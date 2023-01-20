@@ -4,13 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+// I am the one and only Will Slyman!!
+
+//Im Jake Wardell
+
+// dylan was here
+
+//HIIIII josie
 namespace GroupVersionControl
 { 
     
-    //
-    //
-    //
-    //HIIIII
+
     internal class Program
     {
 
