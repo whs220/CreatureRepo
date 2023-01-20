@@ -1,4 +1,6 @@
-﻿namespace GroupVersionControl
+﻿//Im Jake Wardell
+
+namespace GroupVersionControl
 {
     internal class Program
     {
