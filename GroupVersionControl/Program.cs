@@ -1,4 +1,6 @@
-﻿namespace GroupVersionControl
+﻿// I am the one and only Will Slyman
+
+namespace GroupVersionControl
 {
     internal class Program
     {
