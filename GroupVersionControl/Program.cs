@@ -6,11 +6,19 @@ using System.Threading.Tasks;
 
 // I am the one and only Will Slyman!!
 
+//Im Jake Wardell
+
+// dylan was here
+
+//HIIIII josie
+
+//Leah Torregiano
+
 namespace GroupVersionControl
-{
+{ 
     internal class Program
     {
-        //HIIIII
+
         static void Main(string[] args)
         {
             Console.WriteLine("Hello, World!");
