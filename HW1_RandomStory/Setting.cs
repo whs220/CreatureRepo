@@ -9,7 +9,7 @@ namespace HW1_RandomStory
         // ==== FEILDS ====
 
         private string strLocation;
-        private string strSeason;
+        private string strWeather;
 
 
         // ==== PROPERTIES ====
@@ -17,7 +17,7 @@ namespace HW1_RandomStory
         /// <summary>
         /// Returns the location so accessible in the main method
         /// </summary>
-        public string StrLocation
+        public string Location
         {
             get
             {
@@ -28,20 +28,20 @@ namespace HW1_RandomStory
         /// <summary>
         /// Returns the season
         /// </summary>
-        public string StrSeason
+        public string Weather
         {
             get
             {
-                return strSeason;
+                return strWeather;
             }
         }
 
 
         // ==== Constructor ====
-        public Setting(string location, string season)
+        public Setting(string location, string weather)
         {
             this.strLocation = location;
-            this.strSeason = season;
+            this.strWeather = weather;
 
         }
     }
