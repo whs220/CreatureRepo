@@ -29,39 +29,27 @@
             Console.WriteLine();
             //choose menu option
             Console.WriteLine("Your choice: ");
-            string menuChioce = Console.ReadLine();
+            string menuChoice = Console.ReadLine();
             Console.WriteLine();
 
-            switch (menuChioce.ToLower())
+            switch (menuChoice.ToLower())
             {
                 case "happy":
-
-                    Console.WriteLine();
                     Menu();
                     break;
                 case "tragic":
-
-                    Console.WriteLine();
                     Menu();
                     break;
                 case "twist":
-
-                    Console.WriteLine();
                     Menu();
                     break;
                 case "cliffhanger":
-
-                    Console.WriteLine();
                     Menu();
                     break;
                 case "strange":
-
-                    Console.WriteLine();
                     Menu();
                     break;
                 case "lame":
-
-                    Console.WriteLine();
                     Menu();
                     break;
                 //Catch-all so program will not break with incorrect input
