@@ -52,6 +52,8 @@ namespace HW1_RandomStory
                 case 0:
                     return "Happy";
             }
+
+            return "";
         }
     }
 }
