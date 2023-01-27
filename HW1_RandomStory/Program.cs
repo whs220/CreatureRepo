@@ -12,6 +12,10 @@
             Console.WriteLine("Thanks for playing!");
         }
 
+
+        // ============================= Methods =============================
+
+
         public static void Menu()
         {
             //print menu options
@@ -64,6 +68,27 @@
                 default:
                     Console.WriteLine("Sorry. That's not an option\n");
                     Menu(); 
+                    break;
+            }
+        }
+
+        public static void AnotherStory()
+        {
+            //print options
+            Console.WriteLine("Would you like another story? Choose 'yes' or 'no'");
+            Console.WriteLine();
+            //choose option
+            Console.Write(">> ");
+            string another = Console.ReadLine();
+            Console.WriteLine();
+
+            switch (another.ToLower())
+            {
+                case "yes":
+                    Console.WriteLine();
+                    Menu();
+                    break;
+                default:
                     break;
             }
         }
