@@ -32,7 +32,6 @@ namespace HW1_RandomStory
         /// Parameterized constructor to make a conflict!
         /// </summary>
         /// <param name="conflict">String of the conflict!</param>
-        /// <param name="resolution">String of the resolution!</param>
         /// <param name="end">Type of ending to append!</param>
         public Conflict(string conflict, ending end)
         {
