@@ -1,5 +1,5 @@
-football game, rainy
-beach, sunny
-ice rink, chilly
-volcano, hot
-stone temple, snowy
+football game,rainy
+beach,sunny
+ice rink,chilly
+volcano,hot
+stone temple,snowy

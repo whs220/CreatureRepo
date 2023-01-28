@@ -5,6 +5,53 @@
         static void Main(string[] args)
         {
             //Read in data using file io
+            StreamReader reader = null;
+            List<Setting> settings = new List<Setting>();
+            List<Actor> actors = new List<Actor>();
+            List<Conflict> conflicts = new List<Conflict>();
+
+            //Settings
+            try
+            {
+                reader = new StreamReader("../../../settings.txt");
+
+                //Creates a placeholder string
+                string lineOfText = "";
+                //Sets line of text equal to line and checks it's not null
+                while ((lineOfText = reader.ReadLine()) != null)
+                {
+
+                    string[] splitString = lineOfText.Split('|');
+
+                    settings.Add(new Setting(splitString[0], Enum.Parse<ending>(splitString[1])));
+                }
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            reader.Close();
+
+            //Conflicts
+            try
+            {
+                reader = new StreamReader("../../../conflicts.txt");
+
+                //Creates a placeholder string
+                string lineOfText = "";
+                //Sets line of text equal to line and checks it's not null
+                while ((lineOfText = reader.ReadLine()) != null)
+                {
+
+                    string[] splitString = lineOfText.Split('|');
+
+                    conflicts.Add(new Conflict(splitString[0], splitString[1]));
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
 
             //start generator
             Console.WriteLine("Welcome to the story generator!\n");
