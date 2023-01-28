@@ -52,6 +52,29 @@
             {
                 Console.WriteLine(e.Message);
             }
+            reader.Close();
+
+            //Actors
+            try
+            {
+                reader = new StreamReader("../../../actors.txt");
+
+                //Creates a placeholder string
+                string lineOfText = "";
+                //Sets line of text equal to line and checks it's not null
+                while ((lineOfText = reader.ReadLine()) != null)
+                {
+
+                    string[] splitString = lineOfText.Split('|');
+
+                    actors.Add(new Actor(splitString[0], splitString[1], splitString[2], splitString[3], splitString[4], splitString[5]));
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            reader.Close();
 
             //start generator
             Console.WriteLine("Welcome to the story generator!\n");
