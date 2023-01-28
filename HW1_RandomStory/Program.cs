@@ -5,13 +5,13 @@
     {
         static void Main(string[] args)
         {
-            //Read in data using file io
+            //Read in data using file io ==========================================
             StreamReader reader = null;
             List<Setting> settings = new List<Setting>();
             List<Actor> actors = new List<Actor>();
             List<Conflict> conflicts = new List<Conflict>();
 
-            //Settings
+            // -- Settings --------------------------------------------------------
             try
             {
                 reader = new StreamReader("../../../settings.txt");
@@ -27,13 +27,13 @@
                     settings.Add(new Setting(splitString[0], splitString[1]));
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
             reader.Close();
 
-            //Conflicts
+            // -- Conflicts -------------------------------------------------------
             try
             {
                 reader = new StreamReader("../../../conflicts.txt");
@@ -55,7 +55,7 @@
             }
             reader.Close();
 
-            //Actors
+            // -- Actors ----------------------------------------------------------
             try
             {
                 reader = new StreamReader("../../../actors.txt");
@@ -68,7 +68,8 @@
 
                     string[] splitString = lineOfText.Split('|');
 
-                    actors.Add(new Actor(splitString[0], splitString[1], splitString[2], splitString[3], splitString[4], splitString[5]));
+                    actors.Add(new Actor(splitString[0], splitString[1], splitString[2],
+                        splitString[3], splitString[4], splitString[5]));
                 }
             }
             catch (Exception e)
@@ -77,79 +78,112 @@
             }
             reader.Close();
 
-            //start generator
+            //start generator =====================================================
             Console.WriteLine("Welcome to the story generator!\n");
-            Menu();
+
+            // -- Start chossing story info ---------------------------------------
+            //choose the actors
+            Random rng = new Random();
+            int actorNum1 = rng.Next();
+            int actorNum2 = rng.Next();
+            //make sure it's 2 different actors
+            while (actorNum1 == actorNum2)
+            {
+                actorNum2 = rng.Next();
+            }
+            Actor actor1 = actors[actorNum1];
+            Actor actor2 = actors[actorNum2];
+
+            //choose the setting
+            Setting setting = settings[rng.Next()];
+
+            // -- menu ------------------------------------------------------------
+            string menuChoice = "";
+
+            while (menuChoice != "no")
+            {
+                //print menu options
+                Console.WriteLine("Please choose a type of ending to generate a story: ");
+                Console.WriteLine("Happy");
+                Console.WriteLine("Tragic");
+                Console.WriteLine("Twist");
+                Console.WriteLine("Cliffhanger");
+                Console.WriteLine("Strange");
+                Console.WriteLine("Lame");
+                Console.WriteLine();
+                //choose menu option
+                Console.WriteLine("Your choice: ");
+                menuChoice = Console.ReadLine().ToLower();
+                Console.WriteLine();
+
+                //pick conflict
+                int conflictNum = rng.Next();
+                switch (menuChoice)
+                {
+                    case "happy":
+
+                        while (conflicts[conflictNum].end != Ending.Happy)
+                        {
+                            conflictNum = rng.Next();
+                        }
+                        break;
+                    case "tragic":
+                        while (conflicts[conflictNum].end != Ending.Tragic)
+                        {
+                            conflictNum = rng.Next();
+                        }
+                        break;
+                    case "twist":
+                        while (conflicts[conflictNum].end != Ending.Twist)
+                        {
+                            conflictNum = rng.Next();
+                        }
+                        break;
+                    case "cliffhanger":
+                        while (conflicts[conflictNum].end != Ending.Cliffhanger)
+                        {
+                            conflictNum = rng.Next();
+                        }
+                        break;
+                    case "strange":
+                        while (conflicts[conflictNum].end != Ending.Strange)
+                        {
+                            conflictNum = rng.Next();
+                        }
+                        break;
+                    case "lame":
+                        while (conflicts[conflictNum].end != Ending.Lame)
+                        {
+                            conflictNum = rng.Next();
+                        }
+                        break;
+                    //Catch-all so program will not break with incorrect input
+                    default:
+                        Console.WriteLine("Sorry. That's not an option\n");
+                        break;
+                }
+
+                //print conflict
+                Console.WriteLine(conflicts[conflictNum]);
+                // -- go again ----------------------------------------------------
+                //print options
+                Console.WriteLine("Would you like another story? Choose 'yes' or 'no'");
+                Console.WriteLine();
+                //choose option
+                Console.Write(">> ");
+                menuChoice = Console.ReadLine();
+                Console.WriteLine();
+
+                switch (menuChoice.ToLower())
+                {
+                    case "yes":
+                        Console.WriteLine();
+                        break;
+                    default:
+                        break;
+                }
+            }
             Console.WriteLine("Thanks for playing!");
-        }
-
-
-        // ============================= Methods =============================
-
-
-        public static void Menu()
-        {
-            //print menu options
-            Console.WriteLine("Please choose a type of ending to generate a story: ");
-            Console.WriteLine("Happy");
-            Console.WriteLine("Tragic");
-            Console.WriteLine("Twist");
-            Console.WriteLine("Cliffhanger");
-            Console.WriteLine("Strange");
-            Console.WriteLine("Lame");
-            Console.WriteLine();
-            //choose menu option
-            Console.WriteLine("Your choice: ");
-            string menuChoice = Console.ReadLine();
-            Console.WriteLine();
-
-            switch (menuChoice.ToLower())
-            {
-                case "happy":
-                    Menu();
-                    break;
-                case "tragic":
-                    Menu();
-                    break;
-                case "twist":
-                    Menu();
-                    break;
-                case "cliffhanger":
-                    Menu();
-                    break;
-                case "strange":
-                    Menu();
-                    break;
-                case "lame":
-                    Menu();
-                    break;
-                //Catch-all so program will not break with incorrect input
-                default:
-                    Console.WriteLine("Sorry. That's not an option\n");
-                    Menu(); 
-                    break;
-            }
-        }
-
-        public static void AnotherStory()
-        {
-            //print options
-            Console.WriteLine("Would you like another story? Choose 'yes' or 'no'");
-            Console.WriteLine();
-            //choose option
-            Console.Write(">> ");
-            string another = Console.ReadLine();
-            Console.WriteLine();
-
-            switch (another.ToLower())
-            {
-                case "yes":
-                    Console.WriteLine();
-                    Menu();
-                    break;
-                default:
-                    break;
-            }
         }
     }
 }

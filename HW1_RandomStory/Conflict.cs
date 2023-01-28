@@ -28,7 +28,7 @@ namespace HW1_RandomStory
     {
         //  Fields
         private string dialouge;
-        private Ending end;
+        internal Ending end;
 
         /// <summary>
         /// Parameterized constructor to make a conflict!
