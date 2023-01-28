@@ -23,7 +23,7 @@
 
                     string[] splitString = lineOfText.Split('|');
 
-                    settings.Add(new Setting(splitString[0], Enum.Parse<ending>(splitString[1])));
+                    conflicts.Add(new Conflict(splitString[0], Enum.Parse<Ending>(splitString[1])));
                 }
             }
             catch(Exception e)
