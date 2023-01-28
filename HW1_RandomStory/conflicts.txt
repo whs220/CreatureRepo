@@ -1,12 +1,12 @@
-﻿H:write here!
-H:
-T:
-T:
-W:
-W:
-C:
-C:
-S:
-S:
-L:
-L:
+﻿story here!|Happy
+|Happy
+|Tragic
+|Tragic
+|Twist
+|Twist
+|Cliffhanger
+|Cliffhanger
+|Strange
+|Strange
+|Lame
+|Lame
