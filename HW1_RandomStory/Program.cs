@@ -23,7 +23,7 @@
 
                     string[] splitString = lineOfText.Split('|');
 
-                    conflicts.Add(new Conflict(splitString[0], Enum.Parse<Ending>(splitString[1])));
+                    settings.Add(new Setting(splitString[0], splitString[1]));
                 }
             }
             catch(Exception e)
@@ -45,7 +45,7 @@
 
                     string[] splitString = lineOfText.Split('|');
 
-                    conflicts.Add(new Conflict(splitString[0], splitString[1]));
+                    conflicts.Add(new Conflict(splitString[0], Enum.Parse<Ending>(splitString[1])));
                 }
             }
             catch (Exception e)
