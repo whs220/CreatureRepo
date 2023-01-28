@@ -11,7 +11,10 @@ using System.Threading.Tasks;
 
 namespace HW1_RandomStory
 {
-    public enum ending
+    /// <summary>
+    /// Enum that holds the possible endings
+    /// </summary>
+    public enum Ending
     {
         Happy,
         Tragic,
@@ -24,19 +27,40 @@ namespace HW1_RandomStory
     internal class Conflict
     {
         //  Fields
-        private string conflict;
-        private ending end;
-        
+        private string dialouge;
+        private Ending end;
 
         /// <summary>
         /// Parameterized constructor to make a conflict!
         /// </summary>
         /// <param name="conflict">String of the conflict!</param>
         /// <param name="end">Type of ending to append!</param>
-        public Conflict(string conflict, ending end)
+        public Conflict(string dialouge, Ending end)
         {
-            this.conflict = conflict;
+            this.dialouge = dialouge;
             this.end = end;
+        }
+
+        /// <summary>
+        /// Get for dialouge
+        /// </summary>
+        public string Dialouge
+        {
+            get
+            {
+                return dialouge;
+            }
+        }
+
+        /// <summary>
+        /// Get for ending
+        /// </summary>
+        public Ending End
+        {
+            get
+            {
+                return end;
+            }
         }
     }
 }
