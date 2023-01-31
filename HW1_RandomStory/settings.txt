@@ -3,3 +3,5 @@ beach, sunny
 ice rink, chilly
 volcano, hot
 stone temple, snowy
+plane, cloudy
+jake wardell's house,hot
