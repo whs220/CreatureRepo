@@ -1,12 +1,12 @@
-﻿story here!|Happy
-|Happy
+﻿On a {Setting.Weather} day, {Actor1.Name}, who {Actor1.Description}, was put at odds against the evil {Actor2.Name} at a {Setting.Location}. With a swift motion, {Actor2.Name}, who {Actor2.Description}, threw {Actor2.Pronoun2} fist at {Actor1.Name}'s face. However, {Actor1.Name} was able to convert it to a handshake, thus making them friends!|Happy
+It was incredibly an {Setting.Weather} day, and {Actor1.Name} HATED it. {Actor1.Name} {Actor1.Description}, and their associate {Actor2.Name}, who {Actor2.Description}, were sitting in the middle of a {Setting.Location}. Thinking of a way to pass the time until the weather improved, they played a riviting game of cards. Yet, before {Actor1.Pronoun1} knew it, the weather had improved, and they were able to enjoy the day.|Happy
 |Tragic
 |Tragic
 |Twist
 |Twist
 |Cliffhanger
 |Cliffhanger
-|Strange
-|Strange
-|Lame
-|Lame
+Despite the {Setting.Weather} day, {Actor1.Name} was looking forward to seeing the light show at the {Setting.Location}. {Actor1.Pronoun} {Actor1.Description}, and their best friend, {Actor2.Name}, who {Actor2.Description}, had their tickets ready to go! However, when they arrived, there was only one person there... who's name was light show!! They looked at him... he was ok.|Strange
+{Actor1.Name}, who {Actor1.Description}, died. Everyone believed that {Actor1.Pronoun1} died from a heart attack... but only {Actor2.Name} knew the truth. {Actor2.Pronoun1} {Actor2.Description}, but more importantly, {Actor2.Pronoun1} knew that {Actor1.Name} was an alien! Thus, when they were both at a {Setting.Weather} {Setting.Location}, {Actor2.Name} poisoned {Actor1.Name} and saved the world! But nobody ever knew...|Strange
+{Actor1.Name} existed. {Actor1.Pronoun1} {Actor1.Description} or something. {Actor2.Name} also existed. {Actor2.Pronoun1} {Actor2.Description} or something. When they saw each other at a {Setting.Weather} {Setting.Location}, they said "hi" and walked past each other. The end.|Lame
+{Actor1.Name} and {Actor2.Name} were walking. {Actor1.Name} {Actor1.Description}, and {Actor2.Name} {Actor2.Description}. They considered going into the dangerous, spine-tingling, {Setting.Weather} {Setting.Location} where the secret golden artifact was stored... but they decided to go to the library instead. Nerds.|Lame
