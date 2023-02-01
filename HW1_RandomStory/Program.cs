@@ -91,11 +91,11 @@
             {
                 actorNum2 = rng.Next(0, 3);
             }
-            Actor Actor1 = actors[actorNum1];
-            Actor Actor2 = actors[actorNum2];
+            Actor actor1 = actors[actorNum1];
+            Actor actor2 = actors[actorNum2];
 
             //choose the setting
-            Setting Setting = settings[rng.Next(0,settings.Count)];
+            Setting setting = settings[rng.Next(0,settings.Count)];
 
             // -- menu ------------------------------------------------------------
             string menuChoice = "";
@@ -163,8 +163,23 @@
                         break;
                 }
 
-                //print conflict
-                Console.WriteLine(conflicts[conflictNum].Dialouge);                    //NOT WORKING-----INTERPOLATION IS STUPID
+                //print conflict, replacing the text with the data
+                string output = conflicts[conflictNum].Dialouge.Replace("{Actor1.Name}", actor1.Name);
+                output = output.Replace("{Actor1.Pronoun1}", actor1.Pronoun1);
+                output = output.Replace("{Actor1.Pronoun2}", actor1.Pronoun2);
+                output = output.Replace("{Actor1.Pronoun3}", actor1.Pronoun3);
+                output = output.Replace("{Actor1.Occupation}", actor1.Occupation);
+                output = output.Replace("{Actor1.Description}", actor1.Description);
+                output = output.Replace("{Actor2.Name}", actor2.Name);
+                output = output.Replace("{Actor2.Pronoun1}", actor2.Pronoun1);
+                output = output.Replace("{Actor2.Pronoun2}", actor2.Pronoun2);
+                output = output.Replace("{Actor2.Pronoun3}", actor2.Pronoun3);
+                output = output.Replace("{Actor2.Occupation}", actor2.Occupation);
+                output = output.Replace("{Actor2.Description}", actor2.Description);
+                output = output.Replace("{Setting.Location}", setting.Location);
+                output = output.Replace("{Setting.Weather}", setting.Weather);
+                Console.WriteLine(output);
+
                 // -- go again ----------------------------------------------------
                 //print options
                 Console.WriteLine("Would you like another story? Choose 'yes' or 'no'");

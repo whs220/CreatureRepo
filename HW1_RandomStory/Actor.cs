@@ -16,6 +16,71 @@ namespace HW1_RandomStory
         private string description;
         private string occupation;
 
+        /// <summary>
+        /// Get for name
+        /// </summary>
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+        }
+
+        /// <summary>
+        /// Get for pronoun1
+        /// </summary>
+        public string Pronoun1
+        {
+            get
+            {
+                return pronoun1;
+            }
+        }
+
+        /// <summary>
+        /// Get for pronoun2
+        /// </summary>
+        public string Pronoun2
+        {
+            get
+            {
+                return pronoun2;
+            }
+        }
+
+        /// <summary>
+        /// Get for pronoun3
+        /// </summary>
+        public string Pronoun3
+        {
+            get
+            {
+                return pronoun3;
+            }
+        }
+
+        /// <summary>
+        /// Get for description
+        /// </summary>
+        public string Description
+        {
+            get
+            {
+                return description;
+            }
+        }
+
+        /// <summary>
+        /// Get for occupation
+        /// </summary>
+        public string Occupation
+        {
+            get
+            {
+                return occupation;
+            }
+        }
 
 
         // constructor
