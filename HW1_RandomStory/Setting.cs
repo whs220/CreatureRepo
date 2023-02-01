@@ -1,4 +1,7 @@
-﻿
+﻿// Jake Wardell
+// 2/1/2023
+// Class: Setting
+// Stores setting data
 
 using System.Globalization;
 

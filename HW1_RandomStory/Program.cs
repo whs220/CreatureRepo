@@ -1,6 +1,10 @@
-﻿namespace HW1_RandomStory
-{
+﻿// Jake, Josie, Leah, Dylan, Will
+// 2/1/2023
+// HW #1: Random Story generator
+// Purpose: Creates random stories!!
 
+namespace HW1_RandomStory
+{
     internal class Program
     {
         static void Main(string[] args)
