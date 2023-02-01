@@ -81,27 +81,27 @@
             //start generator =====================================================
             Console.WriteLine("Welcome to the story generator!\n");
 
-            // -- Start chossing story info ---------------------------------------
-            //choose the actors
-            Random rng = new Random();
-            int actorNum1 = rng.Next(0,3);
-            int actorNum2 = rng.Next(0,3);
-            //make sure it's 2 different actors
-            while (actorNum1 == actorNum2)
-            {
-                actorNum2 = rng.Next(0, 3);
-            }
-            Actor actor1 = actors[actorNum1];
-            Actor actor2 = actors[actorNum2];
-
-            //choose the setting
-            Setting setting = settings[rng.Next(0,settings.Count)];
-
             // -- menu ------------------------------------------------------------
             string menuChoice = "";
 
             while (menuChoice != "no")
             {
+                // -- Start chossing story info ---------------------------------------
+                //choose the actors
+                Random rng = new Random();
+                int actorNum1 = rng.Next(0, 3);
+                int actorNum2 = rng.Next(0, 3);
+                //make sure it's 2 different actors
+                while (actorNum1 == actorNum2)
+                {
+                    actorNum2 = rng.Next(0, 3);
+                }
+                Actor actor1 = actors[actorNum1];
+                Actor actor2 = actors[actorNum2];
+
+                //choose the setting
+                Setting setting = settings[rng.Next(0, settings.Count)];
+
                 //print menu options
                 Console.WriteLine("Please choose a type of ending to generate a story: ");
                 Console.WriteLine("Happy");
