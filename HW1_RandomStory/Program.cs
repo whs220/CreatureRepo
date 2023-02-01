@@ -84,18 +84,18 @@
             // -- Start chossing story info ---------------------------------------
             //choose the actors
             Random rng = new Random();
-            int actorNum1 = rng.Next();
-            int actorNum2 = rng.Next();
+            int actorNum1 = rng.Next(0,3);
+            int actorNum2 = rng.Next(0,3);
             //make sure it's 2 different actors
             while (actorNum1 == actorNum2)
             {
-                actorNum2 = rng.Next();
+                actorNum2 = rng.Next(0, 3);
             }
-            Actor actor1 = actors[actorNum1];
-            Actor actor2 = actors[actorNum2];
+            Actor Actor1 = actors[actorNum1];
+            Actor Actor2 = actors[actorNum2];
 
             //choose the setting
-            Setting setting = settings[rng.Next()];
+            Setting Setting = settings[rng.Next(0,settings.Count)];
 
             // -- menu ------------------------------------------------------------
             string menuChoice = "";
@@ -117,44 +117,44 @@
                 Console.WriteLine();
 
                 //pick conflict
-                int conflictNum = rng.Next();
+                int conflictNum = rng.Next(0,12);
                 switch (menuChoice)
                 {
                     case "happy":
 
                         while (conflicts[conflictNum].end != Ending.Happy)
                         {
-                            conflictNum = rng.Next();
+                            conflictNum = rng.Next(0,12);
                         }
                         break;
                     case "tragic":
                         while (conflicts[conflictNum].end != Ending.Tragic)
                         {
-                            conflictNum = rng.Next();
+                            conflictNum = rng.Next(0,12);
                         }
                         break;
                     case "twist":
                         while (conflicts[conflictNum].end != Ending.Twist)
                         {
-                            conflictNum = rng.Next();
+                            conflictNum = rng.Next(0,12);
                         }
                         break;
                     case "cliffhanger":
                         while (conflicts[conflictNum].end != Ending.Cliffhanger)
                         {
-                            conflictNum = rng.Next();
+                            conflictNum = rng.Next(0,12);
                         }
                         break;
                     case "strange":
                         while (conflicts[conflictNum].end != Ending.Strange)
                         {
-                            conflictNum = rng.Next();
+                            conflictNum = rng.Next(0,12);
                         }
                         break;
                     case "lame":
                         while (conflicts[conflictNum].end != Ending.Lame)
                         {
-                            conflictNum = rng.Next();
+                            conflictNum = rng.Next(0,12);
                         }
                         break;
                     //Catch-all so program will not break with incorrect input
@@ -164,7 +164,7 @@
                 }
 
                 //print conflict
-                Console.WriteLine(conflicts[conflictNum]);
+                Console.WriteLine(conflicts[conflictNum].Dialouge);                    //NOT WORKING-----INTERPOLATION IS STUPID
                 // -- go again ----------------------------------------------------
                 //print options
                 Console.WriteLine("Would you like another story? Choose 'yes' or 'no'");

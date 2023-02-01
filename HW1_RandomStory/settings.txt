@@ -1,7 +1,7 @@
-football game, rainy
-beach, sunny
-ice rink, chilly
-volcano, hot
-stone temple, snowy
-spa, cloudy
-dorm room,hot
+football game|rainy
+beach|sunny
+ice rink|chilly
+volcano|hot
+stone temple|snowy
+spa|cloudy
+dorm room|hot
