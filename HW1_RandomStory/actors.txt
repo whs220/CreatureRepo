@@ -1,6 +1,6 @@
 Gertrude|she|her|hers|is a mystery|archivist
-Trent|he|him|his|loves long walks on the beach|pet store employee
-Frederick|they|them|theirs|has far too many mugs|CEO
+Trent|he|his|him|loves long walks on the beach|pet store employee
+Frederick|they|their|them|has far too many mugs|CEO
 Melanie|she|her|hers|has a pollen allergy|chef
-Gabe|he|him|him|despises cats|doctor
-River|they|them|theirs|is the tallest person on earth|student
+Gabe|he|his|him|despises cats|doctor
+River|they|their|them|is the tallest person on Earth|student

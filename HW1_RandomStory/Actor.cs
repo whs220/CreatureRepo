@@ -1,4 +1,9 @@
-﻿using System;
+﻿// Dylan Clauson
+// 2/2/2023
+// Class: Actor
+// Holds info about the actors in the story
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
