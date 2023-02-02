@@ -93,12 +93,12 @@ namespace HW1_RandomStory
                 // -- Start chossing story info ---------------------------------------
                 //choose the actors
                 Random rng = new Random();
-                int actorNum1 = rng.Next(0, 3);
-                int actorNum2 = rng.Next(0, 3);
+                int actorNum1 = rng.Next(0, 6);
+                int actorNum2 = rng.Next(0, 6);
                 //make sure it's 2 different actors
                 while (actorNum1 == actorNum2)
                 {
-                    actorNum2 = rng.Next(0, 3);
+                    actorNum2 = rng.Next(0, 6);
                 }
                 Actor actor1 = actors[actorNum1];
                 Actor actor2 = actors[actorNum2];
@@ -183,6 +183,7 @@ namespace HW1_RandomStory
                 output = output.Replace("{Setting.Location}", setting.Location);
                 output = output.Replace("{Setting.Weather}", setting.Weather);
                 Console.WriteLine(output);
+                Console.WriteLine();
 
                 // -- go again ----------------------------------------------------
                 //print options
