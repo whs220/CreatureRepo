@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace Slime_Game
 {
+    /// <summary>
+    /// Josie Caradonna
+    /// Reads the file and makes a tile map
+    /// does not wokr rn
+    /// </summary>
     internal class Level
     {
         //Fields
