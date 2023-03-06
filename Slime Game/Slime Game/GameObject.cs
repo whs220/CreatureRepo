@@ -1,4 +1,5 @@
-﻿using System;
+﻿//Handles setting up the parent for gameobject
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
