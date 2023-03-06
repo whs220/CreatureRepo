@@ -12,8 +12,8 @@ namespace Slime_Game
     internal class GameObject
     {
         // ==== Field ====
-        Texture2D texture;
-        Rectangle position;
+        private Texture2D texture;
+        private Rectangle position;
 
 
         // ==== Constuctor ====
