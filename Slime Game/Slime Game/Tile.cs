@@ -34,9 +34,51 @@ namespace Slime_Game
             this.killStates = killStates;
         }
 
+        /// <summary>
+        /// Creates a new tile, with a defult killStates of none!
+        /// (Won't kill the player on contact in any state)
+        /// </summary>
+        /// <param name="texture">Texture of the tile.</param>
+        /// <param name="pos">Position of the tile.</param>
+        /// <param name="collidableStates">Array of PlayerMatterState's that the tile will collide with.</param>
+        public Tile(Texture2D texture, Rectangle pos, PlayerMatterState[] collidableStates) : base(texture, pos)
+        {
+            this.collidableStates = collidableStates;
+            killStates = new PlayerMatterState[0];
+        }
+
+        /// <summary>
+        /// Creates a default tile!
+        /// (Collides with all PlayerMatterState's and won't kill the player on contact in any state)
+        /// </summary>
+        /// <param name="texture">Texture of the tile.</param>
+        /// <param name="pos">Position of the tile.</param>
         public Tile(Texture2D texture, Rectangle pos) : base(texture, pos)
         {
             collidableStates = new PlayerMatterState[] { PlayerMatterState.Liquid, PlayerMatterState.Gas, PlayerMatterState.Solid, PlayerMatterState.Dead };
+            killStates = new PlayerMatterState[0];
+        }
+
+        // ===== Methods =====
+
+        /// <summary>
+        /// Returns true if the player's current matter state is inside the tile's collidableStates array!
+        /// </summary>
+        /// <param name="playerMatterState">The player's current matter state.</param>
+        /// <returns>True/False if playerMatterState is in collidableStates.</returns>
+        public bool CheckCollide(PlayerMatterState playerMatterState)
+        {
+            return collidableStates.Contains(playerMatterState);
+        }
+
+        /// <summary>
+        /// Returns true if the player's current matter state is inside the tile's killStates array!
+        /// </summary>
+        /// <param name="playerMatterState">The player's current matter state.</param>
+        /// <returns>True/False if playerMatterState is in killStates.</returns>
+        public bool CheckKill(PlayerMatterState playerMatterState)
+        {
+            return killStates.Contains(playerMatterState);
         }
     }
 }
