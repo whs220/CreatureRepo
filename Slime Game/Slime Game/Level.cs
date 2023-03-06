@@ -19,11 +19,48 @@ namespace Slime_Game
         List<Tile> tiles;
         List<Collectable> collectables;
 
-        //Method
+        //Methods
+       
+        /// <summary>
+        /// Returns a list of gameobjects based on the recieved files.
+        /// </summary>
+        /// <returns></returns>
         public List<GameObject> ReadLevel()
         {
             return gameObjects;
-        } 
+        }
+        
+        /// <summary>
+        /// Draws all tiles and collectables
+        /// </summary>
+        public void Draw()
+        {
+
+        }
+
+        /// <summary>
+        /// Checks collectible collisions and tile collisions
+        /// </summary>
+        public void Update()
+        {
+
+        }
+
+        /// <summary>
+        /// Handles collectible collisions
+        /// </summary>
+        public void CollectibleColision()
+        {
+
+        }
+
+        /// <summary>
+        /// handles tile collisions
+        /// </summary>
+        public void TileCollision()
+        {
+
+        }
 
     }
 }
