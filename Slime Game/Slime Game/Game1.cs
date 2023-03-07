@@ -9,6 +9,33 @@ using System.Threading.Tasks;
 
 namespace Slime_Game
 {
+    public enum GameState
+    {
+        Menu,
+        LoadingScreen,
+        InGame,
+        WinScreen
+    }
+
+    public enum PlayerMovementState
+    {
+        IdleLeft,
+        IdleRight,
+        MoveLeft,
+        MoveRight,
+        AirRight,
+        AirLeft
+    }
+
+    public enum PlayerMatterState
+    {
+        Gas,
+        Liquid,
+        Solid,
+        Dead
+    }
+
+
     public class Game1 : Game
     {
         private GraphicsDeviceManager _graphics;
