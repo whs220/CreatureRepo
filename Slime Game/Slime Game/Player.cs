@@ -91,16 +91,6 @@ namespace Slime_Game
         }
 
         /// <summary>
-        /// Checks if player has run into another GameObject
-        /// </summary>
-        /// <param name="other"></param>
-        /// <returns></returns>
-        public bool CheckCollision(GameObject other)
-        {
-            return false;
-        }
-
-        /// <summary>
         /// player dies
         /// </summary>
         public void Die()

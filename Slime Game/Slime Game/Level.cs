@@ -18,6 +18,7 @@ namespace Slime_Game
         List<GameObject> gameObjects;
         List<Tile> tiles;
         List<Collectable> collectables;
+        Player player;
 
         //Methods
        
@@ -25,9 +26,9 @@ namespace Slime_Game
         /// Returns a list of gameobjects based on the recieved files.
         /// </summary>
         /// <returns></returns>
-        public List<GameObject> ReadLevel()
+        public void ReadLevel()
         {
-            return gameObjects;
+            //File IO
         }
         
         /// <summary>
@@ -43,7 +44,8 @@ namespace Slime_Game
         /// </summary>
         public void Update()
         {
-
+           CollectibleColision();
+           TileCollision();
         }
 
         /// <summary>
@@ -51,7 +53,9 @@ namespace Slime_Game
         /// </summary>
         public void CollectibleColision()
         {
-
+            // Loop all collect
+            // if (player.pos.intersects(collectables[i].pos)){
+            //Calls change temperature and sets collectable to inactive
         }
 
         /// <summary>
