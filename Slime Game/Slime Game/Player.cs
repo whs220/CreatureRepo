@@ -152,6 +152,10 @@ namespace Slime_Game
 
         }
 
+        /// <summary>
+        /// updates the current frame of the given movement style
+        /// </summary>
+        /// <param name="gameTime"></param>
         public void UpdateAnimation(GameTime gameTime)
         {
             // ElapsedGameTime is the duration of the last GAME frame
@@ -161,10 +165,10 @@ namespace Slime_Game
             if (timeCounter >= secondsPerFrame)
             {
                 // Change which frame is active, ensuring the frame is reset back to the first 
-                playerCurrentFrame++;
-                if (playerCurrentFrame >= 7)
+                currentFrame++;
+                if (currentFrame >= 7)
                 {
-                    playerCurrentFrame = 1;
+                    currentFrame = 1;
                 }
 
                 // Reset the time counter
@@ -172,7 +176,12 @@ namespace Slime_Game
             }
         }
 
-        private void DrawPlayerWalking(SpriteEffects flip)
+        /// <summary>
+        /// draws player walking
+        /// </summary>
+        /// <param name="sb"></param>
+        /// <param name="flip"></param>
+        private void DrawPlayerWalking(SpriteBatch sb, SpriteEffects flip)
         {
             // This version of draw can flip (mirror) the image horizontally or vertically,
             // depending on the method's SpriteEffects parameter.
@@ -181,14 +190,14 @@ namespace Slime_Game
             // He is drawn starting at the second animation frame in the sprite sheet 
             //   and cycles through animation frames 1, 2, and 3.
             //   (i.e. the second through fourth images in the sheet)
-            _spriteBatch.Draw(
-                player.PlayerTexture,                                   // Whole sprite sheet
-                player.Position,                                  // Position of the Mario sprite
+            sb.Draw(
+                texture,                                   // Whole sprite sheet
+                new Vector2(position.X, position.Y),                                  // Position of the sprite
                 new Rectangle(                                  // Which portion of the sheet is drawn:
-                    playerCurrentFrame * widthOfPlayerSprite + 2 * widthOfPlayerSprite,   // - Left edge
+                    currentFrame * widthOfPlayerSprite + 2 * widthOfPlayerSprite,                             // - Left edge
                     0,                                          // - Top of sprite sheet
                     widthOfPlayerSprite,                        // - Width 
-                    yellowDinoSpriteSheet.Height),              // - Height
+                    texture.Height),              // - Height
                 Color.White,                                    // No change in color
                 0.0f,                                           // No rotation
                 Vector2.Zero,                                   // Start origin at (0, 0) of sprite sheet 
@@ -197,7 +206,12 @@ namespace Slime_Game
                 0.0f);                                          // Layer depth
         }
 
-        private void DrawPlayerStanding(SpriteEffects flip)
+        /// <summary>
+        /// draws player standing
+        /// </summary>
+        /// <param name="sb"></param>
+        /// <param name="flip"></param>
+        private void DrawPlayerStanding(SpriteBatch sb, SpriteEffects flip)
         {
             // This version of draw can flip (mirror) the image horizontally or vertically,
             // depending on the method's SpriteEffects parameter.
@@ -206,14 +220,14 @@ namespace Slime_Game
             // He is drawn starting at the second animation frame in the sprite sheet 
             //   and cycles through animation frames 1, 2, and 3.
             //   (i.e. the second through fourth images in the sheet)
-            _spriteBatch.Draw(
+            sb.Draw(
                 texture,                                   // Whole sprite sheet
-                player.Position,                                  // Position of the Mario sprite
+                new Vector2(position.X, position.Y),                                  // Position of the Mario sprite
                 new Rectangle(                                  // Which portion of the sheet is drawn:
-                    (playerCurrentFrame % 3) * widthOfPlayerSprite,   // - Left edge
+                    (currentFrame % 3) * widthOfPlayerSprite,   // - Left edge
                     0,                                          // - Top of sprite sheet
                     widthOfPlayerSprite,                        // - Width 
-                    yellowDinoSpriteSheet.Height),              // - Height
+                    texture.Height),              // - Height
                 Color.White,                                    // No change in color
                 0.0f,                                           // No rotation
                 Vector2.Zero,                                   // Start origin at (0, 0) of sprite sheet 
