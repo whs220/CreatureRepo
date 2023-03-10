@@ -68,7 +68,7 @@ namespace Slime_Game
         /// </summary>
         public void Update()
         {
-
+            ProcessInput();
         }
 
         /// <summary>
@@ -149,7 +149,7 @@ namespace Slime_Game
         /// </summary>
         public void Die()
         {
-
+            currentMatterState = PlayerMatterState.Dead;
         }
 
         /// <summary>
