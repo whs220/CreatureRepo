@@ -189,16 +189,16 @@ namespace LevelEditor
                         switch (groupMap.Controls[(i*32)+j].BackColor.ToArgb())
                         {
                             case -16181: //pink
-                                writer.WriteLine(i + "," + j + "," + "player");
+                                writer.WriteLine(i + "," + j + "," + "idkMan");
                                 break;
                             case -16776961: //blue
-                                writer.WriteLine(i + "," + j + ","+"blue");
+                                writer.WriteLine(i + "," + j + ","+"cold");
                                 break;
                             case -65536: //red
-                                writer.WriteLine(i + "," + j + "," + "red");
+                                writer.WriteLine(i + "," + j + "," + "hot");
                                 break;
                             case -16744448: //green
-                                writer.WriteLine(i + "," + j + "," + "grass");
+                                writer.WriteLine(i + "," + j + "," + "player");
                                 break;
                             case -256: //yellow
                                 writer.WriteLine(i + "," + j + "," + "yellow");
