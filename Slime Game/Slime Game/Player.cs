@@ -183,13 +183,6 @@ namespace Slime_Game
         /// <param name="flip"></param>
         private void DrawPlayerWalking(SpriteBatch sb, SpriteEffects flip)
         {
-            // This version of draw can flip (mirror) the image horizontally or vertically,
-            // depending on the method's SpriteEffects parameter.
-
-            // Mario is animated with this method.
-            // He is drawn starting at the second animation frame in the sprite sheet 
-            //   and cycles through animation frames 1, 2, and 3.
-            //   (i.e. the second through fourth images in the sheet)
             sb.Draw(
                 texture,                                   // Whole sprite sheet
                 new Vector2(position.X, position.Y),                                  // Position of the sprite
@@ -213,21 +206,14 @@ namespace Slime_Game
         /// <param name="flip"></param>
         private void DrawPlayerStanding(SpriteBatch sb, SpriteEffects flip)
         {
-            // This version of draw can flip (mirror) the image horizontally or vertically,
-            // depending on the method's SpriteEffects parameter.
-
-            // Mario is animated with this method.
-            // He is drawn starting at the second animation frame in the sprite sheet 
-            //   and cycles through animation frames 1, 2, and 3.
-            //   (i.e. the second through fourth images in the sheet)
             sb.Draw(
-                texture,                                   // Whole sprite sheet
-                new Vector2(position.X, position.Y),                                  // Position of the Mario sprite
+                texture,                                        // Whole sprite sheet
+                new Vector2(position.X, position.Y),            // Position of the Mario sprite
                 new Rectangle(                                  // Which portion of the sheet is drawn:
-                    (currentFrame % 3) * widthOfPlayerSprite,   // - Left edge
-                    0,                                          // - Top of sprite sheet
-                    widthOfPlayerSprite,                        // - Width 
-                    texture.Height),              // - Height
+                    (currentFrame % 3) * widthOfPlayerSprite,       // - Left edge
+                    0,                                              // - Top of sprite sheet
+                    widthOfPlayerSprite,                            // - Width 
+                    texture.Height),                                // - Height
                 Color.White,                                    // No change in color
                 0.0f,                                           // No rotation
                 Vector2.Zero,                                   // Start origin at (0, 0) of sprite sheet 
