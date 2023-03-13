@@ -188,34 +188,34 @@ namespace LevelEditor
                     {
                         switch (groupMap.Controls[(i*32)+j].BackColor.ToArgb())
                         {
-                            case -16181:
+                            case -16181: //pink
                                 writer.WriteLine(i + "," + j + "," + "player");
                                 break;
-                            case -16776961:
+                            case -16776961: //blue
                                 writer.WriteLine(i + "," + j + ","+"blue");
                                 break;
-                            case -65536:
+                            case -65536: //red
                                 writer.WriteLine(i + "," + j + "," + "red");
                                 break;
-                            case -16744448:
+                            case -16744448: //green
                                 writer.WriteLine(i + "," + j + "," + "grass");
                                 break;
-                            case -256:
+                            case -256: //yellow
                                 writer.WriteLine(i + "," + j + "," + "yellow");
                                 break;
-                            case -8388480:
+                            case -8388480: //purple
                                 writer.WriteLine(i + "," + j + "," + "platform");
                                 break;
-                            case -1:
+                            case -1: //white
                                 writer.WriteLine(i + "," + j + "," + "small");
                                 break;
-                            case -16777216:
-                                writer.WriteLine(i + "," + j + "," + "stoneLeft");
-                                break;
+                            case -16777216:                                                  //One is gray and one is black
+                                writer.WriteLine(i + "," + j + "," + "stoneLeft");           //One is gray and one is black
+                                break;                                                       //One is gray and one is black
                             case -8355712:
                                 writer.WriteLine(i + "," + j + "," + "stoneRight");
                                 break;
-                            case -9404272:
+                            case -9404272: //slate gray
                                 writer.WriteLine(i + "," + j + "," + "belowGrass");
                                 break;
                             default:
