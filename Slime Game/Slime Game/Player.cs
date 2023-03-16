@@ -25,6 +25,11 @@ namespace Slime_Game
         float speed;
         float jumpHeight;
         Vector2 velocity;
+        Vector2 gravity;
+
+        //Keyboard states
+        KeyboardState prevKeyState;
+        KeyboardState keyboard;
 
         //animation
         private Rectangle frame;
@@ -51,6 +56,7 @@ namespace Slime_Game
             currentMatterState = PlayerMatterState.Solid;
             currentMoveState = PlayerMovementState.IdleRight;
             velocity = Vector2.Zero;
+            gravity = new Vector2(0, 0.5f);
 
             // Set up animation data:
             fps = 8.0;                      // Animation frames to cycle through per second
@@ -69,6 +75,9 @@ namespace Slime_Game
         public void Update()
         {
             ProcessInput();
+            ApplyGravity();
+
+            prevKeyState = keyboard;
         }
 
         /// <summary>
@@ -86,10 +95,14 @@ namespace Slime_Game
         public void ProcessInput()
         {
 
-            KeyboardState keyboard = Keyboard.GetState();
+            keyboard = Keyboard.GetState();
 
             //If space or W are hit then the jump method is called
-            if(keyboard.IsKeyDown(Keys.W) || keyboard.IsKeyDown(Keys.Space)) {
+            if(keyboard.IsKeyDown(Keys.W) && prevKeyState.IsKeyUp(Keys.W) && prevKeyState.IsKeyUp(Keys.Space)) {
+                Jump();
+            }
+            if(keyboard.IsKeyDown(Keys.Space) && prevKeyState.IsKeyUp(Keys.W) && prevKeyState.IsKeyUp(Keys.Space))
+            {
                 Jump();
             }
 
@@ -108,18 +121,27 @@ namespace Slime_Game
             //For solid movement which has a slide
             else
             {
+                //acceleration
                 float acceleration = 2;
-                if (keyboard.IsKeyDown(Keys.D))
+
+                while (keyboard.IsKeyDown(Keys.D))
                 {
+                    //Sets speed to 1 so acceleration isn't multiplyed by 0. Then multiplys
+                    //acceleration and speed and adds it to the previous speed
                     speed = 1;
                     speed += (speed * acceleration);
+                    position.X += (int)speed;
                 }
-                if (keyboard.IsKeyDown(Keys.A))
+                while (keyboard.IsKeyDown(Keys.A))
                 {
+                    //Sets speed to -1 so acceleration isn't multiplyed by 0. Then multiplys
+                    //acceleration and speed and adds it to the previous speed
                     speed = -1;
                     speed += (speed * acceleration);
+                    position.X += (int)speed;
                 }
 
+                //Then while the speed isn't 0
                 while (speed != 0)
                 {
                     position.X += (int)speed;
@@ -133,7 +155,34 @@ namespace Slime_Game
         /// </summary>
         public void Jump()
         {
+            switch (currentMatterState)
+            {
+                //if player is a solid they cannot jump
+                case PlayerMatterState.Solid:
+                    break;
 
+                //If player is gas the jump is invered
+                case PlayerMatterState.Gas:
+                    position.Y = (int)-jumpHeight;
+                    break;
+
+                //If the player is liquid jump is normal
+                case PlayerMatterState.Liquid:
+                    position.Y = (int)jumpHeight;
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Applys gravity to the player
+        /// </summary>
+        public void ApplyGravity()
+        {
+            //Gas has inverse jump
+            if(currentMatterState != PlayerMatterState.Gas)
+            {
+                position.Y += (int)gravity.Y;
+            }
         }
 
         /// <summary>
