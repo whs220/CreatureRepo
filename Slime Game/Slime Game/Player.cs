@@ -86,7 +86,47 @@ namespace Slime_Game
         public void ProcessInput()
         {
 
-        } 
+            KeyboardState keyboard = Keyboard.GetState();
+
+            //If space or W are hit then the jump method is called
+            if(keyboard.IsKeyDown(Keys.W) || keyboard.IsKeyDown(Keys.Space)) {
+                Jump();
+            }
+
+            //This logic is for all states not the solid state
+            if (currentMatterState != PlayerMatterState.Solid)
+            {
+                if (keyboard.IsKeyDown(Keys.D))
+                {
+                    position.X += (int)(speed);
+                }
+                if (keyboard.IsKeyDown(Keys.A))
+                {
+                    position.X -= (int)(speed);
+                }
+            }
+            //For solid movement which has a slide
+            else
+            {
+                float acceleration = 2;
+                if (keyboard.IsKeyDown(Keys.D))
+                {
+                    speed = 1;
+                    speed += (speed * acceleration);
+                }
+                if (keyboard.IsKeyDown(Keys.A))
+                {
+                    speed = -1;
+                    speed += (speed * acceleration);
+                }
+
+                while (speed != 0)
+                {
+                    position.X += (int)speed;
+                    speed -= 1;
+                }
+            }
+        }
 
         /// <summary>
         /// called when w or space is pressed to make the player jump
