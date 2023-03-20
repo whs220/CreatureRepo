@@ -40,6 +40,7 @@ namespace Slime_Game
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+        private GameState gameState;
 
         public Game1()
         {
@@ -50,7 +51,7 @@ namespace Slime_Game
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            gameState = GameState.Menu;
 
             base.Initialize();
         }
@@ -67,7 +68,27 @@ namespace Slime_Game
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            // update GameState
+            switch (gameState)
+            {
+                case GameState.Menu:
+                    // click on start game -> loading screen
+                    // click on quit game -> CLOSE GAME
+                    break;
+
+                case GameState.LoadingScreen:
+                    // loading screen ends -> in game
+                    break;
+
+                case GameState.InGame:
+                    // beat a level -> loading screen
+                    // beat the last level -> win screen
+                    break;
+
+                case GameState.WinScreen:
+                    // click on close game -> CLOSE GAME
+                    break;
+            }
 
             base.Update(gameTime);
         }
@@ -76,7 +97,21 @@ namespace Slime_Game
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
+            // draw GameState
+            switch (gameState)
+            {
+                case GameState.Menu:
+                    break;
+
+                case GameState.LoadingScreen:
+                    break;
+
+                case GameState.InGame:
+                    break;
+
+                case GameState.WinScreen:
+                    break;
+            }
 
             base.Draw(gameTime);
         }

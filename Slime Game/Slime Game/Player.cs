@@ -86,7 +86,59 @@ namespace Slime_Game
         /// <param name="sb"></param>
         public override void Draw(SpriteBatch sb)
         {
+            // draw MatterState
+            // the logic in these comments should be in the update class - its here so i remember it
+            switch (currentMatterState)
+            {
+                case PlayerMatterState.Gas:
+                    // cold collide -> liquid
+                    // hot collide -> dead
+                    break;
 
+                case PlayerMatterState.Liquid:
+                    // hot collide -> gas
+                    // cold collide -> solid
+                    break;
+
+                case PlayerMatterState.Solid:
+                    // hot collide -> liquid
+                    // cold collide -> dead
+                    break;
+
+                case PlayerMatterState.Dead:
+                    break;
+            }
+
+            // draw MovementState
+            // the logic in these comments should be in the update class - its here so i remember it
+            switch (currentMoveState)
+            {
+                case PlayerMovementState.IdleLeft:
+                    // press left (A) -> move left
+                    break;
+
+                case PlayerMovementState.IdleRight:
+                    // press right (D) -> move right
+                    break;
+
+                case PlayerMovementState.MoveLeft:
+                    // left key up (A) -> idle left
+                    // press right (D) -> move right
+                    break;
+
+                case PlayerMovementState.MoveRight:
+                    // right key up (D) -> idle right
+                    // press left (A) -> move left
+                    break;
+
+                case PlayerMovementState.AirRight:
+                    // press left (A) -> air left
+                    break;
+
+                case PlayerMovementState.AirLeft:
+                    // press right (D) -> air right
+                    break;
+            }
         }
 
         /// <summary>
