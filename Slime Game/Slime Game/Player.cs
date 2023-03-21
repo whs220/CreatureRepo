@@ -31,7 +31,7 @@ namespace Slime_Game
 
         //Keyboard states
         KeyboardState prevKeyState;
-        KeyboardState keyboard;
+        KeyboardState keyboard; //current
 
         //animation
         private Rectangle frame;
@@ -80,17 +80,9 @@ namespace Slime_Game
             ProcessInput();
             ApplyGravity();
 
-            prevKeyState = keyboard;
-        }
+            
 
-        /// <summary>
-        /// Draws the player
-        /// </summary>
-        /// <param name="sb"></param>
-        public override void Draw(SpriteBatch sb)
-        {
-            // draw MatterState
-            // the logic in these comments should be in the update class - its here so i remember it
+            // update MatterState
             switch (currentMatterState)
             {
                 case PlayerMatterState.Gas:
@@ -112,8 +104,7 @@ namespace Slime_Game
                     break;
             }
 
-            // draw MovementState
-            // the logic in these comments should be in the update class - its here so i remember it
+            // update MovementState
             switch (currentMoveState)
             {
                 case PlayerMovementState.IdleLeft:
@@ -140,6 +131,54 @@ namespace Slime_Game
 
                 case PlayerMovementState.AirLeft:
                     // press right (D) -> air right
+                    break;
+            }
+
+            // record previous keyboard state
+            prevKeyState = keyboard;
+        }
+
+        /// <summary>
+        /// Draws the player
+        /// </summary>
+        /// <param name="sb"></param>
+        public override void Draw(SpriteBatch sb)
+        {
+            // draw MatterState
+            switch (currentMatterState)
+            {
+                case PlayerMatterState.Gas:
+                    break;
+
+                case PlayerMatterState.Liquid:
+                    break;
+
+                case PlayerMatterState.Solid:
+                    break;
+
+                case PlayerMatterState.Dead:
+                    break;
+            }
+
+            // draw MovementState
+            switch (currentMoveState)
+            {
+                case PlayerMovementState.IdleLeft:
+                    break;
+
+                case PlayerMovementState.IdleRight:
+                    break;
+
+                case PlayerMovementState.MoveLeft:
+                    break;
+
+                case PlayerMovementState.MoveRight:
+                    break;
+
+                case PlayerMovementState.AirRight:
+                    break;
+
+                case PlayerMovementState.AirLeft:
                     break;
             }
         }
