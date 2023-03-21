@@ -18,22 +18,22 @@ namespace Slime_Game
         #region fields
 
         //player states
-        PlayerMatterState currentMatterState;
-        PlayerMovementState currentMoveState;
+        private PlayerMatterState currentMatterState;
+        private PlayerMovementState currentMoveState;
 
         //movement
-        float speed;
-        float jumpHeight;
-        Vector2 velocity;
-        Vector2 gravity;
-        float prevSpeed;
-        bool isGrounded; 
+        private float speed;
+        private float jumpHeight;
+        private Vector2 velocity;
+        private float prevSpeed;
+        private bool isGrounded; 
+        private Vector2 gravity;
 
         //Keyboard states
-        KeyboardState prevKeyState;
-        KeyboardState currentKeyState;
+        private KeyboardState prevKeyState;
+        private KeyboardState currentKeyState;
 
-        //animation
+        // Animation
         private Rectangle frame;
         // Animation data
         private int currentFrame;
@@ -51,7 +51,7 @@ namespace Slime_Game
         //constructor
         public Player(Texture2D texture, Rectangle pos):base(texture, pos)
         {
-            speed = 5.0f;
+            speed = 5.0f;  
             jumpHeight = -15.0f;
             currentMatterState = PlayerMatterState.Solid;
             currentMoveState = PlayerMovementState.IdleRight;
@@ -123,64 +123,9 @@ namespace Slime_Game
                     break;
             }
         }
-
-        /*
-        /// <summary>
-        /// registers what key is being pressed and will move the player in the correct direction
-        /// </summary>
-        public void ProcessInput()
-        {
-
-            //If space or W are hit then the jump method is called
-            if(currentKeyState.IsKeyDown(Keys.W) && prevKeyState.IsKeyUp(Keys.W) && prevKeyState.IsKeyUp(Keys.Space)) {
-                Jump();
-            }
-            if(currentKeyState.IsKeyDown(Keys.Space) && prevKeyState.IsKeyUp(Keys.W) && prevKeyState.IsKeyUp(Keys.Space))
-            {
-                Jump();
-            }
-
-            //This logic is for all states not the solid state
-            if (currentMatterState != PlayerMatterState.Solid)
-            {
-                if (currentKeyState.IsKeyDown(Keys.D))
-                {
-                    position.X += (int)(speed);
-                }
-                if (currentKeyState.IsKeyDown(Keys.A))
-                {
-                    position.X -= (int)(speed);
-                }
-            }
-            //For solid movement which has a slide
-            else
-            {
-                //acceleration
-                float acceleration = 2;
-                
-                if (currentKeyState.IsKeyDown(Keys.D))
-                {
-                    //Sets speed to 1 so acceleration isn't multiplyed by 0. Then multiplys
-                    //acceleration and speed and adds it to the previous speed
-                    speed += (speed + acceleration);
-                    
-                }
-                else if (currentKeyState.IsKeyDown(Keys.A))
-                {
-                    //Sets speed to -1 so acceleration isn't multiplyed by 0. Then multiplys
-                    //acceleration and speed and adds it to the previous speed
-                    speed -= (speed + acceleration);
-                    
-                }
-                else
-                {
-                 speed *= 0.9f;
-                }
-
-                position.X += (int)speed;
-            }
-        }
-        */
+        
+        
+        
 
         public void ProcessMovement()
         {
@@ -317,7 +262,7 @@ namespace Slime_Game
             {
                 velocity -= gravity;
             }
-            position += velocity;
+            position.Y += velocity.Y;
         }
 
         /// <summary>
@@ -446,6 +391,64 @@ namespace Slime_Game
                 flip,                                           // Flip it horizontally or vertically?    
                 0.0f);                                          // Layer depth
         }
+
+        /* ==== Old Movement ====
+        /// <summary>
+        /// registers what key is being pressed and will move the player in the correct direction
+        /// </summary>
+        public void ProcessInput()
+        {
+
+            //If space or W are hit then the jump method is called
+            if(currentKeyState.IsKeyDown(Keys.W) && prevKeyState.IsKeyUp(Keys.W) && prevKeyState.IsKeyUp(Keys.Space)) {
+                Jump();
+            }
+            if(currentKeyState.IsKeyDown(Keys.Space) && prevKeyState.IsKeyUp(Keys.W) && prevKeyState.IsKeyUp(Keys.Space))
+            {
+                Jump();
+            }
+
+            //This logic is for all states not the solid state
+            if (currentMatterState != PlayerMatterState.Solid)
+            {
+                if (currentKeyState.IsKeyDown(Keys.D))
+                {
+                    position.X += (int)(speed);
+                }
+                if (currentKeyState.IsKeyDown(Keys.A))
+                {
+                    position.X -= (int)(speed);
+                }
+            }
+            //For solid movement which has a slide
+            else
+            {
+                //acceleration
+                float acceleration = 2;
+                
+                if (currentKeyState.IsKeyDown(Keys.D))
+                {
+                    //Sets speed to 1 so acceleration isn't multiplyed by 0. Then multiplys
+                    //acceleration and speed and adds it to the previous speed
+                    speed += (speed + acceleration);
+                    
+                }
+                else if (currentKeyState.IsKeyDown(Keys.A))
+                {
+                    //Sets speed to -1 so acceleration isn't multiplyed by 0. Then multiplys
+                    //acceleration and speed and adds it to the previous speed
+                    speed -= (speed + acceleration);
+                    
+                }
+                else
+                {
+                 speed *= 0.9f;
+                }
+
+                position.X += (int)speed;
+            }
+        }
+        */
 
         #endregion
     }
