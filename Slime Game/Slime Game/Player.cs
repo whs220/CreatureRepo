@@ -31,7 +31,7 @@ namespace Slime_Game
 
         //Keyboard states
         KeyboardState prevKeyState;
-        KeyboardState keyboard; //current
+        KeyboardState currentKeyState;
 
         //animation
         private Rectangle frame;
@@ -77,32 +77,11 @@ namespace Slime_Game
         /// </summary>
         public void Update()
         {
+            // record the currenky keyboard state
+            currentKeyState = Keyboard.GetState();
+
             ProcessInput();
             ApplyGravity();
-
-            
-
-            // update MatterState
-            switch (currentMatterState)
-            {
-                case PlayerMatterState.Gas:
-                    // cold collide -> liquid
-                    // hot collide -> dead
-                    break;
-
-                case PlayerMatterState.Liquid:
-                    // hot collide -> gas
-                    // cold collide -> solid
-                    break;
-
-                case PlayerMatterState.Solid:
-                    // hot collide -> liquid
-                    // cold collide -> dead
-                    break;
-
-                case PlayerMatterState.Dead:
-                    break;
-            }
 
             // update MovementState
             switch (currentMoveState)
@@ -117,7 +96,7 @@ namespace Slime_Game
 
                 case PlayerMovementState.MoveLeft:
                     // left key up (A) -> idle left
-                    // press right (D) -> move right
+                    // press right (D) -> move right 
                     break;
 
                 case PlayerMovementState.MoveRight:
@@ -135,7 +114,7 @@ namespace Slime_Game
             }
 
             // record previous keyboard state
-            prevKeyState = keyboard;
+            prevKeyState = currentKeyState;
         }
 
         /// <summary>
@@ -190,10 +169,10 @@ namespace Slime_Game
         {
 
             //If space or W are hit then the jump method is called
-            if(keyboard.IsKeyDown(Keys.W) && prevKeyState.IsKeyUp(Keys.W) && prevKeyState.IsKeyUp(Keys.Space)) {
+            if(currentKeyState.IsKeyDown(Keys.W) && prevKeyState.IsKeyUp(Keys.W) && prevKeyState.IsKeyUp(Keys.Space)) {
                 Jump();
             }
-            if(keyboard.IsKeyDown(Keys.Space) && prevKeyState.IsKeyUp(Keys.W) && prevKeyState.IsKeyUp(Keys.Space))
+            if(currentKeyState.IsKeyDown(Keys.Space) && prevKeyState.IsKeyUp(Keys.W) && prevKeyState.IsKeyUp(Keys.Space))
             {
                 Jump();
             }
@@ -201,11 +180,11 @@ namespace Slime_Game
             //This logic is for all states not the solid state
             if (currentMatterState != PlayerMatterState.Solid)
             {
-                if (keyboard.IsKeyDown(Keys.D))
+                if (currentKeyState.IsKeyDown(Keys.D))
                 {
                     position.X += (int)(speed);
                 }
-                if (keyboard.IsKeyDown(Keys.A))
+                if (currentKeyState.IsKeyDown(Keys.A))
                 {
                     position.X -= (int)(speed);
                 }
@@ -216,14 +195,14 @@ namespace Slime_Game
                 //acceleration
                 float acceleration = 2;
                 
-                if (keyboard.IsKeyDown(Keys.D))
+                if (currentKeyState.IsKeyDown(Keys.D))
                 {
                     //Sets speed to 1 so acceleration isn't multiplyed by 0. Then multiplys
                     //acceleration and speed and adds it to the previous speed
                     speed += (speed + acceleration);
                     
                 }
-                else if (keyboard.IsKeyDown(Keys.A))
+                else if (currentKeyState.IsKeyDown(Keys.A))
                 {
                     //Sets speed to -1 so acceleration isn't multiplyed by 0. Then multiplys
                     //acceleration and speed and adds it to the previous speed
@@ -232,10 +211,10 @@ namespace Slime_Game
                 }
                 else
                 {
-                 speed *= 0.9;
+                 speed *= 0.9f;
                 }
 
-                position.X += speed;
+                position.X += (int)speed;
             }
         }
 
