@@ -22,9 +22,7 @@ namespace Slime_Game
         IdleLeft,
         IdleRight,
         MoveLeft,
-        MoveRight,
-        AirRight,
-        AirLeft
+        MoveRight
     }
 
     public enum PlayerMatterState
@@ -41,6 +39,9 @@ namespace Slime_Game
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private GameState gameState;
+        private Texture2D tileMap;
+        private Texture2D fire;
+        private Texture2D ice;
 
         public Game1()
         {
@@ -59,6 +60,9 @@ namespace Slime_Game
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            tileMap = Content.Load<Texture2D>("tileset");
+            fire = Content.Load<Texture2D>("fire");
+            ice = Content.Load<Texture2D>("ice");
 
             // TODO: use this.Content to load your game content here
         }

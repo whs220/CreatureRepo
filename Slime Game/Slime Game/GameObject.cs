@@ -17,6 +17,20 @@ namespace Slime_Game
         protected Rectangle position;
 
 
+        // ==== Properties ====
+
+        /// <summary>
+        /// Makes the rectangle field accessable
+        /// </summary>
+        public Rectangle Position
+        {
+            get
+            {
+                return position;
+            }
+        }
+
+
         // ==== Constuctor ====
 
         /// <summary>
