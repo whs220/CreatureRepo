@@ -22,9 +22,7 @@ namespace Slime_Game
         IdleLeft,
         IdleRight,
         MoveLeft,
-        MoveRight,
-        AirRight,
-        AirLeft
+        MoveRight
     }
 
     public enum PlayerMatterState

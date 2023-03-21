@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.IO;
 
 namespace Slime_Game
 {
@@ -22,13 +23,26 @@ namespace Slime_Game
         public List<Tile> tiles;
         public List<Collectable> collectables;
         private Player player;
-        private Texture2D ground;
+        private Texture2D tilemap;
+        private Rectangle groundFrame;
+        private Rectangle ceilingFrame;
+        private Rectangle leftFrame;
+        private Rectangle rightFrame;
 
         // 1, 352
         // 31, 383
 
         
-
+        //Constructor
+        public Level(string fileName, Player player, Texture2D tilemap)
+        {
+            this.fileName = fileName;
+            this.player = player;
+            this.tilemap = tilemap;
+            this.tiles = new List<Tile>();
+            this.collectables = new List<Collectable>();
+            this.gameObjects = new List<GameObject>();
+        }
 
 
         //Methods
@@ -39,7 +53,41 @@ namespace Slime_Game
         /// <returns></returns>
         public void ReadLevel()
         {
-            //File IO
+            StreamReader input;
+            bool done = false;
+
+            try
+            {
+                input = new StreamReader(fileName);
+
+                while (!done)
+                {
+                    try
+                    {
+                        string line = input.ReadLine();
+                        string[] data = line.Split(',');
+
+                        //tiles
+                        if (data[2] == "top")
+                        {
+
+                        }
+
+                        //
+
+
+                    }
+                    catch
+                    {
+                        done = true;
+                        break;
+                    }
+                }
+            }
+            catch
+            {
+                
+            }
 
         }
         

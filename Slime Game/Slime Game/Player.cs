@@ -27,11 +27,11 @@ namespace Slime_Game
         Vector2 velocity;
         Vector2 gravity;
         float prevSpeed;
-        bool canJump;
+        bool isGrounded;
 
         //Keyboard states
         KeyboardState prevKeyState;
-        KeyboardState keyboard;
+        KeyboardState currentKeyState;
 
         //animation
         private Rectangle frame;
@@ -48,8 +48,6 @@ namespace Slime_Game
 
         //properties
 
-
-
         //constructor
         public Player(Texture2D texture, Rectangle pos):base(texture, pos)
         {
@@ -59,7 +57,7 @@ namespace Slime_Game
             currentMoveState = PlayerMovementState.IdleRight;
             velocity = Vector2.Zero;
             gravity = new Vector2(0, 0.5f);
-            canJump = true;
+            isGrounded = true;
 
             // Set up animation data:
             fps = 8.0;                      // Animation frames to cycle through per second
@@ -77,10 +75,14 @@ namespace Slime_Game
         /// </summary>
         public void Update()
         {
-            ProcessInput();
+            // record the currenky keyboard state
+            currentKeyState = Keyboard.GetState();
+
+            ProcessMovement();
             ApplyGravity();
 
-            prevKeyState = keyboard;
+            // record previous keyboard state
+            prevKeyState = currentKeyState;
         }
 
         /// <summary>
@@ -90,22 +92,15 @@ namespace Slime_Game
         public override void Draw(SpriteBatch sb)
         {
             // draw MatterState
-            // the logic in these comments should be in the update class - its here so i remember it
             switch (currentMatterState)
             {
                 case PlayerMatterState.Gas:
-                    // cold collide -> liquid
-                    // hot collide -> dead
                     break;
 
                 case PlayerMatterState.Liquid:
-                    // hot collide -> gas
-                    // cold collide -> solid
                     break;
 
                 case PlayerMatterState.Solid:
-                    // hot collide -> liquid
-                    // cold collide -> dead
                     break;
 
                 case PlayerMatterState.Dead:
@@ -113,37 +108,23 @@ namespace Slime_Game
             }
 
             // draw MovementState
-            // the logic in these comments should be in the update class - its here so i remember it
             switch (currentMoveState)
             {
                 case PlayerMovementState.IdleLeft:
-                    // press left (A) -> move left
                     break;
 
                 case PlayerMovementState.IdleRight:
-                    // press right (D) -> move right
                     break;
 
                 case PlayerMovementState.MoveLeft:
-                    // left key up (A) -> idle left
-                    // press right (D) -> move right
                     break;
 
                 case PlayerMovementState.MoveRight:
-                    // right key up (D) -> idle right
-                    // press left (A) -> move left
-                    break;
-
-                case PlayerMovementState.AirRight:
-                    // press left (A) -> air left
-                    break;
-
-                case PlayerMovementState.AirLeft:
-                    // press right (D) -> air right
                     break;
             }
         }
 
+        /*
         /// <summary>
         /// registers what key is being pressed and will move the player in the correct direction
         /// </summary>
@@ -151,10 +132,10 @@ namespace Slime_Game
         {
 
             //If space or W are hit then the jump method is called
-            if(keyboard.IsKeyDown(Keys.W) && prevKeyState.IsKeyUp(Keys.W) && prevKeyState.IsKeyUp(Keys.Space)) {
+            if(currentKeyState.IsKeyDown(Keys.W) && prevKeyState.IsKeyUp(Keys.W) && prevKeyState.IsKeyUp(Keys.Space)) {
                 Jump();
             }
-            if(keyboard.IsKeyDown(Keys.Space) && prevKeyState.IsKeyUp(Keys.W) && prevKeyState.IsKeyUp(Keys.Space))
+            if(currentKeyState.IsKeyDown(Keys.Space) && prevKeyState.IsKeyUp(Keys.W) && prevKeyState.IsKeyUp(Keys.Space))
             {
                 Jump();
             }
@@ -162,11 +143,11 @@ namespace Slime_Game
             //This logic is for all states not the solid state
             if (currentMatterState != PlayerMatterState.Solid)
             {
-                if (keyboard.IsKeyDown(Keys.D))
+                if (currentKeyState.IsKeyDown(Keys.D))
                 {
                     position.X += (int)(speed);
                 }
-                if (keyboard.IsKeyDown(Keys.A))
+                if (currentKeyState.IsKeyDown(Keys.A))
                 {
                     position.X -= (int)(speed);
                 }
@@ -177,14 +158,14 @@ namespace Slime_Game
                 //acceleration
                 float acceleration = 2;
                 
-                if (keyboard.IsKeyDown(Keys.D))
+                if (currentKeyState.IsKeyDown(Keys.D))
                 {
                     //Sets speed to 1 so acceleration isn't multiplyed by 0. Then multiplys
                     //acceleration and speed and adds it to the previous speed
                     speed += (speed + acceleration);
                     
                 }
-                else if (keyboard.IsKeyDown(Keys.A))
+                else if (currentKeyState.IsKeyDown(Keys.A))
                 {
                     //Sets speed to -1 so acceleration isn't multiplyed by 0. Then multiplys
                     //acceleration and speed and adds it to the previous speed
@@ -193,10 +174,105 @@ namespace Slime_Game
                 }
                 else
                 {
-                 speed *= 0.9;
+                 speed *= 0.9f;
                 }
 
-                position.X += speed;
+                position.X += (int)speed;
+            }
+        }
+        */
+
+        public void ProcessMovement()
+        {
+            switch (currentMoveState)
+            {
+                case PlayerMovementState.MoveLeft:
+                    // ===== LOGIC =====
+                    // If you are not a solid...
+                    if (currentMatterState != PlayerMatterState.Solid)
+                    {
+                        // Move at a constant speed
+                        position.X -= (int)(speed);
+                    }
+                    // If you are a solid (ice)
+                    else
+                    {
+                        // Accelerate at a negative dir
+                        if (speed > -10)
+                        {
+                            speed -= 1;
+                        }
+                        position.X += (int)speed;
+                    }
+
+                    // ===== TRANSITIONS =====
+                    if (currentKeyState.IsKeyDown(Keys.D))
+                    {
+                        currentMoveState = PlayerMovementState.MoveRight;
+                    }
+                    else if (currentKeyState.IsKeyUp(Keys.A))
+                    {
+                        currentMoveState = PlayerMovementState.IdleLeft;
+                    }
+                    break;
+                case PlayerMovementState.MoveRight:
+                    // ===== LOGIC =====
+                    // If you are not a solid...
+                    if (currentMatterState != PlayerMatterState.Solid)
+                    {
+                        // Move at a constant speed
+                        position.X += (int)(speed);
+                    }
+                    // If you are a solid (ice)
+                    else
+                    {
+                        // Accelerate at a negative dir
+                        if (speed < 10)
+                        {
+                            speed += 1;
+                        }
+                        position.X += (int)speed;
+                    }
+
+                    // ===== TRANSITIONS =====
+                    if (currentKeyState.IsKeyDown(Keys.A))
+                    {
+                        currentMoveState = PlayerMovementState.MoveLeft;
+                    }
+                    else if (currentKeyState.IsKeyUp(Keys.D))
+                    {
+                        currentMoveState = PlayerMovementState.IdleRight;
+                    }
+                    break;
+                case PlayerMovementState.IdleLeft:
+                case PlayerMovementState.IdleRight:
+                    // ===== NO LOGIC =====
+
+                    // ===== TRANSITIONS =====
+                    if (currentKeyState.IsKeyDown(Keys.A))
+                    {
+                        currentMoveState = PlayerMovementState.MoveLeft;
+                    }
+                    else if (currentKeyState.IsKeyDown(Keys.A))
+                    {
+                        currentMoveState = PlayerMovementState.MoveRight;
+                    }
+                    break;
+            }
+
+            // Possible to jump from any state
+            // (Except dead, duh)
+            if (currentMatterState != PlayerMatterState.Dead)
+            {
+                // Jump if space or W is pressed
+                if (currentKeyState.IsKeyDown(Keys.W) && prevKeyState.IsKeyUp(Keys.W) && prevKeyState.IsKeyUp(Keys.Space))
+                {
+                    Jump();
+                }
+                else if (currentKeyState.IsKeyDown(Keys.Space) && prevKeyState.IsKeyUp(Keys.W) && prevKeyState.IsKeyUp(Keys.Space))
+                {
+                    Jump();
+                }
             }
         }
 
@@ -205,15 +281,26 @@ namespace Slime_Game
         /// </summary>
         public void Jump()
         {
-            if()
-               
-                   //position.Y = (int)-jumpHeight;
-                   
+            // Can only jump if grounded
+            if (isGrounded)
+            {
+                switch (currentMatterState)
+                {
+                    //if player is a solid they cannot jump
+                    case PlayerMatterState.Solid:
+                        break;
 
-               
-                   //position.Y = (int)jumpHeight;
-            
-            
+                    //If player is gas the jump is invered
+                    case PlayerMatterState.Gas:
+                        position.Y = (int)-jumpHeight;
+                        break;
+
+                    //If the player is liquid jump is normal
+                    case PlayerMatterState.Liquid:
+                        position.Y = (int)jumpHeight;
+                        break;
+                }
+            }
         }
 
         /// <summary>

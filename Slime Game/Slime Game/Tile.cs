@@ -19,6 +19,7 @@ namespace Slime_Game
         // ===== Fields =====
         private PlayerMatterState[] collidableStates;
         private PlayerMatterState[] killStates;
+        private Rectangle frame;
 
         // ===== Constructors =====
         /// <summary>
@@ -28,10 +29,11 @@ namespace Slime_Game
         /// <param name="pos">Position of the tile.</param>
         /// <param name="collidableStates">Array of PlayerMatterState's that the tile will collide with.</param>
         /// <param name="killStates">Array of PlayerMatterState's that will kill the player on contact.</param>
-        public Tile(Texture2D texture, Rectangle pos, PlayerMatterState[] collidableStates, PlayerMatterState[] killStates) : base(texture, pos)
+        public Tile(Texture2D texture, Rectangle pos, PlayerMatterState[] collidableStates, PlayerMatterState[] killStates, Rectangle frame) : base(texture, pos)
         {
             this.collidableStates = collidableStates;
             this.killStates = killStates;
+            this.frame = frame;
         }
 
         /// <summary>
@@ -41,10 +43,11 @@ namespace Slime_Game
         /// <param name="texture">Texture of the tile.</param>
         /// <param name="pos">Position of the tile.</param>
         /// <param name="collidableStates">Array of PlayerMatterState's that the tile will collide with.</param>
-        public Tile(Texture2D texture, Rectangle pos, PlayerMatterState[] collidableStates) : base(texture, pos)
+        public Tile(Texture2D texture, Rectangle pos, PlayerMatterState[] collidableStates, Rectangle frame) : base(texture, pos)
         {
             this.collidableStates = collidableStates;
             killStates = new PlayerMatterState[0];
+            this.frame = frame;
         }
 
         /// <summary>
@@ -53,10 +56,11 @@ namespace Slime_Game
         /// </summary>
         /// <param name="texture">Texture of the tile.</param>
         /// <param name="pos">Position of the tile.</param>
-        public Tile(Texture2D texture, Rectangle pos) : base(texture, pos)
+        public Tile(Texture2D texture, Rectangle pos, Rectangle frame) : base(texture, pos)
         {
             collidableStates = new PlayerMatterState[] { PlayerMatterState.Liquid, PlayerMatterState.Gas, PlayerMatterState.Solid, PlayerMatterState.Dead };
             killStates = new PlayerMatterState[0];
+            this.frame = frame;
         }
 
         // ===== Methods =====
