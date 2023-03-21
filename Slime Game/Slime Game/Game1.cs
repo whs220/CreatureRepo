@@ -43,6 +43,11 @@ namespace Slime_Game
         private Texture2D fire;
         private Texture2D ice;
 
+        private Player player;
+        private Texture2D debugSolid;
+        private Texture2D debugLiquid;
+        private Texture2D debugGas;
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -54,17 +59,27 @@ namespace Slime_Game
         {
             gameState = GameState.Menu;
 
+            _graphics.PreferredBackBufferWidth = 1024;
+            _graphics.PreferredBackBufferHeight = 1024;
+
             base.Initialize();
+
+            // Debug: Creating the player here
+            player = new Player(debugSolid, debugLiquid, debugGas, new Rectangle(50, 50, 32, 32));
         }
 
         protected override void LoadContent()
         {
+            // TODO: use this.Content to load your game content here
+
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             tileMap = Content.Load<Texture2D>("tileset");
             fire = Content.Load<Texture2D>("fire");
             ice = Content.Load<Texture2D>("ice");
 
-            // TODO: use this.Content to load your game content here
+            debugSolid = Content.Load<Texture2D>("debug_solid");
+            debugLiquid = Content.Load<Texture2D>("debug_liquid");
+            debugGas = Content.Load<Texture2D>("debug_gas");
         }
 
         protected override void Update(GameTime gameTime)
@@ -78,6 +93,8 @@ namespace Slime_Game
                 case GameState.Menu:
                     // click on start game -> loading screen
                     // click on quit game -> CLOSE GAME
+
+                    player.Update();
                     break;
 
                 case GameState.LoadingScreen:
@@ -101,10 +118,13 @@ namespace Slime_Game
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
+            _spriteBatch.Begin();
+
             // draw GameState
             switch (gameState)
             {
                 case GameState.Menu:
+                    player.Draw(_spriteBatch);
                     break;
 
                 case GameState.LoadingScreen:
@@ -116,6 +136,8 @@ namespace Slime_Game
                 case GameState.WinScreen:
                     break;
             }
+
+            _spriteBatch.End();
 
             base.Draw(gameTime);
         }

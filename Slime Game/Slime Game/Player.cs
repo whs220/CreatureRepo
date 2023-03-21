@@ -46,18 +46,24 @@ namespace Slime_Game
         private int widthOfPlayerSprite;
 
         // Debug sprites
-
+        private Texture2D debugSolid;
+        private Texture2D debugLiquid;
+        private Texture2D debugGas;
 
         #endregion
 
         //properties
 
         //constructor
-        public Player(Texture2D texture, Rectangle pos):base(texture, pos)
+        public Player(Texture2D debugSolid, Texture2D debugLiquid, Texture2D debugGas, Rectangle pos):base(debugSolid, pos)
         {
+            this.debugSolid = debugSolid;
+            this.debugLiquid = debugLiquid;
+            this.debugGas = debugGas;
+
             speed = 5.0f;  
             jumpHeight = -15.0f;
-            currentMatterState = PlayerMatterState.Solid;
+            currentMatterState = PlayerMatterState.Liquid;
             currentMoveState = PlayerMovementState.IdleRight;
             velocity = Vector2.Zero;
             gravity = new Vector2(0, 0.5f);
@@ -96,15 +102,19 @@ namespace Slime_Game
         public override void Draw(SpriteBatch sb)
         {
             // draw MatterState
+            // Currently draws debug textures
             switch (currentMatterState)
             {
                 case PlayerMatterState.Gas:
+                    sb.Draw(debugGas, position, Color.White);
                     break;
 
                 case PlayerMatterState.Liquid:
+                    sb.Draw(debugLiquid, position, Color.White);
                     break;
 
                 case PlayerMatterState.Solid:
+                    sb.Draw(debugSolid, position, Color.White);
                     break;
 
                 case PlayerMatterState.Dead:
@@ -147,7 +157,7 @@ namespace Slime_Game
                     else
                     {
                         // Accelerate at a negative dir
-                        if (speed > -10)
+                        if (speed > -15)
                         {
                             speed -= 1;
                         }
@@ -176,7 +186,7 @@ namespace Slime_Game
                     else
                     {
                         // Accelerate at a negative dir
-                        if (speed < 10)
+                        if (speed < 15)
                         {
                             speed += 1;
                         }
@@ -195,14 +205,20 @@ namespace Slime_Game
                     break;
                 case PlayerMovementState.IdleLeft:
                 case PlayerMovementState.IdleRight:
-                    // ===== NO LOGIC =====
+                    // ===== LOGIC =====
+
+                    if (currentMatterState == PlayerMatterState.Solid)
+                    {
+                        speed = (speed * 0.95f);
+                        position.X += (int)(speed);
+                    }
 
                     // ===== TRANSITIONS =====
                     if (currentKeyState.IsKeyDown(Keys.A))
                     {
                         currentMoveState = PlayerMovementState.MoveLeft;
                     }
-                    else if (currentKeyState.IsKeyDown(Keys.A))
+                    else if (currentKeyState.IsKeyDown(Keys.D))
                     {
                         currentMoveState = PlayerMovementState.MoveRight;
                     }
@@ -241,7 +257,7 @@ namespace Slime_Game
 
                     //If player is gas the jump is invered
                     case PlayerMatterState.Gas:
-                        position.Y = (int)-jumpHeight;
+                        velocity.Y = (int)-jumpHeight;
                         break;
 
                     //If the player is liquid jump is normal
