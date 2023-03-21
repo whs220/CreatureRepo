@@ -40,7 +40,7 @@ namespace Slime_Game
         {
             if (isActive == true)
             {
-                base.Draw(sb);
+                sb.Draw(texture, position, Color.White); ;
             }
         }
     }
