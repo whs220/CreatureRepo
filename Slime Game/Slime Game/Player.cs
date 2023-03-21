@@ -17,11 +17,11 @@ namespace Slime_Game
     {
         #region fields
 
-        //player states
+        // Player states
         PlayerMatterState currentMatterState;
         PlayerMovementState currentMoveState;
 
-        //movement
+        // Movement
         float speed;
         float jumpHeight;
         Vector2 velocity;
@@ -29,11 +29,11 @@ namespace Slime_Game
         float prevSpeed;
         bool isGrounded;
 
-        //Keyboard states
+        // Keyboard states
         KeyboardState prevKeyState;
         KeyboardState currentKeyState;
 
-        //animation
+        // Animation
         private Rectangle frame;
         // Animation data
         private int currentFrame;
