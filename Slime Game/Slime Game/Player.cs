@@ -33,7 +33,7 @@ namespace Slime_Game
         private KeyboardState prevKeyState;
         private KeyboardState currentKeyState;
 
-        //animation
+        // Animation
         private Rectangle frame;
         // Animation data
         private int currentFrame;
