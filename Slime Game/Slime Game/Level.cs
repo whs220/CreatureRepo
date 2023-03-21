@@ -24,6 +24,8 @@ namespace Slime_Game
         public List<Collectable> collectables;
         private Player player;
         private Texture2D tilemap;
+        private Texture2D fire;
+        private Texture2D ice;
         private Rectangle groundFrame;
         private Rectangle ceilingFrame;
         private Rectangle leftFrame;
@@ -34,11 +36,14 @@ namespace Slime_Game
 
         
         //Constructor
-        public Level(string fileName, Player player, Texture2D tilemap)
+        public Level(string fileName, Player player, Texture2D tilemap, Texture2D fire, Texture2D ice)
         {
             this.fileName = fileName;
             this.player = player;
             this.tilemap = tilemap;
+            this.fire = fire;
+            this.ice = ice;
+
             this.tiles = new List<Tile>();
             this.collectables = new List<Collectable>();
             this.gameObjects = new List<GameObject>();
