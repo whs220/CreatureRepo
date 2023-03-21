@@ -20,6 +20,11 @@ namespace Slime_Game
         List<Collectable> collectables;
         Player player;
 
+        // 1, 352
+        // 31, 383
+
+
+
         //Methods
        
         /// <summary>
@@ -29,6 +34,7 @@ namespace Slime_Game
         public void ReadLevel()
         {
             //File IO
+
         }
         
         /// <summary>
