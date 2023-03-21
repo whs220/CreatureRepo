@@ -70,10 +70,41 @@ namespace Slime_Game
                         //tiles
                         if (data[2] == "top")
                         {
+                            tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[0]) - 1) * 32, (int.Parse(data[1]) - 1) * 32, 32, 32), new Rectangle(0, 224, 32, 32)));
+                        }
+                        if (data[2] == "ground")
+                        {
+                            tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[0]) - 1) * 32, (int.Parse(data[1]) - 1) * 32, 32, 32), new Rectangle(0, 383, 32, 32)));
+                        }
+                        if (data[2] == "leftWall")
+                        {
+                            tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[0]) - 1) * 32, (int.Parse(data[1]) - 1) * 32, 32, 32), new Rectangle(800, 416, 32, 32)));
+                        }
+                        if (data[2] == "rightWall")
+                        {
+                            tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[0]) - 1) * 32, (int.Parse(data[1]) - 1) * 32, 32, 32), new Rectangle(864, 416, 32, 32)));
+                        }
+                        if (data[2] == "platform")
+                        {
+                            tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[0]) - 1) * 32, (int.Parse(data[1]) - 1) * 32, 128, 32), new Rectangle(640, 480, 128, 32)));
+                        }
+
+                        //collectable
+                        if(data[2] == "hot")
+                        {
+                            collectables.Add(new Collectable(tilemap, new Rectangle((int.Parse(data[0]) - 1) * 32, (int.Parse(data[1]) - 1) * 32, 32, 32), true));
+                        }
+                        if (data[2] == "cold")
+                        {
+                            collectables.Add(new Collectable(tilemap, new Rectangle((int.Parse(data[0]) - 1) * 32, (int.Parse(data[1]) - 1) * 32, 32, 32), true));
+                        }
+
+                        //player
+                        if (data[2] == "player")
+                        {
 
                         }
 
-                        //
 
 
                     }

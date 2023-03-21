@@ -27,7 +27,7 @@ namespace Slime_Game
         Vector2 velocity;
         Vector2 gravity;
         float prevSpeed;
-        bool isGrounded;
+        bool isGrounded; 
 
         // Keyboard states
         KeyboardState prevKeyState;
@@ -297,7 +297,7 @@ namespace Slime_Game
 
                     //If the player is liquid jump is normal
                     case PlayerMatterState.Liquid:
-                        position.Y = (int)jumpHeight;
+                        velocity.Y = (int)jumpHeight;
                         break;
                 }
             }
@@ -311,12 +311,13 @@ namespace Slime_Game
             //Gas has inverse jump
             if(currentMatterState != PlayerMatterState.Gas)
             {
-                position.Y += (int)gravity.Y;
+                velocity += gravity;
             }
             else
             {
-                position.Y -= (int)gravity.Y;
+                velocity -= gravity;
             }
+            position += velocity;
         }
 
         /// <summary>
