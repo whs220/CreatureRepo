@@ -107,7 +107,10 @@ namespace Slime_Game
                         //player
                         if (data[2] == "player")
                         {
-
+                            Rectangle copy = player.Position;
+                            copy.X = (int.Parse(data[0]) - 1) * 32;
+                            copy.Y = (int.Parse(data[1]) - 1) * 32;
+                            player.Position = copy;
                         }
 
 
