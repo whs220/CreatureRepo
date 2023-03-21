@@ -20,13 +20,17 @@ namespace Slime_Game
         // ==== Properties ====
 
         /// <summary>
-        /// Makes the rectangle field accessable
+        /// Makes the rectangle field accessable and changeable
         /// </summary>
         public Rectangle Position
         {
             get
             {
                 return position;
+            }
+            set
+            {
+                position = value;
             }
         }
 
