@@ -11,7 +11,8 @@ using Microsoft.Xna.Framework.Input;
 namespace Slime_Game
 {
     /// <summary>
-    /// Represents the player that the user controls
+    /// Class: Player
+    /// Represents the player! Can move, jump, and change states
     /// </summary>
     internal class Player: GameObject
     {
@@ -43,6 +44,9 @@ namespace Slime_Game
         // Sprite sheet data
         private int numPlayerSprites;
         private int widthOfPlayerSprite;
+
+        // Debug sprites
+
 
         #endregion
 
@@ -262,7 +266,7 @@ namespace Slime_Game
             {
                 velocity -= gravity;
             }
-            position.Y += velocity.Y;
+            position.Y += (int)velocity.Y;
         }
 
         /// <summary>
