@@ -125,9 +125,16 @@ namespace Slime_Game
         /// <summary>
         /// Draws all tiles and collectables
         /// </summary>
-        public void Draw()
+        public void Draw(SpriteBatch sb)
         {
-
+            foreach(Collectable collectable in collectables)
+            {
+                collectable.Draw(sb);
+            }
+            foreach(Tile tile in tiles)
+            {
+                tile.Draw(sb);
+            }
         }
 
         /// <summary>
