@@ -40,8 +40,8 @@ namespace LevelEditor
         private void MainForm_Load(object sender, EventArgs e)
         {
             //intialize fields
-            width = 0;
-            height = 0;
+            width = 32;
+            height = 32;
             messageError = "";
         }
 
@@ -53,7 +53,7 @@ namespace LevelEditor
         /// <param name="e"></param>
         private void buttonCreate_Click(object sender, EventArgs e)
         {
-            editor = new editorForm(32, 24);
+            editor = new editorForm(32, 32);
             editor.ShowDialog();
         }
 

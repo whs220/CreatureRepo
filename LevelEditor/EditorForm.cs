@@ -84,37 +84,141 @@ namespace LevelEditor
 
             //read in file info 
             StreamReader reader = new StreamReader(fileName);
-            string lineOfText = "";
 
             try
             {
                 //field values
-                width = int.Parse(reader.ReadLine());
-                height = int.Parse(reader.ReadLine());
+                width = 32;
+                height = 32;
                 color = Color.LightGray;
                 gridSize = groupMap.Height / height;
+                Color tileColor = Color.LightGray;
 
-                //make grid
+                int row;
+                int col;
+
+                #region first run
+                //read each line of data in the file
+                string lineOfData = reader.ReadLine();
+                //store the split data into an array
+                string[] objectData = lineOfData.Split(',');
+
+                //determine coords
+                row = int.Parse(objectData[0]);
+                col = int.Parse(objectData[1]);
+
+                //determine what kind color to make the box
+                if (objectData[2] == "ground")
+                {
+                    tileColor = Color.White;
+                }
+                else if (objectData[2] == "top")
+                {
+                    tileColor = Color.Pink;
+                }
+                else if (objectData[2] == "rightWall")
+                {
+                    tileColor = Color.Gray;
+                }
+                else if (objectData[2] == "leftWall")
+                {
+                    tileColor = Color.Black;
+                }
+                else if (objectData[2] == "platform")
+                {
+                    tileColor = Color.Purple;
+                }
+                else if (objectData[2] == "player")
+                {
+                    tileColor = Color.Green;
+                }
+                else if (objectData[2] == "cold")
+                {
+                    tileColor = Color.Blue;
+                }
+                else if (objectData[2] == "hot")
+                {
+                    tileColor = Color.Red;
+                }
+                #endregion
+
                 for (int i = 0; i < height; i++)
                 {
                     for (int j = 0; j < width; j++)
                     {
-                        color = Color.FromArgb(int.Parse(reader.ReadLine()));
+                        if ((row + 1 == i && j == 0) || (row == i && col + 1 == j))
+                        {
+                            if ((lineOfData = reader.ReadLine()) != null)
+                            {
+                                //store the split data into an array
+                                objectData = lineOfData.Split(',');
+
+                                //determine coords
+                                row = int.Parse(objectData[0]);
+                                col = int.Parse(objectData[1]);
+
+                                //determine what kind color to make the box
+                                if (objectData[2] == "ground")
+                                {
+                                    tileColor = Color.White;
+                                }
+                                else if (objectData[2] == "top")
+                                {
+                                    tileColor = Color.Pink;
+                                }
+                                else if (objectData[2] == "rightWall")
+                                {
+                                    tileColor = Color.Gray;
+                                }
+                                else if (objectData[2] == "leftWall")
+                                {
+                                    tileColor = Color.Black;
+                                }
+                                else if (objectData[2] == "platform")
+                                {
+                                    tileColor = Color.Purple;
+                                }
+                                else if (objectData[2] == "player")
+                                {
+                                    tileColor = Color.Green;
+                                }
+                                else if (objectData[2] == "cold")
+                                {
+                                    tileColor = Color.Blue;
+                                }
+                                else if (objectData[2] == "hot")
+                                {
+                                    tileColor = Color.Red;
+                                }
+
+
+                            }
+                        }
+
+                        if (row == i && col == j)
+                        {
+                            color = tileColor;
+                        }
+                        else
+                        {
+                            color = Color.LightGray;
+                        }
 
                         //picture box properties                                                 
                         PictureBox pictureBox = new PictureBox();
 
-                        //add picture box to controls and to events                              
-                        groupMap.Controls.Add(pictureBox);
-                        pictureBox.Height = gridSize;
-                        pictureBox.Width = gridSize;
-                        pictureBox.Location = new Point(
-                        j * gridSize,
-                        i * gridSize);
-                        pictureBox.BackColor = color;
+                            //add picture box to controls and to events                              
+                            groupMap.Controls.Add(pictureBox);
+                            pictureBox.Height = gridSize;
+                            pictureBox.Width = gridSize;
+                            pictureBox.Location = new Point(
+                            j * gridSize,
+                            i * gridSize);
+                            pictureBox.BackColor = color;
 
-                        //add to event
-                        pictureBox.Click += ChangeColor;
+                            //add to event
+                            pictureBox.Click += ChangeColor;
+                        
                     }
                 }
                 //set window title
@@ -182,14 +286,14 @@ namespace LevelEditor
             {
                 //write data to a file
                 StreamWriter writer = new StreamWriter(save.FileName);
-                for (int i = 0; i < 24; i++)
+                for (int i = 0; i < 32; i++)
                 {
                     for (int j = 0; j < 32; j++)
                     {
                         switch (groupMap.Controls[(i*32)+j].BackColor.ToArgb())
                         {
                             case -16181: //pink
-                                writer.WriteLine(i + "," + j + "," + "idkMan");
+                                writer.WriteLine(i + "," + j + "," + "top");
                                 break;
                             case -16776961: //blue
                                 writer.WriteLine(i + "," + j + ","+"cold");
@@ -201,22 +305,22 @@ namespace LevelEditor
                                 writer.WriteLine(i + "," + j + "," + "player");
                                 break;
                             case -256: //yellow
-                                writer.WriteLine(i + "," + j + "," + "yellow");
+                                //writer.WriteLine(i + "," + j + "," + "");
                                 break;
                             case -8388480: //purple
                                 writer.WriteLine(i + "," + j + "," + "platform");
                                 break;
                             case -1: //white
-                                writer.WriteLine(i + "," + j + "," + "small");
+                                writer.WriteLine(i + "," + j + "," + "ground");
                                 break;
-                            case -16777216:                                                  //One is gray and one is black
-                                writer.WriteLine(i + "," + j + "," + "stoneLeft");           //One is gray and one is black
-                                break;                                                       //One is gray and one is black
-                            case -8355712:
-                                writer.WriteLine(i + "," + j + "," + "stoneRight");
+                            case -16777216: //black                                    
+                                writer.WriteLine(i + "," + j + "," + "leftWall");     
+                                break;                                                 
+                            case -8355712: //gray
+                                writer.WriteLine(i + "," + j + "," + "rightWall");
                                 break;
                             case -9404272: //slate gray
-                                writer.WriteLine(i + "," + j + "," + "belowGrass");
+                                //writer.WriteLine(i + "," + j + "," + "");
                                 break;
                             default:
                                 break;
@@ -261,7 +365,6 @@ namespace LevelEditor
 
             //read data to respective values ------------------------------------------//
             StreamReader reader = new StreamReader(opener.FileName);                   //
-            string lineOfText = "";                                                    //
             fileName = opener.SafeFileName;                                            //
                                                                                        //
             if (result == DialogResult.OK)                                             //
@@ -269,31 +372,140 @@ namespace LevelEditor
                 groupMap.Controls.Clear();                                             //
                 try                                                                    //
                 {                                                                      //
-                    width = int.Parse(reader.ReadLine());                              //
-                    height = int.Parse(reader.ReadLine());                             //
+                    width = 32;                                                        //
+                    height = 32;                                                       //
                     gridSize = groupMap.Height / height;                               //
-                    for(int i = 0; i < height; i++)                                    //
-                    {                                                                  //
-                        for(int j = 0; j < width; j++)                                 //
-                        {                                                              //
-                            color = Color.FromArgb(int.Parse(reader.ReadLine()));      //
-                                                                                       //
-                            //picture box properties                                   //            
-                            PictureBox pictureBox = new PictureBox();                  //
-                                                                                       //
-                            //add picture box to controls and to events                //            
-                            groupMap.Controls.Add(pictureBox);                         //
-                            pictureBox.Height = gridSize;                              //
-                            pictureBox.Width = gridSize;                               //
-                            pictureBox.Location = new Point(                           //
-                            j * gridSize,                                              //
-                            i * gridSize);                                             //
-                            pictureBox.BackColor = color;                              //
-                                                                                       //
-                            //add to event                                             //
-                            pictureBox.Click += ChangeColor;                           //
-                        }                                                              //
-                    }                                                                  //
+
+                    Color tileColor = Color.LightGray;
+
+                    int row;
+                    int col;
+
+
+                    #region first run
+                    //read each line of data in the file
+                    string lineOfData = reader.ReadLine();
+                    //store the split data into an array
+                    string[] objectData = lineOfData.Split(',');
+
+                    //determine coords
+                    row = int.Parse(objectData[0]);
+                    col = int.Parse(objectData[1]);
+
+                    //determine what kind color to make the box
+                    if (objectData[2] == "ground")
+                    {
+                        tileColor = Color.White;
+                    }
+                    else if (objectData[2] == "top")
+                    {
+                        tileColor = Color.Pink;
+                    }
+                    else if (objectData[2] == "rightWall")
+                    {
+                        tileColor = Color.Gray;
+                    }
+                    else if (objectData[2] == "leftWall")
+                    {
+                        tileColor = Color.Black;
+                    }
+                    else if (objectData[2] == "platform")
+                    {
+                        tileColor = Color.Purple;
+                    }
+                    else if (objectData[2] == "player")
+                    {
+                        tileColor = Color.Green;
+                    }
+                    else if (objectData[2] == "cold")
+                    {
+                        tileColor = Color.Blue;
+                    }
+                    else if (objectData[2] == "hot")
+                    {
+                        tileColor = Color.Red;
+                    }
+                    #endregion
+
+                    for (int i = 0; i < height; i++)
+                    {
+                        for (int j = 0; j < width; j++)
+                        {
+                            if ((row + 1 == i && j == 0) || (row == i && col + 1 == j))
+                            {
+                                if ((lineOfData = reader.ReadLine()) != null)
+                                {
+                                    //store the split data into an array
+                                    objectData = lineOfData.Split(',');
+
+                                    //determine coords
+                                    row = int.Parse(objectData[0]);
+                                    col = int.Parse(objectData[1]);
+
+                                    //determine what kind color to make the box
+                                    if (objectData[2] == "ground")
+                                    {
+                                        tileColor = Color.White;
+                                    }
+                                    else if (objectData[2] == "top")
+                                    {
+                                        tileColor = Color.Pink;
+                                    }
+                                    else if (objectData[2] == "rightWall")
+                                    {
+                                        tileColor = Color.Gray;
+                                    }
+                                    else if (objectData[2] == "leftWall")
+                                    {
+                                        tileColor = Color.Black;
+                                    }
+                                    else if (objectData[2] == "platform")
+                                    {
+                                        tileColor = Color.Purple;
+                                    }
+                                    else if (objectData[2] == "player")
+                                    {
+                                        tileColor = Color.Green;
+                                    }
+                                    else if (objectData[2] == "cold")
+                                    {
+                                        tileColor = Color.Blue;
+                                    }
+                                    else if (objectData[2] == "hot")
+                                    {
+                                        tileColor = Color.Red;
+                                    }
+
+
+                                }
+                            }
+                            if (row == i && col == j)
+                            {
+                                color = tileColor;
+                            }
+                            else
+                            {
+                                color = Color.LightGray;
+                            }
+
+                            //picture box properties                                                 
+                            PictureBox pictureBox = new PictureBox();
+
+                            //add picture box to controls and to events                              
+                            groupMap.Controls.Add(pictureBox);
+                            pictureBox.Height = gridSize;
+                            pictureBox.Width = gridSize;
+                            pictureBox.Location = new Point(
+                            j * gridSize,
+                            i * gridSize);
+                            pictureBox.BackColor = color;
+
+                            //add to event
+                            pictureBox.Click += ChangeColor;
+
+                        }
+                    }
+
                 }                                                                      //
                 catch(Exception ex)                                                    //
                 {                                                                      //
