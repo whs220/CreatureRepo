@@ -18,6 +18,10 @@ namespace Slime_Game
 
 
         // ==== Properties ====
+
+        /// <summary>
+        /// Makes the rectangle field accessable
+        /// </summary>
         public Rectangle Position
         {
             get
@@ -25,6 +29,8 @@ namespace Slime_Game
                 return position;
             }
         }
+
+
         // ==== Constuctor ====
 
         /// <summary>
