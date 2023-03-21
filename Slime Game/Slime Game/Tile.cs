@@ -84,5 +84,14 @@ namespace Slime_Game
         {
             return killStates.Contains(playerMatterState);
         }
+
+        /// <summary>
+        /// Draws the tile!
+        /// </summary>
+        /// <param name="sb">Spritebatch</param>
+        public override void Draw(SpriteBatch sb)
+        {
+            sb.Draw(texture, position, frame, Color.White);
+        }
     }
 }
