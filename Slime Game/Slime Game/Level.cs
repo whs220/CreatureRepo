@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace Slime_Game
 {
@@ -14,14 +17,17 @@ namespace Slime_Game
     internal class Level
     {
         //Fields
-        string fileName;
-        List<GameObject> gameObjects;
-        List<Tile> tiles;
-        List<Collectable> collectables;
-        Player player;
+        public string fileName;
+        public List<GameObject> gameObjects;
+        public List<Tile> tiles;
+        public List<Collectable> collectables;
+        private Player player;
+        private Texture2D ground;
 
         // 1, 352
         // 31, 383
+
+        
 
 
 
