@@ -73,6 +73,9 @@
 /processorParam:TextureFormat=Color
 /build:ice.png
 
+#begin testLevel.level
+/copy:testLevel.level
+
 #begin tileset.png
 /importer:TextureImporter
 /processor:TextureProcessor
