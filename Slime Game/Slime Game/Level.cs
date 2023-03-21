@@ -22,13 +22,24 @@ namespace Slime_Game
         public List<Tile> tiles;
         public List<Collectable> collectables;
         private Player player;
-        private Texture2D ground;
+        private Texture2D tilemap;
+        private Rectangle groundFrame;
+        private Rectangle ceilingFrame;
+        private Rectangle leftFrame;
+        private Rectangle rightFrame;
 
         // 1, 352
         // 31, 383
 
         
+        //Constructor
+        public Level(string fileName, Player player, Texture2D tilemap)
+        {
+            this.fileName = fileName;
+            this.player = player;
+            this.tilemap = tilemap;
 
+        }
 
 
         //Methods
