@@ -17,6 +17,8 @@ namespace Slime_Game
         protected Rectangle position;
 
 
+        // ==== Properties ====
+        
         // ==== Constuctor ====
 
         /// <summary>
