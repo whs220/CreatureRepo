@@ -205,22 +205,15 @@ namespace Slime_Game
         /// </summary>
         public void Jump()
         {
-            switch (currentMatterState)
-            {
-                //if player is a solid they cannot jump
-                case PlayerMatterState.Solid:
-                    break;
+            if()
+               
+                   //position.Y = (int)-jumpHeight;
+                   
 
-                //If player is gas the jump is invered
-                case PlayerMatterState.Gas:
-                    position.Y = (int)-jumpHeight;
-                    break;
-
-                //If the player is liquid jump is normal
-                case PlayerMatterState.Liquid:
-                    position.Y = (int)jumpHeight;
-                    break;
-            }
+               
+                   //position.Y = (int)jumpHeight;
+            
+            
         }
 
         /// <summary>
