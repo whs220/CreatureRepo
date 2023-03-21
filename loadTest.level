@@ -1,0 +1,8 @@
+0,0,hot
+0,1,cold
+2,20,ground
+6,5,platform
+11,15,player
+18,11,leftWall
+18,31,rightWall
+20,5,top
