@@ -31,6 +31,8 @@ namespace Slime_Game
         private bool isGrounded; 
         private Vector2 gravity;
 
+        private Rectangle groundRect;
+
         //Keyboard states
         private KeyboardState prevKeyState;
         private KeyboardState currentKeyState;
@@ -79,6 +81,11 @@ namespace Slime_Game
             set { isGrounded = true; }
         }
 
+        public Rectangle GroundRect
+        {
+            get { return groundRect; }
+        }
+
         #endregion
 
         //constructor
@@ -96,6 +103,8 @@ namespace Slime_Game
             velocity = Vector2.Zero;
             gravity = new Vector2(0, 0.5f);
             isGrounded = true;
+
+            groundRect = new Rectangle(16, 34, 12, 2);
 
             // Set up animation data:
             fps = 8.0;                      // Animation frames to cycle through per second
@@ -524,7 +533,7 @@ namespace Slime_Game
                 position.X += (int)speed;
             }
         }
-        */
+        
 
         #endregion
     }
