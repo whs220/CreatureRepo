@@ -37,10 +37,8 @@ namespace Slime_Game
         // 31, 383
 
         //Constructor
-        public Level(string fileName, Player player, Texture2D tilemap, Texture2D fire, Texture2D ice, Game1 game1)
-        {
-            this.game1 = game1;
-            game1.Content.RootDirectory = "Content";
+        public Level(string fileName, Player player, Texture2D tilemap, Texture2D fire, Texture2D ice) 
+        { 
 
             this.fileName = fileName;
             this.player = player;
@@ -68,7 +66,9 @@ namespace Slime_Game
 
             try
             {
-                input = new StreamReader(fileName);
+                System.Diagnostics.Debug.WriteLine("Before");
+                input = new StreamReader("../../../" + fileName);
+                System.Diagnostics.Debug.WriteLine("After");
 
                 while (!done)
                 {
@@ -130,7 +130,7 @@ namespace Slime_Game
             }
             catch
             {
-                game1.Exit();
+
             }
 
         }

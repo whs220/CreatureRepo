@@ -82,7 +82,8 @@ namespace Slime_Game
             debugLiquid = Content.Load<Texture2D>("debug_liquid");
             debugGas = Content.Load<Texture2D>("debug_gas");
 
-            level1 = new Level("Content/testLevel.level", player, tileMap, fire, ice, this);
+            level1 = new Level("Content/testLevel.level", player, tileMap, fire, ice);
+            level1.ReadLevel();
         }
 
         protected override void Update(GameTime gameTime)
