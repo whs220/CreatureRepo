@@ -180,7 +180,7 @@ namespace Slime_Game
                 {
                     Rectangle rect = tile.Position;
                     Rectangle intersection = Rectangle.Intersect(rect, posCopy);
-                    Vector2 velCopy
+                    Vector2 velCopy = player.Velocity;
 
                     if (intersection.Height > intersection.Width)
                     {
@@ -196,41 +196,24 @@ namespace Slime_Game
 
                     if (intersection.Height < intersection.Width)
                     {
-                        playerVelocity.Y = 0;
-                        if (playerRect.Y - rect.Y < 0)
+                        velCopy.Y = 0;
+                        player.Velocity = velCopy;
+
+                        if (posCopy.Y - rect.Y < 0)
                         {
-                            playerRect.Y -= intersection.Height;
+                            posCopy.Y -= intersection.Height;
                         }
                         else
                         {
-                            playerRect.Y += intersection.Height;
+                            posCopy.Y += intersection.Height;
                         }
                     }
 
-
-                }
-
-                foreach (Tile tile in intersections)
-                {
-                    Rectangle intersection = Rectangle.Intersect(rect, playerRect);
-                    if (intersection.Height < intersection.Width)
-                    {
-                        playerVelocity.Y = 0;
-                        if (playerRect.Y - rect.Y < 0)
-                        {
-                            playerRect.Y -= intersection.Height;
-                        }
-                        else
-                        {
-                            playerRect.Y += intersection.Height;
-                        }
-                    }
 
                 }
 
                 //resolves intersections
-                playerPosition.X = playerRect.X;
-                playerPosition.Y = playerRect.Y;
+                player.Position = posCopy;
             }
 
 
