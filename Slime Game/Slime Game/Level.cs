@@ -180,6 +180,7 @@ namespace Slime_Game
                 {
                     Rectangle rect = tile.Position;
                     Rectangle intersection = Rectangle.Intersect(rect, posCopy);
+                    Vector2 velCopy
 
                     if (intersection.Height > intersection.Width)
                     {
@@ -192,6 +193,20 @@ namespace Slime_Game
                             posCopy.X += intersection.Width;
                         }
                     }
+
+                    if (intersection.Height < intersection.Width)
+                    {
+                        playerVelocity.Y = 0;
+                        if (playerRect.Y - rect.Y < 0)
+                        {
+                            playerRect.Y -= intersection.Height;
+                        }
+                        else
+                        {
+                            playerRect.Y += intersection.Height;
+                        }
+                    }
+
 
                 }
 
