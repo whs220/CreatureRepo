@@ -134,6 +134,11 @@ namespace Slime_Game
                 DebugKeyDetection();
             }
 
+            if(currentKeyState.IsKeyDown(Keys.F) && prevKeyState.IsKeyUp(Keys.F))
+            {
+                debugModeActive = !debugModeActive;
+            }
+
             // record previous keyboard state
             prevKeyState = currentKeyState;
         }
