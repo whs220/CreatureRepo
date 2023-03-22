@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.IO;
+using Microsoft.Xna.Framework.Content;
 
 namespace Slime_Game
 {
@@ -30,14 +31,17 @@ namespace Slime_Game
         private Rectangle ceilingFrame;
         private Rectangle leftFrame;
         private Rectangle rightFrame;
+        private Game1 game1;
 
         // 1, 352
         // 31, 383
 
-        
         //Constructor
-        public Level(string fileName, Player player, Texture2D tilemap, Texture2D fire, Texture2D ice)
+        public Level(string fileName, Player player, Texture2D tilemap, Texture2D fire, Texture2D ice, Game1 game1)
         {
+            this.game1 = game1;
+            game1.Content.RootDirectory = "Content";
+
             this.fileName = fileName;
             this.player = player;
             this.tilemap = tilemap;
@@ -47,11 +51,12 @@ namespace Slime_Game
             this.tiles = new List<Tile>();
             this.collectables = new List<Collectable>();
             this.gameObjects = new List<GameObject>();
+            this.game1 = game1;
         }
 
 
         //Methods
-       
+    
         /// <summary>
         /// Returns a list of gameobjects based on the recieved files.
         /// </summary>
@@ -125,7 +130,7 @@ namespace Slime_Game
             }
             catch
             {
-                
+                game1.Exit();
             }
 
         }

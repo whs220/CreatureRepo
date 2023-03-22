@@ -47,6 +47,7 @@ namespace Slime_Game
         private Texture2D debugSolid;
         private Texture2D debugLiquid;
         private Texture2D debugGas;
+        private Level level1;
 
         public Game1()
         {
@@ -80,6 +81,8 @@ namespace Slime_Game
             debugSolid = Content.Load<Texture2D>("debug_solid");
             debugLiquid = Content.Load<Texture2D>("debug_liquid");
             debugGas = Content.Load<Texture2D>("debug_gas");
+
+            level1 = new Level("Content/testLevel.level", player, tileMap, fire, ice, this);
         }
 
         protected override void Update(GameTime gameTime)
@@ -125,6 +128,8 @@ namespace Slime_Game
             {
                 case GameState.Menu:
                     player.Draw(_spriteBatch);
+                    level1.Draw(_spriteBatch);
+                    
                     break;
 
                 case GameState.LoadingScreen:
