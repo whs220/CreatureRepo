@@ -76,7 +76,7 @@ namespace Slime_Game
         public bool IsGrounded
         {
             get { return isGrounded; }
-            set { isGrounded = true; }
+            set { isGrounded = value; }
         }
 
         #endregion
@@ -95,7 +95,7 @@ namespace Slime_Game
             currentMoveState = PlayerMovementState.IdleRight;
             velocity = Vector2.Zero;
             gravity = new Vector2(0, 0.5f);
-            isGrounded = true;
+            isGrounded = false;
 
             // Set up animation data:
             fps = 8.0;                      // Animation frames to cycle through per second
