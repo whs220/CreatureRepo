@@ -54,19 +54,20 @@ namespace Slime_Game
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+
+            _graphics.PreferredBackBufferWidth = 1024;
+            _graphics.PreferredBackBufferHeight = 1024;
         }
 
         protected override void Initialize()
         {
             gameState = GameState.Menu;
 
-            _graphics.PreferredBackBufferWidth = 1024;
-            _graphics.PreferredBackBufferHeight = 1024;
+            
 
             base.Initialize();
 
             // Debug: Creating the player here
-            player = new Player(debugSolid, debugLiquid, debugGas, new Rectangle(50, 50, 32, 32));
         }
 
         protected override void LoadContent()
@@ -82,6 +83,7 @@ namespace Slime_Game
             debugLiquid = Content.Load<Texture2D>("debug_liquid");
             debugGas = Content.Load<Texture2D>("debug_gas");
 
+            player = new Player(debugSolid, debugLiquid, debugGas, new Rectangle(50, 50, 32, 32));
             level1 = new Level("Content/testLevel.level", player, tileMap, fire, ice);
             level1.ReadLevel();
         }

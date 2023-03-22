@@ -69,62 +69,52 @@ namespace Slime_Game
                 System.Diagnostics.Debug.WriteLine("Before");
                 input = new StreamReader("../../../" + fileName);
                 System.Diagnostics.Debug.WriteLine("After");
+                string line;
 
-                while (!done)
+                while ((line = input.ReadLine()) != null)
                 {
-                    try
+                    System.Diagnostics.Debug.WriteLine("l");
+                    string[] data = line.Split(',');
+
+                    //tiles
+                    if (data[2] == "top")
                     {
-                        string line = input.ReadLine();
-                        string[] data = line.Split(',');
-
-                        //tiles
-                        if (data[2] == "top")
-                        {
-                            tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[0]) - 1) * 32, (int.Parse(data[1]) - 1) * 32, 32, 32), new Rectangle(0, 224, 32, 32)));
-                        }
-                        if (data[2] == "ground")
-                        {
-                            tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[0]) - 1) * 32, (int.Parse(data[1]) - 1) * 32, 32, 32), new Rectangle(0, 383, 32, 32)));
-                        }
-                        if (data[2] == "leftWall")
-                        {
-                            tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[0]) - 1) * 32, (int.Parse(data[1]) - 1) * 32, 32, 32), new Rectangle(800, 416, 32, 32)));
-                        }
-                        if (data[2] == "rightWall")
-                        {
-                            tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[0]) - 1) * 32, (int.Parse(data[1]) - 1) * 32, 32, 32), new Rectangle(864, 416, 32, 32)));
-                        }
-                        if (data[2] == "platform")
-                        {
-                            tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[0]) - 1) * 32, (int.Parse(data[1]) - 1) * 32, 128, 32), new Rectangle(640, 480, 128, 32)));
-                        }
-
-                        //collectable
-                        if(data[2] == "hot")
-                        {
-                            collectables.Add(new Collectable(tilemap, new Rectangle((int.Parse(data[0]) - 1) * 32, (int.Parse(data[1]) - 1) * 32, 32, 32), true));
-                        }
-                        if (data[2] == "cold")
-                        {
-                            collectables.Add(new Collectable(tilemap, new Rectangle((int.Parse(data[0]) - 1) * 32, (int.Parse(data[1]) - 1) * 32, 32, 32), true));
-                        }
-
-                        //player
-                        if (data[2] == "player")
-                        {
-                            Rectangle copy = player.Position;
-                            copy.X = (int.Parse(data[0]) - 1) * 32;
-                            copy.Y = (int.Parse(data[1]) - 1) * 32;
-                            player.Position = copy;
-                        }
-
-
-
+                        tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), new Rectangle(0, 224, 32, 32)));
                     }
-                    catch
+                    if (data[2] == "ground")
                     {
-                        done = true;
-                        break;
+                        tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), new Rectangle(0, 351, 32, 32)));
+                    }
+                    if (data[2] == "leftWall")
+                    {
+                        tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), new Rectangle(800, 416, 32, 32)));
+                    }
+                    if (data[2] == "rightWall")
+                    {
+                        tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), new Rectangle(864, 416, 32, 32)));
+                    }
+                    if (data[2] == "platform")
+                    {
+                        tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 128, 32), new Rectangle(640, 480, 128, 32)));
+                    }
+
+                    //collectable
+                    if(data[2] == "hot")
+                    {
+                        collectables.Add(new Collectable(tilemap, new Rectangle((int.Parse(data[0]) - 1) * 32, (int.Parse(data[1]) - 1) * 32, 32, 32), true));
+                    }
+                    if (data[2] == "cold")
+                    {
+                        collectables.Add(new Collectable(tilemap, new Rectangle((int.Parse(data[0]) - 1) * 32, (int.Parse(data[1]) - 1) * 32, 32, 32), true));
+                    }
+
+                    //player
+                    if (data[2] == "player")
+                    {
+                        Rectangle copy = player.Position;
+                        copy.X = (int.Parse(data[0]) - 1) * 32;
+                        copy.Y = (int.Parse(data[1]) - 1) * 32;
+                        player.Position = copy;
                     }
                 }
             }
