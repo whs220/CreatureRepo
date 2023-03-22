@@ -55,7 +55,9 @@ namespace Slime_Game
 
         //properties
 
-
+        /// <summary>
+        /// Gets and sets the velocity vector
+        /// </summary>
         public Vector2 Velocity
         {
             get
@@ -74,7 +76,7 @@ namespace Slime_Game
             this.debugSolid = debugSolid;
             this.debugLiquid = debugLiquid;
             this.debugGas = debugGas;
-            debugModeActive = true;
+            debugModeActive = false;
 
             speed = 5.0f;  
             jumpHeight = -15.0f;
@@ -452,6 +454,8 @@ namespace Slime_Game
                 flip,                                           // Flip it horizontally or vertically?    
                 0.0f);                                          // Layer depth
         }
+
+        
 
         /* ==== Old Movement ====
         /// <summary>
