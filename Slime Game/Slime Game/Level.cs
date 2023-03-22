@@ -167,7 +167,6 @@ namespace Slime_Game
                 if (player.Position.Intersects(tile.Position))
                 {
                     intersections.Add(tile);
-                    Rectangle intersection = Rectangle.Intersect(player.Position, tile.Position);
 
                 }
             }
