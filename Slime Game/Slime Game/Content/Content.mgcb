@@ -13,6 +13,13 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin bankgothiclight16.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:bankgothiclight16.spritefont
+
 #begin debug_gas.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -72,13 +79,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:ice.png
-
-#begin round_pixel_font_16.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:round_pixel_font_16.spritefont
 
 #begin testLevel.level
 /copy:testLevel.level
