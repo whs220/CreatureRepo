@@ -172,14 +172,22 @@ namespace Slime_Game
         public void TileCollision()
         {
             List<Tile> intersections = new List<Tile>();
+            bool isGrounded = false;
             foreach(Tile tile in tiles) 
             {
                 if (player.Position.Intersects(tile.Position))
                 {
                     intersections.Add(tile);
-
+                }
+                // If the groundrect intersects a tile...
+                if (!isGrounded && player.GroundRect.Intersects(tile.Position))
+                {
+                    // You're grounded!!
+                    isGrounded = true;
                 }
             }
+            // Set player IsGrounded
+            player.IsGrounded = isGrounded;
 
             if(intersections.Count > 0)
             {
@@ -210,7 +218,6 @@ namespace Slime_Game
 
                         if (posCopy.Y - rect.Y < 0)
                         {
-                            player.IsGrounded = true;
                             posCopy.Y -= intersection.Height;
                         }
                         else
@@ -227,10 +234,6 @@ namespace Slime_Game
 
                 //resolves intersections
                 player.Position = posCopy;
-            }
-            else
-            {
-                player.IsGrounded = false;
             }
 
 
