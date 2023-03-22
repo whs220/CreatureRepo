@@ -66,14 +66,11 @@ namespace Slime_Game
 
             try
             {
-                System.Diagnostics.Debug.WriteLine("Before");
                 input = new StreamReader("../../../" + fileName);
-                System.Diagnostics.Debug.WriteLine("After");
                 string line;
 
                 while ((line = input.ReadLine()) != null)
                 {
-                    System.Diagnostics.Debug.WriteLine("l");
                     string[] data = line.Split(',');
 
                     //tiles
