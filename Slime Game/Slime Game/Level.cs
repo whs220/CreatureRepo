@@ -161,6 +161,78 @@ namespace Slime_Game
         /// </summary>
         public void TileCollision()
         {
+            List<Tile> intersections = new List<Tile>();
+            foreach(Tile tile in tiles) 
+            {
+                if (player.Position.Intersects(tile.Position))
+                {
+                    intersections.Add(tile);
+                    Rectangle intersection = Rectangle.Intersect(player.Position, tile.Position);
+
+                }
+            }
+
+            if(intersections.Count > 0)
+            {
+                Rectangle posCopy = player.Position;
+
+                foreach (Tile tile in intersections)
+                {
+                    Rectangle rect = tile.Position;
+                    Rectangle intersection = Rectangle.Intersect(rect, posCopy);
+                    Vector2 velCopy
+
+                    if (intersection.Height > intersection.Width)
+                    {
+                        if (posCopy.X - rect.X < 0)
+                        {
+                            posCopy.X -= intersection.Width;
+                        }
+                        else
+                        {
+                            posCopy.X += intersection.Width;
+                        }
+                    }
+
+                    if (intersection.Height < intersection.Width)
+                    {
+                        playerVelocity.Y = 0;
+                        if (playerRect.Y - rect.Y < 0)
+                        {
+                            playerRect.Y -= intersection.Height;
+                        }
+                        else
+                        {
+                            playerRect.Y += intersection.Height;
+                        }
+                    }
+
+
+                }
+
+                foreach (Tile tile in intersections)
+                {
+                    Rectangle intersection = Rectangle.Intersect(rect, playerRect);
+                    if (intersection.Height < intersection.Width)
+                    {
+                        playerVelocity.Y = 0;
+                        if (playerRect.Y - rect.Y < 0)
+                        {
+                            playerRect.Y -= intersection.Height;
+                        }
+                        else
+                        {
+                            playerRect.Y += intersection.Height;
+                        }
+                    }
+
+                }
+
+                //resolves intersections
+                playerPosition.X = playerRect.X;
+                playerPosition.Y = playerRect.Y;
+            }
+
 
         }
 
