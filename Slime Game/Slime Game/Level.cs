@@ -200,10 +200,12 @@ namespace Slime_Game
 
                         if (posCopy.Y - rect.Y < 0)
                         {
+                            player.IsGrounded = true;
                             posCopy.Y -= intersection.Height;
                         }
                         else
                         {
+
                             posCopy.Y += intersection.Height;
                         }
                     }
@@ -211,8 +213,14 @@ namespace Slime_Game
 
                 }
 
+                
+
                 //resolves intersections
                 player.Position = posCopy;
+            }
+            else
+            {
+                player.IsGrounded = false;
             }
 
 
