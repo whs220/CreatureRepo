@@ -32,6 +32,7 @@ namespace Slime_Game
         private Rectangle leftFrame;
         private Rectangle rightFrame;
         private Game1 game1;
+        private Tile backTile;
 
         // 1, 352
         // 31, 383
@@ -50,6 +51,7 @@ namespace Slime_Game
             this.collectables = new List<Collectable>();
             this.gameObjects = new List<GameObject>();
             this.game1 = game1;
+            backTile = new Tile(tilemap, new Rectangle(0, 0, 32, 32), new Rectangle(480, 480, 32, 32));
         }
 
 
@@ -127,7 +129,15 @@ namespace Slime_Game
         /// </summary>
         public void Draw(SpriteBatch sb)
         {
-            foreach(Collectable collectable in collectables)
+            for (int i = 0; i < 32; i++)
+            {
+                for (int j = 0; j < 32; j++)
+                {
+                    backTile.Position = new Rectangle(i * 32, j * 32, 32, 32);
+                    backTile.Draw(sb);
+                }
+            }
+            foreach (Collectable collectable in collectables)
             {
                 collectable.Draw(sb);
             }
