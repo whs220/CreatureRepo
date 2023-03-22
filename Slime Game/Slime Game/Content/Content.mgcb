@@ -13,6 +13,13 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin bankgothiclight16.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:bankgothiclight16.spritefont
+
 #begin debug_gas.png
 /importer:TextureImporter
 /processor:TextureProcessor

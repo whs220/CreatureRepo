@@ -49,6 +49,8 @@ namespace Slime_Game
         private Texture2D debugGas;
         private Level level1;
 
+        private SpriteFont mainFont;
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -83,6 +85,8 @@ namespace Slime_Game
             debugLiquid = Content.Load<Texture2D>("debug_liquid");
             debugGas = Content.Load<Texture2D>("debug_gas");
 
+            mainFont = Content.Load<SpriteFont>("bankgothiclight16");
+
             player = new Player(debugSolid, debugLiquid, debugGas, new Rectangle(50, 50, 32, 32));
             level1 = new Level("Content/testLevel.level", player, tileMap, fire, ice);
             level1.ReadLevel();
@@ -101,6 +105,7 @@ namespace Slime_Game
                     // click on quit game -> CLOSE GAME
 
                     player.Update();
+                    level1.Update();
                     break;
 
                 case GameState.LoadingScreen:
@@ -125,6 +130,8 @@ namespace Slime_Game
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             _spriteBatch.Begin();
+
+            _spriteBatch.DrawString(mainFont, "Poop!!", new Vector2(80, 80), Color.White);
 
             // draw GameState
             switch (gameState)

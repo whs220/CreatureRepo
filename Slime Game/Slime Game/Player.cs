@@ -21,6 +21,7 @@ namespace Slime_Game
         //player states
         private PlayerMatterState currentMatterState;
         private PlayerMovementState currentMoveState;
+        private bool debugModeActive;
 
         //movement
         private float speed;
@@ -52,7 +53,33 @@ namespace Slime_Game
 
         #endregion
 
-        //properties
+        #region properties
+
+        /// <summary>
+        /// Gets and sets the velocity vector
+        /// </summary>
+        public Vector2 Velocity
+        {
+            get
+            {
+                return velocity;
+            }
+            set
+            {
+                velocity = value;
+            }
+        }
+
+        /// <summary>
+        /// Get/Set for isGrounded
+        /// </summary>
+        public bool IsGrounded
+        {
+            get { return isGrounded; }
+            set { isGrounded = true; }
+        }
+
+        #endregion
 
         //constructor
         public Player(Texture2D debugSolid, Texture2D debugLiquid, Texture2D debugGas, Rectangle pos):base(debugSolid, pos)
@@ -60,6 +87,7 @@ namespace Slime_Game
             this.debugSolid = debugSolid;
             this.debugLiquid = debugLiquid;
             this.debugGas = debugGas;
+            debugModeActive = false;
 
             speed = 5.0f;  
             jumpHeight = -15.0f;
@@ -90,6 +118,12 @@ namespace Slime_Game
 
             ProcessMovement();
             ApplyGravity();
+
+            //Checks if debug mode is active then does key checks
+            if(debugModeActive == true)
+            {
+                DebugKeyDetection();
+            }
 
             // record previous keyboard state
             prevKeyState = currentKeyState;
@@ -229,14 +263,29 @@ namespace Slime_Game
             // (Except dead, duh)
             if (currentMatterState != PlayerMatterState.Dead)
             {
-                // Jump if space or W is pressed
-                if (currentKeyState.IsKeyDown(Keys.W) && prevKeyState.IsKeyUp(Keys.W) && prevKeyState.IsKeyUp(Keys.Space))
+                if (debugModeActive == false)
                 {
-                    Jump();
+                    // Jump if space or W is pressed
+                    if (currentKeyState.IsKeyDown(Keys.W) && prevKeyState.IsKeyUp(Keys.W) && prevKeyState.IsKeyUp(Keys.Space))
+                    {
+                        Jump();
+                    }
+                    else if (currentKeyState.IsKeyDown(Keys.Space) && prevKeyState.IsKeyUp(Keys.W) && prevKeyState.IsKeyUp(Keys.Space))
+                    {
+                        Jump();
+                    }
                 }
-                else if (currentKeyState.IsKeyDown(Keys.Space) && prevKeyState.IsKeyUp(Keys.W) && prevKeyState.IsKeyUp(Keys.Space))
+                else
                 {
-                    Jump();
+                    if (currentKeyState.IsKeyDown(Keys.W))
+                    {
+                        Jump();
+                    }
+                    if (currentKeyState.IsKeyDown(Keys.S))
+                    {
+                        position.Y += 5;
+                    }
+                    
                 }
             }
         }
@@ -246,25 +295,33 @@ namespace Slime_Game
         /// </summary>
         public void Jump()
         {
-            // Can only jump if grounded
-            if (isGrounded)
+            //If statement for debug mode sees if active
+            if (debugModeActive == false)
             {
-                switch (currentMatterState)
+                // Can only jump if grounded
+                if (isGrounded)
                 {
-                    //if player is a solid they cannot jump
-                    case PlayerMatterState.Solid:
-                        break;
+                    switch (currentMatterState)
+                    {
+                        //if player is a solid they cannot jump
+                        case PlayerMatterState.Solid:
+                            break;
 
-                    //If player is gas the jump is invered
-                    case PlayerMatterState.Gas:
-                        velocity.Y = (int)-jumpHeight;
-                        break;
+                        //If player is gas the jump is invered
+                        case PlayerMatterState.Gas:
+                            velocity.Y = (int)-jumpHeight;
+                            break;
 
-                    //If the player is liquid jump is normal
-                    case PlayerMatterState.Liquid:
-                        velocity.Y = (int)jumpHeight;
-                        break;
+                        //If the player is liquid jump is normal
+                        case PlayerMatterState.Liquid:
+                            velocity.Y = (int)jumpHeight;
+                            break;
+                    }
                 }
+            }
+            else
+            {
+                position.Y -= 5;
             }
         }
 
@@ -273,16 +330,19 @@ namespace Slime_Game
         /// </summary>
         public void ApplyGravity()
         {
-            //Gas has inverse jump
-            if(currentMatterState != PlayerMatterState.Gas)
+            if (debugModeActive == false)
             {
-                velocity += gravity;
+                //Gas has inverse jump
+                if (currentMatterState != PlayerMatterState.Gas)
+                {
+                    velocity += gravity;
+                }
+                else
+                {
+                    velocity -= gravity;
+                }
+                position.Y += (int)velocity.Y;
             }
-            else
-            {
-                velocity -= gravity;
-            }
-            position.Y += (int)velocity.Y;
         }
 
         /// <summary>
@@ -308,7 +368,11 @@ namespace Slime_Game
                         break;
                     // Gas to Dead
                     case PlayerMatterState.Gas:
-                        currentMatterState = PlayerMatterState.Dead;
+                        //Makes it so player can not die in debug mode
+                        if (debugModeActive == false)
+                        {
+                            currentMatterState = PlayerMatterState.Dead;
+                        }
                         break;
                 }
             }
@@ -320,10 +384,16 @@ namespace Slime_Game
                 {
                     // Solid to Dead
                     case PlayerMatterState.Solid:
-                        currentMatterState = PlayerMatterState.Dead;
+                        //Makes it so player can not die in debug mode
+                        if (debugModeActive == false)
+                        {
+                            currentMatterState = PlayerMatterState.Dead;
+                        }
                         break;
                     // Liqid to Solid
                     case PlayerMatterState.Liquid:
+                        //Changes player speed to 0 so no extra sliding
+                        speed = 0;
                         currentMatterState = PlayerMatterState.Solid;
                         break;
                     // Gas to Liquid
@@ -410,6 +480,23 @@ namespace Slime_Game
                 1.0f,                                           // Scale
                 flip,                                           // Flip it horizontally or vertically?    
                 0.0f);                                          // Layer depth
+        }
+
+        /// <summary>
+        /// When in debug mode does keyboard detection
+        /// </summary>
+        public void DebugKeyDetection()
+        {
+            //Checks for single key press on C to change colder
+            if (currentKeyState.IsKeyDown(Keys.C) && prevKeyState.IsKeyUp(Keys.C))
+            {
+                ChangeTemperature(false);
+            }
+            //Checks for single key press on H to change hotter
+            if (currentKeyState.IsKeyDown(Keys.H) && prevKeyState.IsKeyUp(Keys.H))
+            {
+                ChangeTemperature(true);
+            }
         }
 
         /* ==== Old Movement ====

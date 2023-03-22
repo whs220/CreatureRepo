@@ -171,6 +171,60 @@ namespace Slime_Game
         /// </summary>
         public void TileCollision()
         {
+            List<Tile> intersections = new List<Tile>();
+            foreach(Tile tile in tiles) 
+            {
+                if (player.Position.Intersects(tile.Position))
+                {
+                    intersections.Add(tile);
+
+                }
+            }
+
+            if(intersections.Count > 0)
+            {
+                Rectangle posCopy = player.Position;
+
+                foreach (Tile tile in intersections)
+                {
+                    Rectangle rect = tile.Position;
+                    Rectangle intersection = Rectangle.Intersect(rect, posCopy);
+                    Vector2 velCopy = player.Velocity;
+
+                    if (intersection.Height > intersection.Width)
+                    {
+                        if (posCopy.X - rect.X < 0)
+                        {
+                            posCopy.X -= intersection.Width;
+                        }
+                        else
+                        {
+                            posCopy.X += intersection.Width;
+                        }
+                    }
+
+                    if (intersection.Height < intersection.Width)
+                    {
+                        velCopy.Y = 0;
+                        player.Velocity = velCopy;
+
+                        if (posCopy.Y - rect.Y < 0)
+                        {
+                            posCopy.Y -= intersection.Height;
+                        }
+                        else
+                        {
+                            posCopy.Y += intersection.Height;
+                        }
+                    }
+
+
+                }
+
+                //resolves intersections
+                player.Position = posCopy;
+            }
+
 
         }
 
