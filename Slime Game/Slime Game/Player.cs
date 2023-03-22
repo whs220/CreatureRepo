@@ -119,6 +119,12 @@ namespace Slime_Game
             ProcessMovement();
             ApplyGravity();
 
+            //Checks if debug mode is active then does key checks
+            if(debugModeActive == true)
+            {
+                DebugKeyDetection();
+            }
+
             // record previous keyboard state
             prevKeyState = currentKeyState;
         }
@@ -362,7 +368,11 @@ namespace Slime_Game
                         break;
                     // Gas to Dead
                     case PlayerMatterState.Gas:
-                        currentMatterState = PlayerMatterState.Dead;
+                        //Makes it so player can not die in debug mode
+                        if (debugModeActive == false)
+                        {
+                            currentMatterState = PlayerMatterState.Dead;
+                        }
                         break;
                 }
             }
@@ -374,10 +384,16 @@ namespace Slime_Game
                 {
                     // Solid to Dead
                     case PlayerMatterState.Solid:
-                        currentMatterState = PlayerMatterState.Dead;
+                        //Makes it so player can not die in debug mode
+                        if (debugModeActive == false)
+                        {
+                            currentMatterState = PlayerMatterState.Dead;
+                        }
                         break;
                     // Liqid to Solid
                     case PlayerMatterState.Liquid:
+                        //Changes player speed to 0 so no extra sliding
+                        speed = 0;
                         currentMatterState = PlayerMatterState.Solid;
                         break;
                     // Gas to Liquid
@@ -466,7 +482,22 @@ namespace Slime_Game
                 0.0f);                                          // Layer depth
         }
 
-        
+        /// <summary>
+        /// When in debug mode does keyboard detection
+        /// </summary>
+        public void DebugKeyDetection()
+        {
+            //Checks for single key press on C to change colder
+            if (currentKeyState.IsKeyDown(Keys.C) && prevKeyState.IsKeyUp(Keys.C))
+            {
+                ChangeTemperature(false);
+            }
+            //Checks for single key press on H to change hotter
+            if (currentKeyState.IsKeyDown(Keys.H) && prevKeyState.IsKeyUp(Keys.H))
+            {
+                ChangeTemperature(true);
+            }
+        }
 
         /* ==== Old Movement ====
         /// <summary>
