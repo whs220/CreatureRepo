@@ -105,6 +105,7 @@ namespace Slime_Game
                     // click on quit game -> CLOSE GAME
 
                     player.Update();
+                    level1.Update();
                     break;
 
                 case GameState.LoadingScreen:
