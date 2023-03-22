@@ -137,9 +137,8 @@ namespace Slime_Game
             switch (gameState)
             {
                 case GameState.Menu:
-                    player.Draw(_spriteBatch);
                     level1.Draw(_spriteBatch);
-                    
+                    player.Draw(_spriteBatch);
                     break;
 
                 case GameState.LoadingScreen:
