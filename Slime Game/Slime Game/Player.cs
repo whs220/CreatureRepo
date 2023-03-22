@@ -53,7 +53,7 @@ namespace Slime_Game
 
         #endregion
 
-        //properties
+        #region properties
 
         /// <summary>
         /// Gets and sets the velocity vector
@@ -69,6 +69,17 @@ namespace Slime_Game
                 velocity = value;
             }
         }
+
+        /// <summary>
+        /// Get/Set for isGrounded
+        /// </summary>
+        public bool IsGrounded
+        {
+            get { return isGrounded; }
+            set { isGrounded = true; }
+        }
+
+        #endregion
 
         //constructor
         public Player(Texture2D debugSolid, Texture2D debugLiquid, Texture2D debugGas, Rectangle pos):base(debugSolid, pos)
