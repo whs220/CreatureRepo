@@ -610,7 +610,10 @@ namespace Slime_Game
         public void ResetStage()
         {
             // Call reset level event (calls level.ReadLevel again)
-            ResetLevelEvent();
+            if (ResetLevelEvent != null)
+            {
+                ResetLevelEvent();
+            }
             // Reset death timer (waits 1 sec before calling this method)
             deathTime = 1;
 
