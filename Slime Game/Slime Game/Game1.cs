@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿//Jake Wardell
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -49,6 +50,10 @@ namespace Slime_Game
         private Texture2D debugGas;
         private Level level1;
 
+        //Level List
+        private List<Level> levels;
+        private int currentLevel;
+
         // menu
         private Texture2D startTexture;
         private Texture2D quitTexture;
@@ -97,6 +102,12 @@ namespace Slime_Game
 
             player = new Player(debugSolid, debugLiquid, debugGas, new Rectangle(50, 50, 32, 32));
             level1 = new Level("Content/jaketestlevel.level", player, tileMap, fire, ice);
+
+            //Level List
+
+            levels = new List<Level>();
+            levels.Add(level1);
+            currentLevel = 0;
 
             // menu
             startTexture = Content.Load<Texture2D>("startButton");
@@ -175,7 +186,7 @@ namespace Slime_Game
                 case GameState.InGame:
                     GraphicsDevice.Clear(Color.CornflowerBlue);
 
-                    level1.Draw(_spriteBatch);
+                    levels[currentLevel].Draw(_spriteBatch);
                     player.Draw(_spriteBatch);
 
                     //If in debug mode then it draws specific stuff
@@ -194,5 +205,12 @@ namespace Slime_Game
 
             base.Draw(gameTime);
         }
+
+
+        public void Reset()
+        {
+
+        }
+
     }
 }

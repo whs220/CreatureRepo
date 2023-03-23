@@ -1,4 +1,5 @@
 ﻿//Handles setting up the parent for gameobject
+//Jake Wardell
 using System;
 using System.Collections.Generic;
 using System.Linq;

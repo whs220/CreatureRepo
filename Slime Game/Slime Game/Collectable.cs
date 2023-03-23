@@ -1,4 +1,5 @@
 ﻿//This is the collectable class that handles collectable data
+//Jake Wardell, Will Slyman
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,7 @@ namespace Slime_Game
         public bool IsHot
         {
             get { return isHot; }
-            set { isHot = false; }
+            set { isHot = value; }
         }
 
         /// <summary>
@@ -34,7 +35,7 @@ namespace Slime_Game
         public bool IsActive
         {
             get { return isActive; }
-            set { isActive = false; }
+            set { isActive = value; }
         }
 
         /// <summary>
@@ -43,7 +44,7 @@ namespace Slime_Game
         public bool IsExit
         {
             get { return isExit; }
-            set { isExit = false; }
+            set { isExit = value; }
         }
 
 
