@@ -136,6 +136,8 @@ namespace Slime_Game
             gravity = new Vector2(0, 0.5f);
             isGrounded = false;
 
+            deathTime = 1;
+
             groundRect = new Rectangle(14, 34, 24, 24);
 
             // Set up animation data:
@@ -345,10 +347,8 @@ namespace Slime_Game
                 }
                 else
                 {
-                    // Call event and reset player state and timer
-                    ResetLevelEvent();
-                    deathTime = 2;
-                    currentMatterState = PlayerMatterState.Liquid;
+                    // Reset the Stage
+                    ResetStage();
                 }
             }
             
@@ -580,6 +580,18 @@ namespace Slime_Game
             {
                 ChangeTemperature(true);
             }
+        }
+
+        /// <summary>
+        /// Sends a signal to reset the level, and resets the player back to liquid
+        /// </summary>
+        public void ResetStage()
+        {
+            ResetLevelEvent();
+            deathTime = 1;
+
+            currentMatterState = PlayerMatterState.Liquid;
+            speed = 5;
         }
     } 
 }
