@@ -14,7 +14,7 @@ namespace Slime_Game
     /// <summary>
     /// Josie Caradonna
     /// Reads the file and makes a tile map
-    /// does not work rn
+    /// works
     /// </summary>
     internal class Level
     {
@@ -58,7 +58,6 @@ namespace Slime_Game
             this.tiles = new List<Tile>();
             this.collectables = new List<Collectable>();
             this.gameObjects = new List<GameObject>();
-            this.game1 = game1;
             backTile = new Tile(tilemap, new Rectangle(0, 0, 32, 32), new Rectangle(480, 480, 32, 32));
         }
 
@@ -73,6 +72,9 @@ namespace Slime_Game
         {
             StreamReader input;
             bool done = false;
+            tiles.Clear();
+            collectables.Clear();
+            gameObjects.Clear();
 
             try
             {
@@ -192,6 +194,26 @@ namespace Slime_Game
             // Loop all collect
             // if (player.pos.intersects(collectables[i].pos)){
             //Calls change temperature and sets collectable to inactive
+
+            List<Collectable> intersections = new List<Collectable>();
+
+            foreach (Collectable collectable in collectables)
+            {
+                if (player.Position.Intersects(collectable.Position))
+                {
+                    intersections.Add(collectable);
+                }
+
+            }
+
+            foreach(Collectable collectable1 in intersections)
+            {
+
+            }
+
+
+
+
         }
 
         /// <summary>
