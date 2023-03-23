@@ -167,9 +167,11 @@ namespace Slime_Game
             {
                 DebugKeyDetection();
             }
+
+            //If the R key is pressed then reset the level
             if(currentKeyState.IsKeyDown(Keys.R) && prevKeyState.IsKeyUp(Keys.R))
             {
-                
+                ResetStage();
             }
             
 
