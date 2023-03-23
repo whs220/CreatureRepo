@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿//Jake Wardell
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -51,14 +52,20 @@ namespace Slime_Game
         private Texture2D debugGas;
         private Level level1;
 
+        //Level List
+        private List<Level> levels;
+        private int currentLevel;
+
         // menu
         private Texture2D startTexture;
         private Texture2D quitTexture;
         private Button startButton;
         private Button quitButton;
-
         private SpriteFont mainFont;
         private SpriteFont titleFont;
+
+        // loading
+        private double timer;
 
         public Game1()
         {
@@ -72,9 +79,11 @@ namespace Slime_Game
 
         protected override void Initialize()
         {
+            // menu
             gameState = GameState.Menu;
 
-            
+            // loading
+            timer = 2;
 
             base.Initialize();
 
@@ -100,6 +109,12 @@ namespace Slime_Game
             player = new Player(debugSolid, debugLiquid, debugGas, new Rectangle(50, 50, 32, 32));
             level1 = new Level("Content/jaketestlevel.level", player, tileMap, fire, ice);
 
+            //Level List
+
+            levels = new List<Level>();
+            levels.Add(level1);
+            currentLevel = 0;
+
             // menu
             startTexture = Content.Load<Texture2D>("startButton");
             quitTexture = Content.Load<Texture2D>("quitButton");
@@ -123,7 +138,7 @@ namespace Slime_Game
                     // click on start game -> loading screen
                     if(startButton.MousePosition() && startButton.MouseClick())
                     {
-                        gameState = GameState.InGame;
+                        gameState = GameState.LoadingScreen;
                     }
 
                     // click on quit game -> CLOSE GAME
@@ -135,7 +150,16 @@ namespace Slime_Game
                     break;
 
                 case GameState.LoadingScreen:
+                    timer -= gameTime.ElapsedGameTime.TotalSeconds;
+
                     // loading screen ends -> in game
+                    if (timer <= 0)
+                    {
+                        gameState = GameState.InGame;
+                        timer = 2;
+                    }
+
+                    base.Update(gameTime);
                     break;
 
                 case GameState.InGame:
@@ -172,12 +196,16 @@ namespace Slime_Game
                     break;
 
                 case GameState.LoadingScreen:
+                    GraphicsDevice.Clear(Color.DarkOliveGreen);
+
+                    _spriteBatch.DrawString(titleFont, "Loading...", new Vector2(30, 920), Color.LimeGreen);
+
                     break;
 
                 case GameState.InGame:
                     GraphicsDevice.Clear(Color.CornflowerBlue);
 
-                    level1.Draw(_spriteBatch);
+                    levels[currentLevel].Draw(_spriteBatch);
                     player.Draw(_spriteBatch);
 
                     //If in debug mode then it draws specific stuff
@@ -196,5 +224,12 @@ namespace Slime_Game
 
             base.Draw(gameTime);
         }
+
+
+        public void Reset()
+        {
+
+        }
+
     }
 }
