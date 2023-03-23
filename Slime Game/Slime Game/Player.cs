@@ -1,4 +1,6 @@
-﻿using System;
+﻿//Jake Wardell, Dylan Clauson, Will Slyman - This makes it so player is functioning
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -124,7 +126,7 @@ namespace Slime_Game
             debugModeActive = false;
 
             speed = 5.0f;
-            jumpHeight = -15.0f;
+            jumpHeight = -13.0f;
             currentMatterState = PlayerMatterState.Liquid;
             currentMoveState = PlayerMovementState.IdleRight;
             velocity = Vector2.Zero;
