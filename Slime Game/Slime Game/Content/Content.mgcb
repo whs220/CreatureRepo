@@ -80,6 +80,9 @@
 /processorParam:TextureFormat=Color
 /build:ice.png
 
+#begin test2.level
+/copy:test2.level
+
 #begin testLevel.level
 /copy:testLevel.level
 
