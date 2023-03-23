@@ -63,6 +63,9 @@
 /processorParam:TextureFormat=Color
 /build:debug_solid.png
 
+#begin epic_slide.level
+/copy:epic_slide.level
+
 #begin fire.png
 /importer:TextureImporter
 /processor:TextureProcessor
