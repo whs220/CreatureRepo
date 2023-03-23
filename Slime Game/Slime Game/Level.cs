@@ -237,10 +237,6 @@ namespace Slime_Game
                 }
 
             }
-
-
-
-
         }
 
         /// <summary>
@@ -312,8 +308,6 @@ namespace Slime_Game
                             posCopy.Y += intersection.Height;
                         }
                     }
-
-
                 }
 
                 
@@ -323,8 +317,6 @@ namespace Slime_Game
             }
             // Update the player's groundRect on thew new Player Position
             player.UpdateGroundRect(new Vector2(player.Position.X, player.Position.Y));
-
         }
-
     }
 }

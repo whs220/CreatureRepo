@@ -208,10 +208,7 @@ namespace Slime_Game
                         }
                     }
 
-                    if(currentLevel > levels.Count)
-                    {
-                        gameState = GameState.WinScreen;
-                    }
+                    
                     
                     prevKeyState = Keyboard.GetState();
                     // beat a level -> loading screen
@@ -273,14 +270,18 @@ namespace Slime_Game
                     GraphicsDevice.Clear(Color.CornflowerBlue);
 
                     // level and player
+                    
                     levels[currentLevel].Draw(_spriteBatch);
                     player.Draw(_spriteBatch);
 
                     //If in debug mode then it draws specific stuff
                     if (player.DebugModeActive == true)
                     {
-                        _spriteBatch.DrawString(mainFont, "Player X, Y: " + player.Position.X + ", " + player.Position.Y +
-                            "\nCurrent State: " + player.CurrentMatterState.ToString(), new Vector2(30, 50), Color.White);
+                        _spriteBatch.DrawString(mainFont, "Player X, Y: " + player.Position.X + ", " + player.Position.Y + // Writes player X and Y
+                            "\nCurrent State: " + player.CurrentMatterState.ToString() + // Writes players current state
+                            "\nCurrent Level: " + currentLevel // Writes current level number
+                            , new Vector2(30, 50), Color.White);
+                            
                     }
                     break;
 
@@ -307,10 +308,18 @@ namespace Slime_Game
 
         public void NextLevel()
         {
+            
             player.ResetLevelEvent -= levels[currentLevel].ReadLevel;
-            currentLevel++;
-            levels[currentLevel].ReadLevel();
-            player.ResetLevelEvent += levels[currentLevel].ReadLevel;
+            if (currentLevel + 1 < levels.Count)
+            {
+                currentLevel++;
+                levels[currentLevel].ReadLevel();
+                player.ResetLevelEvent += levels[currentLevel].ReadLevel;
+            }
+            else
+            {
+                gameState = GameState.WinScreen;
+            }
         }
     }
 }
