@@ -63,8 +63,6 @@ namespace Slime_Game
             this.fire = fire;
             this.ice = ice;
 
-            // Add reset level event
-            player.ResetLevelEvent += ReadLevel;
 
             this.tiles = new List<Tile>();
             this.collectables = new List<Collectable>();

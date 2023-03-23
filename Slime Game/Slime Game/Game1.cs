@@ -120,6 +120,8 @@ namespace Slime_Game
             quitTexture = Content.Load<Texture2D>("quitButton");
 
             level1.ReadLevel();
+            // Add reset level event
+            player.ResetLevelEvent += level1.ReadLevel;
         }
 
         protected override void Update(GameTime gameTime)

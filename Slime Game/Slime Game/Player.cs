@@ -185,7 +185,11 @@ namespace Slime_Game
         /// <param name="sb"></param>
         public override void Draw(SpriteBatch sb)
         {
-            sb.Draw(debugSolid, groundRect, Color.White);
+            // Draws the jump box if debug mode is active
+            if (debugModeActive)
+            {
+                sb.Draw(debugSolid, groundRect, Color.White);
+            }
 
             // draw MatterState
             // Currently draws debug textures
@@ -596,11 +600,15 @@ namespace Slime_Game
         /// </summary>
         public void ResetStage()
         {
+            // Call reset level event (calls level.ReadLevel again)
             ResetLevelEvent();
+            // Reset death timer (waits 1 sec before calling this method)
             deathTime = 1;
 
+            // Reset player stats back to liquid
             currentMatterState = PlayerMatterState.Liquid;
             speed = 5;
+            velocity.Y = 0;
         }
     } 
 }
