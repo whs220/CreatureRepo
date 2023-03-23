@@ -281,6 +281,11 @@ namespace Slime_Game
                         {
                             posCopy.X += intersection.Width;
                         }
+                        // If player is solid, bounce the ice physics!
+                        if (player.CurrentMatterState == PlayerMatterState.Solid)
+                        {
+                            player.Speed = -player.Speed;
+                        }
                     }
 
                     if (intersection.Height < intersection.Width)

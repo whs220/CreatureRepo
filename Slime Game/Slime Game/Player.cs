@@ -118,6 +118,12 @@ namespace Slime_Game
             get { return groundRect; }
         }
 
+
+        public float Speed
+        {
+            get { return speed; }
+            set { speed = value; }
+        }
         #endregion
 
         //constructor
