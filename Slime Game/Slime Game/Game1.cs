@@ -59,9 +59,11 @@ namespace Slime_Game
         private Texture2D quitTexture;
         private Button startButton;
         private Button quitButton;
-
         private SpriteFont mainFont;
         private SpriteFont titleFont;
+
+        // loading
+        private double timer;
 
         public Game1()
         {
@@ -75,9 +77,11 @@ namespace Slime_Game
 
         protected override void Initialize()
         {
+            // menu
             gameState = GameState.Menu;
 
-            
+            // loading
+            timer = 2;
 
             base.Initialize();
 
@@ -132,7 +136,7 @@ namespace Slime_Game
                     // click on start game -> loading screen
                     if(startButton.MousePosition() && startButton.MouseClick())
                     {
-                        gameState = GameState.InGame;
+                        gameState = GameState.LoadingScreen;
                     }
 
                     // click on quit game -> CLOSE GAME
@@ -144,7 +148,16 @@ namespace Slime_Game
                     break;
 
                 case GameState.LoadingScreen:
+                    timer -= gameTime.ElapsedGameTime.TotalSeconds;
+
                     // loading screen ends -> in game
+                    if (timer <= 0)
+                    {
+                        gameState = GameState.InGame;
+                        timer = 2;
+                    }
+
+                    base.Update(gameTime);
                     break;
 
                 case GameState.InGame:
@@ -181,6 +194,10 @@ namespace Slime_Game
                     break;
 
                 case GameState.LoadingScreen:
+                    GraphicsDevice.Clear(Color.DarkOliveGreen);
+
+                    _spriteBatch.DrawString(titleFont, "Loading...", new Vector2(30, 920), Color.LimeGreen);
+
                     break;
 
                 case GameState.InGame:
