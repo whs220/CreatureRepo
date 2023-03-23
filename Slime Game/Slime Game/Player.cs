@@ -118,6 +118,12 @@ namespace Slime_Game
             get { return groundRect; }
         }
 
+
+        public float Speed
+        {
+            get { return speed; }
+            set { speed = value; }
+        }
         #endregion
 
         //constructor
@@ -185,7 +191,11 @@ namespace Slime_Game
         /// <param name="sb"></param>
         public override void Draw(SpriteBatch sb)
         {
-            sb.Draw(debugSolid, groundRect, Color.White);
+            // Draws the jump box if debug mode is active
+            if (debugModeActive)
+            {
+                sb.Draw(debugSolid, groundRect, Color.White);
+            }
 
             // draw MatterState
             // Currently draws debug textures
@@ -406,7 +416,14 @@ namespace Slime_Game
                 else
                 {
                     velocity -= gravity;
+
+                    // Cap player y velocity if gas
+                    if (velocity.Y < -5)
+                    {
+                        velocity.Y = -5;
+                    }
                 }
+
                 position.Y += (int)velocity.Y;
             }
         }
@@ -589,11 +606,15 @@ namespace Slime_Game
         /// </summary>
         public void ResetStage()
         {
+            // Call reset level event (calls level.ReadLevel again)
             ResetLevelEvent();
+            // Reset death timer (waits 1 sec before calling this method)
             deathTime = 1;
 
+            // Reset player stats back to liquid
             currentMatterState = PlayerMatterState.Liquid;
             speed = 5;
+            velocity.Y = 0;
         }
     } 
 }

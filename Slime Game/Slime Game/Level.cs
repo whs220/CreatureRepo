@@ -67,7 +67,7 @@ namespace Slime_Game
             this.tilemap = tilemap;
             this.fire = fire;
             this.ice = ice;
-            
+
 
             this.tiles = new List<Tile>();
             this.collectables = new List<Collectable>();
@@ -95,6 +95,7 @@ namespace Slime_Game
                 input = new StreamReader("../../../" + fileName);
                 string line;
 
+                tiles.Add(new Tile(tilemap, new Rectangle(0, 0, 1024, 32), new Rectangle(0, 224, 32, 32)));
                 while ((line = input.ReadLine()) != null)
                 {
                     string[] data = line.Split(',');
@@ -122,7 +123,7 @@ namespace Slime_Game
                     }
 
                     //collectable
-                    if(data[2] == "hot")
+                    if (data[2] == "hot")
                     {
                         collectables.Add(new Collectable(fire, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), true));
                     }
@@ -145,10 +146,6 @@ namespace Slime_Game
             {
 
             }
-
-            // Add reset level event
-            player.ResetLevelEvent += ReadLevel;
-
         }
         
         /// <summary>
@@ -288,6 +285,11 @@ namespace Slime_Game
                         else
                         {
                             posCopy.X += intersection.Width;
+                        }
+                        // If player is solid, bounce the ice physics!
+                        if (player.CurrentMatterState == PlayerMatterState.Solid)
+                        {
+                            player.Speed = -player.Speed;
                         }
                     }
 
