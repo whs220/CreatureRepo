@@ -113,11 +113,11 @@
 24,11,rightWall
 24,31,rightWall
 25,0,leftWall
-25,1,platform
-25,7,platform
 25,11,rightWall
 25,31,rightWall
 26,0,leftWall
+26,1,platform
+26,7,platform
 26,11,rightWall
 26,31,rightWall
 27,0,leftWall
