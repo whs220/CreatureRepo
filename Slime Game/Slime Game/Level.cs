@@ -239,6 +239,7 @@ namespace Slime_Game
                 //resolves intersections
                 player.Position = posCopy;
             }
+            // Update the player's groundRect on thew new Player Position
             player.UpdateGroundRect(new Vector2(player.Position.X, player.Position.Y));
 
         }
