@@ -49,7 +49,14 @@ namespace Slime_Game
         private Texture2D debugGas;
         private Level level1;
 
+        // menu
+        private Texture2D startTexture;
+        private Texture2D quitTexture;
+        private Button startButton;
+        private Button quitButton;
+
         private SpriteFont mainFont;
+        private SpriteFont titleFont;
 
         public Game1()
         {
@@ -86,9 +93,15 @@ namespace Slime_Game
             debugGas = Content.Load<Texture2D>("debug_gas");
 
             mainFont = Content.Load<SpriteFont>("bankgothiclight16");
+            titleFont = Content.Load<SpriteFont>("comicSans36");
 
             player = new Player(debugSolid, debugLiquid, debugGas, new Rectangle(50, 50, 32, 32));
             level1 = new Level("Content/test2.level", player, tileMap, fire, ice);
+
+            // menu
+            startTexture = Content.Load<Texture2D>("startButton");
+            quitTexture = Content.Load<Texture2D>("quitButton");
+
             level1.ReadLevel();
         }
 
@@ -101,11 +114,22 @@ namespace Slime_Game
             switch (gameState)
             {
                 case GameState.Menu:
-                    // click on start game -> loading screen
-                    // click on quit game -> CLOSE GAME
+                    // initialize buttons
+                    startButton = new Button(startTexture, new Rectangle(150, 550, 300, 100));
+                    quitButton = new Button(quitTexture, new Rectangle(574, 550, 300, 100));
 
-                    player.Update();
-                    level1.Update();
+                    // click on start game -> loading screen
+                    if(startButton.MousePosition() && startButton.MouseClick())
+                    {
+                        gameState = GameState.InGame;
+                    }
+
+                    // click on quit game -> CLOSE GAME
+                    if (quitButton.MousePosition() && quitButton.MouseClick())
+                    {
+                        System.Environment.Exit(0);
+                    }
+
                     break;
 
                 case GameState.LoadingScreen:
@@ -113,6 +137,9 @@ namespace Slime_Game
                     break;
 
                 case GameState.InGame:
+                    player.Update();
+                    level1.Update();
+
                     // beat a level -> loading screen
                     // beat the last level -> win screen
                     break;
@@ -127,16 +154,19 @@ namespace Slime_Game
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-
             _spriteBatch.Begin();
-
-            _spriteBatch.DrawString(mainFont, "Poop!!", new Vector2(80, 80), Color.White);
 
             // draw GameState
             switch (gameState)
             {
                 case GameState.Menu:
+                    GraphicsDevice.Clear(Color.LimeGreen);
+
+                    _spriteBatch.DrawString(titleFont, "Sebastian Slime!", new Vector2(275, 300), Color.DarkOliveGreen);
+
+                    startButton.Draw(_spriteBatch);
+                    quitButton.Draw(_spriteBatch);
+
                     level1.Draw(_spriteBatch);
                     player.Draw(_spriteBatch);
 
@@ -152,6 +182,10 @@ namespace Slime_Game
                     break;
 
                 case GameState.InGame:
+                    GraphicsDevice.Clear(Color.CornflowerBlue);
+
+                    level1.Draw(_spriteBatch);
+                    player.Draw(_spriteBatch);
                     break;
 
                 case GameState.WinScreen:
