@@ -15,6 +15,36 @@ namespace Slime_Game
         // ==== Fields ====
         private bool isHot;
         private bool isActive;
+        private bool isExit;
+
+        // Properties
+
+        /// <summary>
+        /// Get/set for isHot
+        /// </summary>
+        public bool IsHot
+        {
+            get { return isHot; }
+            set { isHot = false; }
+        }
+
+        /// <summary>
+        /// Get/set for isActive
+        /// </summary>
+        public bool IsActive
+        {
+            get { return isActive; }
+            set { isActive = false; }
+        }
+
+        /// <summary>
+        /// Get/set for isExit
+        /// </summary>
+        public bool IsExit
+        {
+            get { return isExit; }
+            set { isExit = false; }
+        }
 
 
         // ==== Constructors ====
