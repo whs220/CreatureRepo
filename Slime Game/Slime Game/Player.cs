@@ -72,6 +72,18 @@ namespace Slime_Game
             }
         }
 
+        public bool DebugModeActive
+        {
+            get
+            {
+                return debugModeActive;
+            }
+            set
+            {
+                debugModeActive = value;
+            }
+        }
+
         /// <summary>
         /// Get/Set for isGrounded
         /// </summary>
@@ -134,10 +146,7 @@ namespace Slime_Game
                 DebugKeyDetection();
             }
 
-            if(currentKeyState.IsKeyDown(Keys.F) && prevKeyState.IsKeyUp(Keys.F))
-            {
-                debugModeActive = !debugModeActive;
-            }
+            
 
             // record previous keyboard state
             prevKeyState = currentKeyState;

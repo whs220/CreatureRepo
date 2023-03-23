@@ -14,7 +14,7 @@ namespace Slime_Game
     /// <summary>
     /// Josie Caradonna
     /// Reads the file and makes a tile map
-    /// does not wokr rn
+    /// does not work rn
     /// </summary>
     internal class Level
     {
@@ -33,19 +33,25 @@ namespace Slime_Game
         private Rectangle rightFrame;
         private Game1 game1;
         private Tile backTile;
+        private KeyboardState prevKeyState;
+        
+
+        //For debyg mode
+        private bool debugModeActive;
 
         // 1, 352
         // 31, 383
 
         //Constructor
         public Level(string fileName, Player player, Texture2D tilemap, Texture2D fire, Texture2D ice) 
-        { 
-
+        {
+            debugModeActive = false;
             this.fileName = fileName;
             this.player = player;
             this.tilemap = tilemap;
             this.fire = fire;
             this.ice = ice;
+            
 
             this.tiles = new List<Tile>();
             this.collectables = new List<Collectable>();
@@ -100,11 +106,11 @@ namespace Slime_Game
                     //collectable
                     if(data[2] == "hot")
                     {
-                        collectables.Add(new Collectable(tilemap, new Rectangle((int.Parse(data[0]) - 1) * 32, (int.Parse(data[1]) - 1) * 32, 32, 32), true));
+                        collectables.Add(new Collectable(fire, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), true));
                     }
                     if (data[2] == "cold")
                     {
-                        collectables.Add(new Collectable(tilemap, new Rectangle((int.Parse(data[0]) - 1) * 32, (int.Parse(data[1]) - 1) * 32, 32, 32), true));
+                        collectables.Add(new Collectable(ice, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), true));
                     }
 
                     //player
@@ -145,6 +151,7 @@ namespace Slime_Game
             {
                 tile.Draw(sb);
             }
+            
         }
 
         /// <summary>
@@ -154,6 +161,14 @@ namespace Slime_Game
         {
            CollectibleColision();
            TileCollision();
+
+            if(Keyboard.GetState().IsKeyDown(Keys.F1) && prevKeyState.IsKeyUp(Keys.F1))
+            {
+                debugModeActive = !debugModeActive;
+                player.DebugModeActive = debugModeActive;
+            }
+
+            prevKeyState = Keyboard.GetState();
         }
 
         /// <summary>

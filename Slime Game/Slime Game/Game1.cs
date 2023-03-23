@@ -88,7 +88,7 @@ namespace Slime_Game
             mainFont = Content.Load<SpriteFont>("bankgothiclight16");
 
             player = new Player(debugSolid, debugLiquid, debugGas, new Rectangle(50, 50, 32, 32));
-            level1 = new Level("Content/testLevel.level", player, tileMap, fire, ice);
+            level1 = new Level("Content/test2.level", player, tileMap, fire, ice);
             level1.ReadLevel();
         }
 
