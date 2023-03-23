@@ -80,10 +80,10 @@ namespace Slime_Game
         protected override void Initialize()
         {
             // menu
-            gameState = GameState.Menu;
+            gameState = GameState.Menu; // CHANGE THIS TO GameState.InGame IF YOU WANT TO BYPASS THE MENU AND LOADING SCREENS
 
             // loading
-            timer = 2;
+            timer = 1;
 
             base.Initialize();
 
@@ -150,13 +150,16 @@ namespace Slime_Game
                     break;
 
                 case GameState.LoadingScreen:
-                    timer -= gameTime.ElapsedGameTime.TotalSeconds;
-
-                    // loading screen ends -> in game
-                    if (timer <= 0)
+                    if (levels[currentLevel].DebugModeActive == false)
                     {
-                        gameState = GameState.InGame;
-                        timer = 2;
+                        timer -= gameTime.ElapsedGameTime.TotalSeconds;
+
+                        // loading screen ends -> in game
+                        if (timer <= 0)
+                        {
+                            gameState = GameState.InGame;
+                            timer = 2;
+                        }
                     }
 
                     base.Update(gameTime);
@@ -224,12 +227,5 @@ namespace Slime_Game
 
             base.Draw(gameTime);
         }
-
-
-        public void Reset()
-        {
-
-        }
-
     }
 }
