@@ -87,6 +87,9 @@
 /processorParam:TextureFormat=Color
 /build:ice.png
 
+#begin jaketestlevel.level
+/copy:jaketestlevel.level
+
 #begin quitButton.png
 /importer:TextureImporter
 /processor:TextureProcessor

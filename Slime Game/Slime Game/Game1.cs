@@ -96,7 +96,7 @@ namespace Slime_Game
             titleFont = Content.Load<SpriteFont>("comicSans36");
 
             player = new Player(debugSolid, debugLiquid, debugGas, new Rectangle(50, 50, 32, 32));
-            level1 = new Level("Content/test2.level", player, tileMap, fire, ice);
+            level1 = new Level("Content/jaketestlevel.level", player, tileMap, fire, ice);
 
             // menu
             startTexture = Content.Load<Texture2D>("startButton");
