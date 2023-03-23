@@ -40,6 +40,16 @@ namespace Slime_Game
         //For debyg mode
         private bool debugModeActive;
 
+        // Properties
+
+        /// <summary>
+        /// Gets the debugmodeactive bool
+        /// </summary>
+        public bool DebugModeActive
+        {
+            get { return debugModeActive; }
+        }
+
         // 1, 352
         // 31, 383
 

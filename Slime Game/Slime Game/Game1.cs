@@ -148,13 +148,16 @@ namespace Slime_Game
                     break;
 
                 case GameState.LoadingScreen:
-                    timer -= gameTime.ElapsedGameTime.TotalSeconds;
-
-                    // loading screen ends -> in game
-                    if (timer <= 0)
+                    if (levels[currentLevel].DebugModeActive == false)
                     {
-                        gameState = GameState.InGame;
-                        timer = 2;
+                        timer -= gameTime.ElapsedGameTime.TotalSeconds;
+
+                        // loading screen ends -> in game
+                        if (timer <= 0)
+                        {
+                            gameState = GameState.InGame;
+                            timer = 2;
+                        }
                     }
 
                     base.Update(gameTime);
@@ -222,12 +225,5 @@ namespace Slime_Game
 
             base.Draw(gameTime);
         }
-
-
-        public void Reset()
-        {
-
-        }
-
     }
 }
