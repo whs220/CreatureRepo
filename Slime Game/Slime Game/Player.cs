@@ -406,7 +406,14 @@ namespace Slime_Game
                 else
                 {
                     velocity -= gravity;
+
+                    // Cap player y velocity if gas
+                    if (velocity.Y < -5)
+                    {
+                        velocity.Y = -5;
+                    }
                 }
+
                 position.Y += (int)velocity.Y;
             }
         }

@@ -56,11 +56,12 @@ namespace Slime_Game
         /// <param name="texture">The texture of the collectable</param>
         /// <param name="pos">Postion rectangle</param>
         /// <param name="isHot">Whether it's hot or not</param>
-        public Collectable(Texture2D texture, Rectangle pos, bool isHot) :
+        public Collectable(Texture2D texture, Rectangle pos, bool isHot, bool isExit = false) :
             base(texture, pos)
         {
             this.isHot = isHot;
             isActive = true;
+            this.isExit = isExit;
         }
 
         /// <summary>
@@ -69,7 +70,7 @@ namespace Slime_Game
         /// <param name="sb">The sprite batch</param>
         public override void Draw(SpriteBatch sb)
         {
-            if (isActive == true)
+            if (isActive == true && !isExit)
             {
                 sb.Draw(texture, position, Color.White); ;
             }

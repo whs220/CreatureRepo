@@ -62,7 +62,9 @@ namespace Slime_Game
             this.tilemap = tilemap;
             this.fire = fire;
             this.ice = ice;
-            
+
+            // Add reset level event
+            player.ResetLevelEvent += ReadLevel;
 
             this.tiles = new List<Tile>();
             this.collectables = new List<Collectable>();
@@ -140,10 +142,6 @@ namespace Slime_Game
             {
 
             }
-
-            // Add reset level event
-            player.ResetLevelEvent += ReadLevel;
-
         }
         
         /// <summary>
