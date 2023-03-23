@@ -33,19 +33,25 @@ namespace Slime_Game
         private Rectangle rightFrame;
         private Game1 game1;
         private Tile backTile;
+        private KeyboardState prevKeyState;
+        
+
+        //For debyg mode
+        private bool debugModeActive;
 
         // 1, 352
         // 31, 383
 
         //Constructor
         public Level(string fileName, Player player, Texture2D tilemap, Texture2D fire, Texture2D ice) 
-        { 
-
+        {
+            debugModeActive = false;
             this.fileName = fileName;
             this.player = player;
             this.tilemap = tilemap;
             this.fire = fire;
             this.ice = ice;
+            
 
             this.tiles = new List<Tile>();
             this.collectables = new List<Collectable>();
@@ -145,6 +151,7 @@ namespace Slime_Game
             {
                 tile.Draw(sb);
             }
+            
         }
 
         /// <summary>
@@ -154,6 +161,14 @@ namespace Slime_Game
         {
            CollectibleColision();
            TileCollision();
+
+            if(Keyboard.GetState().IsKeyDown(Keys.F1) && prevKeyState.IsKeyUp(Keys.F1))
+            {
+                debugModeActive = !debugModeActive;
+                player.DebugModeActive = debugModeActive;
+            }
+
+            prevKeyState = Keyboard.GetState();
         }
 
         /// <summary>
