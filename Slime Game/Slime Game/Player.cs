@@ -131,7 +131,7 @@ namespace Slime_Game
             gravity = new Vector2(0, 0.5f);
             isGrounded = false;
 
-            groundRect = new Rectangle(16, 34, 12, 2);
+            groundRect = new Rectangle(14, 34, 24, 24);
 
             // Set up animation data:
             fps = 8.0;                      // Animation frames to cycle through per second
@@ -173,6 +173,8 @@ namespace Slime_Game
         /// <param name="sb"></param>
         public override void Draw(SpriteBatch sb)
         {
+            sb.Draw(debugSolid, groundRect, Color.White);
+
             // draw MatterState
             // Currently draws debug textures
             switch (currentMatterState)
@@ -215,10 +217,6 @@ namespace Slime_Game
 
         public void ProcessMovement()
         {
-            // Append groundRect to player's bottom
-            groundRect.X = 16 + Position.X;
-            groundRect.Y = 34 + Position.Y;
-
             switch (currentMoveState)
             {
                 case PlayerMovementState.MoveLeft:
@@ -476,6 +474,24 @@ namespace Slime_Game
                 // Reset the time counter
                 timeCounter -= secondsPerFrame;
             }
+        }
+
+        /// <summary>
+        /// Updates the groundRect so it is adjusted by position
+        /// </summary>
+        /// <param name="pos">Position to adjust by</param>
+        public void UpdateGroundRect(Vector2 pos)
+        {
+            // Append groundRect to player's bottom
+            if (currentMatterState == PlayerMatterState.Gas)
+            {
+                groundRect.Y = -6 + (int)pos.Y;
+            }
+            else
+            {
+                groundRect.Y = 34 + (int)pos.Y;
+            }
+            groundRect.X = (int)pos.X + 6;
         }
 
         /// <summary>
