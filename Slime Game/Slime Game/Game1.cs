@@ -139,6 +139,13 @@ namespace Slime_Game
                 case GameState.Menu:
                     level1.Draw(_spriteBatch);
                     player.Draw(_spriteBatch);
+
+                    //If in debug mode then it draws specific stuff
+                    if (player.DebugModeActive == true)
+                    {
+                        _spriteBatch.DrawString(mainFont, "Player X, Y: " + player.Position.X + ", " + player.Position.Y +
+                            "\nCurrent State: " + player.CurrentMatterState.ToString(), new Vector2(30, 50), Color.White);
+                    }
                     break;
 
                 case GameState.LoadingScreen:

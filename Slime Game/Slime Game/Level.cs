@@ -34,6 +34,7 @@ namespace Slime_Game
         private Game1 game1;
         private Tile backTile;
         private KeyboardState prevKeyState;
+        private bool collisionsOn;
         
 
         //For debyg mode
@@ -45,6 +46,7 @@ namespace Slime_Game
         //Constructor
         public Level(string fileName, Player player, Texture2D tilemap, Texture2D fire, Texture2D ice) 
         {
+            collisionsOn = true;
             debugModeActive = false;
             this.fileName = fileName;
             this.player = player;
@@ -159,15 +161,26 @@ namespace Slime_Game
         /// </summary>
         public void Update()
         {
-           CollectibleColision();
-           TileCollision();
+            CollectibleColision();
+            
+            if (collisionsOn) 
+            {
+                TileCollision();
+            }
 
+            //Checks if the F1 key is clicked and swtiches if it on or off
             if(Keyboard.GetState().IsKeyDown(Keys.F1) && prevKeyState.IsKeyUp(Keys.F1))
             {
                 debugModeActive = !debugModeActive;
                 player.DebugModeActive = debugModeActive;
             }
 
+            if(Keyboard.GetState().IsKeyDown(Keys.F2) && prevKeyState.IsKeyUp(Keys.F2) && debugModeActive)
+            {
+                collisionsOn = !collisionsOn;
+            }
+
+            //Gets previous key clicked for single key pressed
             prevKeyState = Keyboard.GetState();
         }
 

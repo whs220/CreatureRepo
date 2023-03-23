@@ -72,6 +72,9 @@ namespace Slime_Game
             }
         }
 
+        /// <summary>
+        /// Gets and can set whether debug mode is active
+        /// </summary>
         public bool DebugModeActive
         {
             get
@@ -83,6 +86,18 @@ namespace Slime_Game
                 debugModeActive = value;
             }
         }
+
+        /// <summary>
+        /// Gets the current matter state only
+        /// </summary>
+        public PlayerMatterState CurrentMatterState
+        {
+            get
+            {
+                return currentMatterState;
+            }
+        }
+
 
         /// <summary>
         /// Get/Set for isGrounded
