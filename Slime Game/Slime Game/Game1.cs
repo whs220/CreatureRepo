@@ -64,6 +64,10 @@ namespace Slime_Game
         private SpriteFont mainFont;
         private SpriteFont titleFont;
 
+        // win screen
+        private Texture2D restartTexture;
+        private Button restartButton;
+
         // loading
         private double timer;
 
@@ -73,6 +77,7 @@ namespace Slime_Game
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
 
+            // set the size of the window
             _graphics.PreferredBackBufferWidth = 1024;
             _graphics.PreferredBackBufferHeight = 1024;
         }
@@ -92,25 +97,26 @@ namespace Slime_Game
 
         protected override void LoadContent()
         {
-            // TODO: use this.Content to load your game content here
-
+            // loading in tiles and collectibles
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             tileMap = Content.Load<Texture2D>("tileset");
             fire = Content.Load<Texture2D>("fire");
             ice = Content.Load<Texture2D>("ice");
 
+            // loading in debug mode content
             debugSolid = Content.Load<Texture2D>("debug_solid");
             debugLiquid = Content.Load<Texture2D>("debug_liquid");
             debugGas = Content.Load<Texture2D>("debug_gas");
 
+            // loading in fonts
             mainFont = Content.Load<SpriteFont>("bankgothiclight16");
             titleFont = Content.Load<SpriteFont>("comicSans36");
 
+            // loading in player and level
             player = new Player(debugSolid, debugLiquid, debugGas, new Rectangle(50, 50, 32, 32));
             level1 = new Level("Content/jaketestlevel.level", player, tileMap, fire, ice);
 
             //Level List
-
             levels = new List<Level>();
             levels.Add(level1);
             currentLevel = 0;
@@ -118,6 +124,12 @@ namespace Slime_Game
             // menu
             startTexture = Content.Load<Texture2D>("startButton");
             quitTexture = Content.Load<Texture2D>("quitButton");
+            startButton = new Button(startTexture, new Rectangle(150, 550, 300, 100));
+            quitButton = new Button(quitTexture, new Rectangle(574, 550, 300, 100));
+
+            // win screen
+            restartTexture = Content.Load<Texture2D>("restartButton");
+            restartButton = new Button(restartTexture, new Rectangle(150, 650, 300, 100));
 
             level1.ReadLevel();
             // Add reset level event
@@ -133,9 +145,7 @@ namespace Slime_Game
             switch (gameState)
             {
                 case GameState.Menu:
-                    // initialize buttons
-                    startButton = new Button(startTexture, new Rectangle(150, 550, 300, 100));
-                    quitButton = new Button(quitTexture, new Rectangle(574, 550, 300, 100));
+                    quitButton.Y = 550;
 
                     // click on start game -> loading screen
                     if(startButton.MousePosition() && startButton.MouseClick())
@@ -152,6 +162,7 @@ namespace Slime_Game
                     break;
 
                 case GameState.LoadingScreen:
+                    // bypasses loading screen if debug mode is active
                     if (levels[currentLevel].DebugModeActive == false)
                     {
                         timer -= gameTime.ElapsedGameTime.TotalSeconds;
@@ -164,6 +175,7 @@ namespace Slime_Game
                         }
                     }
 
+                    // increment gameTime
                     base.Update(gameTime);
                     break;
 
@@ -176,7 +188,20 @@ namespace Slime_Game
                     break;
 
                 case GameState.WinScreen:
-                    // click on close game -> CLOSE GAME
+                    quitButton.Y = 650;
+
+                    // click on restart -> menu
+                    if (restartButton.MousePosition() && restartButton.MouseClick())
+                    {
+                        gameState = GameState.Menu;
+                    }
+
+                    // click on quit -> CLOSE GAME
+                        if (quitButton.MousePosition() && quitButton.MouseClick())
+                    {
+                        System.Environment.Exit(0);
+                    }
+
                     break;
             }
 
@@ -191,25 +216,32 @@ namespace Slime_Game
             switch (gameState)
             {
                 case GameState.Menu:
+                    // background
                     GraphicsDevice.Clear(Color.LimeGreen);
 
+                    // font(s)
                     _spriteBatch.DrawString(titleFont, "Sebastian Slime!", new Vector2(275, 300), Color.DarkOliveGreen);
 
+                    // button(s)
                     startButton.Draw(_spriteBatch);
                     quitButton.Draw(_spriteBatch);
 
                     break;
 
                 case GameState.LoadingScreen:
+                    // background
                     GraphicsDevice.Clear(Color.DarkOliveGreen);
 
+                    // font(s)
                     _spriteBatch.DrawString(titleFont, "Loading...", new Vector2(30, 920), Color.LimeGreen);
 
                     break;
 
                 case GameState.InGame:
+                    // background
                     GraphicsDevice.Clear(Color.CornflowerBlue);
 
+                    // level and player
                     levels[currentLevel].Draw(_spriteBatch);
                     player.Draw(_spriteBatch);
 
@@ -222,6 +254,17 @@ namespace Slime_Game
                     break;
 
                 case GameState.WinScreen:
+                    // background
+                    GraphicsDevice.Clear(Color.LimeGreen);
+
+                    // font(s)
+                    _spriteBatch.DrawString(titleFont, "You found your family!", new Vector2(225, 300), Color.DarkOliveGreen);
+                    _spriteBatch.DrawString(titleFont, "Congratulations! :)", new Vector2(275, 400), Color.DarkOliveGreen);
+
+                    // button(s)
+                    restartButton.Draw(_spriteBatch);
+                    quitButton.Draw(_spriteBatch);
+
                     break;
             }
 

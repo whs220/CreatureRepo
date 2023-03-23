@@ -30,6 +30,24 @@ namespace Slime_Game
         }
 
         /// <summary>
+        /// gets and sets the x value of the button's positon rectangle
+        /// </summary>
+        public int X
+        {
+            get { return rectangle.X; }
+            set { rectangle.X = value; }
+        }
+
+        /// <summary>
+        /// gets and sets the y value of the button's position rectangle
+        /// </summary>
+        public int Y
+        {
+            get { return rectangle.Y; }
+            set { rectangle.Y = value; }
+        }
+
+        /// <summary>
         /// draws the button to the screen
         /// </summary>
         /// <param name="sb"> sprite batch parameter </param>
