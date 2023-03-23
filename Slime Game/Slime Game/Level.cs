@@ -206,8 +206,21 @@ namespace Slime_Game
 
             }
 
-            foreach(Collectable collectable1 in intersections)
+            foreach(Collectable item in intersections)
             {
+
+                if (item.IsActive)
+                {
+                    if (item.IsHot)
+                    {
+                        player.ChangeTemperature(true);
+                    }
+                    if (!item.IsHot)
+                    {
+                        player.ChangeTemperature(false);
+                    }
+                    item.IsActive = false;
+                }
 
             }
 
