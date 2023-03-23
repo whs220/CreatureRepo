@@ -80,10 +80,10 @@ namespace Slime_Game
         protected override void Initialize()
         {
             // menu
-            gameState = GameState.Menu;
+            gameState = GameState.Menu; // CHANGE THIS TO GameState.InGame IF YOU WANT TO BYPASS THE MENU AND LOADING SCREENS
 
             // loading
-            timer = 2;
+            timer = 1;
 
             base.Initialize();
 
@@ -156,7 +156,7 @@ namespace Slime_Game
                     if (timer <= 0)
                     {
                         gameState = GameState.InGame;
-                        timer = 2;
+                        timer = 1;
                     }
 
                     base.Update(gameTime);
