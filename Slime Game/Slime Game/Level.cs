@@ -199,7 +199,7 @@ namespace Slime_Game
                     Rectangle intersection = Rectangle.Intersect(rect, posCopy);
                     Vector2 velCopy = player.Velocity;
 
-                    if (intersection.Height > intersection.Width)
+                    if (intersection.Height > intersection.Width && intersection.Width > 4)
                     {
                         if (posCopy.X - rect.X < 0)
                         {
@@ -213,7 +213,11 @@ namespace Slime_Game
 
                     if (intersection.Height < intersection.Width)
                     {
-                        velCopy.Y = 0;
+                        if (intersection.Width > 10)
+                        {
+                            velCopy.Y = 0;
+                        }
+                        
                         player.Velocity = velCopy;
 
                         if (posCopy.Y - rect.Y < 0)
@@ -235,7 +239,7 @@ namespace Slime_Game
                 //resolves intersections
                 player.Position = posCopy;
             }
-
+            player.UpdateGroundRect(new Vector2(player.Position.X, player.Position.Y));
 
         }
 
