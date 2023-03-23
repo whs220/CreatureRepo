@@ -35,7 +35,6 @@ namespace Slime_Game
         private Tile backTile;
         private KeyboardState prevKeyState;
         private bool collisionsOn;
-        
 
         //For debyg mode
         private bool debugModeActive;
@@ -129,6 +128,9 @@ namespace Slime_Game
             {
 
             }
+
+            // Add reset level event
+            player.ResetLevelEvent += ReadLevel;
 
         }
         

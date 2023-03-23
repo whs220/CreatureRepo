@@ -33,6 +33,8 @@ namespace Slime_Game
         Dead
     }
 
+    public delegate void ResetLevel();
+
 
     public class Game1 : Game
     {
@@ -137,7 +139,7 @@ namespace Slime_Game
                     break;
 
                 case GameState.InGame:
-                    player.Update();
+                    player.Update(gameTime);
                     level1.Update();
 
                     // beat a level -> loading screen

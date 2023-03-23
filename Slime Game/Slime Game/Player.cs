@@ -55,6 +55,9 @@ namespace Slime_Game
         private Texture2D debugLiquid;
         private Texture2D debugGas;
 
+
+        private double deathTime;
+        public event ResetLevel ResetLevelEvent;
         #endregion
 
         #region properties
@@ -149,12 +152,12 @@ namespace Slime_Game
         /// checks all player logic per frame
         /// will be called in Game1
         /// </summary>
-        public void Update()
+        public void Update(GameTime gameTime)
         {
             // record the currenky keyboard state
             currentKeyState = Keyboard.GetState();
 
-            ProcessMovement();
+            ProcessMovement(gameTime);
             ApplyGravity();
 
             //Checks if debug mode is active then does key checks
@@ -217,94 +220,93 @@ namespace Slime_Game
 
 
 
-        public void ProcessMovement()
+        public void ProcessMovement(GameTime gameTime)
         {
-            switch (currentMoveState)
-            {
-                case PlayerMovementState.MoveLeft:
-                    // ===== LOGIC =====
-                    // If you are not a solid...
-                    if (currentMatterState != PlayerMatterState.Solid)
-                    {
-                        // Move at a constant speed
-                        position.X -= (int)(speed);
-                    }
-                    // If you are a solid (ice)
-                    else
-                    {
-                        // Accelerate at a negative dir
-                        if (speed > -15)
-                        {
-                            speed -= 1;
-                        }
-                        position.X += (int)speed;
-                    }
-
-                    // ===== TRANSITIONS =====
-                    if (currentKeyState.IsKeyDown(Keys.D))
-                    {
-                        currentMoveState = PlayerMovementState.MoveRight;
-                    }
-                    else if (currentKeyState.IsKeyUp(Keys.A))
-                    {
-                        currentMoveState = PlayerMovementState.IdleLeft;
-                    }
-                    break;
-                case PlayerMovementState.MoveRight:
-                    // ===== LOGIC =====
-                    // If you are not a solid...
-                    if (currentMatterState != PlayerMatterState.Solid)
-                    {
-                        // Move at a constant speed
-                        position.X += (int)(speed);
-                    }
-                    // If you are a solid (ice)
-                    else
-                    {
-                        // Accelerate at a negative dir
-                        if (speed < 15)
-                        {
-                            speed += 1;
-                        }
-                        position.X += (int)speed;
-                    }
-
-                    // ===== TRANSITIONS =====
-                    if (currentKeyState.IsKeyDown(Keys.A))
-                    {
-                        currentMoveState = PlayerMovementState.MoveLeft;
-                    }
-                    else if (currentKeyState.IsKeyUp(Keys.D))
-                    {
-                        currentMoveState = PlayerMovementState.IdleRight;
-                    }
-                    break;
-                case PlayerMovementState.IdleLeft:
-                case PlayerMovementState.IdleRight:
-                    // ===== LOGIC =====
-
-                    if (currentMatterState == PlayerMatterState.Solid)
-                    {
-                        speed = (speed * 0.95f);
-                        position.X += (int)(speed);
-                    }
-
-                    // ===== TRANSITIONS =====
-                    if (currentKeyState.IsKeyDown(Keys.A))
-                    {
-                        currentMoveState = PlayerMovementState.MoveLeft;
-                    }
-                    else if (currentKeyState.IsKeyDown(Keys.D))
-                    {
-                        currentMoveState = PlayerMovementState.MoveRight;
-                    }
-                    break;
-            }
-
-            // Possible to jump from any state
-            // (Except dead, duh)
             if (currentMatterState != PlayerMatterState.Dead)
             {
+                switch (currentMoveState)
+                {
+                    case PlayerMovementState.MoveLeft:
+                        // ===== LOGIC =====
+                        // If you are not a solid...
+                        if (currentMatterState != PlayerMatterState.Solid)
+                        {
+                            // Move at a constant speed
+                            position.X -= (int)(speed);
+                        }
+                        // If you are a solid (ice)
+                        else
+                        {
+                            // Accelerate at a negative dir
+                            if (speed > -15)
+                            {
+                                speed -= 1;
+                            }
+                            position.X += (int)speed;
+                        }
+
+                        // ===== TRANSITIONS =====
+                        if (currentKeyState.IsKeyDown(Keys.D))
+                        {
+                            currentMoveState = PlayerMovementState.MoveRight;
+                        }
+                        else if (currentKeyState.IsKeyUp(Keys.A))
+                        {
+                            currentMoveState = PlayerMovementState.IdleLeft;
+                        }
+                        break;
+                    case PlayerMovementState.MoveRight:
+                        // ===== LOGIC =====
+                        // If you are not a solid...
+                        if (currentMatterState != PlayerMatterState.Solid)
+                        {
+                            // Move at a constant speed
+                            position.X += (int)(speed);
+                        }
+                        // If you are a solid (ice)
+                        else
+                        {
+                            // Accelerate at a negative dir
+                            if (speed < 15)
+                            {
+                                speed += 1;
+                            }
+                            position.X += (int)speed;
+                        }
+
+                        // ===== TRANSITIONS =====
+                        if (currentKeyState.IsKeyDown(Keys.A))
+                        {
+                            currentMoveState = PlayerMovementState.MoveLeft;
+                        }
+                        else if (currentKeyState.IsKeyUp(Keys.D))
+                        {
+                            currentMoveState = PlayerMovementState.IdleRight;
+                        }
+                        break;
+                    case PlayerMovementState.IdleLeft:
+                    case PlayerMovementState.IdleRight:
+                        // ===== LOGIC =====
+
+                        if (currentMatterState == PlayerMatterState.Solid)
+                        {
+                            speed = (speed * 0.95f);
+                            position.X += (int)(speed);
+                        }
+
+                        // ===== TRANSITIONS =====
+                        if (currentKeyState.IsKeyDown(Keys.A))
+                        {
+                            currentMoveState = PlayerMovementState.MoveLeft;
+                        }
+                        else if (currentKeyState.IsKeyDown(Keys.D))
+                        {
+                            currentMoveState = PlayerMovementState.MoveRight;
+                        }
+                        break;
+                }
+
+                // Possible to jump from any state
                 if (debugModeActive == false)
                 {
                     // Jump if space or W is pressed
@@ -330,6 +332,23 @@ namespace Slime_Game
 
                 }
             }
+            // If player is dead...
+            else
+            {
+                // Wait 2 sseconds
+                if (deathTime > 0)
+                {
+                    deathTime -= gameTime.ElapsedGameTime.TotalSeconds;
+                }
+                else
+                {
+                    // Call event and reset player state and timer
+                    ResetLevelEvent();
+                    deathTime = 2;
+                    currentMatterState = PlayerMatterState.Liquid;
+                }
+            }
+            
         }
 
         /// <summary>
@@ -413,7 +432,7 @@ namespace Slime_Game
                         //Makes it so player can not die in debug mode
                         if (debugModeActive == false)
                         {
-                            currentMatterState = PlayerMatterState.Dead;
+                            Die();
                         }
                         break;
                 }
@@ -429,7 +448,7 @@ namespace Slime_Game
                         //Makes it so player can not die in debug mode
                         if (debugModeActive == false)
                         {
-                            currentMatterState = PlayerMatterState.Dead;
+                            Die();
                         }
                         break;
                     // Liqid to Solid
@@ -452,6 +471,7 @@ namespace Slime_Game
         public void Die()
         {
             currentMatterState = PlayerMatterState.Dead;
+
         }
 
         /// <summary>
