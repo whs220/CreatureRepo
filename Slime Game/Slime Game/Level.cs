@@ -92,6 +92,7 @@ namespace Slime_Game
                 input = new StreamReader("../../../" + fileName);
                 string line;
 
+                tiles.Add(new Tile(tilemap, new Rectangle(0, 0, 1024, 32), new Rectangle(0, 224, 32, 32)));
                 while ((line = input.ReadLine()) != null)
                 {
                     string[] data = line.Split(',');
@@ -119,7 +120,7 @@ namespace Slime_Game
                     }
 
                     //collectable
-                    if(data[2] == "hot")
+                    if (data[2] == "hot")
                     {
                         collectables.Add(new Collectable(fire, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), true));
                     }
