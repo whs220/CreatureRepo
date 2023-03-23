@@ -34,6 +34,8 @@ namespace Slime_Game
         Dead
     }
 
+    public delegate void ResetLevel();
+
 
     public class Game1 : Game
     {
@@ -78,10 +80,10 @@ namespace Slime_Game
         protected override void Initialize()
         {
             // menu
-            gameState = GameState.Menu;
+            gameState = GameState.Menu; // CHANGE THIS TO GameState.InGame IF YOU WANT TO BYPASS THE MENU AND LOADING SCREENS
 
             // loading
-            timer = 2;
+            timer = 1;
 
             base.Initialize();
 
@@ -164,7 +166,7 @@ namespace Slime_Game
                     break;
 
                 case GameState.InGame:
-                    player.Update();
+                    player.Update(gameTime);
                     level1.Update();
 
                     // beat a level -> loading screen

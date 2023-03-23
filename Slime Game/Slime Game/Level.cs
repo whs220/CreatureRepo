@@ -35,7 +35,6 @@ namespace Slime_Game
         private Tile backTile;
         private KeyboardState prevKeyState;
         private bool collisionsOn;
-        
 
         //For debyg mode
         private bool debugModeActive;
@@ -124,7 +123,7 @@ namespace Slime_Game
                     }
                     if (data[2] == "cold")
                     {
-                        collectables.Add(new Collectable(ice, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), true));
+                        collectables.Add(new Collectable(ice, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), false));
                     }
 
                     //player
@@ -141,6 +140,9 @@ namespace Slime_Game
             {
 
             }
+
+            // Add reset level event
+            player.ResetLevelEvent += ReadLevel;
 
         }
         
