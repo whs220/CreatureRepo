@@ -119,6 +119,9 @@ namespace Slime_Game
         }
 
 
+        /// <summary>
+        /// Get/Set for speed
+        /// </summary>
         public float Speed
         {
             get { return speed; }
