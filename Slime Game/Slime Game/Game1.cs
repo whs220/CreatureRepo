@@ -52,6 +52,7 @@ namespace Slime_Game
         private Texture2D debugLiquid;
         private Texture2D debugGas;
         private Level level1;
+        private Level level2;
         KeyboardState prevKeyState;
 
 
@@ -119,20 +120,22 @@ namespace Slime_Game
 
             // loading in player and level
             player = new Player(debugSolid, debugLiquid, debugGas, new Rectangle(50, 50, 32, 32));
-            //level1 = new Level("Content/jaketestlevel.level", player, tileMap, fire, ice);
             level1 = new Level("Content/epic_slide.level", player, tileMap, fire, ice);
-            //level2 = new Level("Content/epic_slide.level", player, tileMap, fire, ice);
+            level2 = new Level("Content/jaketestlevel.level", player, tileMap, fire, ice);
 
             //Level List
             levels = new List<Level>();
             levels.Add(level1);
+            levels.Add(level2);
             currentLevel = 0;
             foreach(Level level in levels)
             {
                 level.NextLevelEvent += NextLevel;
             }
             levels[0].ReadLevel();
-            
+            // Add reset level event
+            player.ResetLevelEvent += levels[0].ReadLevel;
+
 
             // menu
             startTexture = Content.Load<Texture2D>("startButton");
@@ -144,9 +147,8 @@ namespace Slime_Game
             restartTexture = Content.Load<Texture2D>("restartButton");
             restartButton = new Button(restartTexture, new Rectangle(150, 650, 300, 100));
 
-            level1.ReadLevel();
-            // Add reset level event
-            player.ResetLevelEvent += level1.ReadLevel;
+            
+            
         }
 
         protected override void Update(GameTime gameTime)
@@ -197,7 +199,7 @@ namespace Slime_Game
                     levels[currentLevel].Update();
 
                     
-                    /*
+                    
                     if (levels[currentLevel].DebugModeActive == true)
                     {
                         if(Keyboard.GetState().IsKeyDown(Keys.N) && prevKeyState.IsKeyUp(Keys.N))
@@ -210,7 +212,7 @@ namespace Slime_Game
                     {
                         gameState = GameState.WinScreen;
                     }
-                    */
+                    
                     prevKeyState = Keyboard.GetState();
                     // beat a level -> loading screen
                     // beat the last level -> win screen
@@ -305,8 +307,10 @@ namespace Slime_Game
 
         public void NextLevel()
         {
+            player.ResetLevelEvent -= levels[currentLevel].ReadLevel;
             currentLevel++;
             levels[currentLevel].ReadLevel();
+            player.ResetLevelEvent += levels[currentLevel].ReadLevel;
         }
     }
 }
