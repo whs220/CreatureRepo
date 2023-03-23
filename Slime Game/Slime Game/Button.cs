@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace Slime_Game.Content
+namespace Slime_Game
 {
     internal class Button
     {
@@ -24,7 +24,7 @@ namespace Slime_Game.Content
         /// <param name="graphics"> size of the screen </param>
         public Button(Texture2D image, Rectangle rectangle)
         {
-            this.button = image;
+            button = image;
             this.rectangle = rectangle;
 
         }
