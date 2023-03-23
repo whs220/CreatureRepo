@@ -35,7 +35,8 @@ namespace Slime_Game
     }
 
     public delegate void ResetLevel();
-
+    public delegate void NextLevel();
+    
 
     public class Game1 : Game
     {
@@ -51,6 +52,8 @@ namespace Slime_Game
         private Texture2D debugLiquid;
         private Texture2D debugGas;
         private Level level1;
+        KeyboardState prevKeyState;
+
 
         //Level List
         private List<Level> levels;
@@ -63,6 +66,7 @@ namespace Slime_Game
         private Button quitButton;
         private SpriteFont mainFont;
         private SpriteFont titleFont;
+        
 
         // loading
         private double timer;
@@ -86,6 +90,8 @@ namespace Slime_Game
             timer = 1;
 
             base.Initialize();
+
+            
 
             // Debug: Creating the player here
         }
@@ -114,12 +120,18 @@ namespace Slime_Game
             levels = new List<Level>();
             levels.Add(level1);
             currentLevel = 0;
+            foreach(Level level in levels)
+            {
+                level.NextLevelEvent += NextLevel;
+            }
+            levels[0].ReadLevel();
+            
 
             // menu
             startTexture = Content.Load<Texture2D>("startButton");
             quitTexture = Content.Load<Texture2D>("quitButton");
 
-            level1.ReadLevel();
+            
         }
 
         protected override void Update(GameTime gameTime)
@@ -167,8 +179,24 @@ namespace Slime_Game
 
                 case GameState.InGame:
                     player.Update(gameTime);
-                    level1.Update();
+                    levels[currentLevel].Update();
 
+                    
+                    /*
+                    if (levels[currentLevel].DebugModeActive == true)
+                    {
+                        if(Keyboard.GetState().IsKeyDown(Keys.N) && prevKeyState.IsKeyUp(Keys.N))
+                        {
+                            NextLevel();
+                        }
+                    }
+
+                    if(currentLevel > levels.Count)
+                    {
+                        gameState = GameState.WinScreen;
+                    }
+                    */
+                    prevKeyState = Keyboard.GetState();
                     // beat a level -> loading screen
                     // beat the last level -> win screen
                     break;
@@ -226,6 +254,13 @@ namespace Slime_Game
             _spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+
+        public void NextLevel()
+        {
+            currentLevel++;
+            levels[currentLevel].ReadLevel();
         }
     }
 }

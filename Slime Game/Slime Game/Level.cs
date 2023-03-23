@@ -9,6 +9,9 @@ using Microsoft.Xna.Framework.Input;
 using System.IO;
 using Microsoft.Xna.Framework.Content;
 
+
+
+
 namespace Slime_Game
 {
     /// <summary>
@@ -16,6 +19,7 @@ namespace Slime_Game
     /// Reads the file and makes a tile map
     /// works
     /// </summary>
+    ///
     internal class Level
     {
         //Fields
@@ -35,6 +39,7 @@ namespace Slime_Game
         private Tile backTile;
         private KeyboardState prevKeyState;
         private bool collisionsOn;
+        public event NextLevel NextLevelEvent;
 
         //For debyg mode
         private bool debugModeActive;
