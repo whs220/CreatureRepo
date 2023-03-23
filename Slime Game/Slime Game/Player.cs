@@ -165,7 +165,10 @@ namespace Slime_Game
             {
                 DebugKeyDetection();
             }
-
+            if(currentKeyState.IsKeyDown(Keys.R) && prevKeyState.IsKeyUp(Keys.R))
+            {
+                
+            }
             
 
             // record previous keyboard state
@@ -581,66 +584,4 @@ namespace Slime_Game
     } 
 }
 
-/* ==== Old Movement ====
-/// <summary>
-/// registers what key is being pressed and will move the player in the correct direction
-/// </summary>
-public void ProcessInput()
-{
-
-    //If space or W are hit then the jump method is called
-    if(currentKeyState.IsKeyDown(Keys.W) && prevKeyState.IsKeyUp(Keys.W) && prevKeyState.IsKeyUp(Keys.Space)) {
-        Jump();
-    }
-    if(currentKeyState.IsKeyDown(Keys.Space) && prevKeyState.IsKeyUp(Keys.W) && prevKeyState.IsKeyUp(Keys.Space))
-    {
-        Jump();
-    }
-
-    //This logic is for all states not the solid state
-    if (currentMatterState != PlayerMatterState.Solid)
-    {
-        if (currentKeyState.IsKeyDown(Keys.D))
-        {
-            position.X += (int)(speed);
-        }
-        if (currentKeyState.IsKeyDown(Keys.A))
-        {
-            position.X -= (int)(speed);
-        }
-    }
-    //For solid movement which has a slide
-    else
-    {
-        //acceleration
-        float acceleration = 2;
-
-        if (currentKeyState.IsKeyDown(Keys.D))
-        {
-            //Sets speed to 1 so acceleration isn't multiplyed by 0. Then multiplys
-            //acceleration and speed and adds it to the previous speed
-            speed += (speed + acceleration);
-
-        }
-        else if (currentKeyState.IsKeyDown(Keys.A))
-        {
-            //Sets speed to -1 so acceleration isn't multiplyed by 0. Then multiplys
-            //acceleration and speed and adds it to the previous speed
-            speed -= (speed + acceleration);
-
-        }
-        else
-        {
-         speed *= 0.9f;
-        }
-
-        position.X += (int)speed;
-    }
-}
-
-
-#endregion
-}
-}
-*/
 #endregion
