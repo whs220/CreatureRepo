@@ -183,6 +183,11 @@ namespace Slime_Game
             {
                 position.Y += (int)gravity.Y;
             }
+            //For gas gravity
+            else
+            {
+                position.Y -= (int)gravity.Y;
+            }
         }
 
         /// <summary>
