@@ -1,4 +1,5 @@
 ﻿//This is the collectable class that handles collectable data
+//Jake Wardell, Will Slyman
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,36 @@ namespace Slime_Game
         // ==== Fields ====
         private bool isHot;
         private bool isActive;
+        private bool isExit;
+
+        // Properties
+
+        /// <summary>
+        /// Get/set for isHot
+        /// </summary>
+        public bool IsHot
+        {
+            get { return isHot; }
+            set { isHot = value; }
+        }
+
+        /// <summary>
+        /// Get/set for isActive
+        /// </summary>
+        public bool IsActive
+        {
+            get { return isActive; }
+            set { isActive = value; }
+        }
+
+        /// <summary>
+        /// Get/set for isExit
+        /// </summary>
+        public bool IsExit
+        {
+            get { return isExit; }
+            set { isExit = value; }
+        }
 
 
         // ==== Constructors ====
@@ -25,11 +56,12 @@ namespace Slime_Game
         /// <param name="texture">The texture of the collectable</param>
         /// <param name="pos">Postion rectangle</param>
         /// <param name="isHot">Whether it's hot or not</param>
-        public Collectable(Texture2D texture, Rectangle pos, bool isHot) :
+        public Collectable(Texture2D texture, Rectangle pos, bool isHot, bool isExit = false) :
             base(texture, pos)
         {
             this.isHot = isHot;
             isActive = true;
+            this.isExit = isExit;
         }
 
         /// <summary>
@@ -38,9 +70,9 @@ namespace Slime_Game
         /// <param name="sb">The sprite batch</param>
         public override void Draw(SpriteBatch sb)
         {
-            if (isActive == true)
+            if (isActive == true && !isExit)
             {
-                base.Draw(sb);
+                sb.Draw(texture, position, Color.White); ;
             }
         }
     }

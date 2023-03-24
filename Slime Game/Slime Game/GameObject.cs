@@ -1,4 +1,5 @@
 ﻿//Handles setting up the parent for gameobject
+//Jake Wardell
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,24 @@ namespace Slime_Game
         // ==== Field ====
         protected Texture2D texture;
         protected Rectangle position;
+
+
+        // ==== Properties ====
+
+        /// <summary>
+        /// Makes the rectangle field accessable and changeable
+        /// </summary>
+        public Rectangle Position
+        {
+            get
+            {
+                return position;
+            }
+            set
+            {
+                position = value;
+            }
+        }
 
 
         // ==== Constuctor ====
