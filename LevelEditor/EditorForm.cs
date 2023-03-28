@@ -140,6 +140,10 @@ namespace LevelEditor
                 {
                     tileColor = Color.Red;
                 }
+                else if (objectData[2] == "exit")
+                {
+                    tileColor = Color.Yellow;
+                }
                 #endregion
 
                 for (int i = 0; i < height; i++)
@@ -190,8 +194,10 @@ namespace LevelEditor
                                 {
                                     tileColor = Color.Red;
                                 }
-
-
+                                else if (objectData[2] == "exit")
+                                {
+                                    tileColor = Color.Yellow;
+                                }
                             }
                         }
 
@@ -305,7 +311,7 @@ namespace LevelEditor
                                 writer.WriteLine(i + "," + j + "," + "player");
                                 break;
                             case -256: //yellow
-                                //writer.WriteLine(i + "," + j + "," + "");
+                                writer.WriteLine(i + "," + j + "," + "exit");
                                 break;
                             case -8388480: //purple
                                 writer.WriteLine(i + "," + j + "," + "platform");
@@ -425,6 +431,10 @@ namespace LevelEditor
                     {
                         tileColor = Color.Red;
                     }
+                    else if (objectData[2] == "exit")
+                    {
+                        tileColor = Color.Yellow;
+                    }
                     #endregion
 
                     for (int i = 0; i < height; i++)
@@ -475,8 +485,10 @@ namespace LevelEditor
                                     {
                                         tileColor = Color.Red;
                                     }
-
-
+                                    else if (objectData[2] == "exit")
+                                    {
+                                        tileColor = Color.Yellow;
+                                    }
                                 }
                             }
                             if (row == i && col == j)

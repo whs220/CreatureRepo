@@ -46,6 +46,7 @@ namespace Slime_Game
         private Texture2D tileMap;
         private Texture2D fire;
         private Texture2D ice;
+        private Texture2D exit;
 
         private Player player;
         private Texture2D debugSolid;
@@ -108,6 +109,7 @@ namespace Slime_Game
             tileMap = Content.Load<Texture2D>("tileset");
             fire = Content.Load<Texture2D>("fire");
             ice = Content.Load<Texture2D>("ice");
+            exit = Content.Load<Texture2D>("pipe");
 
             // loading in debug mode content
             debugSolid = Content.Load<Texture2D>("debug_solid");
@@ -120,8 +122,8 @@ namespace Slime_Game
 
             // loading in player and level
             player = new Player(debugSolid, debugLiquid, debugGas, new Rectangle(50, 50, 32, 32));
-            level1 = new Level("Content/epic_slide.level", player, tileMap, fire, ice);
-            level2 = new Level("Content/jaketestlevel.level", player, tileMap, fire, ice);
+            level1 = new Level("Content/level1.level", player, tileMap, fire, ice, exit);
+            level2 = new Level("Content/epic_slide.level", player, tileMap, fire, ice, exit);
 
             //Level List
             levels = new List<Level>();
