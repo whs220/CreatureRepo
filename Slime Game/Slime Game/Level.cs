@@ -31,11 +31,12 @@ namespace Slime_Game
         private Texture2D tilemap;
         private Texture2D fire;
         private Texture2D ice;
+        private Texture2D exit;
+
         private Rectangle groundFrame;
         private Rectangle ceilingFrame;
         private Rectangle leftFrame;
         private Rectangle rightFrame;
-        private Game1 game1;
         private Tile backTile;
         private KeyboardState prevKeyState;
         private bool collisionsOn;
@@ -58,7 +59,7 @@ namespace Slime_Game
         // 31, 383
 
         //Constructor
-        public Level(string fileName, Player player, Texture2D tilemap, Texture2D fire, Texture2D ice) 
+        public Level(string fileName, Player player, Texture2D tilemap, Texture2D fire, Texture2D ice, Texture2D exit) 
         {
             collisionsOn = true;
             debugModeActive = false;
@@ -67,6 +68,7 @@ namespace Slime_Game
             this.tilemap = tilemap;
             this.fire = fire;
             this.ice = ice;
+            this.exit = exit;
 
 
             this.tiles = new List<Tile>();
@@ -133,7 +135,7 @@ namespace Slime_Game
                     }
                     if (data[2] == "exit")
                     {
-                        collectables.Add(new Collectable(ice, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), false, true));
+                        collectables.Add(new Collectable(exit, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), false, true));
                     }
 
                     //player

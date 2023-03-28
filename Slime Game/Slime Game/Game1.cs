@@ -46,6 +46,7 @@ namespace Slime_Game
         private Texture2D tileMap;
         private Texture2D fire;
         private Texture2D ice;
+        private Texture2D exit;
 
         private Player player;
         private Texture2D debugSolid;
@@ -108,6 +109,7 @@ namespace Slime_Game
             tileMap = Content.Load<Texture2D>("tileset");
             fire = Content.Load<Texture2D>("fire");
             ice = Content.Load<Texture2D>("ice");
+            exit = Content.Load<Texture2D>("exit");
 
             // loading in debug mode content
             debugSolid = Content.Load<Texture2D>("debug_solid");
