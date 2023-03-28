@@ -178,8 +178,11 @@ namespace Slime_Game
 
                 case GameState.LoadingScreen:
                     // bypasses loading screen if debug mode is active
-                    if (levels[currentLevel].DebugModeActive == false)
+                    if (levels[currentLevel].DebugModeActive)
                     {
+                        gameState = GameState.InGame;
+                        break;
+                    }
                         timer -= gameTime.ElapsedGameTime.TotalSeconds;
 
                         // loading screen ends -> in game
@@ -188,7 +191,7 @@ namespace Slime_Game
                             gameState = GameState.InGame;
                             timer = 2;
                         }
-                    }
+                    
 
                     // increment gameTime
                     base.Update(gameTime);
