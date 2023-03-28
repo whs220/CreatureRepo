@@ -228,6 +228,7 @@
             this.black.Name = "black";
             this.black.Size = new System.Drawing.Size(60, 47);
             this.black.TabIndex = 4;
+            this.black.Text = "exit";
             this.black.UseVisualStyleBackColor = false;
             this.black.Click += new System.EventHandler(this.colorSelect_Click);
             // 
