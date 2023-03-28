@@ -239,7 +239,17 @@ namespace Slime_Game
                     {
                         player.ChangeTemperature(false);
                     }
+
+                    if (!item.IsExit)
+                    {
+                        
+                    }
+
+
                     item.IsActive = false;
+
+
+
                 }
 
             }
