@@ -135,7 +135,8 @@ namespace Slime_Game
                     }
                     if (data[2] == "exit")
                     {
-                        collectables.Add(new Collectable(exit, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), false, true));
+                        tiles.Add(new Tile(exit, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), new Rectangle(0, 0, 32, 32)));
+                        collectables.Add(new Collectable(exit, new Rectangle((int.Parse(data[1])) * 32 - 4, (int.Parse(data[0])) * 32 + 8, 32, 16), false, true));
                     }
 
                     //player
@@ -169,7 +170,10 @@ namespace Slime_Game
             }
             foreach (Collectable collectable in collectables)
             {
-                collectable.Draw(sb);
+                if (!collectable.IsExit)
+                {
+                    collectable.Draw(sb);
+                }
             }
             foreach(Tile tile in tiles)
             {
@@ -242,6 +246,7 @@ namespace Slime_Game
 
                     if (item.IsExit)
                     {
+
                         NextLevelEvent();
                     }
 
