@@ -23,23 +23,36 @@ namespace Slime_Game
     internal class Level
     {
         //Fields
+
+        //directory
         public string fileName;
+
+        //Lists of game objects
         public List<GameObject> gameObjects;
         public List<Tile> tiles;
         public List<Collectable> collectables;
+
+        //player
         private Player player;
+
+        //Textures
         private Texture2D tilemap;
         private Texture2D fire;
         private Texture2D ice;
         private Texture2D exit;
-
+        
+        //borders for future use
         private Rectangle groundFrame;
         private Rectangle ceilingFrame;
         private Rectangle leftFrame;
         private Rectangle rightFrame;
         private Tile backTile;
+
+        //misc
         private KeyboardState prevKeyState;
         private bool collisionsOn;
+
+        //exit
         public event NextLevel NextLevelEvent;
 
         //For debyg mode
@@ -86,47 +99,65 @@ namespace Slime_Game
         /// <returns></returns>
         public void ReadLevel()
         {
+
+            //make stream reader and set the done bool to false
             StreamReader input;
             bool done = false;
+
+            //clear any previous tiles
             tiles.Clear();
             collectables.Clear();
             gameObjects.Clear();
 
+            //File IO
             try
             {
+                //connects to file
                 input = new StreamReader("../../../" + fileName);
                 string line;
 
+                //ceiling line
                 tiles.Add(new Tile(tilemap, new Rectangle(0, 0, 1024, 32), new Rectangle(0, 224, 32, 32)));
+
+                //Reads through every line
                 while ((line = input.ReadLine()) != null)
                 {
+                    //splits the line into its data
                     string[] data = line.Split(',');
 
-                    //tiles
+                    //All tile cases
                     if (data[2] == "top")
                     {
+                        //ceiling tile
+                        //uses second rectangle to frame the part of the tilemap
                         tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), new Rectangle(0, 224, 32, 32)));
                     }
                     if (data[2] == "ground")
                     {
+                        //uses second rectangle to frame the part of the tilemap
                         tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), new Rectangle(0, 351, 32, 32)));
                     }
                     if (data[2] == "leftWall")
                     {
+                        //uses second rectangle to frame the part of the tilemap
                         tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), new Rectangle(800, 416, 32, 32)));
                     }
                     if (data[2] == "rightWall")
                     {
+                        //uses second rectangle to frame the part of the tilemap
                         tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), new Rectangle(864, 416, 32, 32)));
                     }
                     if (data[2] == "platform")
                     {
+                        //uses second rectangle to frame the part of the tilemap
+                        //Standard size of four blocks long
                         tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 128, 32), new Rectangle(640, 480, 128, 32)));
                     }
 
-                    //collectable
+                    // all collectable cases
                     if (data[2] == "hot")
                     {
+                        //new collectable with bool to determine type
                         collectables.Add(new Collectable(fire, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), true));
                     }
                     if (data[2] == "cold")
@@ -135,11 +166,13 @@ namespace Slime_Game
                     }
                     if (data[2] == "exit")
                     {
+                        //Creates both a tile and a collectable to make the entrance
+                        //of the pipe only at the front
                         tiles.Add(new Tile(exit, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), new Rectangle(0, 0, 32, 32)));
                         collectables.Add(new Collectable(exit, new Rectangle((int.Parse(data[1])) * 32 - 4, (int.Parse(data[0])) * 32 + 8, 32, 16), false, true));
                     }
 
-                    //player
+                    //players position is set to where it starts in the level file
                     if (data[2] == "player")
                     {
                         Rectangle copy = player.Position;
@@ -151,7 +184,7 @@ namespace Slime_Game
             }
             catch
             {
-
+                throw new Exception("Level couldnt read properly");
             }
         }
         
@@ -160,6 +193,7 @@ namespace Slime_Game
         /// </summary>
         public void Draw(SpriteBatch sb)
         {
+            //Prints all background tiles 
             for (int i = 0; i < 32; i++)
             {
                 for (int j = 0; j < 32; j++)
@@ -168,13 +202,18 @@ namespace Slime_Game
                     backTile.Draw(sb);
                 }
             }
+
+            //Each collectable is drawn
             foreach (Collectable collectable in collectables)
             {
+                //besides for the pipe entrance
                 if (!collectable.IsExit)
                 {
                     collectable.Draw(sb);
                 }
             }
+
+            //each tile is drawn
             foreach(Tile tile in tiles)
             {
                 tile.Draw(sb);
@@ -187,8 +226,11 @@ namespace Slime_Game
         /// </summary>
         public void Update()
         {
+            //Calls all collectible collisions
             CollectibleColision();
             
+
+            //for debug mode
             if (collisionsOn) 
             {
                 TileCollision();
@@ -215,12 +257,11 @@ namespace Slime_Game
         /// </summary>
         public void CollectibleColision()
         {
-            // Loop all collect
-            // if (player.pos.intersects(collectables[i].pos)){
-            //Calls change temperature and sets collectable to inactive
 
+            //list of all tiles intersecting
             List<Collectable> intersections = new List<Collectable>();
 
+            //adds each tile that its touching to its own list
             foreach (Collectable collectable in collectables)
             {
                 if (player.Position.Intersects(collectable.Position))
@@ -230,11 +271,13 @@ namespace Slime_Game
 
             }
 
+            //loops through all intersecting collectables
             foreach(Collectable item in intersections)
             {
-
+                //checks to see if the item hasnt been used already
                 if (item.IsActive)
                 {
+                    //Changes the players state of matter
                     if (item.IsHot)
                     {
                         player.ChangeTemperature(true);
@@ -244,13 +287,14 @@ namespace Slime_Game
                         player.ChangeTemperature(false);
                     }
 
+                    //sends you to the next level
                     if (item.IsExit)
                     {
 
                         NextLevelEvent();
                     }
 
-
+                    //turns off the collectable
                     item.IsActive = false;
 
 
@@ -265,36 +309,46 @@ namespace Slime_Game
         /// </summary>
         public void TileCollision()
         {
+            //Lists all intersections
             List<Tile> intersections = new List<Tile>();
+
+            //is not grounded
             bool isGrounded = false;
+
+            //checks for intersections
             foreach(Tile tile in tiles) 
             {
                 if (player.Position.Intersects(tile.Position))
                 {
                     intersections.Add(tile);
                 }
-                // If the groundrect intersects a tile...
+
+                //grounds the player
                 if (!isGrounded && player.GroundRect.Intersects(tile.Position))
                 {
-                    // You're grounded!!
                     isGrounded = true;
                 }
             }
-            // Set player IsGrounded
+
+            //update player
             player.IsGrounded = isGrounded;
 
             if(intersections.Count > 0)
             {
+                //for copy alter replace
                 Rectangle posCopy = player.Position;
 
+                //loops through all intersects
                 foreach (Tile tile in intersections)
                 {
                     Rectangle rect = tile.Position;
                     Rectangle intersection = Rectangle.Intersect(rect, posCopy);
                     Vector2 velCopy = player.Velocity;
 
+                    //If the rectangle is taller than it is wide
                     if (intersection.Height > intersection.Width && intersection.Width > 4)
                     {
+                        //the player is moved left or right
                         if (posCopy.X - rect.X < 0)
                         {
                             posCopy.X -= intersection.Width;
@@ -310,15 +364,19 @@ namespace Slime_Game
                         }
                     }
 
+                    //if wider than it is tall
                     if (intersection.Height < intersection.Width)
                     {
+                        //tolerance and cap
                         if (intersection.Width > 10)
                         {
                             velCopy.Y = 0;
                         }
                         
+                        //copy alter replace
                         player.Velocity = velCopy;
 
+                        //move up or down
                         if (posCopy.Y - rect.Y < 0)
                         {
                             posCopy.Y -= intersection.Height;
@@ -336,7 +394,7 @@ namespace Slime_Game
                 //resolves intersections
                 player.Position = posCopy;
             }
-            // Update the player's groundRect on thew new Player Position
+            // Update the player's groundRect on the new Player Position
             player.UpdateGroundRect(new Vector2(player.Position.X, player.Position.Y));
         }
     }
