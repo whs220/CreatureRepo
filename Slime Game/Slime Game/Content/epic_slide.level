@@ -269,6 +269,7 @@
 30,26,leftWall
 30,27,rightWall
 30,28,rightWall
+30,30,exit
 30,31,rightWall
 31,0,ground
 31,1,ground

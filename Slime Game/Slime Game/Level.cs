@@ -186,6 +186,7 @@ namespace Slime_Game
                     //players position is set to where it starts in the level file
                     if (data[2] == "player")
                     {
+                        player.Reset();
                         Rectangle copy = player.Position;
                         copy.X = (int.Parse(data[1])) * 32;
                         copy.Y = (int.Parse(data[0])) * 32;

@@ -610,6 +610,18 @@ namespace Slime_Game
             speed = 5;
             velocity.Y = 0;
         }
+
+        /// <summary>
+        /// Resets the player to their default states
+        /// </summary>
+        public void Reset()
+        {
+            // Reset player stats back to liquid
+            currentMatterState = PlayerMatterState.Liquid;
+            speed = 5;
+            velocity.Y = 0;
+            velocity.X = 0;
+        }
     } 
 }
 

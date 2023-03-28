@@ -92,7 +92,7 @@ namespace Slime_Game
             gameState = GameState.Menu; // CHANGE THIS TO GameState.InGame IF YOU WANT TO BYPASS THE MENU AND LOADING SCREENS
 
             // loading
-            timer = 1;
+            timer = 0.5f;
 
             // List of levels!
             // This is the order of levels that appear!
@@ -204,7 +204,9 @@ namespace Slime_Game
                         if (timer <= 0)
                         {
                             gameState = GameState.InGame;
-                            timer = 2;
+                            timer = 0.5f;
+                            // Read in the current level
+                            levels[currentLevel].ReadLevel();
                         }
                     
 
@@ -260,13 +262,14 @@ namespace Slime_Game
                 //For when on the game win screen
                 case GameState.WinScreen:
                     quitButton.Y = 650;
-                    currentLevel = -1; //Resets the level to -1
                     NextLevel(); //Then calls nextLevel to reset to the first level
 
                     // click on restart -> menu
                     if (restartButton.MousePosition() && restartButton.MouseClick())
                     {
+                        // Go to menu and set current level back to 0
                         gameState = GameState.Menu;
+                        currentLevel = 0;
                     }
 
                     // click on quit -> CLOSE GAME
@@ -373,27 +376,36 @@ namespace Slime_Game
         /// </summary>
         public void NextLevel()
         {
-            //Unadds the current level from level readlevel event so that when game is reset the correct level is read
-            player.ResetLevelEvent -= levels[currentLevel].ReadLevel;
-
-            //Turns off debug mode
-            levels[currentLevel].DebugModeActive = false;
-            player.DebugModeActive = false;
-
             //If the currentLevel + 1 is less than level count
-            if (currentLevel + 1 < levels.Count)
+            if (currentLevel + 1 < levels.Count && currentLevel >= 0)
             {
+                //Unadds the current level from level readlevel event so that when game is reset the correct level is read
+                player.ResetLevelEvent -= levels[currentLevel].ReadLevel;
+                //Turns off debug mode and re-enable collisions
+                levels[currentLevel].DebugModeActive = false;
+                levels[currentLevel].CollisionsOn = true;
+                player.DebugModeActive = false;
                 //Current level is increased
                 currentLevel++;
-                //Reads level
-                levels[currentLevel].ReadLevel();
+                //Reset Player stats
+
                 //Adds current level to the event
                 player.ResetLevelEvent += levels[currentLevel].ReadLevel;
+
+                // Go to loading screen
+                gameState = GameState.LoadingScreen;
 
             }
             //if this is the last level switches to the win screen
             else
             {
+                // Remove event from the last level
+                player.ResetLevelEvent -= levels[levels.Count - 1].ReadLevel;
+                //Turns off debug mode for last level and re-enable collisions for last level
+                levels[levels.Count - 1].DebugModeActive = false;
+                levels[currentLevel].CollisionsOn = true;
+                player.DebugModeActive = false;
+                // Change to the win screen
                 gameState = GameState.WinScreen;
             }
         }
