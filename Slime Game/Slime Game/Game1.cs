@@ -52,13 +52,12 @@ namespace Slime_Game
         private Texture2D debugSolid;
         private Texture2D debugLiquid;
         private Texture2D debugGas;
-        private Level level1;
-        private Level level2;
         KeyboardState prevKeyState;
 
 
         //Level List
         private List<Level> levels;
+        private string[] levelNames;
         private int currentLevel;
 
         // menu
@@ -95,6 +94,19 @@ namespace Slime_Game
             // loading
             timer = 1;
 
+            // List of levels!
+            // This is the order of levels that appear!
+            levelNames = new string[]
+            {
+                "Content/need_for_speed.level",
+                "Content/level1.level",
+                "Content/epic_slide.level",
+            };
+
+            levels = new List<Level>();
+
+
+
             base.Initialize();
 
             
@@ -120,15 +132,16 @@ namespace Slime_Game
             mainFont = Content.Load<SpriteFont>("bankgothiclight16");
             titleFont = Content.Load<SpriteFont>("comicSans36");
 
-            // loading in player and level
+            // loading in player
             player = new Player(debugSolid, debugLiquid, debugGas, new Rectangle(50, 50, 32, 32));
-            level1 = new Level("Content/level1.level", player, tileMap, fire, ice, exit);
-            level2 = new Level("Content/epic_slide.level", player, tileMap, fire, ice, exit);
 
-            //Level List
-            levels = new List<Level>();
-            levels.Add(level1);
-            levels.Add(level2);
+            // Adding levels to the level list
+            foreach (string levelName in levelNames)
+            {
+                Level level = new Level(levelName, player, tileMap, fire, ice, exit);
+                levels.Add(level);
+            }
+
             currentLevel = 0;
             foreach(Level level in levels)
             {

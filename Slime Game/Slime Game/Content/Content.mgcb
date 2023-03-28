@@ -93,6 +93,12 @@
 #begin jaketestlevel.level
 /copy:jaketestlevel.level
 
+#begin level1.level
+/copy:level1.level
+
+#begin need_for_speed.level
+/copy:need_for_speed.level
+
 #begin pipe.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -104,9 +110,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:pipe.png
-
-#begin level1.level
-/copy:level1.level
 
 #begin quitButton.png
 /importer:TextureImporter
