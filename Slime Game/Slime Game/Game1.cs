@@ -197,29 +197,56 @@ namespace Slime_Game
                     base.Update(gameTime);
                     break;
 
+                //In Game State
                 case GameState.InGame:
                     player.Update(gameTime);
+                    //Calls tge current level update method for current level logic
                     levels[currentLevel].Update();
 
                     
-                    
-                    if (levels[currentLevel].DebugModeActive == true)
+                    //Checks if the F1 key is clicked and debugMode is turned on or off
+                    if (Keyboard.GetState().IsKeyDown(Keys.F1) && prevKeyState.IsKeyUp(Keys.F1))
                     {
+                        levels[currentLevel].DebugModeActive = !levels[currentLevel].DebugModeActive;
+                        player.DebugModeActive = levels[currentLevel].DebugModeActive;
+                    }
+
+                    //If the game is in debug mode
+                    if (levels[currentLevel].DebugModeActive)
+                    {
+                        //If key N is pressed once nextlevel is xalled
                         if(Keyboard.GetState().IsKeyDown(Keys.N) && prevKeyState.IsKeyUp(Keys.N))
                         {
                             NextLevel();
+                        }
+                        //Checks for single key press on C to change colder
+                        if (Keyboard.GetState().IsKeyDown(Keys.C) && prevKeyState.IsKeyUp(Keys.C))
+                        {
+                            player.ChangeTemperature(false);
+                        }
+                        //Checks for single key press on H to change hotter
+                        if (Keyboard.GetState().IsKeyDown(Keys.H) && prevKeyState.IsKeyUp(Keys.H))
+                        {
+                            player.ChangeTemperature(true);
+                        }
+                        //When F2 is clicked then collisions get turned off
+                        if (Keyboard.GetState().IsKeyDown(Keys.F2) && prevKeyState.IsKeyUp(Keys.F2))
+                        {
+                            levels[currentLevel].CollisionsOn = !levels[currentLevel].CollisionsOn;
                         }
                     }
 
                     
                     
                     prevKeyState = Keyboard.GetState();
-                    // beat a level -> loading screen
-                    // beat the last level -> win screen
+
                     break;
 
+                //For when on the game win screen
                 case GameState.WinScreen:
                     quitButton.Y = 650;
+                    currentLevel = -1; //Resets the level to -1
+                    NextLevel(); //Then calls nextLevel to reset to the first level
 
                     // click on restart -> menu
                     if (restartButton.MousePosition() && restartButton.MouseClick())
@@ -239,6 +266,11 @@ namespace Slime_Game
             base.Update(gameTime);
         }
 
+
+        /// <summary>
+        /// Draws the game depending on state and other factors
+        /// </summary>
+        /// <param name="gameTime"></param>
         protected override void Draw(GameTime gameTime)
         {
             _spriteBatch.Begin();
@@ -246,7 +278,9 @@ namespace Slime_Game
             // draw GameState
             switch (gameState)
             {
+                //For Menu state
                 case GameState.Menu:
+                    
                     // background
                     GraphicsDevice.Clear(Color.LimeGreen);
 
@@ -256,38 +290,49 @@ namespace Slime_Game
                     // button(s)
                     startButton.Draw(_spriteBatch);
                     quitButton.Draw(_spriteBatch);
-
                     break;
 
+
+                //For in the Loading screen
                 case GameState.LoadingScreen:
+                    
                     // background
                     GraphicsDevice.Clear(Color.DarkOliveGreen);
 
                     // font(s)
                     _spriteBatch.DrawString(titleFont, "Loading...", new Vector2(30, 920), Color.LimeGreen);
-
                     break;
 
+
+                //In game state
                 case GameState.InGame:
+                    
                     // background
                     GraphicsDevice.Clear(Color.CornflowerBlue);
 
                     // level and player
-                    
                     levels[currentLevel].Draw(_spriteBatch);
                     player.Draw(_spriteBatch);
 
                     //If in debug mode then it draws specific stuff
-                    if (player.DebugModeActive == true)
+                    if (player.DebugModeActive)
                     {
+                        //Debug mode writing
                         _spriteBatch.DrawString(mainFont, "Player X, Y: " + player.Position.X + ", " + player.Position.Y + // Writes player X and Y
                             "\nCurrent State: " + player.CurrentMatterState.ToString() + // Writes players current state
-                            "\nCurrent Level: " + currentLevel // Writes current level number
+                            "\nCurrent Level: " + currentLevel + // Writes current level number
+                            "\nCollisions On: " + levels[currentLevel].CollisionsOn
                             , new Vector2(30, 50), Color.White);
-                            
+
+                        //
+                        _spriteBatch.DrawString(mainFont, "Use 'N' to go to next level \nUse 'H' to go hotter \nUse 'C' for colder \nUse 'F2' to toggle collisions", new Vector2(730, 50),Color.White);
+
+
                     }
                     break;
 
+
+                //Win screen state
                 case GameState.WinScreen:
                     // background
                     GraphicsDevice.Clear(Color.LimeGreen);
@@ -299,7 +344,6 @@ namespace Slime_Game
                     // button(s)
                     restartButton.Draw(_spriteBatch);
                     quitButton.Draw(_spriteBatch);
-
                     break;
             }
 
@@ -309,16 +353,30 @@ namespace Slime_Game
         }
 
 
+        /// <summary>
+        /// For going to the next level
+        /// </summary>
         public void NextLevel()
         {
-            
+            //Unadds the current level from level readlevel event so that when game is reset the correct level is read
             player.ResetLevelEvent -= levels[currentLevel].ReadLevel;
+
+            //Turns off debug mode
+            levels[currentLevel].DebugModeActive = false;
+            player.DebugModeActive = false;
+
+            //If the currentLevel + 1 is less than level count
             if (currentLevel + 1 < levels.Count)
             {
+                //Current level is increased
                 currentLevel++;
+                //Reads level
                 levels[currentLevel].ReadLevel();
+                //Adds current level to the event
                 player.ResetLevelEvent += levels[currentLevel].ReadLevel;
+
             }
+            //if this is the last level switches to the win screen
             else
             {
                 gameState = GameState.WinScreen;

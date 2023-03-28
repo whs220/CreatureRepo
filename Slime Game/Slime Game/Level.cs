@@ -41,18 +41,29 @@ namespace Slime_Game
         private bool collisionsOn;
         public event NextLevel NextLevelEvent;
 
-        //For debyg mode
+        //For debug mode
         private bool debugModeActive;
 
         // Properties
 
         /// <summary>
-        /// Gets the debugmodeactive bool
+        /// Gets and sets the debugmodeactive bool
         /// </summary>
         public bool DebugModeActive
         {
             get { return debugModeActive; }
+            set { debugModeActive = value; }
         }
+
+        /// <summary>
+        /// Makes ColisionsOn have a set value
+        /// </summary>
+        public bool CollisionsOn
+        {
+            get { return collisionsOn; }
+            set { collisionsOn = value; }
+        }
+
 
         // 1, 352
         // 31, 383
@@ -184,17 +195,6 @@ namespace Slime_Game
                 TileCollision();
             }
 
-            //Checks if the F1 key is clicked and swtiches if it on or off
-            if(Keyboard.GetState().IsKeyDown(Keys.F1) && prevKeyState.IsKeyUp(Keys.F1))
-            {
-                debugModeActive = !debugModeActive;
-                player.DebugModeActive = debugModeActive;
-            }
-
-            if(Keyboard.GetState().IsKeyDown(Keys.F2) && prevKeyState.IsKeyUp(Keys.F2) && debugModeActive)
-            {
-                collisionsOn = !collisionsOn;
-            }
 
             //Gets previous key clicked for single key pressed
             prevKeyState = Keyboard.GetState();
