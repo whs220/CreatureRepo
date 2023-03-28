@@ -131,6 +131,10 @@ namespace Slime_Game
                     {
                         collectables.Add(new Collectable(ice, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), false));
                     }
+                    if (data[2] == "exit")
+                    {
+                        collectables.Add(new Collectable(ice, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), false, true));
+                    }
 
                     //player
                     if (data[2] == "player")
