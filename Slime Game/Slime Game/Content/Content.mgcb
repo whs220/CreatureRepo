@@ -105,6 +105,9 @@
 /processorParam:TextureFormat=Color
 /build:pipe.png
 
+#begin level1.level
+/copy:level1.level
+
 #begin quitButton.png
 /importer:TextureImporter
 /processor:TextureProcessor
