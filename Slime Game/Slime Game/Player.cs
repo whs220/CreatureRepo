@@ -171,18 +171,12 @@ namespace Slime_Game
             ProcessMovement(gameTime);
             ApplyGravity();
 
-            //Checks if debug mode is active then does key checks
-            if (debugModeActive == true)
-            {
-                DebugKeyDetection();
-            }
-
-            //If the R key is pressed then reset the level
-            if(currentKeyState.IsKeyDown(Keys.R) && prevKeyState.IsKeyUp(Keys.R))
+            //Checks single key R is pressed then resets the level
+            if (Keyboard.GetState().IsKeyDown(Keys.R) && prevKeyState.IsKeyUp(Keys.R))
             {
                 ResetStage();
             }
-            
+
 
             // record previous keyboard state
             prevKeyState = currentKeyState;
@@ -239,9 +233,13 @@ namespace Slime_Game
 
 
 
-
+        /// <summary>
+        /// Handles movement and player transitions.
+        /// </summary>
+        /// <param name="gameTime">World time</param>
         public void ProcessMovement(GameTime gameTime)
         {
+            //Checks to make sure player isn't dead
             if (currentMatterState != PlayerMatterState.Dead)
             {
                 switch (currentMoveState)
@@ -339,6 +337,7 @@ namespace Slime_Game
                         Jump();
                     }
                 }
+                //For in debugMode
                 else
                 {
                     if (currentKeyState.IsKeyDown(Keys.W))
@@ -409,6 +408,7 @@ namespace Slime_Game
         /// </summary>
         public void ApplyGravity()
         {
+            //When debug isn't active
             if (debugModeActive == false)
             {
                 //Gas has inverse jump
@@ -501,7 +501,6 @@ namespace Slime_Game
         public void Die()
         {
             currentMatterState = PlayerMatterState.Dead;
-
         }
 
         /// <summary>
@@ -592,22 +591,6 @@ namespace Slime_Game
                 0.0f);                                          // Layer depth
         }
 
-        /// <summary>
-        /// When in debug mode does keyboard detection
-        /// </summary>
-        public void DebugKeyDetection()
-        {
-            //Checks for single key press on C to change colder
-            if (currentKeyState.IsKeyDown(Keys.C) && prevKeyState.IsKeyUp(Keys.C))
-            {
-                ChangeTemperature(false);
-            }
-            //Checks for single key press on H to change hotter
-            if (currentKeyState.IsKeyDown(Keys.H) && prevKeyState.IsKeyUp(Keys.H))
-            {
-                ChangeTemperature(true);
-            }
-        }
 
         /// <summary>
         /// Sends a signal to reset the level, and resets the player back to liquid
