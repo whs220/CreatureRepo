@@ -240,9 +240,9 @@ namespace Slime_Game
                         player.ChangeTemperature(false);
                     }
 
-                    if (!item.IsExit)
+                    if (item.IsExit)
                     {
-                        
+                        NextLevelEvent();
                     }
 
 
