@@ -94,7 +94,7 @@ namespace Slime_Game
             // loading
             timer = 0.5f;
 
-            // List of levels!
+            // ===== List of levels! =====
             // This is the order of levels that appear!
             levelNames = new string[]
             {
@@ -192,16 +192,16 @@ namespace Slime_Game
                         gameState = GameState.InGame;
                         break;
                     }
-                        timer -= gameTime.ElapsedGameTime.TotalSeconds;
+                    timer -= gameTime.ElapsedGameTime.TotalSeconds;
 
-                        // loading screen ends -> in game
-                        if (timer <= 0)
-                        {
-                            gameState = GameState.InGame;
-                            timer = 0.5f;
-                            // Read in the current level
-                            levels[currentLevel].ReadLevel();
-                        }
+                    // loading screen ends -> in game
+                    if (timer <= 0)
+                    {
+                        gameState = GameState.InGame;
+                        timer = 0.5f;
+                        // Read in the current level
+                        levels[currentLevel].ReadLevel();
+                    }
                     
 
                     // increment gameTime
@@ -266,7 +266,7 @@ namespace Slime_Game
                     }
 
                     // click on quit -> CLOSE GAME
-                        if (quitButton.MousePosition() && quitButton.MouseClick())
+                    if (quitButton.MousePosition() && quitButton.MouseClick())
                     {
                         System.Environment.Exit(0);
                     }
