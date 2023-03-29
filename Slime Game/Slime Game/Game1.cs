@@ -105,13 +105,7 @@ namespace Slime_Game
 
             levels = new List<Level>();
 
-
-
             base.Initialize();
-
-            
-
-            // Debug: Creating the player here
         }
 
         protected override void LoadContent()
@@ -142,15 +136,10 @@ namespace Slime_Game
                 levels.Add(level);
             }
 
-            currentLevel = 0;
-            foreach(Level level in levels)
+            foreach (Level level in levels)
             {
                 level.NextLevelEvent += NextLevel;
             }
-            levels[0].ReadLevel();
-            // Add reset level event
-            player.ResetLevelEvent += levels[0].ReadLevel;
-
 
             // menu
             startTexture = Content.Load<Texture2D>("startButton");
@@ -181,6 +170,11 @@ namespace Slime_Game
                     if(startButton.MousePosition() && startButton.MouseClick())
                     {
                         gameState = GameState.LoadingScreen;
+
+                        // Set currentLevel to zero and set add the readLevel event
+                        currentLevel = 0;
+                        player.ResetLevelEvent += levels[0].ReadLevel;
+                        // Then the level is read in the loading screen state!
                     }
 
                     // click on quit game -> CLOSE GAME
@@ -269,7 +263,6 @@ namespace Slime_Game
                     {
                         // Go to menu and set current level back to 0
                         gameState = GameState.Menu;
-                        currentLevel = 0;
                     }
 
                     // click on quit -> CLOSE GAME
@@ -387,12 +380,11 @@ namespace Slime_Game
                 player.DebugModeActive = false;
                 //Current level is increased
                 currentLevel++;
-                //Reset Player stats
 
                 //Adds current level to the event
                 player.ResetLevelEvent += levels[currentLevel].ReadLevel;
 
-                // Go to loading screen
+                // Go to loading screen, which then will read the new level
                 gameState = GameState.LoadingScreen;
 
             }

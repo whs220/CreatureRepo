@@ -183,6 +183,7 @@ namespace Slime_Game
                 ResetStage();
             }
 
+            System.Diagnostics.Debug.WriteLine(velocity);
 
             // record previous keyboard state
             prevKeyState = currentKeyState;
