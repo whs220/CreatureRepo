@@ -1,4 +1,4 @@
-﻿//Jake Wardell, Dylan Clauson, Will Slyman - This makes it so player is functioning
+﻿// Written by Jake Wardell, Dylan Clauson, Will Slyman
 
 using System;
 using System.Collections.Generic;
@@ -183,8 +183,6 @@ namespace Slime_Game
                 ResetStage();
             }
 
-            System.Diagnostics.Debug.WriteLine(velocity);
-
             // record previous keyboard state
             prevKeyState = currentKeyState;
         }
@@ -361,9 +359,10 @@ namespace Slime_Game
             // If player is dead...
             else
             {
-                // Wait 2 sseconds
+                // Wait 2 seconds
                 if (deathTime > 0)
                 {
+                    // Decrease deathTime by elapsed total seconds
                     deathTime -= gameTime.ElapsedGameTime.TotalSeconds;
                 }
                 else
@@ -406,6 +405,7 @@ namespace Slime_Game
             }
             else
             {
+                // Allow player to fly
                 position.Y -= 5;
             }
         }
@@ -506,7 +506,7 @@ namespace Slime_Game
         }
 
         /// <summary>
-        /// player dies
+        /// Player dies
         /// </summary>
         public void Die()
         {
@@ -543,15 +543,20 @@ namespace Slime_Game
         /// <param name="pos">Position to adjust by</param>
         public void UpdateGroundRect(Vector2 pos)
         {
-            // Append groundRect to player's bottom
+            // Append groundRect to player's position
+
+            // Change y position based on player matter state
             if (currentMatterState == PlayerMatterState.Gas)
             {
-                groundRect.Y = -6 + (int)pos.Y;
+                // Above top of player for gas
+                groundRect.Y = -24 + (int)pos.Y;
             }
             else
             {
+                // Below player for any other state
                 groundRect.Y = 34 + (int)pos.Y;
             }
+            // Stay with player's x position
             groundRect.X = (int)pos.X + 6;
         }
 
