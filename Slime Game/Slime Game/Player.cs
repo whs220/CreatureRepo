@@ -168,8 +168,14 @@ namespace Slime_Game
             // record the currenky keyboard state
             currentKeyState = Keyboard.GetState();
 
+            // Move the player!
             ProcessMovement(gameTime);
-            ApplyGravity();
+
+            // Only apply gravity if the player is not dead
+            if (currentMatterState != PlayerMatterState.Dead)
+            {
+                ApplyGravity();
+            }
 
             //Checks single key R is pressed then resets the level
             if (Keyboard.GetState().IsKeyDown(Keys.R) && prevKeyState.IsKeyUp(Keys.R))
@@ -442,6 +448,9 @@ namespace Slime_Game
         /// <param name="hotter">Is a hot collectable?</param>
         public void ChangeTemperature(bool hotter)
         {
+            // Don't do anything if we died
+            if (currentMatterState == PlayerMatterState.Dead) { return; }
+
             // If we hit a hot collectable...
             if (hotter)
             {
@@ -606,9 +615,7 @@ namespace Slime_Game
             deathTime = 1;
 
             // Reset player stats back to liquid
-            currentMatterState = PlayerMatterState.Liquid;
-            speed = 5;
-            velocity.Y = 0;
+            Reset();
         }
 
         /// <summary>
