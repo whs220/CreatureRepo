@@ -99,8 +99,8 @@ namespace Slime_Game
             levelNames = new string[]
             {
                 "Content/need_for_speed.level",
-                "Content/level1.level",
-                "Content/epic_slide.level"
+                //"Content/level1.level",
+                "Content/epic_slide.level",
             };
 
             levels = new List<Level>();
