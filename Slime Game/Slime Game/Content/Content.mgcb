@@ -165,3 +165,6 @@
 /processorParam:TextureFormat=Color
 /build:tileset.png
 
+#begin welcome_slime.level
+/copy:welcome_slime.level
+

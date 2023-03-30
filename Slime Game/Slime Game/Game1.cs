@@ -98,9 +98,11 @@ namespace Slime_Game
             // This is the order of levels that appear!
             levelNames = new string[]
             {
-                "Content/need_for_speed.level",
-                //"Content/level1.level",
+                "Content/welcome_slime.level",
                 "Content/epic_slide.level",
+                "Content/need_for_speed.level"
+                //"Content/level1.level",
+                
             };
 
             levels = new List<Level>();
