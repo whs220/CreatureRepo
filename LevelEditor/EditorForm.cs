@@ -93,6 +93,8 @@ namespace LevelEditor
                 color = Color.LightGray;
                 gridSize = groupMap.Height / height;
                 Color tileColor = Color.LightGray;
+                PictureBox temp = new PictureBox();
+                
 
                 int row;
                 int col;
@@ -221,6 +223,7 @@ namespace LevelEditor
                             j * gridSize,
                             i * gridSize);
                             pictureBox.BackColor = color;
+                            
 
                             //add to event
                             pictureBox.Click += ChangeColor;
