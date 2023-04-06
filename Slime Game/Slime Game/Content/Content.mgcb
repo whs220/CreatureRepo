@@ -78,12 +78,6 @@
 /processorParam:TextureFormat=Color
 /build:fire.png
 
-#begin ice-slide.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:ice-slide.wav
-
 #begin ice.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -140,12 +134,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:restartButton.png
-
-#begin slimegame.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:slimegame.mp3
 
 #begin startButton.png
 /importer:TextureImporter
