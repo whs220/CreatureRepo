@@ -1,11 +1,5 @@
 ﻿// Written by Jake Wardell, Dylan Clauson, Will Slyman
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -23,6 +17,7 @@ namespace Slime_Game
         //player states
         private PlayerMatterState currentMatterState;
         private PlayerMovementState currentMoveState;
+        private PlayerMatterState lastMovementState;
         private bool debugModeActive;
 
         //movement
@@ -153,7 +148,8 @@ namespace Slime_Game
             fps = 8.0;                      // Animation frames to cycle through per second
             secondsPerFrame = 1.0 / fps;    // How long each animation frame lasts
             timeCounter = 0;                // Time passed since animation
-            currentFrame = 1;         // Sprite sheet's first animation frame is 1 (not 0)
+            currentFrame = 1;               // Sprite sheet's first animation frame is 1 (not 0)
+
         }
 
 
@@ -204,39 +200,81 @@ namespace Slime_Game
             switch (currentMatterState)
             {
                 case PlayerMatterState.Gas:
-                    sb.Draw(debugGas, position, Color.White);
+                    // draw MovementState
+                    switch (currentMoveState)
+                    {
+                        case PlayerMovementState.IdleLeft:
+                        case PlayerMovementState.MoveLeft:
+                                DrawPlayer(sb, SpriteEffects.FlipHorizontally, 4);
+                            break;
+                        case PlayerMovementState.IdleRight:
+                        case PlayerMovementState.MoveRight:
+                                DrawPlayer(sb, SpriteEffects.None, 4);
+                            break;
+                    }
                     break;
-
+                //============================================================================
                 case PlayerMatterState.Liquid:
-                    sb.Draw(debugLiquid, position, Color.White);
+                    // draw MovementState
+                    switch (currentMoveState)
+                    {
+                        case PlayerMovementState.IdleLeft:
+                        case PlayerMovementState.MoveLeft:
+                            if (isGrounded)
+                            {
+                                DrawPlayer(sb, SpriteEffects.FlipHorizontally, 4);
+                            }
+                            else
+                            {
+                                DrawPlayer(sb, SpriteEffects.FlipHorizontally, 2);
+                            }
+                            break;
+                        case PlayerMovementState.IdleRight:
+                        case PlayerMovementState.MoveRight:
+                            if (isGrounded)
+                            {
+                                DrawPlayer(sb, SpriteEffects.None, 4);
+                            }
+                            else
+                            {
+                                DrawPlayer(sb, SpriteEffects.None, 4);
+                            }
+                            break;
+                    }
                     break;
-
+                //============================================================================
                 case PlayerMatterState.Solid:
-                    sb.Draw(debugSolid, position, Color.White);
+                    // draw MovementState
+                    switch (currentMoveState)
+                    {
+                        case PlayerMovementState.IdleLeft:
+                        case PlayerMovementState.MoveLeft:
+                            DrawPlayer(sb, SpriteEffects.FlipHorizontally, 1);
+                            break;
+                        case PlayerMovementState.IdleRight:
+                        case PlayerMovementState.MoveRight:
+                            DrawPlayer(sb, SpriteEffects.None, 1);
+                            break;
+                    }
                     break;
-
+                //============================================================================
                 case PlayerMatterState.Dead:
-                    break;
-            }
-
-            // draw MovementState
-            switch (currentMoveState)
-            {
-                case PlayerMovementState.IdleLeft:
-                    break;
-
-                case PlayerMovementState.IdleRight:
-                    break;
-
-                case PlayerMovementState.MoveLeft:
-                    break;
-
-                case PlayerMovementState.MoveRight:
+                    // draw dead
+                    switch (currentMatterState)
+                    {
+                        case PlayerMatterState.Gas:
+                            DrawPlayer(sb, SpriteEffects.None, 3);
+                            break;
+                        case PlayerMatterState.Liquid:
+                            DrawPlayer(sb, SpriteEffects.None, 4);
+                            break;
+                        case PlayerMatterState.Solid:
+                            DrawPlayer(sb, SpriteEffects.None, 1);
+                            break;
+                    }
                     break;
             }
         }
-
-
 
         /// <summary>
         /// Handles movement and player transitions.
@@ -510,6 +548,7 @@ namespace Slime_Game
         /// </summary>
         public void Die()
         {
+            lastMovementState = currentMatterState;
             currentMatterState = PlayerMatterState.Dead;
         }
 
@@ -561,43 +600,20 @@ namespace Slime_Game
         }
 
         /// <summary>
-        /// draws player walking
-        /// </summary>
-        /// <param name="sb"></param>
-        /// <param name="flip"></param>
-        private void DrawPlayerWalking(SpriteBatch sb, SpriteEffects flip)
-        {
-            sb.Draw(
-                texture,                                   // Whole sprite sheet
-                new Vector2(position.X, position.Y),                                  // Position of the sprite
-                new Rectangle(                                  // Which portion of the sheet is drawn:
-                    currentFrame * widthOfPlayerSprite + 2 * widthOfPlayerSprite,                             // - Left edge
-                    0,                                          // - Top of sprite sheet
-                    widthOfPlayerSprite,                        // - Width 
-                    texture.Height),              // - Height
-                Color.White,                                    // No change in color
-                0.0f,                                           // No rotation
-                Vector2.Zero,                                   // Start origin at (0, 0) of sprite sheet 
-                1.0f,                                           // Scale
-                flip,                                           // Flip it horizontally or vertically?    
-                0.0f);                                          // Layer depth
-        }
-
-        /// <summary>
         /// draws player standing
         /// </summary>
         /// <param name="sb"></param>
         /// <param name="flip"></param>
-        private void DrawPlayerStanding(SpriteBatch sb, SpriteEffects flip)
+        private void DrawPlayer(SpriteBatch sb, SpriteEffects flip, int frameCycle)
         {
             sb.Draw(
                 texture,                                        // Whole sprite sheet
                 new Vector2(position.X, position.Y),            // Position of the Mario sprite
-                new Rectangle(                                  // Which portion of the sheet is drawn:
-                    (currentFrame % 3) * widthOfPlayerSprite,       // - Left edge
-                    0,                                              // - Top of sprite sheet
-                    widthOfPlayerSprite,                            // - Width 
-                    texture.Height),                                // - Height
+                new Rectangle(                                                          // Which portion of the sheet is drawn:
+                    (currentFrame % 3) * widthOfPlayerSprite,                           // - Left edge
+                    0,                                                                  // - Top of sprite sheet
+                    widthOfPlayerSprite,                                                // - Width 
+                    texture.Height),                                                    // - Height
                 Color.White,                                    // No change in color
                 0.0f,                                           // No rotation
                 Vector2.Zero,                                   // Start origin at (0, 0) of sprite sheet 
@@ -605,7 +621,6 @@ namespace Slime_Game
                 flip,                                           // Flip it horizontally or vertically?    
                 0.0f);                                          // Layer depth
         }
-
 
         /// <summary>
         /// Sends a signal to reset the level, and resets the player back to liquid
