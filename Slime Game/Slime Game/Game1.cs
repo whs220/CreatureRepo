@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -75,6 +76,8 @@ namespace Slime_Game
         // loading
         private double timer;
 
+        private Song themeSong;
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -119,6 +122,10 @@ namespace Slime_Game
             ice = Content.Load<Texture2D>("ice");
             exit = Content.Load<Texture2D>("pipe");
 
+            //Load in sounds
+            themeSong = Content.Load<Song>("slimegame");
+
+
             // loading in debug mode content
             debugSolid = Content.Load<Texture2D>("debug_solid");
             debugLiquid = Content.Load<Texture2D>("debug_liquid");
@@ -153,8 +160,7 @@ namespace Slime_Game
             restartTexture = Content.Load<Texture2D>("restartButton");
             restartButton = new Button(restartTexture, new Rectangle(150, 650, 300, 100));
 
-            
-            
+
         }
 
         protected override void Update(GameTime gameTime)
@@ -212,6 +218,10 @@ namespace Slime_Game
 
                 //In Game State
                 case GameState.InGame:
+                    
+                    MediaPlayer.Play(themeSong);
+                    MediaPlayer.IsRepeating = true;
+
                     player.Update(gameTime);
                     //Calls tge current level update method for current level logic
                     levels[currentLevel].Update();
