@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.groupMap = new System.Windows.Forms.GroupBox();
             this.groupSelect = new System.Windows.Forms.GroupBox();
             this.pink = new System.Windows.Forms.Button();
@@ -46,6 +47,7 @@
             this.colorCurrent = new System.Windows.Forms.PictureBox();
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonLoad = new System.Windows.Forms.Button();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.groupSelect.SuspendLayout();
             this.groupCurrentColor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.colorCurrent)).BeginInit();
@@ -276,6 +278,12 @@
             this.buttonLoad.UseVisualStyleBackColor = true;
             this.buttonLoad.Click += new System.EventHandler(this.buttonLoad_Click);
             // 
+            // imageList1
+            // 
+            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            // 
             // editorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -318,5 +326,6 @@
         private System.Windows.Forms.Button blue;
         private System.Windows.Forms.Button slateGray;
         private System.Windows.Forms.Button pink;
+        private System.Windows.Forms.ImageList imageList1;
     }
 }
