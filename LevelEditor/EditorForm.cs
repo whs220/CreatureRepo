@@ -167,7 +167,6 @@ namespace LevelEditor
                                 if (objectData[2] == "ground")
                                 {
                                     tileColor = Color.White;
-                                    temp.Image = 
                                 }
                                 else if (objectData[2] == "top")
                                 {
