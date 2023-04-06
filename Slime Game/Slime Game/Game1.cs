@@ -110,20 +110,10 @@ namespace Slime_Game
         {
             // loading in tiles and collectibles
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            tileMap = Content.Load<Texture2D>("tileset");
-            fire = Content.Load<Texture2D>("fire");
-            ice = Content.Load<Texture2D>("ice");
-            exit = Content.Load<Texture2D>("pipe");
-
-            //Load in sounds
-            themeSong = Content.Load<Song>("slimegame");
-
-
-            // loading in debug mode content
-            debugSolid = Content.Load<Texture2D>("debug_solid");
-            debugLiquid = Content.Load<Texture2D>("debug_liquid");
-            debugGas = Content.Load<Texture2D>("debug_gas");
             Art.Instance.SetContentLoader(Content);
+
+            // Load in sounds
+            themeSong = Content.Load<Song>("slimegame");
 
             // loading in fonts
             mainFont = Content.Load<SpriteFont>("bankgothiclight16");
