@@ -29,7 +29,6 @@ namespace Slime_Game
         private float speed;
         private float jumpHeight;
         private Vector2 velocity;
-        private float prevSpeed;
         private bool isGrounded;
         private Vector2 gravity;
 
@@ -130,11 +129,11 @@ namespace Slime_Game
         #endregion
 
         //constructor
-        public Player(Texture2D debugSolid, Texture2D debugLiquid, Texture2D debugGas, Rectangle pos) : base(debugSolid, pos)
+        public Player(Rectangle pos) : base(null, pos)
         {
-            this.debugSolid = debugSolid;
-            this.debugLiquid = debugLiquid;
-            this.debugGas = debugGas;
+            this.debugSolid = Art.Instance.LoadTexture2D("debug_solid");
+            this.debugLiquid = Art.Instance.LoadTexture2D("debug_liquid");
+            this.debugGas = Art.Instance.LoadTexture2D("debug_gas");
             debugModeActive = false;
 
             speed = 5.0f;

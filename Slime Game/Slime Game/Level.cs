@@ -9,9 +9,6 @@ using Microsoft.Xna.Framework.Input;
 using System.IO;
 using Microsoft.Xna.Framework.Content;
 
-
-
-
 namespace Slime_Game
 {
     /// <summary>
@@ -83,16 +80,16 @@ namespace Slime_Game
         // 31, 383
 
         //Constructor
-        public Level(string fileName, Player player, Texture2D tilemap, Texture2D fire, Texture2D ice, Texture2D exit) 
+        public Level(string fileName, Player player) 
         {
             collisionsOn = true;
             debugModeActive = false;
             this.fileName = fileName;
             this.player = player;
-            this.tilemap = tilemap;
-            this.fire = fire;
-            this.ice = ice;
-            this.exit = exit;
+            tilemap = Art.Instance.LoadTexture2D("tileset");
+            fire = Art.Instance.LoadTexture2D("fire");
+            ice = Art.Instance.LoadTexture2D("ice");
+            exit = Art.Instance.LoadTexture2D("pipe");
 
 
             this.tiles = new List<Tile>();

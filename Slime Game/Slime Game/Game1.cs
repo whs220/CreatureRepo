@@ -43,15 +43,8 @@ namespace Slime_Game
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private GameState gameState;
-        private Texture2D tileMap;
-        private Texture2D fire;
-        private Texture2D ice;
-        private Texture2D exit;
 
         private Player player;
-        private Texture2D debugSolid;
-        private Texture2D debugLiquid;
-        private Texture2D debugGas;
         KeyboardState prevKeyState;
 
 
@@ -114,27 +107,19 @@ namespace Slime_Game
         {
             // loading in tiles and collectibles
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            tileMap = Content.Load<Texture2D>("tileset");
-            fire = Content.Load<Texture2D>("fire");
-            ice = Content.Load<Texture2D>("ice");
-            exit = Content.Load<Texture2D>("pipe");
-
-            // loading in debug mode content
-            debugSolid = Content.Load<Texture2D>("debug_solid");
-            debugLiquid = Content.Load<Texture2D>("debug_liquid");
-            debugGas = Content.Load<Texture2D>("debug_gas");
+            Art.Instance.SetContentLoader(Content);
 
             // loading in fonts
             mainFont = Content.Load<SpriteFont>("bankgothiclight16");
             titleFont = Content.Load<SpriteFont>("comicSans36");
 
             // loading in player
-            player = new Player(debugSolid, debugLiquid, debugGas, new Rectangle(50, 50, 32, 32));
+            player = new Player(new Rectangle(50, 50, 32, 32));
 
             // Adding levels to the level list
             foreach (string levelName in levelNames)
             {
-                Level level = new Level(levelName, player, tileMap, fire, ice, exit);
+                Level level = new Level(levelName, player);
                 levels.Add(level);
             }
 
