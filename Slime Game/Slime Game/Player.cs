@@ -47,8 +47,7 @@ namespace Slime_Game
 
         // Debug sprites
         private Texture2D debugSolid;
-        private Texture2D debugLiquid;
-        private Texture2D debugGas;
+        private Texture2D texture;
 
 
         private double deathTime;
@@ -138,8 +137,8 @@ namespace Slime_Game
         public Player(Rectangle pos) : base(null, pos)
         {
             this.debugSolid = Art.Instance.LoadTexture2D("debug_solid");
-            this.debugLiquid = Art.Instance.LoadTexture2D("debug_liquid");
-            this.debugGas = Art.Instance.LoadTexture2D("debug_gas");
+
+            this.texture = Art.Instance.LoadTexture2D("slime");
             debugModeActive = false;
 
             speed = 5.0f;
@@ -618,11 +617,11 @@ namespace Slime_Game
         private void DrawPlayer(SpriteBatch sb, SpriteEffects flip, int frameCycle, int sheetLine)
         {
             sb.Draw(
-                texture,                                        // Whole sprite sheet
+                base.texture,                                        // Whole sprite sheet
                 new Vector2(position.X, position.Y),            // Position of the Mario sprite
                 new Rectangle(                                  // Which portion of the sheet is drawn:
                     (currentFrame % frameCycle) * 32,           // - Left edge
-                    32*(sheetLine-1),                           // - Top of sprite frame
+                    32*(sheetLine - 1),                           // - Top of sprite frame
                     32,                                         // - Width 
                     32),                                        // - Height
                 Color.White,                                    // No change in color
