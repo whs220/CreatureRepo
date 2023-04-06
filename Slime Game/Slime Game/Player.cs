@@ -34,20 +34,15 @@ namespace Slime_Game
         private KeyboardState prevKeyState;
         private KeyboardState currentKeyState;
 
-        // Animation
-        private Rectangle frame;
         // Animation data
         private int currentFrame;
         private double fps;
         private double secondsPerFrame;
         private double timeCounter;
         // Sprite sheet data
-        private int numPlayerSprites;
-        private int widthOfPlayerSprite;
 
         // Debug sprites
         private Texture2D debugSolid;
-        private Texture2D texture;
 
 
         private double deathTime;
@@ -176,6 +171,7 @@ namespace Slime_Game
 
             // Move the player!
             ProcessMovement(gameTime);
+            UpdateAnimation(gameTime);
 
             // Only apply gravity if the player is not dead
             if (currentMatterState != PlayerMatterState.Dead || GravityOff == false)
@@ -576,10 +572,6 @@ namespace Slime_Game
             {
                 // Change which frame is active, ensuring the frame is reset back to the first 
                 currentFrame++;
-                if (currentFrame >= 7)
-                {
-                    currentFrame = 1;
-                }
 
                 // Reset the time counter
                 timeCounter -= secondsPerFrame;
@@ -617,7 +609,7 @@ namespace Slime_Game
         private void DrawPlayer(SpriteBatch sb, SpriteEffects flip, int frameCycle, int sheetLine)
         {
             sb.Draw(
-                base.texture,                                        // Whole sprite sheet
+                texture,                                        // Whole sprite sheet
                 new Vector2(position.X, position.Y),            // Position of the Mario sprite
                 new Rectangle(                                  // Which portion of the sheet is drawn:
                     (currentFrame % frameCycle) * 32,           // - Left edge
