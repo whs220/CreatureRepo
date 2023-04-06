@@ -221,7 +221,17 @@ namespace Slime_Game
                 //besides for the pipe entrance
                 if (!collectable.IsExit)
                 {
-                    collectable.Draw(sb);
+                    if (player.CurrentMatterState == PlayerMatterState.Gas && collectable.IsHot) {
+                        collectable.Draw(sb, Color.Orange);
+                    }
+                    else if(player.CurrentMatterState == PlayerMatterState.Solid && collectable.IsHot == false)
+                    {
+                        collectable.Draw(sb, Color.Purple);
+                    }
+                    else
+                    {
+                        collectable.Draw(sb, Color.White);
+                    }
                 }
             }
 
