@@ -247,6 +247,11 @@ namespace Slime_Game
                         {
                             levels[currentLevel].CollisionsOn = !levels[currentLevel].CollisionsOn;
                         }
+                        //Switches the gravity to the opposite
+                        if(Keyboard.GetState().IsKeyDown(Keys.G) && prevKeyState.IsKeyUp(Keys.G))
+                        {
+                            player.GravityOff = !player.GravityOff;
+                        }
                     }
 
                     
@@ -334,11 +339,12 @@ namespace Slime_Game
                         _spriteBatch.DrawString(mainFont, "Player X, Y: " + player.Position.X + ", " + player.Position.Y + // Writes player X and Y
                             "\nCurrent State: " + player.CurrentMatterState.ToString() + // Writes players current state
                             "\nCurrent Level: " + currentLevel + // Writes current level number
-                            "\nCollisions On: " + levels[currentLevel].CollisionsOn
+                            "\nCollisions On: " + levels[currentLevel].CollisionsOn + //States wherther collisions are on
+                            "\nGravity off: " + player.GravityOff // states whether gravity is on
                             , new Vector2(30, 50), Color.White);
 
                         //
-                        _spriteBatch.DrawString(mainFont, "Use 'N' to go to next level \nUse 'H' to go hotter \nUse 'C' for colder \nUse 'F2' to toggle collisions", new Vector2(730, 50),Color.White);
+                        _spriteBatch.DrawString(mainFont, "Use 'N' to go to next level \nUse 'H' to go hotter \nUse 'C' for colder \nUse 'F2' to toggle collisions \nUse 'G' to toggle gravity", new Vector2(730, 50),Color.White);
 
 
                     }

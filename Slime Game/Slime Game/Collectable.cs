@@ -68,11 +68,11 @@ namespace Slime_Game
         /// only draws is active
         /// </summary>
         /// <param name="sb">The sprite batch</param>
-        public override void Draw(SpriteBatch sb)
+        public void Draw(SpriteBatch sb, Color color)
         {
             if (isActive == true || isExit)
             {
-                sb.Draw(texture, position, Color.White);
+                sb.Draw(texture, position, color);
             }
         }
     }
