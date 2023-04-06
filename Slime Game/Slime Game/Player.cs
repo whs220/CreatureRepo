@@ -17,7 +17,7 @@ namespace Slime_Game
         //player states
         private PlayerMatterState currentMatterState;
         private PlayerMovementState currentMoveState;
-        private PlayerMatterState lastMovementState;
+        private PlayerMatterState lastMatterState;
         private bool debugModeActive;
 
         //movement
@@ -217,11 +217,11 @@ namespace Slime_Game
                     {
                         case PlayerMovementState.IdleLeft:
                         case PlayerMovementState.MoveLeft:
-                                DrawPlayer(sb, SpriteEffects.FlipHorizontally, 4);
+                                DrawPlayer(sb, SpriteEffects.FlipHorizontally, 4, 7);
                             break;
                         case PlayerMovementState.IdleRight:
                         case PlayerMovementState.MoveRight:
-                                DrawPlayer(sb, SpriteEffects.None, 4);
+                                DrawPlayer(sb, SpriteEffects.None, 4,7);
                             break;
                     }
                     break;
@@ -234,22 +234,22 @@ namespace Slime_Game
                         case PlayerMovementState.MoveLeft:
                             if (isGrounded)
                             {
-                                DrawPlayer(sb, SpriteEffects.FlipHorizontally, 4);
+                                DrawPlayer(sb, SpriteEffects.FlipHorizontally, 4, 1);
                             }
                             else
                             {
-                                DrawPlayer(sb, SpriteEffects.FlipHorizontally, 2);
+                                DrawPlayer(sb, SpriteEffects.FlipHorizontally, 2, 2);
                             }
                             break;
                         case PlayerMovementState.IdleRight:
                         case PlayerMovementState.MoveRight:
                             if (isGrounded)
                             {
-                                DrawPlayer(sb, SpriteEffects.None, 4);
+                                DrawPlayer(sb, SpriteEffects.None, 4, 1);
                             }
                             else
                             {
-                                DrawPlayer(sb, SpriteEffects.None, 4);
+                                DrawPlayer(sb, SpriteEffects.None, 4, 2);
                             }
                             break;
                     }
@@ -261,27 +261,27 @@ namespace Slime_Game
                     {
                         case PlayerMovementState.IdleLeft:
                         case PlayerMovementState.MoveLeft:
-                            DrawPlayer(sb, SpriteEffects.FlipHorizontally, 1);
+                            DrawPlayer(sb, SpriteEffects.FlipHorizontally, 1, 4);
                             break;
                         case PlayerMovementState.IdleRight:
                         case PlayerMovementState.MoveRight:
-                            DrawPlayer(sb, SpriteEffects.None, 1);
+                            DrawPlayer(sb, SpriteEffects.None, 1, 4);
                             break;
                     }
                     break;
                 //============================================================================
                 case PlayerMatterState.Dead:
                     // draw dead
-                    switch (currentMatterState)
+                    switch (lastMatterState)
                     {
                         case PlayerMatterState.Gas:
-                            DrawPlayer(sb, SpriteEffects.None, 3);
+                            DrawPlayer(sb, SpriteEffects.None, 3, 8);
                             break;
                         case PlayerMatterState.Liquid:
-                            DrawPlayer(sb, SpriteEffects.None, 4);
+                            DrawPlayer(sb, SpriteEffects.None, 4, 3);
                             break;
                         case PlayerMatterState.Solid:
-                            DrawPlayer(sb, SpriteEffects.None, 1);
+                            DrawPlayer(sb, SpriteEffects.None, 1, 5);
                             break;
                     }
                     break;
@@ -560,7 +560,7 @@ namespace Slime_Game
         /// </summary>
         public void Die()
         {
-            lastMovementState = currentMatterState;
+            lastMatterState = currentMatterState;
             currentMatterState = PlayerMatterState.Dead;
         }
 
@@ -616,16 +616,16 @@ namespace Slime_Game
         /// </summary>
         /// <param name="sb"></param>
         /// <param name="flip"></param>
-        private void DrawPlayer(SpriteBatch sb, SpriteEffects flip, int frameCycle)
+        private void DrawPlayer(SpriteBatch sb, SpriteEffects flip, int frameCycle, int sheetLine)
         {
             sb.Draw(
                 texture,                                        // Whole sprite sheet
                 new Vector2(position.X, position.Y),            // Position of the Mario sprite
-                new Rectangle(                                                          // Which portion of the sheet is drawn:
-                    (currentFrame % 3) * widthOfPlayerSprite,                           // - Left edge
-                    0,                                                                  // - Top of sprite sheet
-                    widthOfPlayerSprite,                                                // - Width 
-                    texture.Height),                                                    // - Height
+                new Rectangle(                                  // Which portion of the sheet is drawn:
+                    (currentFrame % frameCycle) * 32,           // - Left edge
+                    32*(sheetLine-1),                           // - Top of sprite frame
+                    32,                                         // - Width 
+                    32),                                        // - Height
                 Color.White,                                    // No change in color
                 0.0f,                                           // No rotation
                 Vector2.Zero,                                   // Start origin at (0, 0) of sprite sheet 
