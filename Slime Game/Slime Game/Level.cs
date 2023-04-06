@@ -162,7 +162,7 @@ namespace Slime_Game
                     {
                         //uses second rectangle to frame the part of the tilemap
                         //Standard size of four blocks long
-                        tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 128, 32), new Rectangle(640, 480, 128, 32)));
+                        tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), new Rectangle(0, 288, 32, 32)));
                     }
 
                     // all collectable cases
@@ -221,7 +221,17 @@ namespace Slime_Game
                 //besides for the pipe entrance
                 if (!collectable.IsExit)
                 {
-                    collectable.Draw(sb);
+                    if (player.CurrentMatterState == PlayerMatterState.Gas && collectable.IsHot) {
+                        collectable.Draw(sb, Color.Orange);
+                    }
+                    else if(player.CurrentMatterState == PlayerMatterState.Solid && collectable.IsHot == false)
+                    {
+                        collectable.Draw(sb, Color.Purple);
+                    }
+                    else
+                    {
+                        collectable.Draw(sb, Color.White);
+                    }
                 }
             }
 

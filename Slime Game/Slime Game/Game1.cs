@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -75,6 +76,8 @@ namespace Slime_Game
         // loading
         private double timer;
 
+        private Song themeSong;
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -119,6 +122,10 @@ namespace Slime_Game
             ice = Content.Load<Texture2D>("ice");
             exit = Content.Load<Texture2D>("pipe");
 
+            //Load in sounds
+            themeSong = Content.Load<Song>("slimegame");
+
+
             // loading in debug mode content
             debugSolid = Content.Load<Texture2D>("debug_solid");
             debugLiquid = Content.Load<Texture2D>("debug_liquid");
@@ -153,8 +160,9 @@ namespace Slime_Game
             restartTexture = Content.Load<Texture2D>("restartButton");
             restartButton = new Button(restartTexture, new Rectangle(150, 650, 300, 100));
 
-            
-            
+            //Play Song
+            MediaPlayer.IsRepeating = true;
+            MediaPlayer.Play(themeSong);
         }
 
         protected override void Update(GameTime gameTime)
@@ -212,6 +220,10 @@ namespace Slime_Game
 
                 //In Game State
                 case GameState.InGame:
+
+                    
+                    
+
                     player.Update(gameTime);
                     //Calls tge current level update method for current level logic
                     levels[currentLevel].Update();
@@ -246,6 +258,11 @@ namespace Slime_Game
                         if (Keyboard.GetState().IsKeyDown(Keys.F2) && prevKeyState.IsKeyUp(Keys.F2))
                         {
                             levels[currentLevel].CollisionsOn = !levels[currentLevel].CollisionsOn;
+                        }
+                        //Switches the gravity to the opposite
+                        if(Keyboard.GetState().IsKeyDown(Keys.G) && prevKeyState.IsKeyUp(Keys.G))
+                        {
+                            player.GravityOff = !player.GravityOff;
                         }
                     }
 
@@ -334,11 +351,12 @@ namespace Slime_Game
                         _spriteBatch.DrawString(mainFont, "Player X, Y: " + player.Position.X + ", " + player.Position.Y + // Writes player X and Y
                             "\nCurrent State: " + player.CurrentMatterState.ToString() + // Writes players current state
                             "\nCurrent Level: " + currentLevel + // Writes current level number
-                            "\nCollisions On: " + levels[currentLevel].CollisionsOn
+                            "\nCollisions On: " + levels[currentLevel].CollisionsOn + //States wherther collisions are on
+                            "\nGravity off: " + player.GravityOff // states whether gravity is on
                             , new Vector2(30, 50), Color.White);
 
                         //
-                        _spriteBatch.DrawString(mainFont, "Use 'N' to go to next level \nUse 'H' to go hotter \nUse 'C' for colder \nUse 'F2' to toggle collisions", new Vector2(730, 50),Color.White);
+                        _spriteBatch.DrawString(mainFont, "Use 'N' to go to next level \nUse 'H' to go hotter \nUse 'C' for colder \nUse 'F2' to toggle collisions \nUse 'G' to toggle gravity", new Vector2(730, 50),Color.White);
 
 
                     }

@@ -27,6 +27,7 @@ namespace Slime_Game
         private float prevSpeed;
         private bool isGrounded;
         private Vector2 gravity;
+        private bool gravityOff;
 
         private Rectangle groundRect;
 
@@ -122,6 +123,16 @@ namespace Slime_Game
             get { return speed; }
             set { speed = value; }
         }
+
+
+        /// <summary>
+        /// Gets and sets the turning gravity on
+        /// </summary>
+        public bool GravityOff
+        {
+            get { return gravityOff; }
+            set { gravityOff = value; }
+        }
         #endregion
 
         //constructor
@@ -139,6 +150,7 @@ namespace Slime_Game
             velocity = Vector2.Zero;
             gravity = new Vector2(0, 0.5f);
             isGrounded = false;
+            gravityOff = false;
 
             deathTime = 1;
 
@@ -168,7 +180,7 @@ namespace Slime_Game
             ProcessMovement(gameTime);
 
             // Only apply gravity if the player is not dead
-            if (currentMatterState != PlayerMatterState.Dead)
+            if (currentMatterState != PlayerMatterState.Dead || GravityOff == false)
             {
                 ApplyGravity();
             }
@@ -418,7 +430,7 @@ namespace Slime_Game
         public void Jump()
         {
             //If statement for debug mode sees if active
-            if (debugModeActive == false)
+            if (GravityOff == false)
             {
                 // Can only jump if grounded
                 if (isGrounded)
@@ -454,7 +466,7 @@ namespace Slime_Game
         public void ApplyGravity()
         {
             //When debug isn't active
-            if (debugModeActive == false)
+            if (GravityOff == false)
             {
                 //Gas has inverse jump
                 if (currentMatterState != PlayerMatterState.Gas)
