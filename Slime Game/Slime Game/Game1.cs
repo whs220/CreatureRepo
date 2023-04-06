@@ -160,7 +160,9 @@ namespace Slime_Game
             restartTexture = Content.Load<Texture2D>("restartButton");
             restartButton = new Button(restartTexture, new Rectangle(150, 650, 300, 100));
 
-
+            //Play Song
+            MediaPlayer.IsRepeating = true;
+            MediaPlayer.Play(themeSong);
         }
 
         protected override void Update(GameTime gameTime)
@@ -218,9 +220,9 @@ namespace Slime_Game
 
                 //In Game State
                 case GameState.InGame:
+
                     
-                    MediaPlayer.Play(themeSong);
-                    MediaPlayer.IsRepeating = true;
+                    
 
                     player.Update(gameTime);
                     //Calls tge current level update method for current level logic
