@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
@@ -69,6 +70,16 @@ namespace Slime_Game
         public SpriteFont LoadSpritefont(string path)
         {
             return content.Load<SpriteFont>(path);
+        }
+
+        /// <summary>
+        /// Loads a SoundEffect from a path.
+        /// </summary>
+        /// <param name="path">Path to load from.</param>
+        /// <returns>SoundEffect from path.</returns>
+        public SoundEffect LoadSoundEffect(string path) 
+        {
+            return content.Load<SoundEffect>(path);
         }
     }
 }
