@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.groupMap = new System.Windows.Forms.GroupBox();
             this.groupSelect = new System.Windows.Forms.GroupBox();
+            this.corner4 = new System.Windows.Forms.Button();
             this.corner3 = new System.Windows.Forms.Button();
             this.corner2 = new System.Windows.Forms.Button();
             this.corner1 = new System.Windows.Forms.Button();
@@ -54,7 +55,6 @@
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonLoad = new System.Windows.Forms.Button();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.corner4 = new System.Windows.Forms.Button();
             this.groupSelect.SuspendLayout();
             this.groupCurrentColor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.colorCurrent)).BeginInit();
@@ -104,13 +104,25 @@
             this.groupSelect.TabStop = false;
             this.groupSelect.Text = "Tile Selector";
             // 
+            // corner4
+            // 
+            this.corner4.BackColor = System.Drawing.Color.MediumSlateBlue;
+            this.corner4.Location = new System.Drawing.Point(79, 389);
+            this.corner4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.corner4.Name = "corner4";
+            this.corner4.Size = new System.Drawing.Size(58, 58);
+            this.corner4.TabIndex = 22;
+            this.corner4.Text = "corner4";
+            this.corner4.UseVisualStyleBackColor = false;
+            this.corner4.Click += new System.EventHandler(this.colorSelect_Click);
+            // 
             // corner3
             // 
             this.corner3.BackColor = System.Drawing.Color.Aquamarine;
-            this.corner3.Location = new System.Drawing.Point(13, 400);
+            this.corner3.Location = new System.Drawing.Point(15, 390);
             this.corner3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.corner3.Name = "corner3";
-            this.corner3.Size = new System.Drawing.Size(58, 57);
+            this.corner3.Size = new System.Drawing.Size(58, 58);
             this.corner3.TabIndex = 23;
             this.corner3.Text = "corner3";
             this.corner3.UseVisualStyleBackColor = false;
@@ -119,10 +131,10 @@
             // corner2
             // 
             this.corner2.BackColor = System.Drawing.Color.Goldenrod;
-            this.corner2.Location = new System.Drawing.Point(79, 339);
+            this.corner2.Location = new System.Drawing.Point(79, 328);
             this.corner2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.corner2.Name = "corner2";
-            this.corner2.Size = new System.Drawing.Size(58, 57);
+            this.corner2.Size = new System.Drawing.Size(58, 58);
             this.corner2.TabIndex = 22;
             this.corner2.Text = "corner2";
             this.corner2.UseVisualStyleBackColor = false;
@@ -131,10 +143,10 @@
             // corner1
             // 
             this.corner1.BackColor = System.Drawing.Color.Honeydew;
-            this.corner1.Location = new System.Drawing.Point(13, 339);
+            this.corner1.Location = new System.Drawing.Point(15, 328);
             this.corner1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.corner1.Name = "corner1";
-            this.corner1.Size = new System.Drawing.Size(60, 57);
+            this.corner1.Size = new System.Drawing.Size(58, 58);
             this.corner1.TabIndex = 21;
             this.corner1.Text = "corner1";
             this.corner1.UseVisualStyleBackColor = false;
@@ -143,10 +155,10 @@
             // pillar
             // 
             this.pillar.BackColor = System.Drawing.Color.DarkSeaGreen;
-            this.pillar.Location = new System.Drawing.Point(143, 278);
+            this.pillar.Location = new System.Drawing.Point(143, 267);
             this.pillar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pillar.Name = "pillar";
-            this.pillar.Size = new System.Drawing.Size(58, 57);
+            this.pillar.Size = new System.Drawing.Size(58, 58);
             this.pillar.TabIndex = 20;
             this.pillar.Text = "pillar";
             this.pillar.UseVisualStyleBackColor = false;
@@ -155,10 +167,10 @@
             // CGleft
             // 
             this.CGleft.BackColor = System.Drawing.Color.Sienna;
-            this.CGleft.Location = new System.Drawing.Point(79, 278);
+            this.CGleft.Location = new System.Drawing.Point(79, 266);
             this.CGleft.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.CGleft.Name = "CGleft";
-            this.CGleft.Size = new System.Drawing.Size(58, 57);
+            this.CGleft.Size = new System.Drawing.Size(58, 58);
             this.CGleft.TabIndex = 19;
             this.CGleft.Text = "CGleft";
             this.CGleft.UseVisualStyleBackColor = false;
@@ -167,10 +179,10 @@
             // CGright
             // 
             this.CGright.BackColor = System.Drawing.Color.Fuchsia;
-            this.CGright.Location = new System.Drawing.Point(13, 278);
+            this.CGright.Location = new System.Drawing.Point(15, 266);
             this.CGright.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.CGright.Name = "CGright";
-            this.CGright.Size = new System.Drawing.Size(60, 57);
+            this.CGright.Size = new System.Drawing.Size(58, 58);
             this.CGright.TabIndex = 18;
             this.CGright.Text = "CGright";
             this.CGright.UseVisualStyleBackColor = false;
@@ -179,10 +191,10 @@
             // filler
             // 
             this.filler.BackColor = System.Drawing.Color.LightBlue;
-            this.filler.Location = new System.Drawing.Point(81, 225);
+            this.filler.Location = new System.Drawing.Point(79, 204);
             this.filler.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.filler.Name = "filler";
-            this.filler.Size = new System.Drawing.Size(53, 47);
+            this.filler.Size = new System.Drawing.Size(58, 58);
             this.filler.TabIndex = 17;
             this.filler.Text = "filler";
             this.filler.UseVisualStyleBackColor = false;
@@ -194,7 +206,7 @@
             this.player.Location = new System.Drawing.Point(145, 19);
             this.player.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.player.Name = "player";
-            this.player.Size = new System.Drawing.Size(58, 57);
+            this.player.Size = new System.Drawing.Size(58, 58);
             this.player.TabIndex = 16;
             this.player.Text = "player";
             this.player.UseVisualStyleBackColor = false;
@@ -203,10 +215,10 @@
             // top
             // 
             this.top.BackColor = System.Drawing.Color.Pink;
-            this.top.Location = new System.Drawing.Point(15, 129);
+            this.top.Location = new System.Drawing.Point(143, 81);
             this.top.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.top.Name = "top";
-            this.top.Size = new System.Drawing.Size(89, 45);
+            this.top.Size = new System.Drawing.Size(58, 58);
             this.top.TabIndex = 15;
             this.top.Text = "top";
             this.top.UseVisualStyleBackColor = false;
@@ -215,10 +227,10 @@
             // ground
             // 
             this.ground.BackColor = System.Drawing.Color.White;
-            this.ground.Location = new System.Drawing.Point(110, 129);
+            this.ground.Location = new System.Drawing.Point(15, 142);
             this.ground.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ground.Name = "ground";
-            this.ground.Size = new System.Drawing.Size(89, 45);
+            this.ground.Size = new System.Drawing.Size(58, 58);
             this.ground.TabIndex = 14;
             this.ground.Text = "ground";
             this.ground.UseVisualStyleBackColor = false;
@@ -227,10 +239,10 @@
             // rightWall
             // 
             this.rightWall.BackColor = System.Drawing.Color.Gray;
-            this.rightWall.Location = new System.Drawing.Point(109, 178);
+            this.rightWall.Location = new System.Drawing.Point(143, 143);
             this.rightWall.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.rightWall.Name = "rightWall";
-            this.rightWall.Size = new System.Drawing.Size(89, 43);
+            this.rightWall.Size = new System.Drawing.Size(58, 58);
             this.rightWall.TabIndex = 13;
             this.rightWall.Text = "rightWall";
             this.rightWall.UseVisualStyleBackColor = false;
@@ -240,10 +252,10 @@
             // 
             this.leftWall.BackColor = System.Drawing.Color.Black;
             this.leftWall.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.leftWall.Location = new System.Drawing.Point(15, 178);
+            this.leftWall.Location = new System.Drawing.Point(79, 142);
             this.leftWall.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.leftWall.Name = "leftWall";
-            this.leftWall.Size = new System.Drawing.Size(89, 43);
+            this.leftWall.Size = new System.Drawing.Size(58, 58);
             this.leftWall.TabIndex = 12;
             this.leftWall.Text = "leftWall";
             this.leftWall.UseVisualStyleBackColor = false;
@@ -252,10 +264,10 @@
             // blank
             // 
             this.blank.BackColor = System.Drawing.Color.MediumOrchid;
-            this.blank.Location = new System.Drawing.Point(109, 80);
+            this.blank.Location = new System.Drawing.Point(79, 80);
             this.blank.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.blank.Name = "blank";
-            this.blank.Size = new System.Drawing.Size(89, 45);
+            this.blank.Size = new System.Drawing.Size(58, 58);
             this.blank.TabIndex = 11;
             this.blank.Text = "blank";
             this.blank.UseVisualStyleBackColor = false;
@@ -267,7 +279,7 @@
             this.platform.Location = new System.Drawing.Point(15, 80);
             this.platform.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.platform.Name = "platform";
-            this.platform.Size = new System.Drawing.Size(89, 45);
+            this.platform.Size = new System.Drawing.Size(58, 58);
             this.platform.TabIndex = 10;
             this.platform.Text = "platform";
             this.platform.UseVisualStyleBackColor = false;
@@ -276,10 +288,10 @@
             // hot
             // 
             this.hot.BackColor = System.Drawing.Color.Red;
-            this.hot.Location = new System.Drawing.Point(81, 19);
+            this.hot.Location = new System.Drawing.Point(79, 18);
             this.hot.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.hot.Name = "hot";
-            this.hot.Size = new System.Drawing.Size(58, 57);
+            this.hot.Size = new System.Drawing.Size(58, 58);
             this.hot.TabIndex = 9;
             this.hot.Text = "hot";
             this.hot.UseVisualStyleBackColor = false;
@@ -291,7 +303,7 @@
             this.cold.Location = new System.Drawing.Point(15, 19);
             this.cold.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cold.Name = "cold";
-            this.cold.Size = new System.Drawing.Size(60, 57);
+            this.cold.Size = new System.Drawing.Size(58, 58);
             this.cold.TabIndex = 8;
             this.cold.Text = "cold";
             this.cold.UseVisualStyleBackColor = false;
@@ -300,10 +312,10 @@
             // lightGray
             // 
             this.lightGray.BackColor = System.Drawing.Color.LightGray;
-            this.lightGray.Location = new System.Drawing.Point(145, 225);
+            this.lightGray.Location = new System.Drawing.Point(145, 205);
             this.lightGray.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lightGray.Name = "lightGray";
-            this.lightGray.Size = new System.Drawing.Size(53, 47);
+            this.lightGray.Size = new System.Drawing.Size(58, 58);
             this.lightGray.TabIndex = 5;
             this.lightGray.Text = "blank";
             this.lightGray.UseVisualStyleBackColor = false;
@@ -312,10 +324,10 @@
             // exit
             // 
             this.exit.BackColor = System.Drawing.Color.Yellow;
-            this.exit.Location = new System.Drawing.Point(15, 225);
+            this.exit.Location = new System.Drawing.Point(15, 204);
             this.exit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.exit.Name = "exit";
-            this.exit.Size = new System.Drawing.Size(60, 47);
+            this.exit.Size = new System.Drawing.Size(58, 58);
             this.exit.TabIndex = 4;
             this.exit.Text = "exit";
             this.exit.UseVisualStyleBackColor = false;
@@ -370,18 +382,6 @@
             this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            // 
-            // corner4
-            // 
-            this.corner4.BackColor = System.Drawing.Color.MediumSlateBlue;
-            this.corner4.Location = new System.Drawing.Point(79, 400);
-            this.corner4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.corner4.Name = "corner4";
-            this.corner4.Size = new System.Drawing.Size(60, 57);
-            this.corner4.TabIndex = 22;
-            this.corner4.Text = "corner4";
-            this.corner4.UseVisualStyleBackColor = false;
-            this.corner4.Click += new System.EventHandler(this.colorSelect_Click);
             // 
             // editorForm
             // 
