@@ -135,6 +135,18 @@
 /processorParam:TextureFormat=Color
 /build:restartButton.png
 
+#begin sfx_fire.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx_fire.mp3
+
+#begin sfx_ice.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx_ice.mp3
+
 #begin slime.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -185,4 +197,10 @@
 
 #begin welcome_slime.level
 /copy:welcome_slime.level
+
+#begin win.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:win.mp3
 
