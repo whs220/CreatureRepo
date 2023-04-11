@@ -39,7 +39,6 @@ namespace Slime_Game
         private double fps;
         private double secondsPerFrame;
         private double timeCounter;
-        // Sprite sheet data
 
         // Debug sprites
         private Texture2D debugSolid;
@@ -211,11 +210,25 @@ namespace Slime_Game
                     {
                         case PlayerMovementState.IdleLeft:
                         case PlayerMovementState.MoveLeft:
+                            if (isGrounded)
+                            {
                                 DrawPlayer(sb, SpriteEffects.FlipHorizontally, 4, 7);
+                            }
+                            else
+                            {
+                                DrawPlayer(sb, SpriteEffects.FlipHorizontally, 4, 6);
+                            }
                             break;
                         case PlayerMovementState.IdleRight:
                         case PlayerMovementState.MoveRight:
-                                DrawPlayer(sb, SpriteEffects.None, 4,7);
+                            if (isGrounded)
+                            {
+                                DrawPlayer(sb, SpriteEffects.None, 4, 7);
+                            }
+                            else
+                            {
+                                DrawPlayer(sb, SpriteEffects.None, 4, 6);
+                            }
                             break;
                     }
                     break;
