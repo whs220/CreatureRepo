@@ -221,6 +221,10 @@ namespace Slime_Game
                     
 
                     player.Update(gameTime);
+                    foreach(Collectable c in levels[currentLevel].collectables)
+                    {
+                        c.UpdateAnimation(gameTime);
+                    }
                     //Calls tge current level update method for current level logic
                     levels[currentLevel].Update();
 

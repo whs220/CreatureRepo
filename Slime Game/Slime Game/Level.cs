@@ -34,8 +34,7 @@ namespace Slime_Game
 
         //Textures
         private Texture2D tilemap;
-        private Texture2D fire;
-        private Texture2D ice;
+        private Texture2D collect;
         private Texture2D exit;
         
         //borders for future use
@@ -87,8 +86,7 @@ namespace Slime_Game
             this.fileName = fileName;
             this.player = player;
             tilemap = Art.Instance.LoadTexture2D("tileset");
-            fire = Art.Instance.LoadTexture2D("fire");
-            ice = Art.Instance.LoadTexture2D("ice");
+            collect = Art.Instance.LoadTexture2D("collectables");
             exit = Art.Instance.LoadTexture2D("pipe");
 
 
@@ -161,16 +159,50 @@ namespace Slime_Game
                         //Standard size of four blocks long
                         tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), new Rectangle(0, 288, 32, 32)));
                     }
+                    if (data[2] == "filler")
+                    {
+                        tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), new Rectangle(90, 90, 32, 32)));
+                    }
+                    if (data[2] == "CGright")
+                    {
+                        tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), new Rectangle(512, 288, 32, 32)));
+                    }
+                    if (data[2] == "CGleft")
+                    {
+                        tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), new Rectangle(448, 288, 32, 32)));
+                    }
+                    if (data[2] == "pillar")
+                    {
+                        tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), new Rectangle(928, 448, 32, 32)));
+                    }
+                    if (data[2] == "corner1")
+                    {
+                        tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), new Rectangle(800, 160, 32, 32)));
+                    }
+                    if (data[2] == "corner2")
+                    {
+                        tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), new Rectangle(864, 288, 32, 32)));
+                    }
+                    if (data[2] == "corner3")
+                    {
+                        tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), new Rectangle(289, 161, 32, 32)));
+                        //225, 161
+                    }
+                    if (data[2] == "corner4")
+                    {
+                        tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), new Rectangle(353, 161, 32, 32)));
+                        //417, 161
+                    }
 
                     // all collectable cases
                     if (data[2] == "hot")
                     {
                         //new collectable with bool to determine type
-                        collectables.Add(new Collectable(fire, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), true));
+                        collectables.Add(new Collectable(collect, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), true));
                     }
                     if (data[2] == "cold")
                     {
-                        collectables.Add(new Collectable(ice, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), false));
+                        collectables.Add(new Collectable(collect, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), false));
                     }
                     if (data[2] == "exit")
                     {
@@ -219,15 +251,26 @@ namespace Slime_Game
                 if (!collectable.IsExit)
                 {
                     if (player.CurrentMatterState == PlayerMatterState.Gas && collectable.IsHot) {
-                        collectable.Draw(sb, Color.Orange);
+                        collectable.DrawHot(sb, Color.Orange);
                     }
                     else if(player.CurrentMatterState == PlayerMatterState.Solid && collectable.IsHot == false)
                     {
-                        collectable.Draw(sb, Color.Purple);
+                        collectable.DrawCold(sb, Color.Purple);
                     }
                     else
                     {
-                        collectable.Draw(sb, Color.White);
+                        if (collectable.IsExit)
+                        {
+                            collectable.Draw(sb);
+                        }
+                        else if (collectable.IsHot)
+                        {
+                            collectable.DrawHot(sb, Color.White);
+                        }
+                        else
+                        {
+                            collectable.DrawCold(sb, Color.White);
+                        }
                     }
                 }
             }
