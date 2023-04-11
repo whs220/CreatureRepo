@@ -126,5 +126,25 @@ namespace Slime_Game
                 0.0f);                                          // Layer depth
             }
         }
+
+        /// <summary>
+        /// updates the current frame of the given movement style
+        /// </summary>
+        /// <param name="gameTime"></param>
+        public void UpdateAnimation(GameTime gameTime)
+        {
+            // ElapsedGameTime is the duration of the last GAME frame
+            timeCounter += gameTime.ElapsedGameTime.TotalSeconds;
+
+            // Has enough time passed to flip to the next frame?
+            if (timeCounter >= secondsPerFrame)
+            {
+                // Change which frame is active, ensuring the frame is reset back to the first 
+                currentFrame++;
+
+                // Reset the time counter
+                timeCounter -= secondsPerFrame;
+            }
+        }
     }
 }

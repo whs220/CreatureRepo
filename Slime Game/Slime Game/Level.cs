@@ -34,8 +34,7 @@ namespace Slime_Game
 
         //Textures
         private Texture2D tilemap;
-        private Texture2D fire;
-        private Texture2D ice;
+        private Texture2D collect;
         private Texture2D exit;
         
         //borders for future use
@@ -87,8 +86,7 @@ namespace Slime_Game
             this.fileName = fileName;
             this.player = player;
             tilemap = Art.Instance.LoadTexture2D("tileset");
-            fire = Art.Instance.LoadTexture2D("fire");
-            ice = Art.Instance.LoadTexture2D("ice");
+            collect = Art.Instance.LoadTexture2D("collectables");
             exit = Art.Instance.LoadTexture2D("pipe");
 
 
@@ -166,11 +164,11 @@ namespace Slime_Game
                     if (data[2] == "hot")
                     {
                         //new collectable with bool to determine type
-                        collectables.Add(new Collectable(fire, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), true));
+                        collectables.Add(new Collectable(collect, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), true));
                     }
                     if (data[2] == "cold")
                     {
-                        collectables.Add(new Collectable(ice, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), false));
+                        collectables.Add(new Collectable(collect, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), false));
                     }
                     if (data[2] == "exit")
                     {
