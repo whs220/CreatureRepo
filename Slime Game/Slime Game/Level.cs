@@ -219,15 +219,26 @@ namespace Slime_Game
                 if (!collectable.IsExit)
                 {
                     if (player.CurrentMatterState == PlayerMatterState.Gas && collectable.IsHot) {
-                        collectable.Draw(sb, Color.Orange);
+                        collectable.DrawHot(sb, Color.Orange);
                     }
                     else if(player.CurrentMatterState == PlayerMatterState.Solid && collectable.IsHot == false)
                     {
-                        collectable.Draw(sb, Color.Purple);
+                        collectable.DrawCold(sb, Color.Purple);
                     }
                     else
                     {
-                        collectable.Draw(sb, Color.White);
+                        if (collectable.IsExit)
+                        {
+                            collectable.Draw(sb);
+                        }
+                        else if (collectable.IsHot)
+                        {
+                            collectable.DrawHot(sb, Color.White);
+                        }
+                        else
+                        {
+                            collectable.DrawCold(sb, Color.White);
+                        }
                     }
                 }
             }
