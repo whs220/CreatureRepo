@@ -325,33 +325,34 @@ namespace Slime_Game
             //loops through all intersecting collectables
             foreach(Collectable item in intersections)
             {
-                //checks to see if the item hasnt been used already
-                if (item.IsActive)
+                if (item.IsExit != true)
                 {
-                    //Changes the players state of matter
-                    if (item.IsHot)
+                    //checks to see if the item hasnt been used already
+                    if (item.IsActive)
                     {
-                        player.ChangeTemperature(true);
+                        //Changes the players state of matter
+                        if (item.IsHot)
+                        {
+                            player.ChangeTemperature(true);
+
+                        }
+                        if (!item.IsHot)
+                        {
+                            player.ChangeTemperature(false);
+                        }
+
+                        
+
+                        //turns off the collectable
+                        item.IsActive = false;
                     }
-                    if (!item.IsHot)
-                    {
-                        player.ChangeTemperature(false);
-                    }
-
-                    //sends you to the next level
-                    if (item.IsExit)
-                    {
-
-                        NextLevelEvent();
-                    }
-
-                    //turns off the collectable
-                    item.IsActive = false;
-
-
-
                 }
+                //sends you to the next level
+                if (item.IsExit)
+                {
 
+                    NextLevelEvent();
+                }
             }
         }
 

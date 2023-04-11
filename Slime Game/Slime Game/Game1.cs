@@ -1,5 +1,6 @@
 ﻿//Jake Wardell
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
@@ -69,7 +70,12 @@ namespace Slime_Game
         // loading
         private double timer;
 
+        //Music
         private Song themeSong;
+
+        //Sound Effect
+        SoundEffect sfx_NextLevel;
+
 
         public Game1()
         {
@@ -146,7 +152,12 @@ namespace Slime_Game
 
             //Play Song
             MediaPlayer.IsRepeating = true;
+            MediaPlayer.Volume = 0.2f;
             MediaPlayer.Play(themeSong);
+            
+
+            //Sound Effects
+            sfx_NextLevel = Content.Load<SoundEffect>("win");
         }
 
         protected override void Update(GameTime gameTime)
@@ -196,6 +207,7 @@ namespace Slime_Game
                         // Read in the current level
                         levels[currentLevel].ReadLevel();
                     }
+
                     
 
                     // increment gameTime
@@ -394,6 +406,7 @@ namespace Slime_Game
 
                 // Go to loading screen, which then will read the new level
                 gameState = GameState.LoadingScreen;
+                sfx_NextLevel.Play();
 
             }
             //if this is the last level switches to the win screen

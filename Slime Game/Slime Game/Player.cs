@@ -1,6 +1,7 @@
 ﻿// Written by Jake Wardell, Dylan Clauson, Will Slyman
 
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -46,6 +47,10 @@ namespace Slime_Game
 
         private double deathTime;
         public event ResetLevel ResetLevelEvent;
+
+        //SOund effects
+        SoundEffect sfx_Fire;
+        SoundEffect sfx_Ice;
         #endregion
 
         #region properties
@@ -154,6 +159,9 @@ namespace Slime_Game
             timeCounter = 0;                // Time passed since animation
             currentFrame = 1;               // Sprite sheet's first animation frame is 1 (not 0)
 
+            //Sound Effect
+            sfx_Fire = Art.Instance.LoadSoundEffect("sfx_fire");
+            sfx_Ice = Art.Instance.LoadSoundEffect("sfx_ice");
         }
 
 
@@ -512,6 +520,7 @@ namespace Slime_Game
             // If we hit a hot collectable...
             if (hotter)
             {
+                sfx_Fire.Play();
                 // Change form based on state
                 switch (currentMatterState)
                 {
@@ -537,6 +546,8 @@ namespace Slime_Game
             // If we hit a cold collectable...
             else
             {
+                sfx_Ice.Play();
+
                 // Change form based on state
                 switch (currentMatterState)
                 {
