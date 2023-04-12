@@ -22,6 +22,7 @@ namespace Slime_Game
         private static Art instance = null;
         private ContentManager content;
 
+
         /// <summary>
         /// Create and sets the only instance of Art
         /// </summary>

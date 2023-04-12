@@ -159,6 +159,40 @@ namespace Slime_Game
                         //Standard size of four blocks long
                         tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), new Rectangle(0, 288, 32, 32)));
                     }
+                    if (data[2] == "filler")
+                    {
+                        tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), new Rectangle(90, 90, 32, 32)));
+                    }
+                    if (data[2] == "CGright")
+                    {
+                        tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), new Rectangle(512, 288, 32, 32)));
+                    }
+                    if (data[2] == "CGleft")
+                    {
+                        tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), new Rectangle(448, 288, 32, 32)));
+                    }
+                    if (data[2] == "pillar")
+                    {
+                        tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), new Rectangle(928, 448, 32, 32)));
+                    }
+                    if (data[2] == "corner1")
+                    {
+                        tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), new Rectangle(800, 160, 32, 32)));
+                    }
+                    if (data[2] == "corner2")
+                    {
+                        tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), new Rectangle(864, 288, 32, 32)));
+                    }
+                    if (data[2] == "corner3")
+                    {
+                        tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), new Rectangle(289, 161, 32, 32)));
+                        //225, 161
+                    }
+                    if (data[2] == "corner4")
+                    {
+                        tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), new Rectangle(353, 161, 32, 32)));
+                        //417, 161
+                    }
 
                     // all collectable cases
                     if (data[2] == "hot")
@@ -291,33 +325,34 @@ namespace Slime_Game
             //loops through all intersecting collectables
             foreach(Collectable item in intersections)
             {
-                //checks to see if the item hasnt been used already
-                if (item.IsActive)
+                if (item.IsExit != true)
                 {
-                    //Changes the players state of matter
-                    if (item.IsHot)
+                    //checks to see if the item hasnt been used already
+                    if (item.IsActive)
                     {
-                        player.ChangeTemperature(true);
+                        //Changes the players state of matter
+                        if (item.IsHot)
+                        {
+                            player.ChangeTemperature(true);
+
+                        }
+                        if (!item.IsHot)
+                        {
+                            player.ChangeTemperature(false);
+                        }
+
+                        
+
+                        //turns off the collectable
+                        item.IsActive = false;
                     }
-                    if (!item.IsHot)
-                    {
-                        player.ChangeTemperature(false);
-                    }
-
-                    //sends you to the next level
-                    if (item.IsExit)
-                    {
-
-                        NextLevelEvent();
-                    }
-
-                    //turns off the collectable
-                    item.IsActive = false;
-
-
-
                 }
+                //sends you to the next level
+                if (item.IsExit)
+                {
 
+                    NextLevelEvent();
+                }
             }
         }
 
