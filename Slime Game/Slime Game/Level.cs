@@ -251,7 +251,7 @@ namespace Slime_Game
                 if (!collectable.IsExit)
                 {
                     if (player.CurrentMatterState == PlayerMatterState.Gas && collectable.IsHot) {
-                        collectable.DrawHot(sb, Color.Yellow);
+                        collectable.DrawHot(sb, Color.Red);
                     }
                     else if(player.CurrentMatterState == PlayerMatterState.Solid && collectable.IsHot == false)
                     {
