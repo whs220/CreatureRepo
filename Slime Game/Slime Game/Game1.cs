@@ -196,7 +196,6 @@ namespace Slime_Game
                         // Read in the current level
                         levels[currentLevel].ReadLevel();
                     }
-                    
 
                     // increment gameTime
                     base.Update(gameTime);
