@@ -60,8 +60,9 @@ namespace Slime_Game
         private Texture2D quitTexture;
         private Button startButton;
         private Button quitButton;
-        private SpriteFont mainFont;
+        private SpriteFont debugFont;
         private SpriteFont titleFont;
+        private SpriteFont gameFont;
 
         // win screen
         private Texture2D restartTexture;
@@ -100,6 +101,8 @@ namespace Slime_Game
             // This is the order of levels that appear!
             levelNames = new string[]
             {
+                "Content/firstLevel.level",
+                "Content/secondLevel.level",
                 "Content/welcome_slime.level",
                 "Content/epic_slide.level",
                 "Content/need_for_speed.level"
@@ -122,8 +125,9 @@ namespace Slime_Game
             themeSong = Content.Load<Song>("slimegame");
 
             // loading in fonts
-            mainFont = Content.Load<SpriteFont>("bankgothiclight16");
+            debugFont = Content.Load<SpriteFont>("bankgothiclight16");
             titleFont = Content.Load<SpriteFont>("comicSans36");
+            gameFont = Content.Load<SpriteFont>("arial-35");
 
             // loading in player
             player = new Player();
@@ -336,7 +340,7 @@ namespace Slime_Game
 
                 //In game state
                 case GameState.InGame:
-                    
+
                     // background
                     GraphicsDevice.Clear(Color.CornflowerBlue);
 
@@ -348,7 +352,7 @@ namespace Slime_Game
                     if (player.DebugModeActive)
                     {
                         //Debug mode writing
-                        _spriteBatch.DrawString(mainFont, "Player X, Y: " + player.Position.X + ", " + player.Position.Y + // Writes player X and Y
+                        _spriteBatch.DrawString(debugFont, "Player X, Y: " + player.Position.X + ", " + player.Position.Y + // Writes player X and Y
                             "\nPlayer Velocity: " + player.Velocity.X + ", " + player.Velocity.Y + // Writes player velocity
                             "\nCurrent State: " + player.CurrentMatterState.ToString() + // Writes players current state
                             "\nCurrent Level: " + currentLevel + // Writes current level number
@@ -357,10 +361,13 @@ namespace Slime_Game
                             , new Vector2(30, 50), Color.White);
 
                         //
-                        _spriteBatch.DrawString(mainFont, "Use 'N' to go to next level \nUse 'H' to go hotter \nUse 'C' for colder \nUse 'F2' to toggle collisions \nUse 'G' to toggle gravity", new Vector2(730, 50),Color.White);
+                        _spriteBatch.DrawString(debugFont, "Use 'N' to go to next level \nUse 'H' to go hotter \nUse 'C' for colder \nUse 'F2' to toggle collisions \nUse 'G' to toggle gravity", new Vector2(730, 50),Color.White);
 
 
                     }
+
+                    //Draws text for tutorial
+                    OnBoarding(_spriteBatch);
                     break;
 
 
@@ -378,6 +385,8 @@ namespace Slime_Game
                     quitButton.Draw(_spriteBatch);
                     break;
             }
+
+            
 
             _spriteBatch.End();
 
@@ -421,6 +430,22 @@ namespace Slime_Game
                 player.DebugModeActive = false;
                 // Change to the win screen
                 gameState = GameState.WinScreen;
+            }
+        }
+
+        public void OnBoarding(SpriteBatch sb)
+        {
+            // Level 1 text for tutorial 
+            if(currentLevel == 0)
+            {
+                sb.DrawString(gameFont, "Use 'W' and or 'Space', 'D', 'A'\n            to move ", 
+                    new Vector2(130, 500), Color.White);
+            }
+            // Level 1 text for tutorial 
+            if (currentLevel == 1)
+            {
+                sb.DrawString(gameFont, "Hit fire collectables to change \n   temperature and become a gas... \n     but don't become too hot ;)",
+                    new Vector2(130, 500), Color.White);
             }
         }
     }
