@@ -400,19 +400,27 @@ namespace Slime_Game
 
                     // NEW & IMPROVED COLLISION!
 
-                    // This is basically the same collision we had before, the player being a full box.
-                    // HOWEVER... only change is that it only updates to this old box collision if the new hitbox hits something!!
+                    // This is basically the same collision we had before,
+                    // the player being a full box.
+                    // HOWEVER... only change is that it only updates to this old box
+                    // collision if the new hitbox hits something!!
                     // Leading to a working smaller player hitbox and (hopefully) no more clipping!
 
                     // ----- checkIntersection -----
-                    // This rectangle is a 32 x 32 bounding box around the player (the same rect the animation uses)
-                    // This is the intersection that DETERMINES WHETER THE PLAYER ADJUSTS UP/DOWN & LEFT/RIGHT
+                    // This rectangle is a 32 x 32 bounding box around the player
+                    // (the same rect the animation uses)
+                    // This is the intersection that
+                    // DETERMINES WHETER THE PLAYER ADJUSTS UP/DOWN & LEFT/RIGHT
 
-                    // The new player hitbox is too small to determine this, leading to clipping through the floor
-                    // This happens due to the player already being in the floor when checking collision...
-                    // ...leading to the code pushing the player through the ground thinking they are more below than above
+                    // The new player hitbox is too small to determine this,
+                    // leading to clipping through the floor
+                    // This happens due to the player already
+                    // being in the floor when checking collision...
+                    // ...leading to the code pushing the player through the
+                    // ground thinking they are more below than above
 
-                    // The larger rectangle fixes this since the area to check is greater, leading to more accurate collisions
+                    // The larger rectangle fixes this since the area to check is greater,
+                    // leading to more accurate collisions
                     Rectangle checkIntersection = Rectangle.Intersect(rect, actualRect);
 
                     // ----- addInterestion -----
@@ -445,7 +453,7 @@ namespace Slime_Game
                     if (checkIntersection.Height < checkIntersection.Width)
                     {
                         //tolerance and cap
-                        if (checkIntersection.Width > 10)
+                        if (checkIntersection.Width > 15)
                         {
                             velCopy.Y = 0;
                         }
