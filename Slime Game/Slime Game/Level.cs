@@ -28,6 +28,7 @@ namespace Slime_Game
         public List<GameObject> gameObjects;
         public List<Tile> tiles;
         public List<Collectable> collectables;
+        public List<Spring> springs;
 
         //player
         private Player player;
@@ -93,6 +94,7 @@ namespace Slime_Game
             this.tiles = new List<Tile>();
             this.collectables = new List<Collectable>();
             this.gameObjects = new List<GameObject>();
+            this.springs = new List<Spring>();
             backTile = new Tile(tilemap, new Rectangle(0, 0, 32, 32), new Rectangle(480, 480, 32, 32));
         }
 
@@ -212,6 +214,12 @@ namespace Slime_Game
                         collectables.Add(new Collectable(exit, new Rectangle((int.Parse(data[1])) * 32 - 4, (int.Parse(data[0])) * 32 + 8, 32, 16), false, true));
                     }
 
+                    // misc objects
+                    if (data[2] == "spring")
+                    {
+                        springs.Add(new Spring(new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32)));
+                    }
+
                     //players position is set to where it starts in the level file
                     if (data[2] == "player")
                     {
@@ -280,6 +288,12 @@ namespace Slime_Game
             {
                 tile.Draw(sb);
             }
+
+            // each spring is drawn
+            foreach (Spring spring in springs)
+            {
+                spring.Draw(sb);
+            }
             
         }
 
@@ -290,6 +304,8 @@ namespace Slime_Game
         {
             //Calls all collectible collisions
             CollectibleColision();
+            // Calls all misc collision
+            MiscCollision();
             
 
             //for debug mode
@@ -476,6 +492,21 @@ namespace Slime_Game
             }
             // Update the player's groundRect on the new Player Position
             player.UpdateGroundRect(new Vector2(player.Position.X, player.Position.Y));
+        }
+
+        public void MiscCollision()
+        {
+            //checks for intersections
+            foreach (Spring spring in springs)
+            {
+                if (player.Position.Intersects(spring.Position))
+                {
+                    Vector2 velCopy = player.Velocity;
+                    velCopy.Y = -15;
+                    player.Velocity = velCopy;
+                    break;
+                }
+            }
         }
     }
 }

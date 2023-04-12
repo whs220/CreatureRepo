@@ -190,6 +190,9 @@
 /processorParam:Quality=Best
 /build:slimegame.mp3
 
+#begin spring_hell.level
+/copy:spring_hell.level
+
 #begin startButton.png
 /importer:TextureImporter
 /processor:TextureProcessor

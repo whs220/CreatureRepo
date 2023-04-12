@@ -269,7 +269,7 @@
             this.blank.Name = "blank";
             this.blank.Size = new System.Drawing.Size(58, 58);
             this.blank.TabIndex = 11;
-            this.blank.Text = "blank";
+            this.blank.Text = "spring";
             this.blank.UseVisualStyleBackColor = false;
             this.blank.Click += new System.EventHandler(this.colorSelect_Click);
             // 
