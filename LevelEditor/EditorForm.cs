@@ -180,6 +180,10 @@ namespace LevelEditor
                 {
                     tileColor = Color.MediumSlateBlue;
                 }
+                else if (objectData[2] == "spring")
+                {
+                    tileColor = Color.MediumOrchid;
+                }
                 // ----------------------------
                 #endregion
 
@@ -268,6 +272,10 @@ namespace LevelEditor
                                 else if (objectData[2] == "corner4")
                                 {
                                     tileColor = Color.MediumSlateBlue;
+                                }
+                                else if (objectData[2] == "spring")
+                                {
+                                    tileColor = Color.MediumOrchid;
                                 }
                                 // ----------------------------
 
@@ -441,8 +449,12 @@ namespace LevelEditor
                             case -8689426: //MediumSlateBlue
                                 writer.WriteLine(i + "," + j + "," + "corner4");
                                 break;
+
+                            case -4565549: //MediumOrchid
+                                writer.WriteLine(i + "," + j + "," + "spring");
+                                break;
                             // ------------------------------------------------
-                            
+
                             default:
                                 break;
                         }
@@ -584,6 +596,10 @@ namespace LevelEditor
                     {
                         tileColor = Color.MediumSlateBlue;
                     }
+                    else if (objectData[2] == "spring")
+                    {
+                        tileColor = Color.MediumOrchid;
+                    }
                     // ----------------------------
                     #endregion
 
@@ -672,6 +688,10 @@ namespace LevelEditor
                                     else if (objectData[2] == "corner4")
                                     {
                                         tileColor = Color.MediumSlateBlue;
+                                    }
+                                    else if (objectData[2] == "spring")
+                                    {
+                                        tileColor = Color.MediumOrchid;
                                     }
                                     // ----------------------------
                                 }
