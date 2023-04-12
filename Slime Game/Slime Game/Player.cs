@@ -1,14 +1,10 @@
 ﻿// Written by Jake Wardell, Dylan Clauson, Will Slyman
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace Slime_Game
 {
@@ -23,6 +19,7 @@ namespace Slime_Game
         //player states
         private PlayerMatterState currentMatterState;
         private PlayerMovementState currentMoveState;
+        private PlayerMatterState lastMatterState;
         private bool debugModeActive;
 
         //movement
@@ -39,25 +36,22 @@ namespace Slime_Game
         private KeyboardState prevKeyState;
         private KeyboardState currentKeyState;
 
-        // Animation
-        private Rectangle frame;
         // Animation data
         private int currentFrame;
         private double fps;
         private double secondsPerFrame;
         private double timeCounter;
-        // Sprite sheet data
-        private int numPlayerSprites;
-        private int widthOfPlayerSprite;
 
         // Debug sprites
         private Texture2D debugSolid;
-        private Texture2D debugLiquid;
-        private Texture2D debugGas;
 
 
         private double deathTime;
         public event ResetLevel ResetLevelEvent;
+
+        //SOund effects
+        SoundEffect sfx_Fire;
+        SoundEffect sfx_Ice;
         #endregion
 
         #region properties
@@ -140,11 +134,11 @@ namespace Slime_Game
         #endregion
 
         //constructor
-        public Player(Rectangle pos) : base(null, pos)
+        public Player() : base(null, new Rectangle(50, 50, 24, 16))
         {
             this.debugSolid = Art.Instance.LoadTexture2D("debug_solid");
-            this.debugLiquid = Art.Instance.LoadTexture2D("debug_liquid");
-            this.debugGas = Art.Instance.LoadTexture2D("debug_gas");
+
+            this.texture = Art.Instance.LoadTexture2D("slime");
             debugModeActive = false;
 
             speed = 5.0f;
@@ -158,13 +152,17 @@ namespace Slime_Game
 
             deathTime = 1;
 
-            groundRect = new Rectangle(14, 34, 24, 24);
+            groundRect = new Rectangle(14, 34, 24, 12);
 
             // Set up animation data:
             fps = 8.0;                      // Animation frames to cycle through per second
             secondsPerFrame = 1.0 / fps;    // How long each animation frame lasts
             timeCounter = 0;                // Time passed since animation
-            currentFrame = 1;         // Sprite sheet's first animation frame is 1 (not 0)
+            currentFrame = 1;               // Sprite sheet's first animation frame is 1 (not 0)
+
+            //Sound Effect
+            sfx_Fire = Art.Instance.LoadSoundEffect("sfx_fire");
+            sfx_Ice = Art.Instance.LoadSoundEffect("sfx_ice");
         }
 
 
@@ -181,6 +179,7 @@ namespace Slime_Game
 
             // Move the player!
             ProcessMovement(gameTime);
+            UpdateAnimation(gameTime);
 
             // Only apply gravity if the player is not dead
             if (currentMatterState != PlayerMatterState.Dead || GravityOff == false)
@@ -204,50 +203,110 @@ namespace Slime_Game
         /// <param name="sb"></param>
         public override void Draw(SpriteBatch sb)
         {
-            // Draws the jump box if debug mode is active
+            // Draw some hitboxes while debug mode is on
             if (debugModeActive)
             {
+                // Draws the jump box if debug mode is active
                 sb.Draw(debugSolid, groundRect, Color.White);
+                // Also draw the intersectRect
+                sb.Draw(debugSolid, GetCollisionHelperRect(), Color.Green);
             }
+            
 
             // draw MatterState
             // Currently draws debug textures
             switch (currentMatterState)
             {
                 case PlayerMatterState.Gas:
-                    sb.Draw(debugGas, position, Color.White);
+                    // draw MovementState
+                    switch (currentMoveState)
+                    {
+                        case PlayerMovementState.IdleLeft:
+                        case PlayerMovementState.MoveLeft:
+                            if (isGrounded)
+                            {
+                                DrawPlayer(sb, SpriteEffects.FlipHorizontally, 4, 7);
+                            }
+                            else
+                            {
+                                DrawPlayer(sb, SpriteEffects.FlipHorizontally, 4, 6);
+                            }
+                            break;
+                        case PlayerMovementState.IdleRight:
+                        case PlayerMovementState.MoveRight:
+                            if (isGrounded)
+                            {
+                                DrawPlayer(sb, SpriteEffects.None, 4, 7);
+                            }
+                            else
+                            {
+                                DrawPlayer(sb, SpriteEffects.None, 4, 6);
+                            }
+                            break;
+                    }
                     break;
-
+                //============================================================================
                 case PlayerMatterState.Liquid:
-                    sb.Draw(debugLiquid, position, Color.White);
+                    // draw MovementState
+                    switch (currentMoveState)
+                    {
+                        case PlayerMovementState.IdleLeft:
+                        case PlayerMovementState.MoveLeft:
+                            if (isGrounded)
+                            {
+                                DrawPlayer(sb, SpriteEffects.FlipHorizontally, 4, 1);
+                            }
+                            else
+                            {
+                                DrawPlayer(sb, SpriteEffects.FlipHorizontally, 2, 2);
+                            }
+                            break;
+                        case PlayerMovementState.IdleRight:
+                        case PlayerMovementState.MoveRight:
+                            if (isGrounded)
+                            {
+                                DrawPlayer(sb, SpriteEffects.None, 4, 1);
+                            }
+                            else
+                            {
+                                DrawPlayer(sb, SpriteEffects.None, 4, 2);
+                            }
+                            break;
+                    }
                     break;
-
+                //============================================================================
                 case PlayerMatterState.Solid:
-                    sb.Draw(debugSolid, position, Color.White);
+                    // draw MovementState
+                    switch (currentMoveState)
+                    {
+                        case PlayerMovementState.IdleLeft:
+                        case PlayerMovementState.MoveLeft:
+                            DrawPlayer(sb, SpriteEffects.FlipHorizontally, 1, 4);
+                            break;
+                        case PlayerMovementState.IdleRight:
+                        case PlayerMovementState.MoveRight:
+                            DrawPlayer(sb, SpriteEffects.None, 1, 4);
+                            break;
+                    }
                     break;
-
+                //============================================================================
                 case PlayerMatterState.Dead:
-                    break;
-            }
-
-            // draw MovementState
-            switch (currentMoveState)
-            {
-                case PlayerMovementState.IdleLeft:
-                    break;
-
-                case PlayerMovementState.IdleRight:
-                    break;
-
-                case PlayerMovementState.MoveLeft:
-                    break;
-
-                case PlayerMovementState.MoveRight:
+                    // draw dead
+                    switch (lastMatterState)
+                    {
+                        case PlayerMatterState.Gas:
+                            DrawPlayer(sb, SpriteEffects.None, 3, 8);
+                            break;
+                        case PlayerMatterState.Liquid:
+                            DrawPlayer(sb, SpriteEffects.None, 4, 3);
+                            break;
+                        case PlayerMatterState.Solid:
+                            DrawPlayer(sb, SpriteEffects.None, 1, 5);
+                            break;
+                    }
                     break;
             }
         }
-
-
 
         /// <summary>
         /// Handles movement and player transitions.
@@ -433,6 +492,12 @@ namespace Slime_Game
                 if (currentMatterState != PlayerMatterState.Gas)
                 {
                     velocity += gravity;
+
+                    // Cap y velocity to avoid clipping through floor
+                    if (velocity.Y > 15)
+                    {
+                        velocity.Y = 15;
+                    }
                 }
                 else
                 {
@@ -466,6 +531,7 @@ namespace Slime_Game
             // If we hit a hot collectable...
             if (hotter)
             {
+                sfx_Fire.Play();
                 // Change form based on state
                 switch (currentMatterState)
                 {
@@ -491,6 +557,8 @@ namespace Slime_Game
             // If we hit a cold collectable...
             else
             {
+                sfx_Ice.Play();
+
                 // Change form based on state
                 switch (currentMatterState)
                 {
@@ -521,6 +589,7 @@ namespace Slime_Game
         /// </summary>
         public void Die()
         {
+            lastMatterState = currentMatterState;
             currentMatterState = PlayerMatterState.Dead;
         }
 
@@ -538,10 +607,6 @@ namespace Slime_Game
             {
                 // Change which frame is active, ensuring the frame is reset back to the first 
                 currentFrame++;
-                if (currentFrame >= 7)
-                {
-                    currentFrame = 1;
-                }
 
                 // Reset the time counter
                 timeCounter -= secondsPerFrame;
@@ -565,33 +630,10 @@ namespace Slime_Game
             else
             {
                 // Below player for any other state
-                groundRect.Y = 34 + (int)pos.Y;
+                groundRect.Y = 16 + (int)pos.Y;
             }
             // Stay with player's x position
-            groundRect.X = (int)pos.X + 6;
-        }
-
-        /// <summary>
-        /// draws player walking
-        /// </summary>
-        /// <param name="sb"></param>
-        /// <param name="flip"></param>
-        private void DrawPlayerWalking(SpriteBatch sb, SpriteEffects flip)
-        {
-            sb.Draw(
-                texture,                                   // Whole sprite sheet
-                new Vector2(position.X, position.Y),                                  // Position of the sprite
-                new Rectangle(                                  // Which portion of the sheet is drawn:
-                    currentFrame * widthOfPlayerSprite + 2 * widthOfPlayerSprite,                             // - Left edge
-                    0,                                          // - Top of sprite sheet
-                    widthOfPlayerSprite,                        // - Width 
-                    texture.Height),              // - Height
-                Color.White,                                    // No change in color
-                0.0f,                                           // No rotation
-                Vector2.Zero,                                   // Start origin at (0, 0) of sprite sheet 
-                1.0f,                                           // Scale
-                flip,                                           // Flip it horizontally or vertically?    
-                0.0f);                                          // Layer depth
+            groundRect.X = (int)pos.X;
         }
 
         /// <summary>
@@ -599,16 +641,19 @@ namespace Slime_Game
         /// </summary>
         /// <param name="sb"></param>
         /// <param name="flip"></param>
-        private void DrawPlayerStanding(SpriteBatch sb, SpriteEffects flip)
+        private void DrawPlayer(SpriteBatch sb, SpriteEffects flip, int frameCycle, int sheetLine)
         {
+            int yDifference = -16;
+            if (currentMatterState == PlayerMatterState.Gas) { yDifference = 0; }
+
             sb.Draw(
                 texture,                                        // Whole sprite sheet
-                new Vector2(position.X, position.Y),            // Position of the Mario sprite
+                new Vector2(position.X - 4, position.Y + yDifference),            // Position of the Mario sprite
                 new Rectangle(                                  // Which portion of the sheet is drawn:
-                    (currentFrame % 3) * widthOfPlayerSprite,       // - Left edge
-                    0,                                              // - Top of sprite sheet
-                    widthOfPlayerSprite,                            // - Width 
-                    texture.Height),                                // - Height
+                    (currentFrame % frameCycle) * 32,           // - Left edge
+                    32*(sheetLine - 1),                           // - Top of sprite frame
+                    32,                                         // - Width 
+                    32),                                        // - Height
                 Color.White,                                    // No change in color
                 0.0f,                                           // No rotation
                 Vector2.Zero,                                   // Start origin at (0, 0) of sprite sheet 
@@ -617,6 +662,28 @@ namespace Slime_Game
                 0.0f);                                          // Layer depth
         }
 
+        /// <summary>
+        /// Returns a rectangle ready to be used to determine collision.
+        /// </summary>
+        /// <returns>A rectangle to be used by level for determining collision directions.</returns>
+        public Rectangle GetCollisionHelperRect()
+        {
+            // Determine where the bottom of the rectangle should be
+            
+            // The bottom should be where the player meets the tile
+            // Thus, flip the bottom and top based on y velocity
+            // (Notice how it flips when you jump in debug mode)
+
+            // Default is bottom
+            int yDifference = -16;
+            // If we are going up, put the box on top
+            if (Math.Round(velocity.Y) < 0) { yDifference = 0; }
+
+            // It's a little wonky with gas, but it hasn't broken anything, so it's all ok
+
+            // Return this helper rectangle!
+            return new Rectangle(position.X - 4, position.Y + yDifference, 32, 32);
+        }
 
         /// <summary>
         /// Sends a signal to reset the level, and resets the player back to liquid
@@ -642,6 +709,7 @@ namespace Slime_Game
         {
             // Reset player stats back to liquid
             currentMatterState = PlayerMatterState.Liquid;
+            gravityOff = false;
             speed = 5;
             velocity.Y = 0;
             velocity.X = 0;

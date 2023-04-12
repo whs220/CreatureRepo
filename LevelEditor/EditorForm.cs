@@ -146,6 +146,41 @@ namespace LevelEditor
                 {
                     tileColor = Color.Yellow;
                 }
+                // code that dylan is adding!!!
+                // ----------------------------
+                else if (objectData[2] == "filler")
+                {
+                    tileColor = Color.LightBlue;
+                }
+                else if (objectData[2] == "CGright")
+                {
+                    tileColor = Color.Fuchsia;
+                }
+                else if (objectData[2] == "CGleft")
+                {
+                    tileColor = Color.Sienna;
+                }
+                else if (objectData[2] == "pillar")
+                {
+                    tileColor = Color.DarkSeaGreen;
+                }
+                else if (objectData[2] == "corner1")
+                {
+                    tileColor = Color.Honeydew;
+                }
+                else if (objectData[2] == "corner2")
+                {
+                    tileColor = Color.Goldenrod;
+                }
+                else if (objectData[2] == "corner3")
+                {
+                    tileColor = Color.Aquamarine;
+                }
+                else if (objectData[2] == "corner4")
+                {
+                    tileColor = Color.MediumSlateBlue;
+                }
+                // ----------------------------
                 #endregion
 
                 for (int i = 0; i < height; i++)
@@ -200,6 +235,42 @@ namespace LevelEditor
                                 {
                                     tileColor = Color.Yellow;
                                 }
+                                // code that dylan is adding!!!
+                                // ----------------------------
+                                else if (objectData[2] == "filler")
+                                {
+                                    tileColor = Color.LightBlue;
+                                }
+                                else if (objectData[2] == "CGright")
+                                {
+                                    tileColor = Color.Fuchsia;
+                                }
+                                else if (objectData[2] == "CGleft")
+                                {
+                                    tileColor = Color.Sienna;
+                                }
+                                else if (objectData[2] == "pillar")
+                                {
+                                    tileColor = Color.DarkSeaGreen;
+                                }
+                                else if (objectData[2] == "corner1")
+                                {
+                                    tileColor = Color.Honeydew;
+                                }
+                                else if (objectData[2] == "corner2")
+                                {
+                                    tileColor = Color.Goldenrod;
+                                }
+                                else if (objectData[2] == "corner3")
+                                {
+                                    tileColor = Color.Aquamarine;
+                                }
+                                else if (objectData[2] == "corner4")
+                                {
+                                    tileColor = Color.MediumSlateBlue;
+                                }
+                                // ----------------------------
+
                             }
                         }
 
@@ -304,33 +375,74 @@ namespace LevelEditor
                             case -16181: //pink
                                 writer.WriteLine(i + "," + j + "," + "top");
                                 break;
+
                             case -16776961: //blue
                                 writer.WriteLine(i + "," + j + ","+"cold");
                                 break;
+
                             case -65536: //red
                                 writer.WriteLine(i + "," + j + "," + "hot");
                                 break;
+
                             case -16744448: //green
                                 writer.WriteLine(i + "," + j + "," + "player");
                                 break;
+
                             case -256: //yellow
                                 writer.WriteLine(i + "," + j + "," + "exit");
                                 break;
+
                             case -8388480: //purple
                                 writer.WriteLine(i + "," + j + "," + "platform");
                                 break;
+
                             case -1: //white
                                 writer.WriteLine(i + "," + j + "," + "ground");
                                 break;
+
                             case -16777216: //black                                    
                                 writer.WriteLine(i + "," + j + "," + "leftWall");     
-                                break;                                                 
+                                break;  
+                                
                             case -8355712: //gray
                                 writer.WriteLine(i + "," + j + "," + "rightWall");
                                 break;
-                            case -9404272: //slate gray
-                                //writer.WriteLine(i + "," + j + "," + "");
+
+                            // code that dylan is adding!!!
+                            // ------------------------------------------------
+                            case -5383962: //LightBlue
+                                writer.WriteLine(i + "," + j + "," + "filler");
                                 break;
+
+                            case -65281: //Fuchsia
+                                writer.WriteLine(i + "," + j + "," + "CGright");
+                                break;
+
+                            case -6270419: //Sienna
+                                writer.WriteLine(i + "," + j + "," + "CGleft");
+                                break;
+
+                            case -7357301: //DarkSeaGreen
+                                writer.WriteLine(i + "," + j + "," + "pillar");
+                                break;
+
+                            case -983056: //Honeydew
+                                writer.WriteLine(i + "," + j + "," + "corner1");
+                                break;
+
+                            case -2448096: //Goldenrod
+                                writer.WriteLine(i + "," + j + "," + "corner2");
+                                break;
+
+                            case -8388652: //Aquamarine
+                                writer.WriteLine(i + "," + j + "," + "corner3");
+                                break;
+
+                            case -8689426: //MediumSlateBlue
+                                writer.WriteLine(i + "," + j + "," + "corner4");
+                                break;
+                            // ------------------------------------------------
+                            
                             default:
                                 break;
                         }
@@ -438,6 +550,41 @@ namespace LevelEditor
                     {
                         tileColor = Color.Yellow;
                     }
+                    // code that dylan is adding!!!
+                    // ----------------------------
+                    else if (objectData[2] == "filler")
+                    {
+                        tileColor = Color.LightBlue;
+                    }
+                    else if (objectData[2] == "CGright")
+                    {
+                        tileColor = Color.Fuchsia;
+                    }
+                    else if (objectData[2] == "CGleft")
+                    {
+                        tileColor = Color.Sienna;
+                    }
+                    else if (objectData[2] == "pillar")
+                    {
+                        tileColor = Color.DarkSeaGreen;
+                    }
+                    else if (objectData[2] == "corner1")
+                    {
+                        tileColor = Color.Honeydew;
+                    }
+                    else if (objectData[2] == "corner2")
+                    {
+                        tileColor = Color.Goldenrod;
+                    }
+                    else if (objectData[2] == "corner3")
+                    {
+                        tileColor = Color.Aquamarine;
+                    }
+                    else if (objectData[2] == "corner4")
+                    {
+                        tileColor = Color.MediumSlateBlue;
+                    }
+                    // ----------------------------
                     #endregion
 
                     for (int i = 0; i < height; i++)
@@ -492,6 +639,41 @@ namespace LevelEditor
                                     {
                                         tileColor = Color.Yellow;
                                     }
+                                    // code that dylan is adding!!!
+                                    // ----------------------------
+                                    else if (objectData[2] == "filler")
+                                    {
+                                        tileColor = Color.LightBlue;
+                                    }
+                                    else if (objectData[2] == "CGright")
+                                    {
+                                        tileColor = Color.Fuchsia;
+                                    }
+                                    else if (objectData[2] == "CGleft")
+                                    {
+                                        tileColor = Color.Sienna;
+                                    }
+                                    else if (objectData[2] == "pillar")
+                                    {
+                                        tileColor = Color.DarkSeaGreen;
+                                    }
+                                    else if (objectData[2] == "corner1")
+                                    {
+                                        tileColor = Color.Honeydew;
+                                    }
+                                    else if (objectData[2] == "corner2")
+                                    {
+                                        tileColor = Color.Goldenrod;
+                                    }
+                                    else if (objectData[2] == "corner3")
+                                    {
+                                        tileColor = Color.Aquamarine;
+                                    }
+                                    else if (objectData[2] == "corner4")
+                                    {
+                                        tileColor = Color.MediumSlateBlue;
+                                    }
+                                    // ----------------------------
                                 }
                             }
                             if (row == i && col == j)

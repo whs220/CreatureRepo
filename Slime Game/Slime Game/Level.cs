@@ -34,8 +34,7 @@ namespace Slime_Game
 
         //Textures
         private Texture2D tilemap;
-        private Texture2D fire;
-        private Texture2D ice;
+        private Texture2D collect;
         private Texture2D exit;
         
         //borders for future use
@@ -87,8 +86,7 @@ namespace Slime_Game
             this.fileName = fileName;
             this.player = player;
             tilemap = Art.Instance.LoadTexture2D("tileset");
-            fire = Art.Instance.LoadTexture2D("fire");
-            ice = Art.Instance.LoadTexture2D("ice");
+            collect = Art.Instance.LoadTexture2D("collectables");
             exit = Art.Instance.LoadTexture2D("pipe");
 
 
@@ -161,16 +159,50 @@ namespace Slime_Game
                         //Standard size of four blocks long
                         tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), new Rectangle(0, 288, 32, 32)));
                     }
+                    if (data[2] == "filler")
+                    {
+                        tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), new Rectangle(90, 90, 32, 32)));
+                    }
+                    if (data[2] == "CGright")
+                    {
+                        tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), new Rectangle(512, 288, 32, 32)));
+                    }
+                    if (data[2] == "CGleft")
+                    {
+                        tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), new Rectangle(448, 288, 32, 32)));
+                    }
+                    if (data[2] == "pillar")
+                    {
+                        tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), new Rectangle(928, 448, 32, 32)));
+                    }
+                    if (data[2] == "corner1")
+                    {
+                        tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), new Rectangle(800, 160, 32, 32)));
+                    }
+                    if (data[2] == "corner2")
+                    {
+                        tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), new Rectangle(864, 288, 32, 32)));
+                    }
+                    if (data[2] == "corner3")
+                    {
+                        tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), new Rectangle(289, 161, 32, 32)));
+                        //225, 161
+                    }
+                    if (data[2] == "corner4")
+                    {
+                        tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), new Rectangle(353, 161, 32, 32)));
+                        //417, 161
+                    }
 
                     // all collectable cases
                     if (data[2] == "hot")
                     {
                         //new collectable with bool to determine type
-                        collectables.Add(new Collectable(fire, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), true));
+                        collectables.Add(new Collectable(collect, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), true));
                     }
                     if (data[2] == "cold")
                     {
-                        collectables.Add(new Collectable(ice, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), false));
+                        collectables.Add(new Collectable(collect, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), false));
                     }
                     if (data[2] == "exit")
                     {
@@ -223,11 +255,22 @@ namespace Slime_Game
                     }
                     else if(player.CurrentMatterState == PlayerMatterState.Solid && collectable.IsHot == false)
                     {
-                        collectable.Draw(sb, Color.Purple);
+                        collectable.DrawCold(sb, Color.Purple);
                     }
                     else
                     {
-                        collectable.Draw(sb, Color.White);
+                        if (collectable.IsExit)
+                        {
+                            collectable.Draw(sb);
+                        }
+                        else if (collectable.IsHot)
+                        {
+                            collectable.DrawHot(sb, Color.White);
+                        }
+                        else
+                        {
+                            collectable.DrawCold(sb, Color.White);
+                        }
                     }
                 }
             }
@@ -282,33 +325,34 @@ namespace Slime_Game
             //loops through all intersecting collectables
             foreach(Collectable item in intersections)
             {
-                //checks to see if the item hasnt been used already
-                if (item.IsActive)
+                if (item.IsExit != true)
                 {
-                    //Changes the players state of matter
-                    if (item.IsHot)
+                    //checks to see if the item hasnt been used already
+                    if (item.IsActive)
                     {
-                        player.ChangeTemperature(true);
+                        //Changes the players state of matter
+                        if (item.IsHot)
+                        {
+                            player.ChangeTemperature(true);
+
+                        }
+                        if (!item.IsHot)
+                        {
+                            player.ChangeTemperature(false);
+                        }
+
+                        
+
+                        //turns off the collectable
+                        item.IsActive = false;
                     }
-                    if (!item.IsHot)
-                    {
-                        player.ChangeTemperature(false);
-                    }
-
-                    //sends you to the next level
-                    if (item.IsExit)
-                    {
-
-                        NextLevelEvent();
-                    }
-
-                    //turns off the collectable
-                    item.IsActive = false;
-
-
-
                 }
+                //sends you to the next level
+                if (item.IsExit)
+                {
 
+                    NextLevelEvent();
+                }
             }
         }
 
@@ -346,24 +390,57 @@ namespace Slime_Game
                 //for copy alter replace
                 Rectangle posCopy = player.Position;
 
+                // For square collision detection
+                Rectangle actualRect = player.GetCollisionHelperRect();
+
                 //loops through all intersects
                 foreach (Tile tile in intersections)
                 {
                     Rectangle rect = tile.Position;
-                    Rectangle intersection = Rectangle.Intersect(rect, posCopy);
+
+                    // NEW & IMPROVED COLLISION!
+
+                    // This is basically the same collision we had before,
+                    // the player being a full box.
+                    // HOWEVER... only change is that it only updates to this old box
+                    // collision if the new hitbox hits something!!
+                    // Leading to a working smaller player hitbox and (hopefully) no more clipping!
+
+                    // ----- checkIntersection -----
+                    // This rectangle is a 32 x 32 bounding box around the player
+                    // (the same rect the animation uses)
+                    // This is the intersection that
+                    // DETERMINES WHETER THE PLAYER ADJUSTS UP/DOWN & LEFT/RIGHT
+
+                    // The new player hitbox is too small to determine this,
+                    // leading to clipping through the floor
+                    // This happens due to the player already
+                    // being in the floor when checking collision...
+                    // ...leading to the code pushing the player through the
+                    // ground thinking they are more below than above
+
+                    // The larger rectangle fixes this since the area to check is greater,
+                    // leading to more accurate collisions
+                    Rectangle checkIntersection = Rectangle.Intersect(rect, actualRect);
+
+                    // ----- addInterestion -----
+                    // This is the actual player hitbox intersection
+                    // It will determine HOW FAR the player adjusts (just like mario!!)
+                    Rectangle addIntersection = Rectangle.Intersect(rect, posCopy);
+
                     Vector2 velCopy = player.Velocity;
 
-                    //If the rectangle is taller than it is wide
-                    if (intersection.Height > intersection.Width && intersection.Width > 4)
+                    //If the check rectangle is taller than it is wide
+                    if (checkIntersection.Height > checkIntersection.Width && checkIntersection.Width > 4)
                     {
                         //the player is moved left or right
                         if (posCopy.X - rect.X < 0)
                         {
-                            posCopy.X -= intersection.Width;
+                            posCopy.X -= addIntersection.Width;
                         }
                         else
                         {
-                            posCopy.X += intersection.Width;
+                            posCopy.X += addIntersection.Width;
                         }
                         // If player is solid, bounce the ice physics!
                         if (player.CurrentMatterState == PlayerMatterState.Solid)
@@ -373,10 +450,10 @@ namespace Slime_Game
                     }
 
                     //if wider than it is tall
-                    if (intersection.Height < intersection.Width)
+                    if (checkIntersection.Height < checkIntersection.Width)
                     {
                         //tolerance and cap
-                        if (intersection.Width > 10)
+                        if (checkIntersection.Width > 15)
                         {
                             velCopy.Y = 0;
                         }
@@ -387,17 +464,14 @@ namespace Slime_Game
                         //move up or down
                         if (posCopy.Y - rect.Y < 0)
                         {
-                            posCopy.Y -= intersection.Height;
+                            posCopy.Y -= addIntersection.Height;
                         }
                         else
                         {
-
-                            posCopy.Y += intersection.Height;
+                            posCopy.Y += addIntersection.Height;
                         }
                     }
                 }
-
-                
 
                 //resolves intersections
                 player.Position = posCopy;

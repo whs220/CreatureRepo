@@ -1,5 +1,6 @@
 ﻿//Jake Wardell
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
@@ -69,7 +70,12 @@ namespace Slime_Game
         // loading
         private double timer;
 
+        //Music
         private Song themeSong;
+
+        //Sound Effect
+        SoundEffect sfx_NextLevel;
+
 
         public Game1()
         {
@@ -110,22 +116,17 @@ namespace Slime_Game
         {
             // loading in tiles and collectibles
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-
-
-            //Load in sounds
-            themeSong = Content.Load<Song>("slimegame");
-
-
-            // loading in debug mode content
-
             Art.Instance.SetContentLoader(Content);
+
+            // Load in sounds
+            themeSong = Content.Load<Song>("slimegame");
 
             // loading in fonts
             mainFont = Content.Load<SpriteFont>("bankgothiclight16");
             titleFont = Content.Load<SpriteFont>("comicSans36");
 
             // loading in player
-            player = new Player(new Rectangle(50, 50, 32, 32));
+            player = new Player();
 
             // Adding levels to the level list
             foreach (string levelName in levelNames)
@@ -151,7 +152,12 @@ namespace Slime_Game
 
             //Play Song
             MediaPlayer.IsRepeating = true;
+            MediaPlayer.Volume = 0.2f;
             MediaPlayer.Play(themeSong);
+            
+
+            //Sound Effects
+            sfx_NextLevel = Content.Load<SoundEffect>("win");
         }
 
         protected override void Update(GameTime gameTime)
@@ -201,6 +207,7 @@ namespace Slime_Game
                         // Read in the current level
                         levels[currentLevel].ReadLevel();
                     }
+
                     
 
                     // increment gameTime
@@ -214,6 +221,10 @@ namespace Slime_Game
                     
 
                     player.Update(gameTime);
+                    foreach(Collectable c in levels[currentLevel].collectables)
+                    {
+                        c.UpdateAnimation(gameTime);
+                    }
                     //Calls tge current level update method for current level logic
                     levels[currentLevel].Update();
 
@@ -395,6 +406,7 @@ namespace Slime_Game
 
                 // Go to loading screen, which then will read the new level
                 gameState = GameState.LoadingScreen;
+                sfx_NextLevel.Play();
 
             }
             //if this is the last level switches to the win screen

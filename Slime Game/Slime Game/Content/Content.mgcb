@@ -20,6 +20,18 @@
 /processorParam:TextureFormat=Compressed
 /build:bankgothiclight16.spritefont
 
+#begin collectables.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:collectables.png
+
 #begin comicSans36.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
@@ -135,11 +147,29 @@
 /processorParam:TextureFormat=Color
 /build:restartButton.png
 
-#begin slimegame.mp3
+#begin sfx_fire.mp3
 /importer:Mp3Importer
-/processor:SongProcessor
+/processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:slimegame.mp3
+/build:sfx_fire.mp3
+
+#begin sfx_ice.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx_ice.mp3
+
+#begin slime.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:slime.png
 
 #begin slimegame.mp3
 /importer:Mp3Importer
@@ -179,4 +209,10 @@
 
 #begin welcome_slime.level
 /copy:welcome_slime.level
+
+#begin win.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:win.mp3
 
