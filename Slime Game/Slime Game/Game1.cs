@@ -349,6 +349,7 @@ namespace Slime_Game
                     {
                         //Debug mode writing
                         _spriteBatch.DrawString(mainFont, "Player X, Y: " + player.Position.X + ", " + player.Position.Y + // Writes player X and Y
+                            "\nPlayer Velocity: " + player.Velocity.X + ", " + player.Velocity.Y + // Writes player velocity
                             "\nCurrent State: " + player.CurrentMatterState.ToString() + // Writes players current state
                             "\nCurrent Level: " + currentLevel + // Writes current level number
                             "\nCollisions On: " + levels[currentLevel].CollisionsOn + //States wherther collisions are on

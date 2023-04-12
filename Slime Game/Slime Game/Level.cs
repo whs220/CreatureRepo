@@ -342,7 +342,6 @@ namespace Slime_Game
                         }
 
                         
-
                         //turns off the collectable
                         item.IsActive = false;
                     }
@@ -431,6 +430,7 @@ namespace Slime_Game
                     Vector2 velCopy = player.Velocity;
 
                     //If the check rectangle is taller than it is wide
+                    // 4 Pixel buffer to avoid getting stuck
                     if (checkIntersection.Height > checkIntersection.Width && checkIntersection.Width > 4)
                     {
                         //the player is moved left or right
@@ -450,14 +450,12 @@ namespace Slime_Game
                     }
 
                     //if wider than it is tall
-                    if (checkIntersection.Height < checkIntersection.Width)
+                    // Buffer of 10 pixels to avoid getting stuck on the wall
+                    if (checkIntersection.Height < checkIntersection.Width && checkIntersection.Width > 10)
                     {
                         //tolerance and cap
-                        if (checkIntersection.Width > 15)
-                        {
-                            velCopy.Y = 0;
-                        }
-                        
+                        velCopy.Y = 0;
+
                         //copy alter replace
                         player.Velocity = velCopy;
 
