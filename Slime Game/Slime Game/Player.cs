@@ -3,6 +3,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace Slime_Game
 {
@@ -128,7 +129,7 @@ namespace Slime_Game
         #endregion
 
         //constructor
-        public Player(Rectangle pos) : base(null, pos)
+        public Player() : base(null, new Rectangle(50, 50, 24, 16))
         {
             this.debugSolid = Art.Instance.LoadTexture2D("debug_solid");
 
@@ -146,7 +147,7 @@ namespace Slime_Game
 
             deathTime = 1;
 
-            groundRect = new Rectangle(14, 34, 24, 24);
+            groundRect = new Rectangle(14, 34, 24, 12);
 
             // Set up animation data:
             fps = 8.0;                      // Animation frames to cycle through per second
@@ -194,11 +195,15 @@ namespace Slime_Game
         /// <param name="sb"></param>
         public override void Draw(SpriteBatch sb)
         {
-            // Draws the jump box if debug mode is active
+            // Draw some hitboxes while debug mode is on
             if (debugModeActive)
             {
+                // Draws the jump box if debug mode is active
                 sb.Draw(debugSolid, groundRect, Color.White);
+                // Also draw the intersectRect
+                sb.Draw(debugSolid, GetCollisionHelperRect(), Color.Green);
             }
+            
 
             // draw MatterState
             // Currently draws debug textures
@@ -479,6 +484,12 @@ namespace Slime_Game
                 if (currentMatterState != PlayerMatterState.Gas)
                 {
                     velocity += gravity;
+
+                    // Cap y velocity to avoid clipping through floor
+                    if (velocity.Y > 15)
+                    {
+                        velocity.Y = 15;
+                    }
                 }
                 else
                 {
@@ -608,10 +619,10 @@ namespace Slime_Game
             else
             {
                 // Below player for any other state
-                groundRect.Y = 34 + (int)pos.Y;
+                groundRect.Y = 16 + (int)pos.Y;
             }
             // Stay with player's x position
-            groundRect.X = (int)pos.X + 6;
+            groundRect.X = (int)pos.X;
         }
 
         /// <summary>
@@ -621,9 +632,12 @@ namespace Slime_Game
         /// <param name="flip"></param>
         private void DrawPlayer(SpriteBatch sb, SpriteEffects flip, int frameCycle, int sheetLine)
         {
+            int yDifference = -16;
+            if (currentMatterState == PlayerMatterState.Gas) { yDifference = 0; }
+
             sb.Draw(
                 texture,                                        // Whole sprite sheet
-                new Vector2(position.X, position.Y),            // Position of the Mario sprite
+                new Vector2(position.X - 4, position.Y + yDifference),            // Position of the Mario sprite
                 new Rectangle(                                  // Which portion of the sheet is drawn:
                     (currentFrame % frameCycle) * 32,           // - Left edge
                     32*(sheetLine - 1),                           // - Top of sprite frame
@@ -635,6 +649,29 @@ namespace Slime_Game
                 1.0f,                                           // Scale
                 flip,                                           // Flip it horizontally or vertically?    
                 0.0f);                                          // Layer depth
+        }
+
+        /// <summary>
+        /// Returns a rectangle ready to be used to determine collision.
+        /// </summary>
+        /// <returns>A rectangle to be used by level for determining collision directions.</returns>
+        public Rectangle GetCollisionHelperRect()
+        {
+            // Determine where the bottom of the rectangle should be
+            
+            // The bottom should be where the player meets the tile
+            // Thus, flip the bottom and top based on y velocity
+            // (Notice how it flips when you jump in debug mode)
+
+            // Default is bottom
+            int yDifference = -16;
+            // If we are going up, put the box on top
+            if (Math.Round(velocity.Y) < 0) { yDifference = 0; }
+
+            // It's a little wonky with gas, but it hasn't broken anything, so it's all ok
+
+            // Return this helper rectangle!
+            return new Rectangle(position.X - 4, position.Y + yDifference, 32, 32);
         }
 
         /// <summary>
@@ -661,6 +698,7 @@ namespace Slime_Game
         {
             // Reset player stats back to liquid
             currentMatterState = PlayerMatterState.Liquid;
+            gravityOff = false;
             speed = 5;
             velocity.Y = 0;
             velocity.X = 0;

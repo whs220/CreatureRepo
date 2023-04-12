@@ -355,24 +355,49 @@ namespace Slime_Game
                 //for copy alter replace
                 Rectangle posCopy = player.Position;
 
+                // For square collision detection
+                Rectangle actualRect = player.GetCollisionHelperRect();
+
                 //loops through all intersects
                 foreach (Tile tile in intersections)
                 {
                     Rectangle rect = tile.Position;
-                    Rectangle intersection = Rectangle.Intersect(rect, posCopy);
+
+                    // NEW & IMPROVED COLLISION!
+
+                    // This is basically the same collision we had before, the player being a full box.
+                    // HOWEVER... only change is that it only updates to this old box collision if the new hitbox hits something!!
+                    // Leading to a working smaller player hitbox and (hopefully) no more clipping!
+
+                    // ----- checkIntersection -----
+                    // This rectangle is a 32 x 32 bounding box around the player (the same rect the animation uses)
+                    // This is the intersection that DETERMINES WHETER THE PLAYER ADJUSTS UP/DOWN & LEFT/RIGHT
+
+                    // The new player hitbox is too small to determine this, leading to clipping through the floor
+                    // This happens due to the player already being in the floor when checking collision...
+                    // ...leading to the code pushing the player through the ground thinking they are more below than above
+
+                    // The larger rectangle fixes this since the area to check is greater, leading to more accurate collisions
+                    Rectangle checkIntersection = Rectangle.Intersect(rect, actualRect);
+
+                    // ----- addInterestion -----
+                    // This is the actual player hitbox intersection
+                    // It will determine HOW FAR the player adjusts (just like mario!!)
+                    Rectangle addIntersection = Rectangle.Intersect(rect, posCopy);
+
                     Vector2 velCopy = player.Velocity;
 
-                    //If the rectangle is taller than it is wide
-                    if (intersection.Height > intersection.Width && intersection.Width > 4)
+                    //If the check rectangle is taller than it is wide
+                    if (checkIntersection.Height > checkIntersection.Width && checkIntersection.Width > 4)
                     {
                         //the player is moved left or right
                         if (posCopy.X - rect.X < 0)
                         {
-                            posCopy.X -= intersection.Width;
+                            posCopy.X -= addIntersection.Width;
                         }
                         else
                         {
-                            posCopy.X += intersection.Width;
+                            posCopy.X += addIntersection.Width;
                         }
                         // If player is solid, bounce the ice physics!
                         if (player.CurrentMatterState == PlayerMatterState.Solid)
@@ -382,10 +407,10 @@ namespace Slime_Game
                     }
 
                     //if wider than it is tall
-                    if (intersection.Height < intersection.Width)
+                    if (checkIntersection.Height < checkIntersection.Width)
                     {
                         //tolerance and cap
-                        if (intersection.Width > 10)
+                        if (checkIntersection.Width > 10)
                         {
                             velCopy.Y = 0;
                         }
@@ -396,17 +421,14 @@ namespace Slime_Game
                         //move up or down
                         if (posCopy.Y - rect.Y < 0)
                         {
-                            posCopy.Y -= intersection.Height;
+                            posCopy.Y -= addIntersection.Height;
                         }
                         else
                         {
-
-                            posCopy.Y += intersection.Height;
+                            posCopy.Y += addIntersection.Height;
                         }
                     }
                 }
-
-                
 
                 //resolves intersections
                 player.Position = posCopy;

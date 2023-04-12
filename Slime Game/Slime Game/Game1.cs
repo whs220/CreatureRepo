@@ -120,7 +120,7 @@ namespace Slime_Game
             titleFont = Content.Load<SpriteFont>("comicSans36");
 
             // loading in player
-            player = new Player(new Rectangle(50, 50, 32, 32));
+            player = new Player();
 
             // Adding levels to the level list
             foreach (string levelName in levelNames)
