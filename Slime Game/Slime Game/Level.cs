@@ -502,7 +502,7 @@ namespace Slime_Game
                 if (player.Position.Intersects(spring.Position))
                 {
                     Vector2 velCopy = player.Velocity;
-                    velCopy.Y = -100;
+                    velCopy.Y = -15;
                     player.Velocity = velCopy;
                     break;
                 }

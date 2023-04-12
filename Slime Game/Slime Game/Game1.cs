@@ -100,6 +100,7 @@ namespace Slime_Game
             // This is the order of levels that appear!
             levelNames = new string[]
             {
+                "Content/spring_hell.level",
                 "Content/welcome_slime.level",
                 "Content/epic_slide.level",
                 "Content/need_for_speed.level"
