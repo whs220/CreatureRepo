@@ -27,6 +27,9 @@
 /processorParam:TextureFormat=Compressed
 /build:bankgothiclight16.spritefont
 
+#begin Bounce.level
+/copy:Bounce.level
+
 #begin collectables.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -99,6 +102,9 @@
 
 #begin firstLevel.level
 /copy:firstLevel.level
+
+#begin fourthLevel.level
+/copy:fourthLevel.level
 
 #begin ice.png
 /importer:TextureImporter
@@ -210,6 +216,9 @@
 
 #begin testLevel.level
 /copy:testLevel.level
+
+#begin thirdLevel.level
+/copy:thirdLevel.level
 
 #begin tileset.png
 /importer:TextureImporter
