@@ -27,6 +27,9 @@
 /processorParam:TextureFormat=Compressed
 /build:bankgothiclight16.spritefont
 
+#begin Bounce.level
+/copy:Bounce.level
+
 #begin collectables.png
 /importer:TextureImporter
 /processor:TextureProcessor
