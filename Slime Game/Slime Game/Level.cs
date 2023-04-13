@@ -499,11 +499,21 @@ namespace Slime_Game
             //checks for intersections
             foreach (Spring spring in springs)
             {
+                // Boost player up!!
+                // Have to increase y position to avoid bumping!
+
+                int flip = 1;
                 if (player.GetCollisionHelperRect().Intersects(spring.Position))
                 {
+                    // Boost downwards if gas
+                    if (player.CurrentMatterState == PlayerMatterState.Gas) { flip = -1; }
+
+                    Rectangle posCopy = player.Position;
                     Vector2 velCopy = player.Velocity;
-                    velCopy.Y = -15;
+                    posCopy.Y -= 4 * flip;
+                    velCopy.Y = -14 * flip;
                     player.Velocity = velCopy;
+                    player.Position = posCopy;
                     break;
                 }
             }
