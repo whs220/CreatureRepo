@@ -116,6 +116,7 @@ namespace Slime_Game
             tiles.Clear();
             collectables.Clear();
             gameObjects.Clear();
+            springs.Clear();
 
             //File IO
             try
