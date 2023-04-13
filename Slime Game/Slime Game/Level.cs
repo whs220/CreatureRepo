@@ -499,7 +499,7 @@ namespace Slime_Game
             //checks for intersections
             foreach (Spring spring in springs)
             {
-                if (player.Position.Intersects(spring.Position))
+                if (player.GetCollisionHelperRect().Intersects(spring.Position))
                 {
                     Vector2 velCopy = player.Velocity;
                     velCopy.Y = -15;
