@@ -106,9 +106,9 @@ namespace Slime_Game
                 "Content/spring_hell.level",
                 "Content/welcome_slime.level",
                 "Content/epic_slide.level",
-                "Content/need_for_speed.level"
+                "Content/need_for_speed.level",
                 //"Content/level1.level",
-                
+                "Content/Bounce.level"
             };
 
             levels = new List<Level>();
