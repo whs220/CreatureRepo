@@ -292,7 +292,9 @@ namespace Slime_Game
             // each spring is drawn
             foreach (Spring spring in springs)
             {
-                spring.Draw(sb);
+                // Flip spring if gas
+                spring.Flip = player.CurrentMatterState == PlayerMatterState.Gas;
+                spring.DrawBounce(sb, Color.White);
             }
             
         }
@@ -514,6 +516,7 @@ namespace Slime_Game
                     velCopy.Y = -14 * flip;
                     player.Velocity = velCopy;
                     player.Position = posCopy;
+                    spring.StartAnimation();
                     break;
                 }
             }

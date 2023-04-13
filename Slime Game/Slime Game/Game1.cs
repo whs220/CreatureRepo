@@ -101,6 +101,7 @@ namespace Slime_Game
             // This is the order of levels that appear!
             levelNames = new string[]
             {
+                "Content/Bounce.level",
                 "Content/firstLevel.level",
                 "Content/secondLevel.level",
                 "Content/thirdLevel.level",
@@ -110,7 +111,7 @@ namespace Slime_Game
                 "Content/epic_slide.level",
                 //"Content/need_for_speed.level"
                 //"Content/level1.level",
-                "Content/Bounce.level"
+                
             };
 
             levels = new List<Level>();
@@ -228,9 +229,15 @@ namespace Slime_Game
                     
 
                     player.Update(gameTime);
+                    // Collectable animation
                     foreach(Collectable c in levels[currentLevel].collectables)
                     {
                         c.UpdateAnimation(gameTime);
+                    }
+                    // Spring animation
+                    foreach (Spring s in levels[currentLevel].springs)
+                    {
+                        s.UpdateAnimation(gameTime);
                     }
                     //Calls tge current level update method for current level logic
                     levels[currentLevel].Update();
