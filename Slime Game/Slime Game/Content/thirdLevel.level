@@ -50,7 +50,8 @@
 4,8,ground
 4,9,ground
 4,10,ground
-4,11,corner2
+4,11,ground
+4,12,corner2
 4,15,corner1
 4,16,ground
 4,17,ground
@@ -67,7 +68,7 @@
 4,28,ground
 4,29,ground
 4,30,ground
-4,31,rightWall
+4,31,filler
 5,0,filler
 5,1,filler
 5,2,filler
@@ -79,7 +80,8 @@
 5,8,filler
 5,9,filler
 5,10,filler
-5,11,leftWall
+5,11,filler
+5,12,leftWall
 5,15,rightWall
 5,16,filler
 5,17,filler
@@ -108,7 +110,8 @@
 6,8,filler
 6,9,filler
 6,10,filler
-6,11,leftWall
+6,11,filler
+6,12,leftWall
 6,15,rightWall
 6,16,filler
 6,17,filler
@@ -137,8 +140,8 @@
 7,8,filler
 7,9,filler
 7,10,filler
-7,11,leftWall
-7,12,cold
+7,11,filler
+7,12,leftWall
 7,13,cold
 7,14,cold
 7,15,rightWall
