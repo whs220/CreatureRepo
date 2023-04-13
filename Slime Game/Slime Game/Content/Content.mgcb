@@ -103,6 +103,9 @@
 #begin firstLevel.level
 /copy:firstLevel.level
 
+#begin fourthLevel.level
+/copy:fourthLevel.level
+
 #begin ice.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -213,6 +216,9 @@
 
 #begin testLevel.level
 /copy:testLevel.level
+
+#begin thirdLevel.level
+/copy:thirdLevel.level
 
 #begin tileset.png
 /importer:TextureImporter
