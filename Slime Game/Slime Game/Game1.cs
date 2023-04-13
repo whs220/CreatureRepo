@@ -107,9 +107,14 @@ namespace Slime_Game
                 "Content/thirdLevel.level",
                 "Content/fourthLevel.level",
                 "Content/welcome_slime.level",
-                "Content/spring_hell.level",
                 "Content/epic_slide.level",
-                //"Content/need_for_speed.level"
+                "Content/need_for_speed.level",
+
+                //spring tutorial
+                "Content/spring_hell.level",
+                "Content/maze.level",
+
+
                 //"Content/level1.level",
                 
             };
