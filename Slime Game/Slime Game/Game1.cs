@@ -101,6 +101,7 @@ namespace Slime_Game
             // This is the order of levels that appear!
             levelNames = new string[]
             {
+                "Content/maze.level",
                 "Content/Bounce.level",
                 "Content/firstLevel.level",
                 "Content/secondLevel.level",
@@ -112,7 +113,7 @@ namespace Slime_Game
 
                 //spring tutorial
                 "Content/spring_hell.level",
-                "Content/maze.level",
+                
 
 
                 //"Content/level1.level",
