@@ -101,12 +101,21 @@ namespace Slime_Game
             // This is the order of levels that appear!
             levelNames = new string[]
             {
+                "Content/maze.level",
+                "Content/Bounce.level",
                 "Content/firstLevel.level",
                 "Content/secondLevel.level",
-                "Content/spring_hell.level",
+                "Content/thirdLevel.level",
+                "Content/fourthLevel.level",
                 "Content/welcome_slime.level",
                 "Content/epic_slide.level",
-                "Content/need_for_speed.level"
+                "Content/need_for_speed.level",
+
+                //spring tutorial
+                "Content/spring_hell.level",
+                
+
+
                 //"Content/level1.level",
                 
             };
@@ -226,9 +235,15 @@ namespace Slime_Game
                     
 
                     player.Update(gameTime);
+                    // Collectable animation
                     foreach(Collectable c in levels[currentLevel].collectables)
                     {
                         c.UpdateAnimation(gameTime);
+                    }
+                    // Spring animation
+                    foreach (Spring s in levels[currentLevel].springs)
+                    {
+                        s.UpdateAnimation(gameTime);
                     }
                     //Calls tge current level update method for current level logic
                     levels[currentLevel].Update();
@@ -447,6 +462,18 @@ namespace Slime_Game
             {
                 sb.DrawString(gameFont, "Hit fire collectables to change \n   temperature and become a gas... \n     but don't become too hot ;)",
                     new Vector2(130, 500), Color.White);
+            }
+            //Level 3 tutorial text
+            if (currentLevel == 2)
+            {
+                sb.DrawString(gameFont, "    Hit Ice collectables\n temperature and become a Solid... \n Solids can't jump but can slide",
+                    new Vector2(130, 600), Color.White);
+            }
+            //Level 4 tutorial text (Talks about resetting and all the matter states)
+            if (currentLevel == 3)
+            {
+                sb.DrawString(gameFont, "  If you ever get stuck hit 'R' \n      to reset The 3 matter\nstates are solid -> liquid -> gas",
+                    new Vector2(130, 600), Color.White);
             }
         }
     }

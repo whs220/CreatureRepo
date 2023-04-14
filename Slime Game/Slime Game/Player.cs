@@ -333,7 +333,7 @@ namespace Slime_Game
                         else
                         {
                             // Accelerate at a negative dir
-                            if (speed > -15)
+                            if (speed > -12)
                             {
                                 speed -= 1;
                             }
@@ -362,7 +362,7 @@ namespace Slime_Game
                         else
                         {
                             // Accelerate at a negative dir
-                            if (speed < 15)
+                            if (speed < 12)
                             {
                                 speed += 1;
                             }
