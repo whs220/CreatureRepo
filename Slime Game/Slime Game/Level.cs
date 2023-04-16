@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.IO;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Audio;
 
 namespace Slime_Game
 {
@@ -55,6 +56,9 @@ namespace Slime_Game
         //For debug mode
         private bool debugModeActive;
 
+        //Sound effects
+        SoundEffect sfx_Landing;
+
         // Properties
 
         /// <summary>
@@ -96,6 +100,9 @@ namespace Slime_Game
             this.gameObjects = new List<GameObject>();
             this.springs = new List<Spring>();
             backTile = new Tile(tilemap, new Rectangle(0, 0, 32, 32), new Rectangle(480, 480, 32, 32));
+
+            //Sound Effects
+            sfx_Landing = Art.Instance.LoadSoundEffect("sfx_landing");
         }
 
 
@@ -116,6 +123,7 @@ namespace Slime_Game
             tiles.Clear();
             collectables.Clear();
             gameObjects.Clear();
+            springs.Clear();
 
             //File IO
             try
@@ -383,6 +391,7 @@ namespace Slime_Game
 
             //is not grounded
             bool isGrounded = false;
+            bool currentIsGrounded = player.IsGrounded;
 
             //checks for intersections
             foreach(Tile tile in tiles) 
@@ -401,6 +410,10 @@ namespace Slime_Game
 
             //update player
             player.IsGrounded = isGrounded;
+            if(isGrounded != currentIsGrounded && currentIsGrounded == true)
+            {
+                sfx_Landing.Play();
+            }
 
             if(intersections.Count > 0)
             {

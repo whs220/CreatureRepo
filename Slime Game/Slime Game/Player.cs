@@ -52,6 +52,7 @@ namespace Slime_Game
         //SOund effects
         SoundEffect sfx_Fire;
         SoundEffect sfx_Ice;
+        
         #endregion
 
         #region properties
@@ -163,6 +164,7 @@ namespace Slime_Game
             //Sound Effect
             sfx_Fire = Art.Instance.LoadSoundEffect("sfx_fire");
             sfx_Ice = Art.Instance.LoadSoundEffect("sfx_ice");
+            
         }
 
 

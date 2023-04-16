@@ -178,6 +178,12 @@
 /processorParam:Quality=Best
 /build:sfx_ice.mp3
 
+#begin sfx_landing.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx_landing.mp3
+
 #begin slime.png
 /importer:TextureImporter
 /processor:TextureProcessor

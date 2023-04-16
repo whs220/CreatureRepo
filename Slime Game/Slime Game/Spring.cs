@@ -23,7 +23,6 @@ namespace Slime_Game
         private double fps;
         private double secondsPerFrame;
         private double timeCounter;
-        private int framesLeft = -1;
         private bool flip;
 
         public bool Flip
@@ -41,7 +40,7 @@ namespace Slime_Game
             fps = 12.0;                      // Animation frames to cycle through per second
             secondsPerFrame = 1.0 / fps;    // How long each animation frame lasts
             timeCounter = 0;                // Time passed since animation
-            currentFrame = 1;
+            currentFrame = 0;
         }
 
         public void DrawBounce(SpriteBatch sb, Color color)
