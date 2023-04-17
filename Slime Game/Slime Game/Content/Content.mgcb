@@ -241,6 +241,9 @@
 /processorParam:TextureFormat=Color
 /build:spring.png
 
+#begin springTutoiral.level
+/copy:springTutoiral.level
+
 #begin startButton.png
 /importer:TextureImporter
 /processor:TextureProcessor
