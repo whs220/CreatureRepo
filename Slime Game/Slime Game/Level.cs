@@ -56,9 +56,6 @@ namespace Slime_Game
         //For debug mode
         private bool debugModeActive;
 
-        //Sound effects
-        SoundEffect sfx_Landing;
-
         // Properties
 
         /// <summary>
@@ -101,8 +98,7 @@ namespace Slime_Game
             this.springs = new List<Spring>();
             backTile = new Tile(tilemap, new Rectangle(0, 0, 32, 32), new Rectangle(480, 480, 32, 32));
 
-            //Sound Effects
-            sfx_Landing = Art.Instance.LoadSoundEffect("sfx_landing");
+            
         }
 
 
@@ -410,10 +406,6 @@ namespace Slime_Game
 
             //update player
             player.IsGrounded = isGrounded;
-            if(isGrounded != currentIsGrounded && currentIsGrounded == true)
-            {
-                sfx_Landing.Play();
-            }
 
             if(intersections.Count > 0)
             {
