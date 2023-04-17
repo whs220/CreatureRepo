@@ -498,6 +498,7 @@ namespace Slime_Game
                 case 0:
                     if (currentSong != 0)
                     {
+                        MediaPlayer.Stop();
                         MediaPlayer.Play(themeSong);
                         currentSong = 0;
                     }
@@ -505,6 +506,7 @@ namespace Slime_Game
                 case 1:
                     if (currentSong != 1)
                     {
+                        MediaPlayer.Stop();
                         MediaPlayer.Play(secondSong);
                         currentSong = 1;
                     }
