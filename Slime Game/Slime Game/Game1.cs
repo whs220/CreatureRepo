@@ -77,7 +77,7 @@ namespace Slime_Game
         //Music
         private Song themeSong;
         private Song secondSong;
-        private int currentSong = 0;
+        private int currentSong = -1;
 
         //Sound Effect
         SoundEffect sfx_NextLevel;
