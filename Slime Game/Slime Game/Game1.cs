@@ -58,6 +58,7 @@ namespace Slime_Game
         // menu
         private Texture2D startTexture;
         private Texture2D quitTexture;
+        private Texture2D startScreen;
         private Button startButton;
         private Button quitButton;
         private SpriteFont debugFont;
@@ -66,9 +67,11 @@ namespace Slime_Game
 
         // win screen
         private Texture2D restartTexture;
+        private Texture2D winScreen;
         private Button restartButton;
 
         // loading
+        private Texture2D loadingScreen;
         private double timer;
 
         //Music
@@ -92,7 +95,7 @@ namespace Slime_Game
         protected override void Initialize()
         {
             // menu
-            gameState = GameState.Menu; // CHANGE THIS TO GameState.InGame IF YOU WANT TO BYPASS THE MENU AND LOADING SCREENS
+            gameState = GameState.Menu;
 
             // loading
             timer = 0.5f;
@@ -157,12 +160,17 @@ namespace Slime_Game
             // menu
             startTexture = Content.Load<Texture2D>("startButton");
             quitTexture = Content.Load<Texture2D>("quitButton");
-            startButton = new Button(startTexture, new Rectangle(150, 550, 300, 100));
-            quitButton = new Button(quitTexture, new Rectangle(574, 550, 300, 100));
+            startScreen = Content.Load<Texture2D>("startScreen");
+            startButton = new Button(startTexture, new Rectangle(640, 600, 300, 100));
+            quitButton = new Button(quitTexture, new Rectangle(640, 800, 300, 100));
+
+            // loading
+            loadingScreen = Content.Load<Texture2D>("loadScreen");
 
             // win screen
             restartTexture = Content.Load<Texture2D>("restartButton");
-            restartButton = new Button(restartTexture, new Rectangle(150, 650, 300, 100));
+            winScreen = Content.Load<Texture2D>("winScreen");
+            restartButton = new Button(restartTexture, new Rectangle(30, 300, 300, 100));
 
             //Play Song
             MediaPlayer.IsRepeating = true;
@@ -183,7 +191,9 @@ namespace Slime_Game
             switch (gameState)
             {
                 case GameState.Menu:
-                    quitButton.Y = 550;
+                    // moves quit button from win position to start position (in case player restarts from the end)
+                    quitButton.X = 640;
+                    quitButton.Y = 800;
 
                     // click on start game -> loading screen
                     if(startButton.MousePosition() && startButton.MouseClick())
@@ -294,7 +304,11 @@ namespace Slime_Game
 
                 //For when on the game win screen
                 case GameState.WinScreen:
-                    quitButton.Y = 650;
+
+                    // moves quit button from win position to start position (in case player restarts from the end)
+                    quitButton.X = 700;
+                    quitButton.Y = 300;
+
                     NextLevel(); //Then calls nextLevel to reset to the first level
 
                     // click on restart -> menu
@@ -330,12 +344,9 @@ namespace Slime_Game
             {
                 //For Menu state
                 case GameState.Menu:
-                    
-                    // background
-                    GraphicsDevice.Clear(Color.LimeGreen);
 
-                    // font(s)
-                    _spriteBatch.DrawString(titleFont, "Sebastian Slime!", new Vector2(275, 300), Color.DarkOliveGreen);
+                    // background image
+                    _spriteBatch.Draw(startScreen, new Rectangle(0, 0, 1024, 1024), Color.White);
 
                     // button(s)
                     startButton.Draw(_spriteBatch);
@@ -345,12 +356,10 @@ namespace Slime_Game
 
                 //For in the Loading screen
                 case GameState.LoadingScreen:
-                    
-                    // background
-                    GraphicsDevice.Clear(Color.DarkOliveGreen);
 
-                    // font(s)
-                    _spriteBatch.DrawString(titleFont, "Loading...", new Vector2(30, 920), Color.LimeGreen);
+                    // background image
+                    _spriteBatch.Draw(loadingScreen, new Rectangle(0, 0, 1024, 1024), Color.White);
+
                     break;
 
 
@@ -389,12 +398,8 @@ namespace Slime_Game
 
                 //Win screen state
                 case GameState.WinScreen:
-                    // background
-                    GraphicsDevice.Clear(Color.LimeGreen);
-
-                    // font(s)
-                    _spriteBatch.DrawString(titleFont, "You found your family!", new Vector2(225, 300), Color.DarkOliveGreen);
-                    _spriteBatch.DrawString(titleFont, "Congratulations! :)", new Vector2(275, 400), Color.DarkOliveGreen);
+                    // background image
+                    _spriteBatch.Draw(winScreen, new Rectangle(0, 0, 1024, 1024), Color.White);;
 
                     // button(s)
                     restartButton.Draw(_spriteBatch);
