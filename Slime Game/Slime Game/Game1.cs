@@ -246,12 +246,11 @@ namespace Slime_Game
                 //In Game State
                 case GameState.InGame:
 
-                    // Switch song if on stage 3
-                    if (currentLevel == 3)
+                    // Switch song if on stage 6
+                    if (currentLevel == 6)
                     {
                         PlaySong(1);
                     }
-                    
 
                     player.Update(gameTime);
                     // Collectable animation
