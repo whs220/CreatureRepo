@@ -104,22 +104,25 @@ namespace Slime_Game
             // This is the order of levels that appear!
             levelNames = new string[]
             {
+                //Tutorial Levels
                 "Content/firstLevel.level",
                 "Content/secondLevel.level",
                 "Content/thirdLevel.level",
                 "Content/fourthLevel.level",
+
+                //Middle levels?
                 "Content/welcome_slime.level",
                 "Content/epic_slide.level",
                 "Content/need_for_speed.level",
-                "Content/Bounce.level",
+                
 
                 //spring tutorial
-                "Content/spring_hell.level",
-                
-
+                "Content/springTutoiral.level",
+                "Content/Bounce.level",
+                "Content/maze.level",
+                "Content/spring_hell.level"
 
                 //"Content/level1.level",
-                
             };
 
             levels = new List<Level>();
