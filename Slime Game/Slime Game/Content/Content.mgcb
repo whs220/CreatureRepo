@@ -49,6 +49,18 @@
 /processorParam:TextureFormat=Compressed
 /build:comicSans36.spritefont
 
+#begin creditsButton.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:creditsButton.png
+
 #begin debug_gas.png
 /importer:TextureImporter
 /processor:TextureProcessor
