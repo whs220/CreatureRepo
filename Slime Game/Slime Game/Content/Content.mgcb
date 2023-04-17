@@ -121,6 +121,18 @@
 #begin need_for_speed.level
 /copy:need_for_speed.level
 
+#begin newer_slime.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:newer_slime.png
+
 #begin pipe.png
 /importer:TextureImporter
 /processor:TextureProcessor
