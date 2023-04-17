@@ -161,7 +161,7 @@ namespace Slime_Game
 
             // menu
             startTexture = Content.Load<Texture2D>("newStartButton");
-            quitTexture = Content.Load<Texture2D>("quitButton");
+            quitTexture = Content.Load<Texture2D>("newQuitButton");
             startScreen = Content.Load<Texture2D>("startScreen");
             startButton = new Button(startTexture, new Rectangle(640, 600, 300, 100));
             quitButton = new Button(quitTexture, new Rectangle(640, 800, 300, 100));
@@ -170,7 +170,7 @@ namespace Slime_Game
             loadingScreen = Content.Load<Texture2D>("loadScreen");
 
             // win screen
-            restartTexture = Content.Load<Texture2D>("restartButton");
+            restartTexture = Content.Load<Texture2D>("newRestartButton");
             winScreen = Content.Load<Texture2D>("winScreen");
             restartButton = new Button(restartTexture, new Rectangle(30, 300, 300, 100));
 
