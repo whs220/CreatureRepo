@@ -27,6 +27,9 @@
 /processorParam:TextureFormat=Compressed
 /build:bankgothiclight16.spritefont
 
+#begin Bounce.level
+/copy:Bounce.level
+
 #begin collectables.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -45,6 +48,18 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
 /build:comicSans36.spritefont
+
+#begin creditsButton.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:creditsButton.png
 
 #begin debug_gas.png
 /importer:TextureImporter
@@ -100,6 +115,9 @@
 #begin firstLevel.level
 /copy:firstLevel.level
 
+#begin fourthLevel.level
+/copy:fourthLevel.level
+
 #begin ice.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -118,6 +136,18 @@
 #begin level1.level
 /copy:level1.level
 
+#begin loadScreen.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:loadScreen.png
+
 #begin need_for_speed.level
 /copy:need_for_speed.level
 
@@ -134,6 +164,43 @@
 /build:newer_slime.png
 
 #begin pipe.png
+#begin newQuitButton.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:newQuitButton.png
+
+#begin newRestartButton.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:newRestartButton.png
+
+#begin newStartButton.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:newStartButton.png
+
+#begin pipe.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -144,30 +211,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:pipe.png
-
-#begin quitButton.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:quitButton.png
-
-#begin restartButton.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:restartButton.png
 
 #begin secondLevel.level
 /copy:secondLevel.level
@@ -183,6 +226,12 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:sfx_ice.mp3
+
+#begin sfx_landing.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx_landing.mp3
 
 #begin slime.png
 /importer:TextureImporter
@@ -202,10 +251,16 @@
 /processorParam:Quality=Best
 /build:slimegame.mp3
 
+#begin slimegame2.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:slimegame2.mp3
+
 #begin spring_hell.level
 /copy:spring_hell.level
 
-#begin startButton.png
+#begin spring.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -215,13 +270,31 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:startButton.png
+/build:spring.png
+
+#begin springTutoiral.level
+/copy:springTutoiral.level
+
+#begin startScreen.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:startScreen.png
 
 #begin test2.level
 /copy:test2.level
 
 #begin testLevel.level
 /copy:testLevel.level
+
+#begin thirdLevel.level
+/copy:thirdLevel.level
 
 #begin tileset.png
 /importer:TextureImporter
@@ -243,4 +316,16 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:win.mp3
+
+#begin winScreen.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:winScreen.png
 

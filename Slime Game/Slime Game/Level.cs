@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.IO;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Audio;
 
 namespace Slime_Game
 {
@@ -96,6 +97,8 @@ namespace Slime_Game
             this.gameObjects = new List<GameObject>();
             this.springs = new List<Spring>();
             backTile = new Tile(tilemap, new Rectangle(0, 0, 32, 32), new Rectangle(480, 480, 32, 32));
+
+            
         }
 
 
@@ -116,6 +119,7 @@ namespace Slime_Game
             tiles.Clear();
             collectables.Clear();
             gameObjects.Clear();
+            springs.Clear();
 
             //File IO
             try
@@ -292,7 +296,9 @@ namespace Slime_Game
             // each spring is drawn
             foreach (Spring spring in springs)
             {
-                spring.Draw(sb);
+                // Flip spring if gas
+                spring.Flip = player.CurrentMatterState == PlayerMatterState.Gas;
+                spring.DrawBounce(sb, Color.White);
             }
             
         }
@@ -381,6 +387,7 @@ namespace Slime_Game
 
             //is not grounded
             bool isGrounded = false;
+            bool currentIsGrounded = player.IsGrounded;
 
             //checks for intersections
             foreach(Tile tile in tiles) 
@@ -459,7 +466,7 @@ namespace Slime_Game
                             posCopy.X += addIntersection.Width;
                         }
                         // If player is solid, bounce the ice physics!
-                        if (player.CurrentMatterState == PlayerMatterState.Solid)
+                        if (player.CurrentMatterState == PlayerMatterState.Solid && checkIntersection.Height > 4)
                         {
                             player.Speed = -player.Speed;
                         }
@@ -499,11 +506,22 @@ namespace Slime_Game
             //checks for intersections
             foreach (Spring spring in springs)
             {
-                if (player.Position.Intersects(spring.Position))
+                // Boost player up!!
+                // Have to increase y position to avoid bumping!
+
+                int flip = 1;
+                if (player.GetCollisionHelperRect().Intersects(spring.Position))
                 {
+                    // Boost downwards if gas
+                    if (player.CurrentMatterState == PlayerMatterState.Gas) { flip = -1; }
+
+                    Rectangle posCopy = player.Position;
                     Vector2 velCopy = player.Velocity;
-                    velCopy.Y = -15;
+                    posCopy.Y -= 4 * flip;
+                    velCopy.Y = -14 * flip;
                     player.Velocity = velCopy;
+                    player.Position = posCopy;
+                    spring.StartAnimation();
                     break;
                 }
             }

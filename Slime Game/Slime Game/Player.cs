@@ -52,6 +52,8 @@ namespace Slime_Game
         //SOund effects
         SoundEffect sfx_Fire;
         SoundEffect sfx_Ice;
+        SoundEffect sfx_jump;
+        
         #endregion
 
         #region properties
@@ -163,6 +165,8 @@ namespace Slime_Game
             //Sound Effect
             sfx_Fire = Art.Instance.LoadSoundEffect("sfx_fire");
             sfx_Ice = Art.Instance.LoadSoundEffect("sfx_ice");
+            sfx_jump = Art.Instance.LoadSoundEffect("sfx_landing");
+
         }
 
 
@@ -331,7 +335,7 @@ namespace Slime_Game
                         else
                         {
                             // Accelerate at a negative dir
-                            if (speed > -15)
+                            if (speed > -12)
                             {
                                 speed -= 1;
                             }
@@ -360,7 +364,7 @@ namespace Slime_Game
                         else
                         {
                             // Accelerate at a negative dir
-                            if (speed < 15)
+                            if (speed < 12)
                             {
                                 speed += 1;
                             }
@@ -469,6 +473,9 @@ namespace Slime_Game
                         //If the player is liquid jump is normal
                         case PlayerMatterState.Liquid:
                             velocity.Y = (int)jumpHeight;
+
+                            //Sound Effects
+                            sfx_jump.Play();
                             break;
                     }
                 }
