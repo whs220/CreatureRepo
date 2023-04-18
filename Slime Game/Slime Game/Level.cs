@@ -466,10 +466,11 @@ namespace Slime_Game
                         {
                             posCopy.X += addIntersection.Width;
                         }
-                        // If player is solid, bounce the ice physics!
+                        // If player is solid, bounce! Cool ice physics!
                         if (player.CurrentMatterState == PlayerMatterState.Solid && checkIntersection.Height > 6)
                         {
-                            player.Speed = -player.Speed;
+                            // Lesser bounce to stop clipping through walls :(
+                            player.Speed = -player.Speed * 0.8f;
                         }
                     }
 

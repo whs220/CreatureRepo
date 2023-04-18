@@ -55,6 +55,8 @@
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonLoad = new System.Windows.Forms.Button();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.pillarBottom = new System.Windows.Forms.Button();
+            this.pillarTop = new System.Windows.Forms.Button();
             this.groupSelect.SuspendLayout();
             this.groupCurrentColor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.colorCurrent)).BeginInit();
@@ -75,6 +77,8 @@
             // 
             // groupSelect
             // 
+            this.groupSelect.Controls.Add(this.pillarBottom);
+            this.groupSelect.Controls.Add(this.pillarTop);
             this.groupSelect.Controls.Add(this.corner4);
             this.groupSelect.Controls.Add(this.corner3);
             this.groupSelect.Controls.Add(this.corner2);
@@ -383,6 +387,30 @@
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
+            // pillarBottom
+            // 
+            this.pillarBottom.BackColor = System.Drawing.Color.Thistle;
+            this.pillarBottom.Location = new System.Drawing.Point(143, 390);
+            this.pillarBottom.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pillarBottom.Name = "pillarBottom";
+            this.pillarBottom.Size = new System.Drawing.Size(58, 58);
+            this.pillarBottom.TabIndex = 24;
+            this.pillarBottom.Text = "pillarBottom";
+            this.pillarBottom.UseVisualStyleBackColor = false;
+            this.pillarBottom.Click += new System.EventHandler(this.colorSelect_Click);
+            // 
+            // pillarTop
+            // 
+            this.pillarTop.BackColor = System.Drawing.Color.Moccasin;
+            this.pillarTop.Location = new System.Drawing.Point(143, 329);
+            this.pillarTop.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pillarTop.Name = "pillarTop";
+            this.pillarTop.Size = new System.Drawing.Size(58, 58);
+            this.pillarTop.TabIndex = 25;
+            this.pillarTop.Text = "pillarTop";
+            this.pillarTop.UseVisualStyleBackColor = false;
+            this.pillarTop.Click += new System.EventHandler(this.colorSelect_Click);
+            // 
             // editorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -433,5 +461,7 @@
         private System.Windows.Forms.Button CGleft;
         private System.Windows.Forms.Button CGright;
         private System.Windows.Forms.Button corner4;
+        private System.Windows.Forms.Button pillarBottom;
+        private System.Windows.Forms.Button pillarTop;
     }
 }
