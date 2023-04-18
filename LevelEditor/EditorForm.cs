@@ -192,6 +192,10 @@ namespace LevelEditor
                 {
                     tileColor = Color.Thistle;
                 }
+                else if (objectData[2] == "drainPipe")
+                {
+                    tileColor = Color.Olive;
+                }
                 // ----------------------------
                 #endregion
 
@@ -292,6 +296,10 @@ namespace LevelEditor
                                 else if (objectData[2] == "pillarBottom")
                                 {
                                     tileColor = Color.Thistle;
+                                }
+                                else if (objectData[2] == "drainPipe")
+                                {
+                                    tileColor = Color.Olive;
                                 }
                                 // ----------------------------
 
@@ -477,6 +485,10 @@ namespace LevelEditor
                             case -2572328: //Thistle
                                 writer.WriteLine(i + "," + j + "," + "pillarBottom");
                                 break;
+
+                            case -8355840: //Olive
+                                writer.WriteLine(i + "," + j + "," + "drainPipe");
+                                break;
                             // ------------------------------------------------
 
                             default:
@@ -632,6 +644,10 @@ namespace LevelEditor
                     {
                         tileColor = Color.Thistle;
                     }
+                    else if (objectData[2] == "drainPipe")
+                    {
+                        tileColor = Color.Olive;
+                    }
                     // ----------------------------
                     #endregion
 
@@ -732,6 +748,10 @@ namespace LevelEditor
                                     else if (objectData[2] == "pillarBottom")
                                     {
                                         tileColor = Color.Thistle;
+                                    }
+                                    else if (objectData[2] == "drainPipe")
+                                    {
+                                        tileColor = Color.Olive;
                                     }
                                     // ----------------------------
                                 }

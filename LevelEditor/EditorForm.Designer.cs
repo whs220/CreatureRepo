@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             this.groupMap = new System.Windows.Forms.GroupBox();
             this.groupSelect = new System.Windows.Forms.GroupBox();
+            this.pillarBottom = new System.Windows.Forms.Button();
+            this.pillarTop = new System.Windows.Forms.Button();
             this.corner4 = new System.Windows.Forms.Button();
             this.corner3 = new System.Windows.Forms.Button();
             this.corner2 = new System.Windows.Forms.Button();
@@ -55,8 +57,7 @@
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonLoad = new System.Windows.Forms.Button();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.pillarBottom = new System.Windows.Forms.Button();
-            this.pillarTop = new System.Windows.Forms.Button();
+            this.drainPipe = new System.Windows.Forms.Button();
             this.groupSelect.SuspendLayout();
             this.groupCurrentColor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.colorCurrent)).BeginInit();
@@ -77,6 +78,7 @@
             // 
             // groupSelect
             // 
+            this.groupSelect.Controls.Add(this.drainPipe);
             this.groupSelect.Controls.Add(this.pillarBottom);
             this.groupSelect.Controls.Add(this.pillarTop);
             this.groupSelect.Controls.Add(this.corner4);
@@ -107,6 +109,30 @@
             this.groupSelect.TabIndex = 1;
             this.groupSelect.TabStop = false;
             this.groupSelect.Text = "Tile Selector";
+            // 
+            // pillarBottom
+            // 
+            this.pillarBottom.BackColor = System.Drawing.Color.Thistle;
+            this.pillarBottom.Location = new System.Drawing.Point(143, 390);
+            this.pillarBottom.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pillarBottom.Name = "pillarBottom";
+            this.pillarBottom.Size = new System.Drawing.Size(58, 58);
+            this.pillarBottom.TabIndex = 24;
+            this.pillarBottom.Text = "pillarBottom";
+            this.pillarBottom.UseVisualStyleBackColor = false;
+            this.pillarBottom.Click += new System.EventHandler(this.colorSelect_Click);
+            // 
+            // pillarTop
+            // 
+            this.pillarTop.BackColor = System.Drawing.Color.Moccasin;
+            this.pillarTop.Location = new System.Drawing.Point(143, 329);
+            this.pillarTop.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pillarTop.Name = "pillarTop";
+            this.pillarTop.Size = new System.Drawing.Size(58, 58);
+            this.pillarTop.TabIndex = 25;
+            this.pillarTop.Text = "pillarTop";
+            this.pillarTop.UseVisualStyleBackColor = false;
+            this.pillarTop.Click += new System.EventHandler(this.colorSelect_Click);
             // 
             // corner4
             // 
@@ -387,29 +413,17 @@
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
-            // pillarBottom
+            // drainPipe
             // 
-            this.pillarBottom.BackColor = System.Drawing.Color.Thistle;
-            this.pillarBottom.Location = new System.Drawing.Point(143, 390);
-            this.pillarBottom.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.pillarBottom.Name = "pillarBottom";
-            this.pillarBottom.Size = new System.Drawing.Size(58, 58);
-            this.pillarBottom.TabIndex = 24;
-            this.pillarBottom.Text = "pillarBottom";
-            this.pillarBottom.UseVisualStyleBackColor = false;
-            this.pillarBottom.Click += new System.EventHandler(this.colorSelect_Click);
-            // 
-            // pillarTop
-            // 
-            this.pillarTop.BackColor = System.Drawing.Color.Moccasin;
-            this.pillarTop.Location = new System.Drawing.Point(143, 329);
-            this.pillarTop.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.pillarTop.Name = "pillarTop";
-            this.pillarTop.Size = new System.Drawing.Size(58, 58);
-            this.pillarTop.TabIndex = 25;
-            this.pillarTop.Text = "pillarTop";
-            this.pillarTop.UseVisualStyleBackColor = false;
-            this.pillarTop.Click += new System.EventHandler(this.colorSelect_Click);
+            this.drainPipe.BackColor = System.Drawing.Color.Olive;
+            this.drainPipe.Location = new System.Drawing.Point(15, 452);
+            this.drainPipe.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.drainPipe.Name = "drainPipe";
+            this.drainPipe.Size = new System.Drawing.Size(58, 58);
+            this.drainPipe.TabIndex = 26;
+            this.drainPipe.Text = "drainPipe";
+            this.drainPipe.UseVisualStyleBackColor = false;
+            this.drainPipe.Click += new System.EventHandler(this.colorSelect_Click);
             // 
             // editorForm
             // 
@@ -463,5 +477,6 @@
         private System.Windows.Forms.Button corner4;
         private System.Windows.Forms.Button pillarBottom;
         private System.Windows.Forms.Button pillarTop;
+        private System.Windows.Forms.Button drainPipe;
     }
 }
