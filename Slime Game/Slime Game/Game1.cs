@@ -360,7 +360,7 @@ namespace Slime_Game
                     // button(s)
                     startButton.Draw(_spriteBatch);
                     quitButton.Draw(_spriteBatch);
-                    break;
+                    break; 
 
 
                 //For in the Loading screen
