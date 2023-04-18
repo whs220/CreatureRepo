@@ -185,8 +185,8 @@ namespace Slime_Game
             ProcessMovement(gameTime);
             UpdateAnimation(gameTime);
 
-            // Only apply gravity if the player is not dead
-            if (currentMatterState != PlayerMatterState.Dead || GravityOff == false)
+            // Don't apply gravity if a debug setting is on
+            if (GravityOff == false)
             {
                 ApplyGravity();
             }
@@ -492,38 +492,30 @@ namespace Slime_Game
         /// </summary>
         public void ApplyGravity()
         {
-            //When debug isn't active
-            if (GravityOff == false)
+            if (currentMatterState != PlayerMatterState.Gas && lastMatterState != PlayerMatterState.Gas)
             {
-                //Gas has inverse jump
-                if (currentMatterState != PlayerMatterState.Gas)
+                velocity += gravity;
+
+                // Cap y velocity to avoid clipping through floor
+                if (velocity.Y > 15)
                 {
-                    velocity += gravity;
-
-                    // Cap y velocity to avoid clipping through floor
-                    if (velocity.Y > 15)
-                    {
-                        velocity.Y = 15;
-                    }
+                    velocity.Y = 15;
                 }
-                else
-                {
-                    velocity -= gravity;
-
-                    // Cap player y velocity if gas
-                    if (velocity.Y < -5)
-                    {
-                        velocity.Y = -5;
-                    }
-                }
-
-                position.Y += (int)velocity.Y;
             }
-            //For gas gravity
+            // Gas has inverse jump
+            // Or if you died as gas, you still float
             else
             {
-                position.Y -= (int)gravity.Y;
+                velocity -= gravity;
+
+                // Cap player y velocity if gas
+                if (velocity.Y < -5)
+                {
+                    velocity.Y = -5;
+                }
             }
+
+            position.Y += (int)velocity.Y;
         }
 
         /// <summary>
@@ -716,6 +708,7 @@ namespace Slime_Game
         {
             // Reset player stats back to liquid
             currentMatterState = PlayerMatterState.Liquid;
+            lastMatterState = PlayerMatterState.Liquid;
             gravityOff = false;
             speed = 5;
             velocity.Y = 0;
