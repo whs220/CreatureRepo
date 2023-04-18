@@ -146,7 +146,7 @@ namespace Slime_Game
                     if (data[2] == "ground")
                     {
                         //uses second rectangle to frame the part of the tilemap
-                        tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), new Rectangle(0, 351, 32, 32)));
+                        tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), new Rectangle(0, 352, 32, 32)));
                     }
                     if (data[2] == "leftWall")
                     {
@@ -182,11 +182,11 @@ namespace Slime_Game
                     }
                     if (data[2] == "corner1")
                     {
-                        tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), new Rectangle(800, 160, 32, 32)));
+                        tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), new Rectangle(544, 352, 32, 32)));
                     }
                     if (data[2] == "corner2")
                     {
-                        tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), new Rectangle(864, 288, 32, 32)));
+                        tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), new Rectangle(480, 352, 32, 32)));
                     }
                     if (data[2] == "corner3")
                     {

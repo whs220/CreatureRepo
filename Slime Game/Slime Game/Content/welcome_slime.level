@@ -20,12 +20,12 @@
 0,19,top
 0,20,top
 0,21,top
-0,22,top
-0,23,top
+0,22,filler
+0,23,filler
 0,24,top
 0,25,top
-0,26,top
-0,27,top
+0,26,filler
+0,27,filler
 0,28,top
 0,29,top
 0,30,top
@@ -92,7 +92,7 @@
 9,21,corner3
 9,22,corner2
 9,31,rightWall
-10,0,leftWall
+10,0,filler
 10,1,platform
 10,2,CGright
 10,12,rightWall
@@ -117,7 +117,7 @@
 11,28,platform
 11,29,platform
 11,30,platform
-11,31,rightWall
+11,31,filler
 12,0,leftWall
 12,12,rightWall
 12,13,filler
@@ -125,7 +125,7 @@
 12,15,filler
 12,16,leftWall
 12,31,rightWall
-13,0,leftWall
+13,0,filler
 13,1,platform
 13,2,platform
 13,3,platform
@@ -183,7 +183,7 @@
 19,0,leftWall
 19,24,pillar
 19,31,rightWall
-20,0,leftWall
+20,0,filler
 20,1,platform
 20,2,platform
 20,3,platform
@@ -206,7 +206,7 @@
 22,22,hot
 22,24,pillar
 22,31,rightWall
-23,0,leftWall
+23,0,filler
 23,1,platform
 23,2,platform
 23,3,platform
@@ -270,8 +270,8 @@
 31,3,ground
 31,4,ground
 31,5,ground
-31,6,ground
-31,7,ground
+31,6,filler
+31,7,filler
 31,8,ground
 31,9,ground
 31,10,ground
@@ -283,7 +283,7 @@
 31,16,ground
 31,17,ground
 31,18,ground
-31,19,ground
+31,19,filler
 31,20,ground
 31,21,ground
 31,22,ground
