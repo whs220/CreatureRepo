@@ -1,4 +1,4 @@
-0,0,leftWall
+0,0,filler
 0,1,top
 0,2,top
 0,3,top
@@ -29,7 +29,7 @@
 0,28,top
 0,29,top
 0,30,top
-0,31,rightWall
+0,31,filler
 1,0,leftWall
 1,22,rightWall
 1,23,leftWall
@@ -217,7 +217,7 @@
 23,8,platform
 23,9,platform
 23,10,platform
-23,11,platform
+23,11,ground
 23,12,platform
 23,13,platform
 23,14,platform
@@ -246,7 +246,7 @@
 27,16,CGleft
 27,17,platform
 27,18,platform
-27,19,CGright
+27,19,corner2
 27,31,rightWall
 28,0,leftWall
 28,11,pillar
@@ -264,7 +264,7 @@
 30,19,pillar
 30,28,hot
 30,31,rightWall
-31,0,ground
+31,0,filler
 31,1,ground
 31,2,ground
 31,3,ground
@@ -295,4 +295,4 @@
 31,28,ground
 31,29,ground
 31,30,ground
-31,31,ground
+31,31,filler
