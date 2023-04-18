@@ -184,6 +184,14 @@ namespace LevelEditor
                 {
                     tileColor = Color.MediumOrchid;
                 }
+                else if (objectData[2] == "pillarTop")
+                {
+                    tileColor = Color.Moccasin;
+                }
+                else if (objectData[2] == "pillarBottom")
+                {
+                    tileColor = Color.Thistle;
+                }
                 // ----------------------------
                 #endregion
 
@@ -276,6 +284,14 @@ namespace LevelEditor
                                 else if (objectData[2] == "spring")
                                 {
                                     tileColor = Color.MediumOrchid;
+                                }
+                                else if (objectData[2] == "pillarTop")
+                                {
+                                    tileColor = Color.Moccasin;
+                                }
+                                else if (objectData[2] == "pillarBottom")
+                                {
+                                    tileColor = Color.Thistle;
                                 }
                                 // ----------------------------
 
@@ -453,6 +469,14 @@ namespace LevelEditor
                             case -4565549: //MediumOrchid
                                 writer.WriteLine(i + "," + j + "," + "spring");
                                 break;
+
+                            case -6987: //Moccasin
+                                writer.WriteLine(i + "," + j + "," + "pillarTop");
+                                break;
+
+                            case -2572328: //Thistle
+                                writer.WriteLine(i + "," + j + "," + "pillarBottom");
+                                break;
                             // ------------------------------------------------
 
                             default:
@@ -600,6 +624,14 @@ namespace LevelEditor
                     {
                         tileColor = Color.MediumOrchid;
                     }
+                    else if (objectData[2] == "pillarTop")
+                    {
+                        tileColor = Color.Moccasin;
+                    }
+                    else if (objectData[2] == "pillarBottom")
+                    {
+                        tileColor = Color.Thistle;
+                    }
                     // ----------------------------
                     #endregion
 
@@ -692,6 +724,14 @@ namespace LevelEditor
                                     else if (objectData[2] == "spring")
                                     {
                                         tileColor = Color.MediumOrchid;
+                                    }
+                                    else if (objectData[2] == "pillarTop")
+                                    {
+                                        tileColor = Color.Moccasin;
+                                    }
+                                    else if (objectData[2] == "pillarBottom")
+                                    {
+                                        tileColor = Color.Thistle;
                                     }
                                     // ----------------------------
                                 }
