@@ -56,9 +56,6 @@ namespace Slime_Game
         //For debug mode
         private bool debugModeActive;
 
-        //Sound effects
-        SoundEffect sfx_Landing;
-
         // Properties
 
         /// <summary>
@@ -101,8 +98,7 @@ namespace Slime_Game
             this.springs = new List<Spring>();
             backTile = new Tile(tilemap, new Rectangle(0, 0, 32, 32), new Rectangle(480, 480, 32, 32));
 
-            //Sound Effects
-            sfx_Landing = Art.Instance.LoadSoundEffect("sfx_landing");
+            
         }
 
 
@@ -117,7 +113,6 @@ namespace Slime_Game
 
             //make stream reader and set the done bool to false
             StreamReader input;
-            bool done = false;
 
             //clear any previous tiles
             tiles.Clear();
@@ -250,6 +245,7 @@ namespace Slime_Game
         /// </summary>
         public void Draw(SpriteBatch sb)
         {
+            /* Old background tiles
             //Prints all background tiles 
             for (int i = 0; i < 32; i++)
             {
@@ -259,6 +255,7 @@ namespace Slime_Game
                     backTile.Draw(sb);
                 }
             }
+            */
 
             //Each collectable is drawn
             foreach (Collectable collectable in collectables)
@@ -410,10 +407,6 @@ namespace Slime_Game
 
             //update player
             player.IsGrounded = isGrounded;
-            if(isGrounded != currentIsGrounded && currentIsGrounded == true)
-            {
-                sfx_Landing.Play();
-            }
 
             if(intersections.Count > 0)
             {
@@ -474,7 +467,7 @@ namespace Slime_Game
                             posCopy.X += addIntersection.Width;
                         }
                         // If player is solid, bounce the ice physics!
-                        if (player.CurrentMatterState == PlayerMatterState.Solid)
+                        if (player.CurrentMatterState == PlayerMatterState.Solid && checkIntersection.Height > 6)
                         {
                             player.Speed = -player.Speed;
                         }

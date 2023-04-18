@@ -49,6 +49,18 @@
 /processorParam:TextureFormat=Compressed
 /build:comicSans36.spritefont
 
+#begin creditsButton.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:creditsButton.png
+
 #begin debug_gas.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -139,6 +151,19 @@
 #begin need_for_speed.level
 /copy:need_for_speed.level
 
+#begin newer_slime.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:newer_slime.png
+
+#begin pipe.png
 #begin newQuitButton.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -225,6 +250,12 @@
 /processor:SongProcessor
 /processorParam:Quality=Best
 /build:slimegame.mp3
+
+#begin slimegame2.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:slimegame2.mp3
 
 #begin spring_hell.level
 /copy:spring_hell.level

@@ -52,6 +52,7 @@ namespace Slime_Game
         //SOund effects
         SoundEffect sfx_Fire;
         SoundEffect sfx_Ice;
+        SoundEffect sfx_jump;
         
         #endregion
 
@@ -135,11 +136,11 @@ namespace Slime_Game
         #endregion
 
         //constructor
-        public Player() : base(null, new Rectangle(50, 50, 24, 16))
+        public Player() : base(null, new Rectangle(50, 50, 24, 24))
         {
             this.debugSolid = Art.Instance.LoadTexture2D("debug_solid");
 
-            this.texture = Art.Instance.LoadTexture2D("slime");
+            this.texture = Art.Instance.LoadTexture2D("newer_slime");
             debugModeActive = false;
 
             speed = 5.0f;
@@ -164,7 +165,8 @@ namespace Slime_Game
             //Sound Effect
             sfx_Fire = Art.Instance.LoadSoundEffect("sfx_fire");
             sfx_Ice = Art.Instance.LoadSoundEffect("sfx_ice");
-            
+            sfx_jump = Art.Instance.LoadSoundEffect("sfx_landing");
+
         }
 
 
@@ -212,8 +214,8 @@ namespace Slime_Game
                 sb.Draw(debugSolid, groundRect, Color.White);
                 // Also draw the intersectRect
                 sb.Draw(debugSolid, GetCollisionHelperRect(), Color.Green);
+                sb.Draw(debugSolid, position, Color.Red);
             }
-            
 
             // draw MatterState
             // Currently draws debug textures
@@ -271,7 +273,7 @@ namespace Slime_Game
                             }
                             else
                             {
-                                DrawPlayer(sb, SpriteEffects.None, 4, 2);
+                                DrawPlayer(sb, SpriteEffects.None, 2, 2);
                             }
                             break;
                     }
@@ -471,6 +473,9 @@ namespace Slime_Game
                         //If the player is liquid jump is normal
                         case PlayerMatterState.Liquid:
                             velocity.Y = (int)jumpHeight;
+
+                            //Sound Effects
+                            sfx_jump.Play();
                             break;
                     }
                 }
@@ -645,7 +650,7 @@ namespace Slime_Game
         /// <param name="flip"></param>
         private void DrawPlayer(SpriteBatch sb, SpriteEffects flip, int frameCycle, int sheetLine)
         {
-            int yDifference = -16;
+            int yDifference = -8;
             if (currentMatterState == PlayerMatterState.Gas) { yDifference = 0; }
 
             sb.Draw(
@@ -677,7 +682,7 @@ namespace Slime_Game
             // (Notice how it flips when you jump in debug mode)
 
             // Default is bottom
-            int yDifference = -16;
+            int yDifference = -8;
             // If we are going up, put the box on top
             if (Math.Round(velocity.Y) < 0) { yDifference = 0; }
 

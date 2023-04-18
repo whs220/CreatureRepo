@@ -76,6 +76,8 @@ namespace Slime_Game
 
         //Music
         private Song themeSong;
+        private Song secondSong;
+        private int currentSong = -1;
 
         //Sound Effect
         SoundEffect sfx_NextLevel;
@@ -84,6 +86,7 @@ namespace Slime_Game
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
+            
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
 
@@ -138,6 +141,7 @@ namespace Slime_Game
 
             // Load in sounds
             themeSong = Content.Load<Song>("slimegame");
+            secondSong = Content.Load<Song>("slimegame2");
 
             // loading in fonts
             debugFont = Content.Load<SpriteFont>("bankgothiclight16");
@@ -177,7 +181,7 @@ namespace Slime_Game
             //Play Song
             MediaPlayer.IsRepeating = true;
             MediaPlayer.Volume = 0.2f;
-            MediaPlayer.Play(themeSong);
+            PlaySong(0);
             
 
             //Sound Effects
@@ -243,8 +247,11 @@ namespace Slime_Game
                 //In Game State
                 case GameState.InGame:
 
-                    
-                    
+                    // Switch song if on stage 6
+                    if (currentLevel == 6)
+                    {
+                        PlaySong(1);
+                    }
 
                     player.Update(gameTime);
                     // Collectable animation
@@ -369,7 +376,7 @@ namespace Slime_Game
                 case GameState.InGame:
 
                     // background
-                    GraphicsDevice.Clear(Color.CornflowerBlue);
+                    GraphicsDevice.Clear(Color.DarkGray);
 
                     // level and player
                     levels[currentLevel].Draw(_spriteBatch);
@@ -465,22 +472,45 @@ namespace Slime_Game
                     new Vector2(130, 500), Color.White);
             }
             // Level 1 text for tutorial 
-            if (currentLevel == 1)
+            else if (currentLevel == 1)
             {
                 sb.DrawString(gameFont, "Hit fire collectables to change \n   temperature and become a gas... \n     but don't become too hot ;)",
                     new Vector2(130, 500), Color.White);
             }
             //Level 3 tutorial text
-            if (currentLevel == 2)
+            else if (currentLevel == 2)
             {
                 sb.DrawString(gameFont, "    Hit Ice collectables\n temperature and become a Solid... \n Solids can't jump but can slide",
                     new Vector2(130, 600), Color.White);
             }
             //Level 4 tutorial text (Talks about resetting and all the matter states)
-            if (currentLevel == 3)
+            else if (currentLevel == 3)
             {
                 sb.DrawString(gameFont, "  If you ever get stuck hit 'R' \n      to reset The 3 matter\nstates are solid -> liquid -> gas",
                     new Vector2(130, 600), Color.White);
+            }
+        }
+
+        public void PlaySong(int id)
+        {
+            switch (id)
+            {
+                case 0:
+                    if (currentSong != 0)
+                    {
+                        MediaPlayer.Stop();
+                        MediaPlayer.Play(themeSong);
+                        currentSong = 0;
+                    }
+                    break;
+                case 1:
+                    if (currentSong != 1)
+                    {
+                        MediaPlayer.Stop();
+                        MediaPlayer.Play(secondSong);
+                        currentSong = 1;
+                    }
+                    break;
             }
         }
     }
