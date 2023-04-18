@@ -20,6 +20,18 @@
 /processorParam:TextureFormat=Compressed
 /build:arial-35.spritefont
 
+#begin background.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:background.png
+
 #begin bankgothiclight16.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
@@ -97,6 +109,18 @@
 /processorParam:TextureFormat=Color
 /build:debug_solid.png
 
+#begin drainPipe.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:drainPipe.png
+
 #begin epic_slide.level
 /copy:epic_slide.level
 
@@ -163,7 +187,6 @@
 /processorParam:TextureFormat=Color
 /build:newer_slime.png
 
-#begin pipe.png
 #begin newQuitButton.png
 /importer:TextureImporter
 /processor:TextureProcessor
