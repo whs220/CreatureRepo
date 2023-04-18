@@ -74,6 +74,9 @@ namespace Slime_Game
         private Texture2D loadingScreen;
         private double timer;
 
+        // in game
+        private Texture2D background;
+
         //Music
         private Song themeSong;
         private Song secondSong;
@@ -172,6 +175,9 @@ namespace Slime_Game
 
             // loading
             loadingScreen = Content.Load<Texture2D>("loadScreen");
+
+            // in game
+            background = Content.Load<Texture2D>("background");
 
             // win screen
             restartTexture = Content.Load<Texture2D>("newRestartButton");
@@ -360,7 +366,7 @@ namespace Slime_Game
                     // button(s)
                     startButton.Draw(_spriteBatch);
                     quitButton.Draw(_spriteBatch);
-                    break;
+                    break; 
 
 
                 //For in the Loading screen
@@ -376,7 +382,7 @@ namespace Slime_Game
                 case GameState.InGame:
 
                     // background
-                    GraphicsDevice.Clear(Color.DarkGray);
+                    _spriteBatch.Draw(background, new Rectangle(0, 0, 1024, 1024), Color.White);
 
                     // level and player
                     levels[currentLevel].Draw(_spriteBatch);
