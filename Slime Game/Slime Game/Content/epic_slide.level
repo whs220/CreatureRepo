@@ -85,12 +85,12 @@
 4,30,filler
 4,31,filler
 5,0,leftWall
-5,22,rightWall
+5,22,pillar
 5,29,rightWall
 5,30,filler
 5,31,filler
 6,0,leftWall
-6,22,rightWall
+6,22,pillar
 6,25,CGleft
 6,26,platform
 6,27,platform
@@ -105,7 +105,7 @@
 7,4,ground
 7,5,ground
 7,6,corner2
-7,22,rightWall
+7,22,pillar
 7,29,rightWall
 7,30,filler
 7,31,filler
