@@ -84,6 +84,7 @@ namespace Slime_Game
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
+            GraphicsDevice.Clear(Color.DarkGray);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
 

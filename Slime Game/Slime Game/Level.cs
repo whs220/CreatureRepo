@@ -113,7 +113,6 @@ namespace Slime_Game
 
             //make stream reader and set the done bool to false
             StreamReader input;
-            bool done = false;
 
             //clear any previous tiles
             tiles.Clear();
@@ -246,6 +245,7 @@ namespace Slime_Game
         /// </summary>
         public void Draw(SpriteBatch sb)
         {
+            /* Old background tiles
             //Prints all background tiles 
             for (int i = 0; i < 32; i++)
             {
@@ -255,6 +255,7 @@ namespace Slime_Game
                     backTile.Draw(sb);
                 }
             }
+            */
 
             //Each collectable is drawn
             foreach (Collectable collectable in collectables)
