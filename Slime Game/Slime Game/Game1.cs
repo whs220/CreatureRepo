@@ -86,7 +86,7 @@ namespace Slime_Game
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
-            GraphicsDevice.Clear(Color.DarkGray);
+            
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
 
@@ -376,7 +376,7 @@ namespace Slime_Game
                 case GameState.InGame:
 
                     // background
-                    GraphicsDevice.Clear(Color.CornflowerBlue);
+                    GraphicsDevice.Clear(Color.DarkGray);
 
                     // level and player
                     levels[currentLevel].Draw(_spriteBatch);
