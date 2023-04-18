@@ -393,15 +393,20 @@ namespace Slime_Game
             //checks for intersections
             foreach(Tile tile in tiles) 
             {
-                if (player.Position.Intersects(tile.Position))
+                // If the tile can collide with the player...
+                if (tile.CheckCollide(player.CurrentMatterState))
                 {
-                    intersections.Add(tile);
-                }
+                    // Add the tile as an intersection!
+                    if (player.Position.Intersects(tile.Position))
+                    {
+                        intersections.Add(tile);
+                    }
 
-                //grounds the player
-                if (!isGrounded && player.GroundRect.Intersects(tile.Position))
-                {
-                    isGrounded = true;
+                    //grounds the player
+                    if (!isGrounded && player.GroundRect.Intersects(tile.Position))
+                    {
+                        isGrounded = true;
+                    }
                 }
             }
 
