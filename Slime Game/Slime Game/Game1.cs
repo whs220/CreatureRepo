@@ -58,9 +58,11 @@ namespace Slime_Game
         // menu
         private Texture2D startTexture;
         private Texture2D quitTexture;
+        private Texture2D creditsTexture;
         private Texture2D startScreen;
         private Button startButton;
         private Button quitButton;
+        private Button creditsButton;
         private SpriteFont debugFont;
         private SpriteFont titleFont;
         private SpriteFont gameFont;
@@ -169,9 +171,11 @@ namespace Slime_Game
             // menu
             startTexture = Content.Load<Texture2D>("newStartButton");
             quitTexture = Content.Load<Texture2D>("newQuitButton");
+            creditsTexture = Content.Load<Texture2D>("creditsButton");
             startScreen = Content.Load<Texture2D>("startScreen");
             startButton = new Button(startTexture, new Rectangle(640, 600, 300, 100));
-            quitButton = new Button(quitTexture, new Rectangle(640, 800, 300, 100));
+            quitButton = new Button(quitTexture, new Rectangle(640, 725, 300, 100));
+            creditsButton = new Button(creditsTexture, new Rectangle(640, 850, 300, 100));
 
             // loading
             loadingScreen = Content.Load<Texture2D>("loadScreen");
@@ -205,7 +209,7 @@ namespace Slime_Game
                 case GameState.Menu:
                     // moves quit button from win position to start position (in case player restarts from the end)
                     quitButton.X = 640;
-                    quitButton.Y = 800;
+                    quitButton.Y = 725;
 
                     // click on start game -> loading screen
                     if(startButton.MousePosition() && startButton.MouseClick())
@@ -366,6 +370,8 @@ namespace Slime_Game
                     // button(s)
                     startButton.Draw(_spriteBatch);
                     quitButton.Draw(_spriteBatch);
+                    creditsButton.Draw(_spriteBatch);
+
                     break; 
 
 
