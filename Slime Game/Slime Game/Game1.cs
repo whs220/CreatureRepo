@@ -84,6 +84,9 @@ namespace Slime_Game
         private Song secondSong;
         private int currentSong = -1;
 
+        // Speedrun timer
+        private GameTime speedrunTime;
+
         //Sound Effect
         SoundEffect sfx_NextLevel;
 
@@ -219,6 +222,8 @@ namespace Slime_Game
                         // Set currentLevel to zero and set add the readLevel event
                         currentLevel = 0;
                         player.ResetLevelEvent += levels[0].ReadLevel;
+                        // Reset speedrun timer
+                        speedrunTime = new GameTime();
                         // Then the level is read in the loading screen state!
                     }
 
@@ -262,6 +267,9 @@ namespace Slime_Game
                     {
                         PlaySong(1);
                     }
+
+                    // Speedrun timer
+                    speedrunTime.ElapsedGameTime += gameTime.ElapsedGameTime;
 
                     player.Update(gameTime);
                     // Collectable animation
@@ -414,6 +422,11 @@ namespace Slime_Game
 
                     //Draws text for tutorial
                     OnBoarding(_spriteBatch);
+
+                    // Draw speedrun timer
+                    _spriteBatch.DrawString(debugFont, string.Format("{0:00}:{1:00}:{2:00}", speedrunTime.ElapsedGameTime.Minutes, speedrunTime.ElapsedGameTime.Seconds, speedrunTime.ElapsedGameTime.Milliseconds),
+                        new Vector2(915,995), Color.White);
+
                     break;
 
 
@@ -425,6 +438,11 @@ namespace Slime_Game
                     // button(s)
                     restartButton.Draw(_spriteBatch);
                     quitButton.Draw(_spriteBatch);
+
+                    // Final speedrun time!
+                    _spriteBatch.DrawString(debugFont, string.Format("{0:00}:{1:00}.{2:00}", speedrunTime.ElapsedGameTime.Minutes, speedrunTime.ElapsedGameTime.Seconds, speedrunTime.ElapsedGameTime.Milliseconds),
+                        new Vector2(915, 995), Color.Cyan);
+
                     break;
             }
 
