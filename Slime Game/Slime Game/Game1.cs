@@ -203,8 +203,6 @@ namespace Slime_Game
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
 
             // update GameState
             switch (gameState)
@@ -261,6 +259,9 @@ namespace Slime_Game
 
                 //In Game State
                 case GameState.InGame:
+
+                    if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+                        gameState = GameState.Menu;
 
                     // Switch song if on stage 6
                     if (currentLevel == 6)
