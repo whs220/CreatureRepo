@@ -498,8 +498,8 @@ namespace Slime_Game
             // Level 1 text for tutorial 
             if(currentLevel == 0)
             {
-                sb.DrawString(gameFont, "Use 'W' and or 'Space', 'D', 'A'\n            to move ", 
-                    new Vector2(130, 500), Color.White);
+                sb.DrawString(gameFont, " Use \'A\' and \'D\' to move\nUse \'W\' or \'Space\' to jump", 
+                    new Vector2(220, 500), Color.White);
             }
             // Level 1 text for tutorial 
             else if (currentLevel == 1)
