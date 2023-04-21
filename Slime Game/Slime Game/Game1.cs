@@ -124,13 +124,13 @@ namespace Slime_Game
                 //Middle levels?
                 "Content/welcome_slime.level",
                 "Content/epic_slide.level",
-                "Content/need_for_speed.level",
                 
 
                 //spring tutorial
                 "Content/springTutoiral.level",
                 "Content/Bounce.level",
                 "Content/maze.level",
+                "Content/need_for_speed.level",
                 "Content/spring_hell.level"
 
                 //"Content/level1.level",
@@ -260,7 +260,7 @@ namespace Slime_Game
                 //In Game State
                 case GameState.InGame:
 
-
+                    //If escape is clciked in game then it will take you to menu
                     if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                         gameState = GameState.Menu;
 
