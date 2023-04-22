@@ -125,13 +125,13 @@ namespace Slime_Game
                 //Middle levels?
                 "Content/welcome_slime.level",
                 "Content/epic_slide.level",
-                "Content/need_for_speed.level",
                 
 
                 //spring tutorial
                 "Content/springTutoiral.level",
                 "Content/Bounce.level",
                 "Content/maze.level",
+                "Content/need_for_speed.level",
                 "Content/spring_hell.level"
 
                 //"Content/level1.level",
@@ -206,8 +206,6 @@ namespace Slime_Game
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
 
             // update GameState
             switch (gameState)
@@ -270,6 +268,10 @@ namespace Slime_Game
 
                 //In Game State
                 case GameState.InGame:
+
+                    //If escape is clciked in game then it will take you to menu
+                    if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+                        gameState = GameState.Menu;
 
                     // Switch song if on stage 6
                     if (currentLevel == 6)
@@ -515,8 +517,8 @@ namespace Slime_Game
             // Level 1 text for tutorial 
             if(currentLevel == 0)
             {
-                sb.DrawString(gameFont, "Use 'W' and or 'Space', 'D', 'A'\n            to move ", 
-                    new Vector2(130, 500), Color.White);
+                sb.DrawString(gameFont, " Use \'A\' and \'D\' to move\nUse \'W\' or \'Space\' to jump", 
+                    new Vector2(220, 500), Color.White);
             }
             // Level 1 text for tutorial 
             else if (currentLevel == 1)
