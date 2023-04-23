@@ -546,8 +546,13 @@ namespace Slime_Game
             }
         }
 
+        /// <summary>
+        /// Changes which song is playing
+        /// </summary>
+        /// <param name="id">The id of the song to play an int value</param>
         public void PlaySong(int id)
         {
+            //To pick which song it is
             switch (id)
             {
                 case 0:
