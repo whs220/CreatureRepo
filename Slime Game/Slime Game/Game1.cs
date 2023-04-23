@@ -523,13 +523,13 @@ namespace Slime_Game
             // Level 1 text for tutorial 
             else if (currentLevel == 1)
             {
-                sb.DrawString(gameFont, "Hit fire collectables to change \n   temperature and become a gas... \n     but don't become too hot ;)",
+                sb.DrawString(gameFont, "Hit fire collectables to change \n   temperature and become a gas... \n  this will allow you to float ;)",
                     new Vector2(130, 500), Color.White);
             }
             //Level 3 tutorial text
             else if (currentLevel == 2)
             {
-                sb.DrawString(gameFont, "    Hit Ice collectables\n temperature and become a Solid... \n Solids can't jump but can slide",
+                sb.DrawString(gameFont, "    Hit Ice collectables\n and become a Solid... \n Solids can't jump but can slide",
                     new Vector2(130, 600), Color.White);
             }
             //Level 4 tutorial text (Talks about resetting and all the matter states)
