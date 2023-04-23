@@ -86,6 +86,7 @@ namespace Slime_Game
 
         // Speedrun timer
         private GameTime speedrunTime;
+        private bool speedRunTimerActive; 
 
         //Sound Effect
         SoundEffect sfx_NextLevel;
@@ -111,7 +112,7 @@ namespace Slime_Game
             // loading
             timer = 0.5f;
 
-            // ===== List of levels! =====
+            // ===== List of levels! =====d
             // This is the order of levels that appear!
             levelNames = new string[]
             {
@@ -195,7 +196,9 @@ namespace Slime_Game
             MediaPlayer.IsRepeating = true;
             MediaPlayer.Volume = 0.2f;
             PlaySong(0);
-            
+
+            //Speed run timer
+            speedRunTimerActive = false;
 
             //Sound Effects
             sfx_NextLevel = Content.Load<SoundEffect>("win");
@@ -229,6 +232,12 @@ namespace Slime_Game
                     if (quitButton.MousePosition() && quitButton.MouseClick())
                     {
                         System.Environment.Exit(0);
+                    }
+
+                    //Turns speed run timer on
+                    if(Keyboard.GetState().IsKeyDown(Keys.Tab) && prevKeyState.IsKeyUp(Keys.Tab))
+                    {
+                        speedRunTimerActive = !speedRunTimerActive;
                     }
 
                     break;
@@ -271,7 +280,10 @@ namespace Slime_Game
                     }
 
                     // Speedrun timer
-                    speedrunTime.ElapsedGameTime += gameTime.ElapsedGameTime;
+                    if (speedRunTimerActive)
+                    {
+                        speedrunTime.ElapsedGameTime += gameTime.ElapsedGameTime;
+                    }
 
                     player.Update(gameTime);
                     // Collectable animation
@@ -407,7 +419,7 @@ namespace Slime_Game
                     //If in debug mode then it draws specific stuff
                     if (player.DebugModeActive)
                     {
-                        //Debug mode writing
+                        //Debug mode writing on left side with stats about things
                         _spriteBatch.DrawString(debugFont, "Player X, Y: " + player.Position.X + ", " + player.Position.Y + // Writes player X and Y
                             "\nPlayer Velocity: " + player.Velocity.X + ", " + player.Velocity.Y + // Writes player velocity
                             "\nCurrent State: " + player.CurrentMatterState.ToString() + // Writes players current state
@@ -416,7 +428,7 @@ namespace Slime_Game
                             "\nGravity off: " + player.GravityOff // states whether gravity is on
                             , new Vector2(30, 50), Color.White);
 
-                        //
+                        //Debug mode writing on the right side of the screen how to use it 
                         _spriteBatch.DrawString(debugFont, "Use 'N' to go to next level \nUse 'H' to go hotter \nUse 'C' for colder \nUse 'F2' to toggle collisions \nUse 'G' to toggle gravity", new Vector2(730, 50),Color.White);
 
 
@@ -426,8 +438,11 @@ namespace Slime_Game
                     OnBoarding(_spriteBatch);
 
                     // Draw speedrun timer
-                    _spriteBatch.DrawString(debugFont, string.Format("{0:00}:{1:00}:{2:00}", speedrunTime.ElapsedGameTime.Minutes, speedrunTime.ElapsedGameTime.Seconds, speedrunTime.ElapsedGameTime.Milliseconds),
-                        new Vector2(915,995), Color.White);
+                    if (speedRunTimerActive)
+                    {
+                        _spriteBatch.DrawString(debugFont, string.Format("{0:00}:{1:00}:{2:00}", speedrunTime.ElapsedGameTime.Minutes, speedrunTime.ElapsedGameTime.Seconds, speedrunTime.ElapsedGameTime.Milliseconds),
+                            new Vector2(915, 995), Color.White);
+                    }
 
                     break;
 
@@ -442,9 +457,11 @@ namespace Slime_Game
                     quitButton.Draw(_spriteBatch);
 
                     // Final speedrun time!
-                    _spriteBatch.DrawString(debugFont, string.Format("{0:00}:{1:00}.{2:00}", speedrunTime.ElapsedGameTime.Minutes, speedrunTime.ElapsedGameTime.Seconds, speedrunTime.ElapsedGameTime.Milliseconds),
-                        new Vector2(915, 995), Color.Cyan);
-
+                    if (speedRunTimerActive)
+                    {
+                        _spriteBatch.DrawString(debugFont, string.Format("{0:00}:{1:00}.{2:00}", speedrunTime.ElapsedGameTime.Minutes, speedrunTime.ElapsedGameTime.Seconds, speedrunTime.ElapsedGameTime.Milliseconds),
+                            new Vector2(915, 995), Color.Cyan);
+                    }
                     break;
             }
 
@@ -500,8 +517,8 @@ namespace Slime_Game
             // Level 1 text for tutorial 
             if(currentLevel == 0)
             {
-                sb.DrawString(gameFont, "Use 'W' and or 'Space', 'D', 'A'\n            to move ", 
-                    new Vector2(130, 500), Color.White);
+                sb.DrawString(gameFont, " Use \'A\' and \'D\' to move\nUse \'W\' or \'Space\' to jump", 
+                    new Vector2(220, 500), Color.White);
             }
             // Level 1 text for tutorial 
             else if (currentLevel == 1)
@@ -521,10 +538,21 @@ namespace Slime_Game
                 sb.DrawString(gameFont, "  If you ever get stuck hit 'R' \n      to reset The 3 matter\nstates are solid -> liquid -> gas",
                     new Vector2(130, 600), Color.White);
             }
+            //Text for spring tutorial 
+            else if (currentLevel == 6)
+            {
+                sb.DrawString(gameFont, "A spring can make you bounce \n     in any matter state!",
+                    new Vector2(130, 600), Color.White);
+            }
         }
 
+        /// <summary>
+        /// Changes which song is playing
+        /// </summary>
+        /// <param name="id">The id of the song to play an int value</param>
         public void PlaySong(int id)
         {
+            //To pick which song it is
             switch (id)
             {
                 case 0:
