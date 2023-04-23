@@ -538,6 +538,12 @@ namespace Slime_Game
                 sb.DrawString(gameFont, "  If you ever get stuck hit 'R' \n      to reset The 3 matter\nstates are solid -> liquid -> gas",
                     new Vector2(130, 600), Color.White);
             }
+            //Text for spring tutorial 
+            else if (currentLevel == 6)
+            {
+                sb.DrawString(gameFont, "A spring can make you bounce \n     in any matter state!",
+                    new Vector2(130, 600), Color.White);
+            }
         }
 
         public void PlaySong(int id)
