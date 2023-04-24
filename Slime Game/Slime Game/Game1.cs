@@ -523,8 +523,8 @@ namespace Slime_Game
             // Level 1 text for tutorial 
             else if (currentLevel == 1)
             {
-                sb.DrawString(gameFont, "Hit fire collectables to change \n   temperature and become a gas... \n  this will allow you to float ;)",
-                    new Vector2(130, 500), Color.White);
+                sb.DrawString(gameFont, "Hit fire collectables to change \ntemperature and \nbecome a gas... this \nwill allow you to \nfloat ;)",
+                    new Vector2(500, 650), Color.White);
             }
             //Level 3 tutorial text
             else if (currentLevel == 2)
