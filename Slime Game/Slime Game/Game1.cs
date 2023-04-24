@@ -179,7 +179,7 @@ namespace Slime_Game
             startScreen = Content.Load<Texture2D>("startScreen");
             startButton = new Button(startTexture, new Rectangle(640, 600, 300, 100));
             quitButton = new Button(quitTexture, new Rectangle(640, 725, 300, 100));
-            creditsButton = new Button(creditsTexture, new Rectangle(640, 850, 300, 100));
+            //creditsButton = new Button(creditsTexture, new Rectangle(640, 850, 300, 100));
 
             // loading
             loadingScreen = Content.Load<Texture2D>("loadScreen");
@@ -211,6 +211,9 @@ namespace Slime_Game
             switch (gameState)
             {
                 case GameState.Menu:
+                    // Play main theme
+                    PlaySong(0);
+
                     // moves quit button from win position to start position (in case player restarts from the end)
                     quitButton.X = 640;
                     quitButton.Y = 725;
@@ -392,7 +395,7 @@ namespace Slime_Game
                     // button(s)
                     startButton.Draw(_spriteBatch);
                     quitButton.Draw(_spriteBatch);
-                    creditsButton.Draw(_spriteBatch);
+                    //creditsButton.Draw(_spriteBatch);
 
                     break; 
 
