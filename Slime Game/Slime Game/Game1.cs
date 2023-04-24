@@ -178,7 +178,7 @@ namespace Slime_Game
             startScreen = Content.Load<Texture2D>("startScreen");
             startButton = new Button(startTexture, new Rectangle(640, 600, 300, 100));
             quitButton = new Button(quitTexture, new Rectangle(640, 725, 300, 100));
-            creditsButton = new Button(creditsTexture, new Rectangle(640, 850, 300, 100));
+            //creditsButton = new Button(creditsTexture, new Rectangle(640, 850, 300, 100));
 
             // loading
             loadingScreen = Content.Load<Texture2D>("loadScreen");
