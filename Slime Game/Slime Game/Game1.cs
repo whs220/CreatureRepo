@@ -392,7 +392,7 @@ namespace Slime_Game
                     // button(s)
                     startButton.Draw(_spriteBatch);
                     quitButton.Draw(_spriteBatch);
-                    creditsButton.Draw(_spriteBatch);
+                    //creditsButton.Draw(_spriteBatch);
 
                     break; 
 
