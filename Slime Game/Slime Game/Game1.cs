@@ -211,6 +211,9 @@ namespace Slime_Game
             switch (gameState)
             {
                 case GameState.Menu:
+                    // Play main theme
+                    PlaySong(0);
+
                     // moves quit button from win position to start position (in case player restarts from the end)
                     quitButton.X = 640;
                     quitButton.Y = 725;
