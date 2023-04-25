@@ -223,6 +223,9 @@
 /processorParam:TextureFormat=Color
 /build:newStartButton.png
 
+#begin Ninja Training.level
+/copy:Ninja Training.level
+
 #begin pipe.png
 /importer:TextureImporter
 /processor:TextureProcessor
