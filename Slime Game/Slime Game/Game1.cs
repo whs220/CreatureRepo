@@ -308,8 +308,8 @@ namespace Slime_Game
                     if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                         gameState = GameState.Menu;
 
-                    // Switch song if on stage 9 (Spring Tutorial)
-                    if (currentLevel == 9)
+                    // Switch song if on stage 10 (Spring Tutorial)
+                    if (currentLevel == 10)
                     {
                         PlaySong(1);
                     }
@@ -604,7 +604,7 @@ namespace Slime_Game
                     new Vector2(130, 600), Color.White);
             }
             //Text for spring tutorial 
-            else if (currentLevel == 9)
+            else if (currentLevel == 10)
             {
                 sb.DrawString(gameFont, "A spring can make you bounce \n     in any matter state!",
                     new Vector2(130, 600), Color.White);
