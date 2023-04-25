@@ -223,6 +223,9 @@
 /processorParam:TextureFormat=Color
 /build:newStartButton.png
 
+#begin pinball.level
+/copy:pinball.level
+
 #begin pipe.png
 /importer:TextureImporter
 /processor:TextureProcessor

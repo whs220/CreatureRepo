@@ -129,6 +129,7 @@ namespace Slime_Game
 
                 //spring tutorial
                 "Content/springTutoiral.level",
+                "Content/pinball.level",
                 "Content/Bounce.level",
                 "Content/maze.level",
                 "Content/need_for_speed.level",
