@@ -49,6 +49,8 @@ namespace Slime_Game
         //misc
         private KeyboardState prevKeyState;
         private bool collisionsOn;
+        private string levelName;
+        private SpriteFont font;
 
         //exit
         public event NextLevel NextLevelEvent;
@@ -91,6 +93,7 @@ namespace Slime_Game
             collect = Art.Instance.LoadTexture2D("collectables");
             exit = Art.Instance.LoadTexture2D("pipe");
 
+            font = Art.Instance.LoadSpritefont("arial-35");
 
             this.tiles = new List<Tile>();
             this.collectables = new List<Collectable>();
@@ -126,6 +129,8 @@ namespace Slime_Game
                 //connects to file
                 input = new StreamReader("../../../" + fileName);
                 string line;
+
+                levelName = input.ReadLine();
 
                 //ceiling line
                 tiles.Add(new Tile(tilemap, new Rectangle(0, 0, 1024, 32), new Rectangle(0, 224, 32, 32)));
@@ -264,6 +269,11 @@ namespace Slime_Game
                 }
             }
             */
+
+
+            sb.DrawString(font, fileName,
+                new Vector2(40, 995), Color.Cyan);
+
 
             //Each collectable is drawn
             foreach (Collectable collectable in collectables)
