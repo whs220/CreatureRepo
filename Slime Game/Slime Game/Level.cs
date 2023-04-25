@@ -196,8 +196,16 @@ namespace Slime_Game
                     if (data[2] == "corner4")
                     {
                         tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), new Rectangle(353, 161, 32, 32)));
-                        //417, 161
                     }
+                    if (data[2] == "pillarTop")
+                    {
+                        tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), new Rectangle(417, 97, 32, 32)));
+                    }
+                    if (data[2] == "pillarBottom")
+                    {
+                        tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), new Rectangle(353, 97, 32, 32)));
+                    }
+
 
                     // all collectable cases
                     if (data[2] == "hot")

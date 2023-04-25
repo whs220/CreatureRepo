@@ -15,6 +15,7 @@ namespace Slime_Game
     public enum GameState
     {
         Menu,
+        CreditScreen,
         LoadingScreen,
         InGame,
         WinScreen
@@ -123,6 +124,7 @@ namespace Slime_Game
                 "Content/fourthLevel.level",
 
                 //Middle levels?
+                "Content/slime.level",
                 "Content/welcome_slime.level",
                 "Content/epic_slide.level",
                 
@@ -179,7 +181,7 @@ namespace Slime_Game
             startScreen = Content.Load<Texture2D>("startScreen");
             startButton = new Button(startTexture, new Rectangle(640, 600, 300, 100));
             quitButton = new Button(quitTexture, new Rectangle(640, 725, 300, 100));
-            creditsButton = new Button(creditsTexture, new Rectangle(640, 850, 300, 100));
+            //creditsButton = new Button(creditsTexture, new Rectangle(640, 850, 300, 100));
 
             // loading
             loadingScreen = Content.Load<Texture2D>("loadScreen");
@@ -194,7 +196,7 @@ namespace Slime_Game
 
             //Play Song
             MediaPlayer.IsRepeating = true;
-            MediaPlayer.Volume = 0.2f;
+            MediaPlayer.Volume = 0.09f;
             PlaySong(0);
 
             //Speed run timer
@@ -211,6 +213,9 @@ namespace Slime_Game
             switch (gameState)
             {
                 case GameState.Menu:
+                    // Play main theme
+                    PlaySong(0);
+
                     // moves quit button from win position to start position (in case player restarts from the end)
                     quitButton.X = 640;
                     quitButton.Y = 725;
@@ -392,7 +397,7 @@ namespace Slime_Game
                     // button(s)
                     startButton.Draw(_spriteBatch);
                     quitButton.Draw(_spriteBatch);
-                    creditsButton.Draw(_spriteBatch);
+                    //creditsButton.Draw(_spriteBatch);
 
                     break; 
 
@@ -523,13 +528,13 @@ namespace Slime_Game
             // Level 1 text for tutorial 
             else if (currentLevel == 1)
             {
-                sb.DrawString(gameFont, "Hit fire collectables to change \n   temperature and become a gas... \n     but don't become too hot ;)",
-                    new Vector2(130, 500), Color.White);
+                sb.DrawString(gameFont, "Hit fire collectables to change \ntemperature and \nbecome a gas... this \nwill allow you to \nfloat ;)",
+                    new Vector2(500, 650), Color.White);
             }
             //Level 3 tutorial text
             else if (currentLevel == 2)
             {
-                sb.DrawString(gameFont, "    Hit Ice collectables\n temperature and become a Solid... \n Solids can't jump but can slide",
+                sb.DrawString(gameFont, "    Hit Ice collectables\n and become a Solid... \n Solids can't jump but can slide",
                     new Vector2(130, 600), Color.White);
             }
             //Level 4 tutorial text (Talks about resetting and all the matter states)
