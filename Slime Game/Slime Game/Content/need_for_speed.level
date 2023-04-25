@@ -77,7 +77,7 @@
 2,24,leftWall
 2,31,rightWall
 3,0,leftWall
-3,3,pillar
+3,3,pillarTop
 3,4,cold
 3,5,rightWall
 3,6,filler
@@ -356,7 +356,7 @@
 16,3,pillar
 16,14,pillar
 16,17,pillar
-16,28,pillar
+16,28,pillarTop
 16,31,rightWall
 17,0,leftWall
 17,3,pillar
@@ -374,7 +374,7 @@
 19,0,leftWall
 19,3,pillar
 19,14,pillar
-19,17,pillar
+19,17,pillarBottom
 19,28,pillar
 19,31,rightWall
 20,0,leftWall
@@ -464,7 +464,7 @@
 25,9,leftWall
 25,31,rightWall
 26,0,leftWall
-26,3,pillar
+26,3,pillarBottom
 26,6,rightWall
 26,7,filler
 26,8,filler

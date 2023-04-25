@@ -1,4 +1,4 @@
-0,0,top
+0,0,filler
 0,1,top
 0,2,top
 0,3,top
@@ -10,10 +10,10 @@
 0,9,top
 0,10,top
 0,11,top
-0,12,rightWall
+0,12,filler
 0,13,filler
 0,14,filler
-0,15,leftWall
+0,15,filler
 0,16,top
 0,17,top
 0,18,top
@@ -29,7 +29,7 @@
 0,28,top
 0,29,top
 0,30,top
-0,31,top
+0,31,filler
 1,0,leftWall
 1,12,rightWall
 1,13,filler
@@ -76,7 +76,7 @@
 4,28,ground
 4,29,ground
 4,30,ground
-4,31,rightWall
+4,31,filler
 5,0,filler
 5,1,filler
 5,2,filler
@@ -182,8 +182,8 @@
 8,10,filler
 8,11,filler
 8,12,filler
-8,13,filler
-8,14,filler
+8,13,ground
+8,14,ground
 8,15,filler
 8,16,filler
 8,17,filler
