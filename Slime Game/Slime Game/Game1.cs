@@ -15,6 +15,7 @@ namespace Slime_Game
     public enum GameState
     {
         Menu,
+        CreditScreen,
         LoadingScreen,
         InGame,
         WinScreen
@@ -195,7 +196,7 @@ namespace Slime_Game
 
             //Play Song
             MediaPlayer.IsRepeating = true;
-            MediaPlayer.Volume = 0.2f;
+            MediaPlayer.Volume = 0.09f;
             PlaySong(0);
 
             //Speed run timer
