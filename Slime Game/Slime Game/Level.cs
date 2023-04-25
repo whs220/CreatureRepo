@@ -93,7 +93,7 @@ namespace Slime_Game
             collect = Art.Instance.LoadTexture2D("collectables");
             exit = Art.Instance.LoadTexture2D("pipe");
 
-            font = Art.Instance.LoadSpritefont("comicSans36");
+            font = Art.Instance.LoadSpritefont("bankgothiclight16");
 
             this.tiles = new List<Tile>();
             this.collectables = new List<Collectable>();
