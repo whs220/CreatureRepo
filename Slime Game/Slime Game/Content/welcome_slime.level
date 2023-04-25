@@ -249,7 +249,7 @@
 27,19,corner2
 27,31,rightWall
 28,0,leftWall
-28,11,pillar
+28,11,pillarBottom
 28,19,pillar
 28,31,rightWall
 29,0,leftWall

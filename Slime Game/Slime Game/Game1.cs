@@ -15,7 +15,7 @@ namespace Slime_Game
     public enum GameState
     {
         Menu,
-        CreditScreen,
+        CreditsScreen,
         LoadingScreen,
         InGame,
         WinScreen
@@ -73,6 +73,11 @@ namespace Slime_Game
         private Texture2D winScreen;
         private Button restartButton;
 
+        // credits screen
+        private Texture2D creditsScreen;
+        private Texture2D backTexture;
+        private Button backButton;
+
         // loading
         private Texture2D loadingScreen;
         private double timer;
@@ -128,12 +133,15 @@ namespace Slime_Game
                 "Content/welcome_slime.level",
                 "Content/platformer.level",
                 "Content/epic_slide.level",
+                "Content/dodge_em.level",
                 
 
                 //spring tutorial
                 "Content/springTutoiral.level",
+                "Content/pinball.level",
                 "Content/Bounce.level",
                 "Content/maze.level",
+                "Content/Ninja Training.level",
                 "Content/need_for_speed.level",
                 "Content/spring_hell.level"
 
@@ -182,10 +190,15 @@ namespace Slime_Game
             startScreen = Content.Load<Texture2D>("startScreen");
             startButton = new Button(startTexture, new Rectangle(640, 600, 300, 100));
             quitButton = new Button(quitTexture, new Rectangle(640, 725, 300, 100));
-            //creditsButton = new Button(creditsTexture, new Rectangle(640, 850, 300, 100));
+            creditsButton = new Button(creditsTexture, new Rectangle(640, 850, 300, 100));
 
             // loading
             loadingScreen = Content.Load<Texture2D>("loadScreen");
+
+            // credits
+            creditsScreen = Content.Load<Texture2D>("credits");
+            backTexture = Content.Load<Texture2D>("backButton ");
+            backButton = new Button(backTexture, new Rectangle(25, 900, 300, 100));
 
             // in game
             background = Content.Load<Texture2D>("background");
@@ -240,10 +253,25 @@ namespace Slime_Game
                         System.Environment.Exit(0);
                     }
 
+                    // click on credits -> credits
+                    if (creditsButton.MousePosition() && quitButton.MouseClick())
+                    {
+                        gameState = GameState.CreditsScreen;
+                    }
+
                     //Turns speed run timer on
                     if(Keyboard.GetState().IsKeyDown(Keys.Tab) && prevKeyState.IsKeyUp(Keys.Tab))
                     {
                         speedRunTimerActive = !speedRunTimerActive;
+                    }
+
+                    break;
+
+                case GameState.CreditsScreen:
+                    // click on back -> menu
+                    if (backButton.MousePosition() && quitButton.MouseClick())
+                    {
+                        gameState = GameState.Menu;
                     }
 
                     break;
@@ -398,10 +426,19 @@ namespace Slime_Game
                     // button(s)
                     startButton.Draw(_spriteBatch);
                     quitButton.Draw(_spriteBatch);
-                    //creditsButton.Draw(_spriteBatch);
+                    creditsButton.Draw(_spriteBatch);
 
-                    break; 
+                    break;
 
+                // credits screen
+                case GameState.CreditsScreen:
+                    // background image
+                    _spriteBatch.Draw(creditsScreen, new Rectangle(0, 0, 1024, 1024), Color.White);
+
+                    // button
+                    backButton.Draw(_spriteBatch);
+
+                    break;
 
                 //For in the Loading screen
                 case GameState.LoadingScreen:
