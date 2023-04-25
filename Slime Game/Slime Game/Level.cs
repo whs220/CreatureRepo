@@ -271,10 +271,6 @@ namespace Slime_Game
             */
 
 
-            sb.DrawString(font, fileName,
-                new Vector2(40, 995), Color.Cyan);
-
-
             //Each collectable is drawn
             foreach (Collectable collectable in collectables)
             {
@@ -319,7 +315,11 @@ namespace Slime_Game
                 spring.Flip = player.CurrentMatterState == PlayerMatterState.Gas;
                 spring.DrawBounce(sb, Color.White);
             }
-            
+
+            sb.DrawString(font, levelName,
+            new Vector2(40, 995), Color.Cyan);
+
+
         }
 
         /// <summary>
