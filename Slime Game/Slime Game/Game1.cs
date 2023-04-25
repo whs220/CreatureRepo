@@ -15,6 +15,7 @@ namespace Slime_Game
     public enum GameState
     {
         Menu,
+        CreditScreen,
         LoadingScreen,
         InGame,
         WinScreen
