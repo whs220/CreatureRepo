@@ -134,10 +134,10 @@ Up n' Down
 24,27,pillar
 24,31,rightWall
 25,0,leftWall
+25,6,hot
 25,27,pillar
 25,31,rightWall
 26,0,leftWall
-26,6,hot
 26,27,pillar
 26,31,rightWall
 27,0,leftWall
