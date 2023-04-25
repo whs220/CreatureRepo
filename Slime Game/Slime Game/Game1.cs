@@ -126,6 +126,7 @@ namespace Slime_Game
                 //Middle levels?
                 "Content/slime.level",
                 "Content/welcome_slime.level",
+                "Content/platformer.level",
                 "Content/epic_slide.level",
                 
 

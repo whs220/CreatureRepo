@@ -235,6 +235,9 @@
 /processorParam:TextureFormat=Color
 /build:pipe.png
 
+#begin platformer.level
+/copy:platformer.level
+
 #begin secondLevel.level
 /copy:secondLevel.level
 
