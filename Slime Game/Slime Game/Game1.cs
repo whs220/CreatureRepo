@@ -135,6 +135,7 @@ namespace Slime_Game
                 "Content/pinball.level",
                 "Content/Bounce.level",
                 "Content/maze.level",
+                "Content/Ninja Training.level",
                 "Content/need_for_speed.level",
                 "Content/spring_hell.level"
 
