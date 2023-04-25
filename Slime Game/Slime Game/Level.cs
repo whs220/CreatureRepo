@@ -198,6 +198,11 @@ namespace Slime_Game
                         tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), new Rectangle(353, 161, 32, 32)));
                         //417, 161
                     }
+                    if (data[2] == "")
+                    {
+                        tiles.Add(new Tile(tilemap, new Rectangle((int.Parse(data[1])) * 32, (int.Parse(data[0])) * 32, 32, 32), new Rectangle(353, 161, 32, 32)));
+                        //417, 161
+                    }
 
                     // all collectable cases
                     if (data[2] == "hot")
