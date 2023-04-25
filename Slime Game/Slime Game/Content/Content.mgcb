@@ -256,6 +256,9 @@
 /processorParam:Quality=Best
 /build:sfx_landing.mp3
 
+#begin slime.level
+/copy:slime.level
+
 #begin slime.png
 /importer:TextureImporter
 /processor:TextureProcessor
