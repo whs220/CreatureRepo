@@ -84,6 +84,10 @@ namespace Slime_Game
         private Song secondSong;
         private int currentSong = -1;
 
+        // Speedrun timer
+        private GameTime speedrunTime;
+        private bool speedRunTimerActive; 
+
         //Sound Effect
         SoundEffect sfx_NextLevel;
 
@@ -108,7 +112,7 @@ namespace Slime_Game
             // loading
             timer = 0.5f;
 
-            // ===== List of levels! =====
+            // ===== List of levels! =====d
             // This is the order of levels that appear!
             levelNames = new string[]
             {
@@ -121,13 +125,13 @@ namespace Slime_Game
                 //Middle levels?
                 "Content/welcome_slime.level",
                 "Content/epic_slide.level",
-                "Content/need_for_speed.level",
                 
 
                 //spring tutorial
                 "Content/springTutoiral.level",
                 "Content/Bounce.level",
                 "Content/maze.level",
+                "Content/need_for_speed.level",
                 "Content/spring_hell.level"
 
                 //"Content/level1.level",
@@ -175,7 +179,7 @@ namespace Slime_Game
             startScreen = Content.Load<Texture2D>("startScreen");
             startButton = new Button(startTexture, new Rectangle(640, 600, 300, 100));
             quitButton = new Button(quitTexture, new Rectangle(640, 725, 300, 100));
-            creditsButton = new Button(creditsTexture, new Rectangle(640, 850, 300, 100));
+            //creditsButton = new Button(creditsTexture, new Rectangle(640, 850, 300, 100));
 
             // loading
             loadingScreen = Content.Load<Texture2D>("loadScreen");
@@ -192,7 +196,9 @@ namespace Slime_Game
             MediaPlayer.IsRepeating = true;
             MediaPlayer.Volume = 0.2f;
             PlaySong(0);
-            
+
+            //Speed run timer
+            speedRunTimerActive = false;
 
             //Sound Effects
             sfx_NextLevel = Content.Load<SoundEffect>("win");
@@ -200,13 +206,14 @@ namespace Slime_Game
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
 
             // update GameState
             switch (gameState)
             {
                 case GameState.Menu:
+                    // Play main theme
+                    PlaySong(0);
+
                     // moves quit button from win position to start position (in case player restarts from the end)
                     quitButton.X = 640;
                     quitButton.Y = 725;
@@ -219,6 +226,8 @@ namespace Slime_Game
                         // Set currentLevel to zero and set add the readLevel event
                         currentLevel = 0;
                         player.ResetLevelEvent += levels[0].ReadLevel;
+                        // Reset speedrun timer
+                        speedrunTime = new GameTime();
                         // Then the level is read in the loading screen state!
                     }
 
@@ -226,6 +235,12 @@ namespace Slime_Game
                     if (quitButton.MousePosition() && quitButton.MouseClick())
                     {
                         System.Environment.Exit(0);
+                    }
+
+                    //Turns speed run timer on
+                    if(Keyboard.GetState().IsKeyDown(Keys.Tab) && prevKeyState.IsKeyUp(Keys.Tab))
+                    {
+                        speedRunTimerActive = !speedRunTimerActive;
                     }
 
                     break;
@@ -257,10 +272,20 @@ namespace Slime_Game
                 //In Game State
                 case GameState.InGame:
 
+                    //If escape is clciked in game then it will take you to menu
+                    if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+                        gameState = GameState.Menu;
+
                     // Switch song if on stage 6
                     if (currentLevel == 6)
                     {
                         PlaySong(1);
+                    }
+
+                    // Speedrun timer
+                    if (speedRunTimerActive)
+                    {
+                        speedrunTime.ElapsedGameTime += gameTime.ElapsedGameTime;
                     }
 
                     player.Update(gameTime);
@@ -370,7 +395,7 @@ namespace Slime_Game
                     // button(s)
                     startButton.Draw(_spriteBatch);
                     quitButton.Draw(_spriteBatch);
-                    creditsButton.Draw(_spriteBatch);
+                    //creditsButton.Draw(_spriteBatch);
 
                     break; 
 
@@ -397,7 +422,7 @@ namespace Slime_Game
                     //If in debug mode then it draws specific stuff
                     if (player.DebugModeActive)
                     {
-                        //Debug mode writing
+                        //Debug mode writing on left side with stats about things
                         _spriteBatch.DrawString(debugFont, "Player X, Y: " + player.Position.X + ", " + player.Position.Y + // Writes player X and Y
                             "\nPlayer Velocity: " + player.Velocity.X + ", " + player.Velocity.Y + // Writes player velocity
                             "\nCurrent State: " + player.CurrentMatterState.ToString() + // Writes players current state
@@ -406,7 +431,7 @@ namespace Slime_Game
                             "\nGravity off: " + player.GravityOff // states whether gravity is on
                             , new Vector2(30, 50), Color.White);
 
-                        //
+                        //Debug mode writing on the right side of the screen how to use it 
                         _spriteBatch.DrawString(debugFont, "Use 'N' to go to next level \nUse 'H' to go hotter \nUse 'C' for colder \nUse 'F2' to toggle collisions \nUse 'G' to toggle gravity", new Vector2(730, 50),Color.White);
 
 
@@ -414,6 +439,14 @@ namespace Slime_Game
 
                     //Draws text for tutorial
                     OnBoarding(_spriteBatch);
+
+                    // Draw speedrun timer
+                    if (speedRunTimerActive)
+                    {
+                        _spriteBatch.DrawString(debugFont, string.Format("{0:00}:{1:00}:{2:00}", speedrunTime.ElapsedGameTime.Minutes, speedrunTime.ElapsedGameTime.Seconds, speedrunTime.ElapsedGameTime.Milliseconds),
+                            new Vector2(915, 995), Color.White);
+                    }
+
                     break;
 
 
@@ -425,6 +458,13 @@ namespace Slime_Game
                     // button(s)
                     restartButton.Draw(_spriteBatch);
                     quitButton.Draw(_spriteBatch);
+
+                    // Final speedrun time!
+                    if (speedRunTimerActive)
+                    {
+                        _spriteBatch.DrawString(debugFont, string.Format("{0:00}:{1:00}.{2:00}", speedrunTime.ElapsedGameTime.Minutes, speedrunTime.ElapsedGameTime.Seconds, speedrunTime.ElapsedGameTime.Milliseconds),
+                            new Vector2(915, 995), Color.Cyan);
+                    }
                     break;
             }
 
@@ -480,19 +520,19 @@ namespace Slime_Game
             // Level 1 text for tutorial 
             if(currentLevel == 0)
             {
-                sb.DrawString(gameFont, "Use 'W' and or 'Space', 'D', 'A'\n            to move ", 
-                    new Vector2(130, 500), Color.White);
+                sb.DrawString(gameFont, " Use \'A\' and \'D\' to move\nUse \'W\' or \'Space\' to jump", 
+                    new Vector2(220, 500), Color.White);
             }
             // Level 1 text for tutorial 
             else if (currentLevel == 1)
             {
-                sb.DrawString(gameFont, "Hit fire collectables to change \n   temperature and become a gas... \n     but don't become too hot ;)",
-                    new Vector2(130, 500), Color.White);
+                sb.DrawString(gameFont, "Hit fire collectables to change \ntemperature and \nbecome a gas... this \nwill allow you to \nfloat ;)",
+                    new Vector2(500, 650), Color.White);
             }
             //Level 3 tutorial text
             else if (currentLevel == 2)
             {
-                sb.DrawString(gameFont, "    Hit Ice collectables\n temperature and become a Solid... \n Solids can't jump but can slide",
+                sb.DrawString(gameFont, "    Hit Ice collectables\n and become a Solid... \n Solids can't jump but can slide",
                     new Vector2(130, 600), Color.White);
             }
             //Level 4 tutorial text (Talks about resetting and all the matter states)
@@ -501,10 +541,21 @@ namespace Slime_Game
                 sb.DrawString(gameFont, "  If you ever get stuck hit 'R' \n      to reset The 3 matter\nstates are solid -> liquid -> gas",
                     new Vector2(130, 600), Color.White);
             }
+            //Text for spring tutorial 
+            else if (currentLevel == 6)
+            {
+                sb.DrawString(gameFont, "A spring can make you bounce \n     in any matter state!",
+                    new Vector2(130, 600), Color.White);
+            }
         }
 
+        /// <summary>
+        /// Changes which song is playing
+        /// </summary>
+        /// <param name="id">The id of the song to play an int value</param>
         public void PlaySong(int id)
         {
+            //To pick which song it is
             switch (id)
             {
                 case 0:
