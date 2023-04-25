@@ -438,8 +438,15 @@ namespace Slime_Game
                     // button
                     backButton.Draw(_spriteBatch);
 
-                    // text
-                    _spriteBatch.DrawString(gameFont, "credits credits credits", new Vector2(50, 250), Color.DarkGreen);
+                    // --- text ---
+                    // sound credits
+                    _spriteBatch.DrawString(gameFont, "Music and Sound Credits:" +
+                        "\n   Ding - OwlStorm" +
+                        "\n   Lighting a Fire - plasterbrain" +
+                        "\n   Sebastian Slime 1 - Will Slyman" +
+                        "\n   Sebastion Slime 2 - Will Slyman" +
+                        "\n   wet slop plop - Eneasz", 
+                        new Vector2(50, 250), Color.DarkGreen);
 
                     break;
 
