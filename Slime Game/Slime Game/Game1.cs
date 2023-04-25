@@ -15,6 +15,7 @@ namespace Slime_Game
     public enum GameState
     {
         Menu,
+        CreditScreen,
         LoadingScreen,
         InGame,
         WinScreen
@@ -123,12 +124,14 @@ namespace Slime_Game
                 "Content/fourthLevel.level",
 
                 //Middle levels?
+                "Content/slime.level",
                 "Content/welcome_slime.level",
                 "Content/epic_slide.level",
                 
 
                 //spring tutorial
                 "Content/springTutoiral.level",
+                "Content/pinball.level",
                 "Content/Bounce.level",
                 "Content/maze.level",
                 "Content/Ninja Training.level",

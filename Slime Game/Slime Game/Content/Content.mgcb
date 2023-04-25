@@ -223,6 +223,9 @@
 /processorParam:TextureFormat=Color
 /build:newStartButton.png
 
+#begin pinball.level
+/copy:pinball.level
+
 #begin Ninja Training.level
 /copy:Ninja Training.level
 
@@ -258,6 +261,9 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:sfx_landing.mp3
+
+#begin slime.level
+/copy:slime.level
 
 #begin slime.png
 /importer:TextureImporter
