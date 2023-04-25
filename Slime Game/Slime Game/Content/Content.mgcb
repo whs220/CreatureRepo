@@ -20,6 +20,18 @@
 /processorParam:TextureFormat=Compressed
 /build:arial-35.spritefont
 
+#begin backButton .png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:backButton .png
+
 #begin background.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -63,6 +75,18 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
 /build:comicSans36.spritefont
+
+#begin credits.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:credits.png
 
 #begin creditsButton.png
 /importer:TextureImporter
@@ -111,6 +135,9 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:debug_solid.png
+
+#begin dodge_em.level
+/copy:dodge_em.level
 
 #begin drainPipe.png
 /importer:TextureImporter
@@ -244,6 +271,9 @@
 /processorParam:TextureFormat=Color
 /build:pipe.png
 
+#begin platformer.level
+/copy:platformer.level
+
 #begin secondLevel.level
 /copy:secondLevel.level
 
@@ -264,9 +294,6 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:sfx_landing.mp3
-
-#begin slime.level
-/copy:slime.level
 
 #begin slime.png
 /importer:TextureImporter
