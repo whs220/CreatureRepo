@@ -317,7 +317,7 @@ namespace Slime_Game
             }
 
             sb.DrawString(font, levelName,
-            new Vector2(40, 995), Color.Cyan);
+            new Vector2(40, 995), Color.White);
 
 
         }
