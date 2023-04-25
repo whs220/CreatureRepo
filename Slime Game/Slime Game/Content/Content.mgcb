@@ -109,6 +109,9 @@
 /processorParam:TextureFormat=Color
 /build:debug_solid.png
 
+#begin dodge_em.level
+/copy:dodge_em.level
+
 #begin drainPipe.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -258,9 +261,6 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:sfx_landing.mp3
-
-#begin slime.level
-/copy:slime.level
 
 #begin slime.png
 /importer:TextureImporter

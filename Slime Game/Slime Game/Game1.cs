@@ -127,6 +127,7 @@ namespace Slime_Game
                 "Content/slime.level",
                 "Content/welcome_slime.level",
                 "Content/epic_slide.level",
+                "Content/dodge_em.level",
                 
 
                 //spring tutorial
