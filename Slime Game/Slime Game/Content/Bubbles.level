@@ -1,4 +1,4 @@
-Bubbles
+Bubbles!
 0,0,filler
 0,1,top
 0,2,top
@@ -89,7 +89,7 @@ Bubbles
 7,9,leftWall
 7,25,corner3
 7,26,corner4
-7,28,corner3
+7,28,pillar
 7,31,rightWall
 8,0,leftWall
 8,4,rightWall
