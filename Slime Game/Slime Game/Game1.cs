@@ -438,6 +438,9 @@ namespace Slime_Game
                     // button
                     backButton.Draw(_spriteBatch);
 
+                    // text
+                    _spriteBatch.DrawString(gameFont, "credits credits credits", new Vector2(50, 250), Color.DarkGreen);
+
                     break;
 
                 //For in the Loading screen
@@ -582,7 +585,7 @@ namespace Slime_Game
                     new Vector2(130, 600), Color.White);
             }
             //Text for spring tutorial 
-            else if (currentLevel == 6)
+            else if (currentLevel == 7)
             {
                 sb.DrawString(gameFont, "A spring can make you bounce \n     in any matter state!",
                     new Vector2(130, 600), Color.White);

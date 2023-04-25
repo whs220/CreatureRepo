@@ -1,3 +1,4 @@
+Ninja Training
 0,0,filler
 0,1,top
 0,2,top
@@ -68,7 +69,7 @@
 8,5,corner4
 8,31,rightWall
 9,0,leftWall
-9,11,CGleft
+9,11,corner1
 9,12,platform
 9,13,platform
 9,14,CGright
@@ -85,8 +86,8 @@
 12,31,rightWall
 13,0,leftWall
 13,26,CGleft
-13,27,platform
-13,29,platform
+13,27,CGright
+13,29,CGleft
 13,30,platform
 13,31,filler
 14,0,leftWall

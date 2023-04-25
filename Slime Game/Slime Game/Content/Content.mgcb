@@ -54,6 +54,9 @@
 #begin Bounce.level
 /copy:Bounce.level
 
+#begin Bubbles.level
+/copy:Bubbles.level
+
 #begin collectables.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -250,11 +253,11 @@
 /processorParam:TextureFormat=Color
 /build:newStartButton.png
 
-#begin pinball.level
-/copy:pinball.level
-
 #begin Ninja Training.level
 /copy:Ninja Training.level
+
+#begin pinball.level
+/copy:pinball.level
 
 #begin pipe.png
 /importer:TextureImporter
