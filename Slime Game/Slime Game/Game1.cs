@@ -133,6 +133,7 @@ namespace Slime_Game
                 "Content/welcome_slime.level",
                 "Content/platformer.level",
                 "Content/epic_slide.level",
+                "Content/Bubbles.level",
                 "Content/dodge_em.level",
                 
 
