@@ -438,6 +438,9 @@ namespace Slime_Game
                     // button
                     backButton.Draw(_spriteBatch);
 
+                    // text
+                    _spriteBatch.DrawString(gameFont, "credits credits credits", new Vector2(50, 250), Color.DarkGreen);
+
                     break;
 
                 //For in the Loading screen
