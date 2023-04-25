@@ -53,7 +53,14 @@ namespace Slime_Game
         /// <param name="sb"> sprite batch parameter </param>
         public void Draw(SpriteBatch sb)
         {
-            sb.Draw(button, rectangle, Color.White);
+            if (MousePosition())
+            {
+                sb.Draw(button, rectangle, Color.Green);
+            }
+            else
+            {
+                sb.Draw(button, rectangle, Color.White);
+            }
         }
 
         /// <summary>

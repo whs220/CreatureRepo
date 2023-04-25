@@ -406,14 +406,34 @@ namespace Slime_Game
                 // Possible to jump from any state
                 if (debugModeActive == false)
                 {
-                    // Jump if space or W is pressed
-                    if (currentKeyState.IsKeyDown(Keys.W) && prevKeyState.IsKeyUp(Keys.W) && prevKeyState.IsKeyUp(Keys.Space))
+                    
+                    //Makes it so you can jump using S as well as the other keys for whatever is the preferance 
+                    if(currentMatterState == PlayerMatterState.Gas)
                     {
-                        Jump();
+                        if (currentKeyState.IsKeyDown(Keys.W) && prevKeyState.IsKeyUp(Keys.W) && prevKeyState.IsKeyUp(Keys.Space) && prevKeyState.IsKeyUp(Keys.S))
+                        {
+                            Jump();
+                        }
+                        else if (currentKeyState.IsKeyDown(Keys.Space) && prevKeyState.IsKeyUp(Keys.W) && prevKeyState.IsKeyUp(Keys.Space) && prevKeyState.IsKeyUp(Keys.S))
+                        {
+                            Jump();
+                        }
+                        else if (currentKeyState.IsKeyDown(Keys.S) && prevKeyState.IsKeyUp(Keys.W) && prevKeyState.IsKeyUp(Keys.Space) && prevKeyState.IsKeyUp(Keys.S))
+                        {
+                            Jump();
+                        }
                     }
-                    else if (currentKeyState.IsKeyDown(Keys.Space) && prevKeyState.IsKeyUp(Keys.W) && prevKeyState.IsKeyUp(Keys.Space))
+                    else
                     {
-                        Jump();
+                        // Jump if space or W is pressed  this will work for every state
+                        if (currentKeyState.IsKeyDown(Keys.W) && prevKeyState.IsKeyUp(Keys.W) && prevKeyState.IsKeyUp(Keys.Space))
+                        {
+                            Jump();
+                        }
+                        else if (currentKeyState.IsKeyDown(Keys.Space) && prevKeyState.IsKeyUp(Keys.W) && prevKeyState.IsKeyUp(Keys.Space))
+                        {
+                            Jump();
+                        }
                     }
                 }
                 //For in debugMode
