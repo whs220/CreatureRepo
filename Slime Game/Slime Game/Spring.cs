@@ -43,6 +43,11 @@ namespace Slime_Game
             currentFrame = 0;
         }
 
+        /// <summary>
+        /// Draws the spring!
+        /// </summary>
+        /// <param name="sb">Spritebatch</param>
+        /// <param name="color">Color of spring</param>
         public void DrawBounce(SpriteBatch sb, Color color)
         {
             if (flip)
