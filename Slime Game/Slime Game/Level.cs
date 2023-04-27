@@ -58,6 +58,9 @@ namespace Slime_Game
         //For debug mode
         private bool debugModeActive;
 
+        //Sound Effects
+        private SoundEffect sfx_spring;
+
         // Properties
 
         /// <summary>
@@ -100,7 +103,7 @@ namespace Slime_Game
             this.gameObjects = new List<GameObject>();
             this.springs = new List<Spring>();
             backTile = new Tile(tilemap, new Rectangle(0, 0, 32, 32), new Rectangle(480, 480, 32, 32));
-
+            sfx_spring = Art.Instance.LoadSoundEffect("boing");
             
         }
 
@@ -537,6 +540,7 @@ namespace Slime_Game
                 int flip = 1;
                 if (player.GetCollisionHelperRect().Intersects(spring.Position))
                 {
+                    sfx_spring.Play();
                     // Boost downwards if gas
                     if (player.CurrentMatterState == PlayerMatterState.Gas) { flip = -1; }
 
