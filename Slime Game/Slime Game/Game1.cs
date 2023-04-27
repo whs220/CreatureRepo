@@ -307,8 +307,8 @@ namespace Slime_Game
                     if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                         gameState = GameState.Menu;
 
-                    // Switch song if on stage 6
-                    if (currentLevel == 6)
+                    // Switch song if on stage 10 (Spring Tutorial)
+                    if (currentLevel == 10)
                     {
                         PlaySong(1);
                     }
@@ -345,7 +345,7 @@ namespace Slime_Game
                     if (levels[currentLevel].DebugModeActive)
                     {
                         //If key N is pressed once nextlevel is xalled
-                        if(Keyboard.GetState().IsKeyDown(Keys.N) && prevKeyState.IsKeyUp(Keys.N))
+                        if (Keyboard.GetState().IsKeyDown(Keys.N) && prevKeyState.IsKeyUp(Keys.N))
                         {
                             NextLevel();
                         }
@@ -365,15 +365,11 @@ namespace Slime_Game
                             levels[currentLevel].CollisionsOn = !levels[currentLevel].CollisionsOn;
                         }
                         //Switches the gravity to the opposite
-                        if(Keyboard.GetState().IsKeyDown(Keys.G) && prevKeyState.IsKeyUp(Keys.G))
+                        if (Keyboard.GetState().IsKeyDown(Keys.G) && prevKeyState.IsKeyUp(Keys.G))
                         {
                             player.GravityOff = !player.GravityOff;
                         }
                     }
-
-                    
-                    
-                    prevKeyState = Keyboard.GetState();
 
                     break;
 
@@ -402,6 +398,7 @@ namespace Slime_Game
                     break;
             }
 
+            prevKeyState = Keyboard.GetState();
             base.Update(gameTime);
         }
 
@@ -427,6 +424,20 @@ namespace Slime_Game
                     startButton.Draw(_spriteBatch);
                     quitButton.Draw(_spriteBatch);
                     creditsButton.Draw(_spriteBatch);
+
+                    // Speedrun
+                    if (!speedRunTimerActive)
+                    {
+                        _spriteBatch.DrawString(debugFont,
+                            "Speedrun mode OFF. Press Tab to Enable!",
+                            new Vector2(615, 995), Color.White);
+                    }
+                    else
+                    {
+                        _spriteBatch.DrawString(debugFont,
+                           "Speedrun mode ON. Press Tab to Disable!",
+                           new Vector2(615, 995), Color.White);
+                    }
 
                     break;
 
@@ -594,7 +605,7 @@ namespace Slime_Game
                     new Vector2(130, 600), Color.White);
             }
             //Text for spring tutorial 
-            else if (currentLevel == 7)
+            else if (currentLevel == 10)
             {
                 sb.DrawString(gameFont, "A spring can make you bounce \n     in any matter state!",
                     new Vector2(130, 600), Color.White);

@@ -100,6 +100,9 @@ namespace LevelEditor
                 int col;
 
                 #region first run
+                // Ignore first line (level title)
+                reader.ReadLine();
+
                 //read each line of data in the file
                 string lineOfData = reader.ReadLine();
                 //store the split data into an array
