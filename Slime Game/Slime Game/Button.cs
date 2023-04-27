@@ -10,10 +10,33 @@ namespace Slime_Game
     /// </summary>
     internal class Button
     {
+        // ==== Fields ====
+
         private Texture2D button;
         private Rectangle rectangle;
         private MouseState prevMS;
 
+
+        // ==== Properties ====
+
+        /// <summary>
+        /// sets the x value of the button's positon rectangle
+        /// </summary>
+        public int X
+        {
+            set { rectangle.X = value; }
+        }
+
+        /// <summary>
+        /// sets the y value of the button's position rectangle
+        /// </summary>
+        public int Y
+        {
+            set { rectangle.Y = value; }
+        }
+
+
+        // ==== Constuctors ====
 
         /// <summary>
         /// instantiating the button
@@ -28,23 +51,8 @@ namespace Slime_Game
 
         }
 
-        /// <summary>
-        /// gets and sets the x value of the button's positon rectangle
-        /// </summary>
-        public int X
-        {
-            get { return rectangle.X; }
-            set { rectangle.X = value; }
-        }
 
-        /// <summary>
-        /// gets and sets the y value of the button's position rectangle
-        /// </summary>
-        public int Y
-        {
-            get { return rectangle.Y; }
-            set { rectangle.Y = value; }
-        }
+        #region Methods
 
         /// <summary>
         /// draws the button to the screen
@@ -94,5 +102,6 @@ namespace Slime_Game
             prevMS = mouse;
             return false;
         }
+        #endregion
     }
 }

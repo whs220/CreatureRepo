@@ -10,6 +10,7 @@ namespace Slime_Game
     internal class Collectable : GameObject
     {
         // ==== Fields ====
+
         private bool isHot;
         private bool isActive;
         private bool isExit;
@@ -21,15 +22,14 @@ namespace Slime_Game
         private double timeCounter;
 
 
-        // Properties
+        // ==== Properties ====
 
         /// <summary>
-        /// Get/set for isHot
+        /// Get for isHot
         /// </summary>
         public bool IsHot
         {
             get { return isHot; }
-            set { isHot = value; }
         }
 
         /// <summary>
@@ -42,12 +42,11 @@ namespace Slime_Game
         }
 
         /// <summary>
-        /// Get/set for isExit
+        /// Get for isExit
         /// </summary>
         public bool IsExit
         {
             get { return isExit; }
-            set { isExit = value; }
         }
 
 
@@ -72,6 +71,9 @@ namespace Slime_Game
             timeCounter = 0;                // Time passed since animation
             currentFrame = 1;               // Sprite sheet's first animation frame is 1 (not 0)
         }
+
+
+        #region Methods
 
         /// <summary>
         /// only draws hot if active
@@ -142,5 +144,6 @@ namespace Slime_Game
                 timeCounter -= secondsPerFrame;
             }
         }
+        #endregion
     }
 }

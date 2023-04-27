@@ -11,7 +11,8 @@ namespace Slime_Game
     /// </summary>
     public sealed class Art
     {
-        // Fields
+        // ==== Fields ====
+
         private static Art instance = null;
         private ContentManager content;
 
@@ -36,6 +37,9 @@ namespace Slime_Game
 
             // NEVER a set for the instance
         }
+
+
+        #region Methods
 
         /// <summary>
         /// Sets Art's content loader. Needed to load any assets.
@@ -75,5 +79,6 @@ namespace Slime_Game
         {
             return content.Load<SoundEffect>(path);
         }
+        #endregion
     }
 }

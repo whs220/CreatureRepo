@@ -1,23 +1,16 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Slime_Game
 {
     /// <summary>
-    /// Will
+    /// Will, Jake
     /// Gives player a bounce on collision 
     /// </summary>
     internal class Spring : GameObject
     {
         // ===== Fields =====
+
         // Animation data
         private int currentFrame;
         private double fps;
@@ -25,10 +18,26 @@ namespace Slime_Game
         private double timeCounter;
         private bool flip;
 
+        // ==== Properties ====
+
+        /// <summary>
+        /// Sets the flip
+        /// </summary>
         public bool Flip
         {
             set { flip = value; }
         }
+
+        /// <summary>
+        /// Sets the Current Frame
+        /// </summary>
+        public int CurrentFrame
+        {
+            set { currentFrame = value; }
+        }
+
+
+        // ==== Constructor ====
 
         public Spring(Rectangle rect) : base(null, new Rectangle())
         {
@@ -42,6 +51,9 @@ namespace Slime_Game
             timeCounter = 0;                // Time passed since animation
             currentFrame = 0;
         }
+
+
+        #region Methods
 
         /// <summary>
         /// Draws the spring!
@@ -111,10 +123,6 @@ namespace Slime_Game
                 if (currentFrame == 5) { currentFrame = 0; }
             }
         }
-
-        public void StartAnimation()
-        {
-            currentFrame = 1;
-        }
+        #endregion
     }
 }

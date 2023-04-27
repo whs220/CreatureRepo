@@ -42,6 +42,8 @@ namespace Slime_Game
     /// </summary>
     public class Game1 : Game
     {
+        // ==== Feilds ====
+
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private GameState gameState;
@@ -96,6 +98,7 @@ namespace Slime_Game
         //Sound Effect
         SoundEffect sfx_NextLevel;
 
+        // ==== Constructor ====
 
         public Game1()
         {
@@ -535,6 +538,8 @@ namespace Slime_Game
         }
 
 
+        #region Methods
+
         /// <summary>
         /// For going to the next level
         /// </summary>
@@ -645,5 +650,6 @@ namespace Slime_Game
                     break;
             }
         }
+        #endregion
     }
 }

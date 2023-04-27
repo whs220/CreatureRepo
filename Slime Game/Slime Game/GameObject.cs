@@ -14,6 +14,7 @@ namespace Slime_Game
     internal class GameObject
     {
         // ==== Field ====
+
         protected Texture2D texture;
         protected Rectangle position;
 
@@ -60,6 +61,5 @@ namespace Slime_Game
         {
             sb.Draw(texture, position, Color.White);
         }
-        
     }
 }

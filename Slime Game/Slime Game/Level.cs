@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
 using System.IO;
 
 namespace Slime_Game
@@ -14,7 +15,7 @@ namespace Slime_Game
     /// </summary>
     internal class Level
     {
-        //Fields
+        // ==== Fields ====
 
         //directory
         public string fileName;
@@ -34,10 +35,6 @@ namespace Slime_Game
         private Texture2D exit;
         
         //borders for future use
-        private Rectangle groundFrame;
-        private Rectangle ceilingFrame;
-        private Rectangle leftFrame;
-        private Rectangle rightFrame;
         private Tile backTile;
 
         //misc
@@ -55,7 +52,8 @@ namespace Slime_Game
         //Sound Effects
         private SoundEffect sfx_spring;
 
-        // Properties
+
+        // ==== Properties ====
 
         /// <summary>
         /// Gets and sets the debugmodeactive bool
@@ -67,7 +65,7 @@ namespace Slime_Game
         }
 
         /// <summary>
-        /// Makes ColisionsOn have a set value
+        /// Makes ColisionsOn have a set value and get
         /// </summary>
         public bool CollisionsOn
         {
@@ -76,10 +74,13 @@ namespace Slime_Game
         }
 
 
-        // 1, 352
-        // 31, 383
+        // ==== Constructor ====
 
-        //Constructor
+        /// <summary>
+        /// Creates a level
+        /// </summary>
+        /// <param name="fileName">File Name as string to read form</param>
+        /// <param name="player"></param>
         public Level(string fileName, Player player) 
         {
             collisionsOn = true;
@@ -102,8 +103,8 @@ namespace Slime_Game
         }
 
 
-        //Methods
-    
+        #region Methods
+
         /// <summary>
         /// Returns a list of gameobjects based on the recieved files.
         /// </summary>
@@ -542,10 +543,11 @@ namespace Slime_Game
                     velCopy.Y = -14 * flip;
                     player.Velocity = velCopy;
                     player.Position = posCopy;
-                    spring.StartAnimation();
+                    spring.CurrentFrame = 1;
                     break;
                 }
             }
         }
+        #endregion
     }
 }

@@ -133,7 +133,12 @@ namespace Slime_Game
         }
         #endregion
 
-        //constructor
+
+        // ==== Constructor ====
+
+        /// <summary>
+        /// Creates the player
+        /// </summary>
         public Player() : base(null, new Rectangle(50, 50, 24, 24))
         {
             this.debugSolid = Art.Instance.LoadTexture2D("debug_solid");

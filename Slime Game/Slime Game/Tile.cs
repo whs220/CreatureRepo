@@ -12,11 +12,14 @@ namespace Slime_Game
     internal class Tile : GameObject
     {
         // ===== Fields =====
+
         private PlayerMatterState[] collidableStates;
         private PlayerMatterState[] killStates;
         private Rectangle frame;
 
+
         // ===== Constructors =====
+
         /// <summary>
         /// Creates a new tile!
         /// </summary>
@@ -57,6 +60,7 @@ namespace Slime_Game
             killStates = new PlayerMatterState[0];
             this.frame = frame;
         }
+
 
         // ===== Methods =====
 
