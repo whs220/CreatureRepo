@@ -1,23 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.IO;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Audio;
 
 namespace Slime_Game
 {
     /// <summary>
-    /// Josie Caradonna
+    /// Josie, Jake, Will, Leah
     /// Reads the file and makes a tile map
     /// works
     /// </summary>
-    ///
     internal class Level
     {
         //Fields
@@ -277,6 +271,7 @@ namespace Slime_Game
                 //besides for the pipe entrance
                 if (!collectable.IsExit)
                 {
+                    // === Draws the collectable baed on the state ===
                     if (player.CurrentMatterState == PlayerMatterState.Gas && collectable.IsHot) {
                         collectable.DrawHot(sb, Color.Red);
                     }
@@ -284,13 +279,10 @@ namespace Slime_Game
                     {
                         collectable.DrawCold(sb, Color.Purple);
                     }
+                    //For liquid state
                     else
                     {
-                        if (collectable.IsExit)
-                        {
-                            collectable.Draw(sb);
-                        }
-                        else if (collectable.IsHot)
+                        if (collectable.IsHot)
                         {
                             collectable.DrawHot(sb, Color.White);
                         }
@@ -316,10 +308,9 @@ namespace Slime_Game
                 spring.DrawBounce(sb, Color.White);
             }
 
+            //Draws the name of the level
             sb.DrawString(font, levelName,
             new Vector2(40, 995), Color.White);
-
-
         }
 
         /// <summary>
@@ -390,7 +381,6 @@ namespace Slime_Game
                 //sends you to the next level
                 if (item.IsExit)
                 {
-
                     NextLevelEvent();
                 }
             }
@@ -406,7 +396,6 @@ namespace Slime_Game
 
             //is not grounded
             bool isGrounded = false;
-            bool currentIsGrounded = player.IsGrounded;
 
             //checks for intersections
             foreach(Tile tile in tiles) 
@@ -526,6 +515,9 @@ namespace Slime_Game
             player.UpdateGroundRect(new Vector2(player.Position.X, player.Position.Y));
         }
 
+        /// <summary>
+        /// Handles misc collisions suchs as spring and future collisions
+        /// </summary>
         public void MiscCollision()
         {
             //checks for intersections

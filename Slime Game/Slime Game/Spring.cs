@@ -12,8 +12,8 @@ using System.Threading.Tasks;
 namespace Slime_Game
 {
     /// <summary>
-    /// Spring Class
-    /// Gives player a bounce on collision
+    /// Will
+    /// Gives player a bounce on collision 
     /// </summary>
     internal class Spring : GameObject
     {

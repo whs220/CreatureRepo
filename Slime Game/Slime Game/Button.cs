@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 namespace Slime_Game
 {
+    /// <summary>
+    /// Leah and Dylan 
+    ///Handles our buttons on the UI
+    /// </summary>
     internal class Button
     {
         private Texture2D button;

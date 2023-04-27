@@ -1,16 +1,12 @@
-﻿//This is the collectable class that handles collectable data
-//Jake Wardell, Will Slyman
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 
 namespace Slime_Game
 {
+    /// <summary>
+    /// This is the collectable class that handles collectable data
+    /// Jake, Josie, Will, Leah
+    /// </summary>
     internal class Collectable : GameObject
     {
         // ==== Fields ====

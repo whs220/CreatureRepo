@@ -1,14 +1,9 @@
-﻿//Jake Wardell
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Slime_Game
 {
@@ -39,8 +34,12 @@ namespace Slime_Game
 
     public delegate void ResetLevel();
     public delegate void NextLevel();
-    
 
+
+    /// <summary>
+    /// Jake, Dylan, Leah, Josie, Will
+    /// Handles all game logic
+    /// </summary>
     public class Game1 : Game
     {
         private GraphicsDeviceManager _graphics;
@@ -484,8 +483,6 @@ namespace Slime_Game
 
                         //Debug mode writing on the right side of the screen how to use it 
                         _spriteBatch.DrawString(debugFont, "Use 'N' to go to next level \nUse 'H' to go hotter \nUse 'C' for colder \nUse 'F2' to toggle collisions \nUse 'G' to toggle gravity", new Vector2(730, 50),Color.White);
-
-
                     }
 
                     //Draws text for tutorial
@@ -566,6 +563,10 @@ namespace Slime_Game
             }
         }
 
+        /// <summary>
+        /// Prints text for all the specific tutorial levels
+        /// </summary>
+        /// <param name="sb">Spritebatch for drawing</param>
         public void OnBoarding(SpriteBatch sb)
         {
             // Level 1 text for tutorial 
@@ -609,19 +610,25 @@ namespace Slime_Game
             //To pick which song it is
             switch (id)
             {
+                //Plays slime game one by checking that the id equals 0 && that current song doesn't
                 case 0:
                     if (currentSong != 0)
                     {
                         MediaPlayer.Stop();
                         MediaPlayer.Play(themeSong);
+                        //Sets value of current song equal to 0 this eliminates the song playing
+                        //Continuelsy 
                         currentSong = 0;
                     }
                     break;
+                //Checks if song id == 1
                 case 1:
                     if (currentSong != 1)
                     {
                         MediaPlayer.Stop();
                         MediaPlayer.Play(secondSong);
+                        //Sets value of current song equal to 1 this eliminates the song playing
+                        //Continuelsy 
                         currentSong = 1;
                     }
                     break;

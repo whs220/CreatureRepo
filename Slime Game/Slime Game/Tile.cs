@@ -1,19 +1,14 @@
-﻿// Will Slyman
-// 3/6/2023
-// Class: Tile
-// Purpose: To act as a platform or a deterred depending on the player's state
-
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 
 namespace Slime_Game
 {
+    /// <summary>
+    /// Will, Josie
+    /// To act as a platform or a deterred depending on the player's state
+    /// </summary>
     internal class Tile : GameObject
     {
         // ===== Fields =====

@@ -1,6 +1,4 @@
-﻿// Written by Jake Wardell, Dylan Clauson, Will Slyman
-
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -9,7 +7,7 @@ using System;
 namespace Slime_Game
 {
     /// <summary>
-    /// Class: Player
+    /// Jake, Dylan, Will, Leah, Josie
     /// Represents the player! Can move, jump, and change states
     /// </summary>
     internal class Player : GameObject
@@ -166,7 +164,6 @@ namespace Slime_Game
             sfx_Fire = Art.Instance.LoadSoundEffect("sfx_fire");
             sfx_Ice = Art.Instance.LoadSoundEffect("sfx_ice");
             sfx_jump = Art.Instance.LoadSoundEffect("sfx_landing");
-
         }
 
 
@@ -447,7 +444,6 @@ namespace Slime_Game
                     {
                         position.Y += 5;
                     }
-
                 }
             }
             // If player is dead...
@@ -465,7 +461,6 @@ namespace Slime_Game
                     ResetStage();
                 }
             }
-            
         }
 
         /// <summary>
