@@ -107,10 +107,15 @@ Up n' Down
 16,27,pillar
 16,31,rightWall
 17,0,leftWall
+17,8,CGleft
+17,9,platform
+17,10,platform
+17,11,platform
+17,12,CGright
 17,27,pillar
 17,31,rightWall
 18,0,leftWall
-18,10,cold
+18,11,cold
 18,22,hot
 18,27,pillar
 18,31,rightWall
@@ -128,6 +133,9 @@ Up n' Down
 22,27,pillar
 22,31,rightWall
 23,0,leftWall
+23,13,CGleft
+23,14,platform
+23,15,CGright
 23,27,pillar
 23,31,rightWall
 24,0,leftWall

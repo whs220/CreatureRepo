@@ -222,6 +222,7 @@ Maze
 8,20,ground
 8,21,ground
 8,22,corner2
+8,24,hot
 8,25,rightWall
 8,26,filler
 8,27,leftWall
@@ -310,7 +311,6 @@ Maze
 12,20,filler
 12,21,filler
 12,22,leftWall
-12,24,hot
 12,25,rightWall
 12,26,filler
 12,27,leftWall
@@ -357,6 +357,7 @@ Maze
 14,20,filler
 14,21,filler
 14,22,leftWall
+14,23,hot
 14,25,rightWall
 14,26,filler
 14,27,leftWall
@@ -403,7 +404,6 @@ Maze
 16,20,filler
 16,21,filler
 16,22,leftWall
-16,23,hot
 16,25,rightWall
 16,26,filler
 16,27,leftWall

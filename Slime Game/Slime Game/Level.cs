@@ -496,7 +496,7 @@ namespace Slime_Game
                         if (player.CurrentMatterState == PlayerMatterState.Solid && checkIntersection.Height > 6)
                         {
                             // Lesser bounce to stop clipping through walls :(
-                            player.Speed = -player.Speed * 0.8f;
+                            player.Speed = -player.Speed * 0.6f;
                         }
                     }
 
