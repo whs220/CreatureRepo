@@ -455,6 +455,7 @@ namespace Slime_Game
                     // --- text ---
                     // sound credits
                     _spriteBatch.DrawString(gameFont, "Music and Sound Credits:" +
+                        "\n   Boing Sounds - Johnny2810" +
                         "\n   Ding - OwlStorm" +
                         "\n   Lighting a Fire - plasterbrain" +
                         "\n   Sebastian Slime 1 - Will Slyman" +
@@ -462,6 +463,12 @@ namespace Slime_Game
                         "\n   wet slop plop - Eneasz", 
                         new Vector2(50, 250), Color.DarkGreen);
 
+
+                    _spriteBatch.DrawString(gameFont, "Art:" +
+                        "\n   Slime pack - g.lerf" +
+                        "\n   2D Platformer Tileset Laboratory - ExceptRea" +
+                        "\n   Buttons, Backgrounds - Dylan Clauson",
+                        new Vector2(200, 250), Color.DarkGreen);
                     break;
 
                 //For in the Loading screen

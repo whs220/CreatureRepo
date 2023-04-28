@@ -106,30 +106,6 @@
 /processorParam:TextureFormat=Color
 /build:creditsButton.png
 
-#begin debug_gas.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:debug_gas.png
-
-#begin debug_liquid.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:debug_liquid.png
-
 #begin debug_solid.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -145,56 +121,14 @@
 #begin dodge_em.level
 /copy:dodge_em.level
 
-#begin drainPipe.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:drainPipe.png
-
 #begin epic_slide.level
 /copy:epic_slide.level
-
-#begin fire.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:fire.png
 
 #begin firstLevel.level
 /copy:firstLevel.level
 
 #begin fourthLevel.level
 /copy:fourthLevel.level
-
-#begin ice.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:ice.png
-
-#begin jaketestlevel.level
-/copy:jaketestlevel.level
-
-#begin level1.level
-/copy:level1.level
 
 #begin loadScreen.png
 /importer:TextureImporter
@@ -301,18 +235,6 @@
 /processorParam:Quality=Best
 /build:sfx_landing.mp3
 
-#begin slime.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:slime.png
-
 #begin slimegame.mp3
 /importer:Mp3Importer
 /processor:SongProcessor
@@ -354,12 +276,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:startScreen.png
-
-#begin test2.level
-/copy:test2.level
-
-#begin testLevel.level
-/copy:testLevel.level
 
 #begin thirdLevel.level
 /copy:thirdLevel.level
