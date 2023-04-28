@@ -466,9 +466,9 @@ namespace Slime_Game
 
                     _spriteBatch.DrawString(gameFont, "Art:" +
                         "\n   Slime pack - g.lerf" +
-                        "\n   2D Platformer Tileset Laboratory - ExceptRea" +
+                        "\n   2D Platformer Tileset Laboratory - \n   ExceptRea" +
                         "\n   Buttons, Backgrounds - Dylan Clauson",
-                        new Vector2(200, 250), Color.DarkGreen);
+                        new Vector2(50, 550), Color.DarkGreen);
                     break;
 
                 //For in the Loading screen
