@@ -601,19 +601,19 @@ namespace Slime_Game
             // Level 1 text for tutorial 
             else if (currentLevel == 1)
             {
-                sb.DrawString(gameFont, "Hit fire collectables to change \ntemperature and \nbecome a gas... this \nwill allow you to \nfloat ;)",
+                sb.DrawString(gameFont, "Hit fire collectables\nto change temperature\nand become a gas...\nthis will allow\nyou to float ;)",
                     new Vector2(500, 650), Color.White);
             }
             //Level 3 tutorial text
             else if (currentLevel == 2)
             {
-                sb.DrawString(gameFont, "    Hit Ice collectables\n and become a Solid... \n Solids can't jump but can slide",
-                    new Vector2(130, 600), Color.White);
+                sb.DrawString(gameFont, "Hit ice collectables to\n   become a Solid!\nSolids can't jump but \ncan slide really fast!",
+                    new Vector2(230, 600), Color.White);
             }
             //Level 4 tutorial text (Talks about resetting and all the matter states)
             else if (currentLevel == 3)
             {
-                sb.DrawString(gameFont, "  If you ever get stuck hit 'R' \n      to reset The 3 matter\nstates are solid -> liquid -> gas",
+                sb.DrawString(gameFont, "  If you ever get stuck hit 'R' \n          to reset!\n    The 3 matter states are\n    solid -> liquid -> gas",
                     new Vector2(130, 600), Color.White);
             }
             //Text for spring tutorial 
