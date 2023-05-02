@@ -142,6 +142,9 @@
 /processorParam:TextureFormat=Color
 /build:loadScreen.png
 
+#begin maze.level
+/copy:maze.level
+
 #begin need_for_speed.level
 /copy:need_for_speed.level
 

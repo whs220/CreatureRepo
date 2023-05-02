@@ -125,7 +125,7 @@ namespace Slime_Game
             try
             {
                 //connects to file
-                input = new StreamReader("../../../" + fileName);
+                input = new StreamReader(fileName);
                 string line;
 
                 levelName = input.ReadLine();
