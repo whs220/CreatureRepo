@@ -13,6 +13,9 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin ../../../../slime.level
+/copy:../../../../slime.level;slime.level
+
 #begin arial-35.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
