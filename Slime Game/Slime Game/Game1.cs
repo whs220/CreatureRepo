@@ -465,7 +465,7 @@ namespace Slime_Game
 
 
                     _spriteBatch.DrawString(gameFont, "Art:" +
-                        "\n   Slime pack - g.lerf" +
+                        "\n   Slime pack - g.lerf, \n   Editted by Will Slyman" +
                         "\n   2D Platformer Tileset Laboratory - \n   ExceptRea" +
                         "\n   Buttons, Backgrounds - Dylan Clauson",
                         new Vector2(50, 550), Color.DarkGreen);

@@ -13,6 +13,9 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin ../../../../slime.level
+/copy:../../../../slime.level;slime.level
+
 #begin arial-35.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
@@ -153,6 +156,9 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:loadScreen.png
+
+#begin maze.level
+/copy:maze.level
 
 #begin need_for_speed.level
 /copy:need_for_speed.level
